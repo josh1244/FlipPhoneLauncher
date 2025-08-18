@@ -22,6 +22,9 @@ import android.widget.TextView
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.RelativeSizeSpan
 
 // Data class to hold app details
 data class AppDetail(
@@ -123,9 +126,19 @@ class HomeActivity : Activity() {
 
     private fun updateTimeAndDate() {
         val now = Date()
-        val currentTime = SimpleDateFormat("hh:mm a", Locale.getDefault()).format(now)
+        val timeFormat = SimpleDateFormat("h:mm a", Locale.getDefault())
+        val currentTime = timeFormat.format(now)
         val currentDate = SimpleDateFormat("EEEE, MMMM d", Locale.getDefault()).format(now)
-        timeTextView.text = currentTime
+
+        // Make am/pm smaller
+        val amPmStart = currentTime.indexOf(' ')
+        if (amPmStart != -1) {
+            val spannable = SpannableString(currentTime)
+            spannable.setSpan(RelativeSizeSpan(0.5f), amPmStart + 1, currentTime.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            timeTextView.text = spannable
+        } else {
+            timeTextView.text = currentTime
+        }
         dateTextView.text = currentDate
     }
 
