@@ -1,11 +1,13 @@
 package com.ham.flipphonelauncher
 
 import android.app.Activity
+import android.app.WallpaperManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ResolveInfo
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,6 +31,17 @@ class HomeActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Set wallpaper as background
+        val wallpaperManager = WallpaperManager.getInstance(this)
+        try {
+            val wallpaperDrawable = wallpaperManager.drawable
+            window.setBackgroundDrawable(wallpaperDrawable)
+        } catch (e: SecurityException) {
+            // Handle case where permission might be missing (though typically not for system wallpaper)
+            e.printStackTrace()
+        }
+
         setContentView(R.layout.activity_home)
 
         listView = findViewById(R.id.app_list)
@@ -64,12 +77,39 @@ class HomeActivity : Activity() {
 
     private fun setupClickListener() {
         listView.setOnItemClickListener { parent, view, position, id ->
+            launchApp(position)
+        }
+    }
+
+    private fun launchApp(position: Int) {
+        if (position >= 0 && position < appList.size) {
             val clickedAppDetail: AppDetail = appList[position]
             val launchIntent = Intent(Intent.ACTION_MAIN)
             launchIntent.setClassName(clickedAppDetail.packageName, clickedAppDetail.activityName)
             launchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(launchIntent)
         }
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER || keyCode == KeyEvent.KEYCODE_ENTER) {
+            if (listView.visibility == View.GONE) {
+                listView.visibility = View.VISIBLE
+                listView.requestFocus() // Request focus for D-Pad navigation
+                // Optionally, select the first item
+                if (listView.adapter.count > 0) {
+                    listView.setSelection(0)
+                }
+                return true // Event handled
+            } else if (listView.visibility == View.VISIBLE) {
+                val selectedPosition = listView.selectedItemPosition
+                if (selectedPosition != ListView.INVALID_POSITION) {
+                    launchApp(selectedPosition)
+                    return true // Event handled
+                }
+            }
+        }
+        return super.onKeyDown(keyCode, event)
     }
 
     private class AppListAdapter(
