@@ -2,7 +2,38 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingTop="32dp">
+
+    <!-- Time -->
+    <TextView
+        android:id="@+id/time_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="48sp"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:text="12:00" />
+
+    <!-- Date -->
+    <TextView
+        android:id="@+id/date_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:text="Monday, August 18" />
+
+    <!-- Carrier -->
+    <TextView
+        android:id="@+id/carrier_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:text="Carrier" />
 
     <ListView
         android:id="@+id/app_list"

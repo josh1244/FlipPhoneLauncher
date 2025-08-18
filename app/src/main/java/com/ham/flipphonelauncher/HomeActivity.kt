@@ -7,6 +7,9 @@ import android.content.Intent
 import android.content.pm.ResolveInfo
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.telephony.TelephonyManager
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +18,9 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
-import com.ham.flipphonelauncher.R
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 // Data class to hold app details
 data class AppDetail(
@@ -28,6 +33,11 @@ data class AppDetail(
 class HomeActivity : Activity() {
     private lateinit var appList: MutableList<AppDetail>
     private lateinit var listView: ListView
+    private lateinit var timeTextView: TextView
+    private lateinit var dateTextView: TextView
+    private lateinit var carrierTextView: TextView
+    private val handler = Handler(Looper.getMainLooper())
+    private lateinit var timeUpdateRunnable: Runnable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,11 +54,16 @@ class HomeActivity : Activity() {
 
         setContentView(R.layout.activity_home)
 
-        listView = findViewById(R.id.app_list)
+    listView = findViewById(R.id.app_list)
+    timeTextView = findViewById(R.id.time_text)
+    dateTextView = findViewById(R.id.date_text)
+    carrierTextView = findViewById(R.id.carrier_text)
 
-        loadApplications()
-        setupAdapter()
-        setupClickListener()
+    loadApplications()
+    setupAdapter()
+    setupClickListener()
+    setupTimeUpdater()
+    showCarrierName()
     }
 
     private fun loadApplications() {
@@ -81,6 +96,45 @@ class HomeActivity : Activity() {
         }
     }
 
+    private fun setupTimeUpdater() {
+        timeUpdateRunnable = object : Runnable {
+            override fun run() {
+                updateTimeAndDate()
+                handler.postDelayed(this, 1000) // Update every second
+            }
+        }
+    }
+
+    private fun updateTimeAndDate() {
+        val now = Date()
+        val currentTime = SimpleDateFormat("HH:mm", Locale.getDefault()).format(now)
+        val currentDate = SimpleDateFormat("EEEE, MMMM d", Locale.getDefault()).format(now)
+        timeTextView.text = currentTime
+        dateTextView.text = currentDate
+    }
+
+    private fun showCarrierName() {
+        try {
+            val tm = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+            val carrier = tm.networkOperatorName
+            carrierTextView.text = if (carrier.isNullOrBlank()) "No Service" else carrier
+        } catch (e: Exception) {
+            carrierTextView.text = "No Service"
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        handler.post(timeUpdateRunnable) // Start time/date updates when activity resumes
+        showCarrierName() // Refresh carrier name in case it changed
+    }
+
+    override fun onPause() {
+        super.onPause()
+        handler.removeCallbacks(timeUpdateRunnable) // Stop time/date updates when activity is paused
+    }
+
+
     private fun launchApp(position: Int) {
         if (position >= 0 && position < appList.size) {
             val clickedAppDetail: AppDetail = appList[position]
@@ -107,6 +161,11 @@ class HomeActivity : Activity() {
                     launchApp(selectedPosition)
                     return true // Event handled
                 }
+            }
+        } else if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (listView.visibility == View.VISIBLE) {
+                listView.visibility = View.GONE
+                return true // Consume back event, show home info panel
             }
         }
         return super.onKeyDown(keyCode, event)
