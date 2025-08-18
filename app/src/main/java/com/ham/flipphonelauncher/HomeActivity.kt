@@ -217,12 +217,25 @@ class HomeActivity : Activity() {
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+
         // Handle dialer keys: 0-9, *, #
         val dialerKeys = setOf(
             KeyEvent.KEYCODE_0, KeyEvent.KEYCODE_1, KeyEvent.KEYCODE_2, KeyEvent.KEYCODE_3,
             KeyEvent.KEYCODE_4, KeyEvent.KEYCODE_5, KeyEvent.KEYCODE_6, KeyEvent.KEYCODE_7,
             KeyEvent.KEYCODE_8, KeyEvent.KEYCODE_9, KeyEvent.KEYCODE_STAR, KeyEvent.KEYCODE_POUND
         )
+        // If on home menu and left menu button pressed, launch NotificationActivity
+        if (keyCode == KeyEvent.KEYCODE_SOFT_LEFT && listView.visibility == View.GONE) {
+            val intent = Intent()
+            intent.setClassName("com.android.systemui", "com.android.systemui.launcher3.NotificationActivity")
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            try {
+                startActivity(intent)
+            } catch (e: Exception) {
+                // Optionally handle if activity not found
+            }
+            return true
+        }
         if (keyCode in dialerKeys && listView.visibility == View.GONE) {
             // Map keyCode to the corresponding character
             val digit = when (keyCode) {
