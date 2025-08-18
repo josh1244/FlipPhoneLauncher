@@ -60,6 +60,17 @@ class HomeActivity : Activity() {
             View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         window.statusBarColor = Color.TRANSPARENT
 
+        // Remove bottom system window inset padding (for physical button devices)
+        window.decorView.setOnApplyWindowInsetsListener { v, insets ->
+            v.setPadding(0, 0, 0, 0)
+            insets.replaceSystemWindowInsets(
+                insets.systemWindowInsetLeft,
+                insets.systemWindowInsetTop,
+                insets.systemWindowInsetRight,
+                0 // Remove bottom inset
+            )
+        }
+
         setContentView(R.layout.activity_home)
 
         listView = findViewById(R.id.app_list)
