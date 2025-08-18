@@ -1,50 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingTop="32dp"
-    android:fitsSystemWindows="true">
-
-    <!-- Time -->
-    <TextView
-        android:id="@+id/time_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="48sp"
-        android:textAlignment="center"
-        android:gravity="center"
-        android:text="12:00"
-        android:textColor="#FFFFFF" />
+    android:fitsSystemWindows="true"
+    android:background="@android:color/transparent">
 
 
-    <!-- Date -->
-    <TextView
-        android:id="@+id/date_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textAlignment="center"
-        android:gravity="center"
-        android:text="Monday, August 18"
-        android:textColor="#FFFFFF" />
 
 
-    <!-- Carrier -->
-    <TextView
-        android:id="@+id/carrier_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textAlignment="center"
-        android:gravity="center"
-        android:text="Carrier"
-        android:textColor="#FFFFFF" />
 
-    <ListView
-        android:id="@+id/app_list"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone" />
+        android:orientation="vertical"
+        android:paddingTop="32dp">
 
-</LinearLayout>
+        <!-- Time -->
+        <TextView
+            android:id="@+id/time_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="48sp"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:text="12:00 AM"
+            android:textColor="#FFFFFF"
+            android:fontFamily="sans-serif-medium"
+            android:includeFontPadding="false" />
+
+        <!-- Date (uppercase, smaller) -->
+        <TextView
+            android:id="@+id/date_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:text="SUN, JAN 1"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif"
+            android:includeFontPadding="false" />
+
+        <!-- Carrier -->
+        <TextView
+            android:id="@+id/carrier_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:text="Carrier"
+            android:textColor="#FFFFFF"
+            android:fontFamily="sans-serif"
+            android:includeFontPadding="false" />
+
+        <ListView
+            android:id="@+id/app_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</FrameLayout>

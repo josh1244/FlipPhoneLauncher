@@ -128,7 +128,8 @@ class HomeActivity : Activity() {
         val now = Date()
         val timeFormat = SimpleDateFormat("h:mm a", Locale.getDefault())
         val currentTime = timeFormat.format(now)
-        val currentDate = SimpleDateFormat("EEEE, MMMM d", Locale.getDefault()).format(now)
+        val currentDate = SimpleDateFormat("EEE, MMM d", Locale.getDefault()).format(now).uppercase(Locale.getDefault())
+        // val currentDate = SimpleDateFormat("EEEE, MMMM d", Locale.getDefault()).format(now)
 
         // Make am/pm smaller
         val amPmStart = currentTime.indexOf(' ')
