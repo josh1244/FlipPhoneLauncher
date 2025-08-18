@@ -175,6 +175,37 @@ class HomeActivity : Activity() {
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        // Handle dialer keys: 0-9, *, #
+        val dialerKeys = setOf(
+            KeyEvent.KEYCODE_0, KeyEvent.KEYCODE_1, KeyEvent.KEYCODE_2, KeyEvent.KEYCODE_3,
+            KeyEvent.KEYCODE_4, KeyEvent.KEYCODE_5, KeyEvent.KEYCODE_6, KeyEvent.KEYCODE_7,
+            KeyEvent.KEYCODE_8, KeyEvent.KEYCODE_9, KeyEvent.KEYCODE_STAR, KeyEvent.KEYCODE_POUND
+        )
+        if (keyCode in dialerKeys && listView.visibility == View.GONE) {
+            // Map keyCode to the corresponding character
+            val digit = when (keyCode) {
+                KeyEvent.KEYCODE_0 -> "0"
+                KeyEvent.KEYCODE_1 -> "1"
+                KeyEvent.KEYCODE_2 -> "2"
+                KeyEvent.KEYCODE_3 -> "3"
+                KeyEvent.KEYCODE_4 -> "4"
+                KeyEvent.KEYCODE_5 -> "5"
+                KeyEvent.KEYCODE_6 -> "6"
+                KeyEvent.KEYCODE_7 -> "7"
+                KeyEvent.KEYCODE_8 -> "8"
+                KeyEvent.KEYCODE_9 -> "9"
+                KeyEvent.KEYCODE_STAR -> "*"
+                KeyEvent.KEYCODE_POUND -> "#"
+                else -> ""
+            }
+            // Launch the dialer with the digit pre-filled
+            val intent = Intent(Intent.ACTION_DIAL)
+            intent.data = android.net.Uri.parse("tel:$digit")
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+            return true
+        }
+
         if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER || keyCode == KeyEvent.KEYCODE_ENTER) {
             if (listView.visibility == View.GONE) {
                 showInfoPanel(false)
