@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.telephony.TelephonyManager
+import android.graphics.Color
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -51,6 +52,13 @@ class HomeActivity : Activity() {
             // Handle case where permission might be missing (though typically not for system wallpaper)
             e.printStackTrace()
         }
+
+
+        // Draw wallpaper under the status bar
+        window.decorView.systemUiVisibility =
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        // Explicitly set status bar color to transparent
+        window.statusBarColor = Color.TRANSPARENT
 
         setContentView(R.layout.activity_home)
 
@@ -107,7 +115,7 @@ class HomeActivity : Activity() {
 
     private fun updateTimeAndDate() {
         val now = Date()
-        val currentTime = SimpleDateFormat("HH:mm", Locale.getDefault()).format(now)
+        val currentTime = SimpleDateFormat("hh:mm a", Locale.getDefault()).format(now)
         val currentDate = SimpleDateFormat("EEEE, MMMM d", Locale.getDefault()).format(now)
         timeTextView.text = currentTime
         dateTextView.text = currentDate
@@ -166,6 +174,9 @@ class HomeActivity : Activity() {
             if (listView.visibility == View.VISIBLE) {
                 listView.visibility = View.GONE
                 return true // Consume back event, show home info panel
+            } else {
+                // Home menu is visible, do nothing (consume event)
+                return true
             }
         }
         return super.onKeyDown(keyCode, event)
