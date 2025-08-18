@@ -78,6 +78,27 @@ class HomeActivity : Activity() {
         dateTextView = findViewById(R.id.date_text)
         carrierTextView = findViewById(R.id.carrier_text)
 
+            // Softkey bar setup
+            val softkeyBack: View? = findViewById(R.id.softkey_back)
+            val softkeyHome: View? = findViewById(R.id.softkey_home)
+            val softkeyMenu: View? = findViewById(R.id.softkey_menu)
+
+            softkeyBack?.setOnClickListener {
+                // Simulate back button
+                onBackPressed()
+            }
+            softkeyHome?.setOnClickListener {
+                // Go to home (relaunch this activity as home)
+                val intent = Intent(Intent.ACTION_MAIN)
+                intent.addCategory(Intent.CATEGORY_HOME)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+            }
+            softkeyMenu?.setOnClickListener {
+                // Show options menu if needed (override if you have a menu)
+                openOptionsMenu()
+            }
+
         loadApplications()
         setupAdapter()
         setupClickListener()
@@ -89,11 +110,15 @@ class HomeActivity : Activity() {
     }
 
     private fun showInfoPanel(show: Boolean) {
-        val visibility = if (show) View.VISIBLE else View.GONE
-        timeTextView.visibility = visibility
-        dateTextView.visibility = visibility
-        carrierTextView.visibility = visibility
-        listView.visibility = if (show) View.GONE else View.VISIBLE
+        val infoPanel: View? = findViewById(R.id.info_panel)
+        val appList: View? = findViewById(R.id.app_list)
+        if (show) {
+            infoPanel?.visibility = View.VISIBLE
+            appList?.visibility = View.GONE
+        } else {
+            infoPanel?.visibility = View.GONE
+            appList?.visibility = View.VISIBLE
+        }
     }
 
     private fun loadApplications() {

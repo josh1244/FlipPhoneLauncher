@@ -10,58 +10,23 @@
 
 
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingTop="32dp">
+        android:paddingTop="0dp"
+        android:paddingBottom="20dp">
 
-        <!-- Time -->
-        <TextView
-            android:id="@+id/time_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="48sp"
-            android:textAlignment="center"
-            android:gravity="center"
-            android:text="12:00 AM"
-            android:textColor="#FFFFFF"
-            android:fontFamily="sans-serif-medium"
-            android:includeFontPadding="false" />
+    <!-- Info Panel (Home Menu) with top padding -->
+    <include layout="@layout/info_panel" />
 
-        <!-- Date (uppercase, smaller) -->
-        <TextView
-            android:id="@+id/date_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textAlignment="center"
-            android:gravity="center"
-            android:text="SUN, JAN 1"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            android:fontFamily="sans-serif"
-            android:includeFontPadding="false" />
-
-        <!-- Carrier -->
-        <TextView
-            android:id="@+id/carrier_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textAlignment="center"
-            android:gravity="center"
-            android:text="Carrier"
-            android:textColor="#FFFFFF"
-            android:fontFamily="sans-serif"
-            android:includeFontPadding="false" />
-
-        <ListView
-            android:id="@+id/app_list"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:visibility="gone" />
+    <include layout="@layout/app_list" />
     </LinearLayout>
 
+    <include
+        layout="@layout/softkey_bar"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </FrameLayout>

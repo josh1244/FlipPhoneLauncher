@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:orientation="horizontal"
+    android:background="#222"
+    android:gravity="center">
+
+
+    <TextView
+        android:id="@+id/softkey_back"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="Back"
+        android:textColor="#fff"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textAllCaps="false"
+        android:background="@android:color/transparent"
+        android:focusable="false"
+        android:clickable="false"
+        android:textIsSelectable="false" />
+
+    <TextView
+        android:id="@+id/softkey_home"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="Home"
+        android:textColor="#fff"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textAllCaps="false"
+        android:background="@android:color/transparent"
+        android:focusable="false"
+        android:clickable="false"
+        android:textIsSelectable="false" />
+
+    <TextView
+        android:id="@+id/softkey_menu"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="Menu"
+        android:textColor="#fff"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textAllCaps="false"
+        android:background="@android:color/transparent"
+        android:focusable="false"
+        android:clickable="false"
+        android:textIsSelectable="false" />
+
+</LinearLayout>
