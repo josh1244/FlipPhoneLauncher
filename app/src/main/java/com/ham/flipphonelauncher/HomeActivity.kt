@@ -35,6 +35,9 @@ data class AppDetail(
 )
 
 class HomeActivity : Activity() {
+    private lateinit var softkeyLeft: TextView
+    private lateinit var softkeyMiddle: TextView
+    private lateinit var softkeyRight: TextView
     private lateinit var appList: MutableList<AppDetail>
     private lateinit var listView: ListView
     private lateinit var timeTextView: TextView
@@ -78,26 +81,12 @@ class HomeActivity : Activity() {
         dateTextView = findViewById(R.id.date_text)
         carrierTextView = findViewById(R.id.carrier_text)
 
-            // Softkey bar setup
-            val softkeyBack: View? = findViewById(R.id.softkey_back)
-            val softkeyHome: View? = findViewById(R.id.softkey_home)
-            val softkeyMenu: View? = findViewById(R.id.softkey_menu)
+        // Softkey bar setup
+        softkeyLeft = findViewById(R.id.softkey_left)
+        softkeyMiddle = findViewById(R.id.softkey_middle)
+        softkeyRight = findViewById(R.id.softkey_right)
 
-            softkeyBack?.setOnClickListener {
-                // Simulate back button
-                onBackPressed()
-            }
-            softkeyHome?.setOnClickListener {
-                // Go to home (relaunch this activity as home)
-                val intent = Intent(Intent.ACTION_MAIN)
-                intent.addCategory(Intent.CATEGORY_HOME)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                startActivity(intent)
-            }
-            softkeyMenu?.setOnClickListener {
-                // Show options menu if needed (override if you have a menu)
-                openOptionsMenu()
-            }
+
 
         loadApplications()
         setupAdapter()
@@ -115,10 +104,26 @@ class HomeActivity : Activity() {
         if (show) {
             infoPanel?.visibility = View.VISIBLE
             appList?.visibility = View.GONE
+            setSoftkeyBarText(
+                left = "Notification",
+                middle = "Menu",
+                right = "Shortcuts"
+            )
         } else {
             infoPanel?.visibility = View.GONE
             appList?.visibility = View.VISIBLE
+            setSoftkeyBarText(
+                left = "",
+                middle = "Select",
+                right = ""
+            )
         }
+    }
+
+    private fun setSoftkeyBarText(left: String, middle: String, right: String) {
+        softkeyLeft.text = left
+        softkeyMiddle.text = middle
+        softkeyRight.text = right
     }
 
     private fun loadApplications() {

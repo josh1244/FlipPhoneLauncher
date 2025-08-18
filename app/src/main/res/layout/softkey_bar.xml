@@ -1,55 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="56dp"
+    android:layout_height="48dp"
     android:orientation="horizontal"
-    android:background="#222"
-    android:gravity="center">
+    android:background="@android:color/transparent"
+    android:gravity="bottom|center_vertical">
 
 
     <TextView
-        android:id="@+id/softkey_back"
+        android:id="@+id/softkey_left"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:text="Back"
-        android:textColor="#fff"
+        android:text="LEFT"
+        android:textColor="#FFFFFF"
         android:gravity="center"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textAllCaps="false"
         android:background="@android:color/transparent"
         android:focusable="false"
         android:clickable="false"
-        android:textIsSelectable="false" />
+        android:textIsSelectable="false"
+        android:fontFamily="sans-serif" />
 
     <TextView
-        android:id="@+id/softkey_home"
+        android:id="@+id/softkey_middle"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:text="Home"
-        android:textColor="#fff"
+        android:text="MIDDLE"
+        android:textColor="#FFFFFF"
         android:gravity="center"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textAllCaps="false"
         android:background="@android:color/transparent"
         android:focusable="false"
         android:clickable="false"
-        android:textIsSelectable="false" />
+        android:textIsSelectable="false"
+        android:fontFamily="sans-serif" />
 
     <TextView
-        android:id="@+id/softkey_menu"
+        android:id="@+id/softkey_right"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:text="Menu"
-        android:textColor="#fff"
+        android:text="RIGHT"
+        android:textColor="#FFFFFF"
         android:gravity="center"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textAllCaps="false"
         android:background="@android:color/transparent"
         android:focusable="false"
         android:clickable="false"
-        android:textIsSelectable="false" />
+        android:textIsSelectable="false"
+        android:fontFamily="sans-serif" />
 
 </LinearLayout>
