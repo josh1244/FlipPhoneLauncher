@@ -49,29 +49,37 @@ class HomeActivity : Activity() {
             val wallpaperDrawable = wallpaperManager.drawable
             window.setBackgroundDrawable(wallpaperDrawable)
         } catch (e: SecurityException) {
-            // Handle case where permission might be missing (though typically not for system wallpaper)
             e.printStackTrace()
         }
-
 
         // Draw wallpaper under the status bar
         window.decorView.systemUiVisibility =
             View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-        // Explicitly set status bar color to transparent
         window.statusBarColor = Color.TRANSPARENT
 
         setContentView(R.layout.activity_home)
 
-    listView = findViewById(R.id.app_list)
-    timeTextView = findViewById(R.id.time_text)
-    dateTextView = findViewById(R.id.date_text)
-    carrierTextView = findViewById(R.id.carrier_text)
+        listView = findViewById(R.id.app_list)
+        timeTextView = findViewById(R.id.time_text)
+        dateTextView = findViewById(R.id.date_text)
+        carrierTextView = findViewById(R.id.carrier_text)
 
-    loadApplications()
-    setupAdapter()
-    setupClickListener()
-    setupTimeUpdater()
-    showCarrierName()
+        loadApplications()
+        setupAdapter()
+        setupClickListener()
+        setupTimeUpdater()
+        showCarrierName()
+
+        // Show info panel, hide app list at start
+        showInfoPanel(true)
+    }
+
+    private fun showInfoPanel(show: Boolean) {
+        val visibility = if (show) View.VISIBLE else View.GONE
+        timeTextView.visibility = visibility
+        dateTextView.visibility = visibility
+        carrierTextView.visibility = visibility
+        listView.visibility = if (show) View.GONE else View.VISIBLE
     }
 
     private fun loadApplications() {
@@ -156,26 +164,24 @@ class HomeActivity : Activity() {
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER || keyCode == KeyEvent.KEYCODE_ENTER) {
             if (listView.visibility == View.GONE) {
-                listView.visibility = View.VISIBLE
+                showInfoPanel(false)
                 listView.requestFocus() // Request focus for D-Pad navigation
-                // Optionally, select the first item
                 if (listView.adapter.count > 0) {
                     listView.setSelection(0)
                 }
-                return true // Event handled
+                return true
             } else if (listView.visibility == View.VISIBLE) {
                 val selectedPosition = listView.selectedItemPosition
                 if (selectedPosition != ListView.INVALID_POSITION) {
                     launchApp(selectedPosition)
-                    return true // Event handled
+                    return true
                 }
             }
         } else if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (listView.visibility == View.VISIBLE) {
-                listView.visibility = View.GONE
-                return true // Consume back event, show home info panel
+                showInfoPanel(true)
+                return true
             } else {
-                // Home menu is visible, do nothing (consume event)
                 return true
             }
         }
