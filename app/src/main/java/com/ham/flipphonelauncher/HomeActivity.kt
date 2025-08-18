@@ -141,8 +141,8 @@ class HomeActivity : Activity() {
             val activityName = activityInfo.name
             appList.add(AppDetail(label, icon, packageName, activityName))
         }
-        // Optional: Sort the app list alphabetically by label
-        // appList.sortBy { it.label.toString() }
+        // Sort the app list alphabetically by label
+        appList.sortBy { it.label.toString().lowercase(Locale.getDefault()) }
     }
 
     private fun setupAdapter() {
