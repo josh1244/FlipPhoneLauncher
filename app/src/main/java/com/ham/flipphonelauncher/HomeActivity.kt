@@ -174,6 +174,16 @@ class HomeActivity : Activity() {
         // Use progress drawable for brightness
         shortcutButtons[3].setBackgroundResource(R.drawable.brightness_progress)
 
+        // Long-press Brightness: open Display settings
+        shortcutButtons[3].setOnLongClickListener {
+            try {
+                startActivity(Intent(android.provider.Settings.ACTION_DISPLAY_SETTINGS))
+            } catch (e: Exception) {
+                Toast.makeText(this, "Unable to open Display settings", Toast.LENGTH_SHORT).show()
+            }
+            true
+        }
+
         // Set initial progress
         setBrightnessProgress()
         
@@ -215,6 +225,15 @@ class HomeActivity : Activity() {
             shortcutButtons[0].setBackgroundResource(if (enabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
             setShortcutIconTint(0, enabled)
         }
+        // Long-press Wi-Fi: open Wi-Fi settings
+        shortcutButtons[0].setOnLongClickListener {
+            try {
+                startActivity(Intent(android.provider.Settings.ACTION_WIFI_SETTINGS))
+            } catch (e: Exception) {
+                Toast.makeText(this, "Unable to open Wi-Fi settings", Toast.LENGTH_SHORT).show()
+            }
+            true
+        }
         // Bluetooth
         shortcutButtons[1].setOnClickListener {
             val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
@@ -227,6 +246,15 @@ class HomeActivity : Activity() {
             } else {
                 Toast.makeText(this, "Bluetooth not supported", Toast.LENGTH_SHORT).show()
             }
+        }
+        // Long-press Bluetooth: open Bluetooth settings
+        shortcutButtons[1].setOnLongClickListener {
+            try {
+                startActivity(Intent(android.provider.Settings.ACTION_BLUETOOTH_SETTINGS))
+            } catch (e: Exception) {
+                Toast.makeText(this, "Unable to open Bluetooth settings", Toast.LENGTH_SHORT).show()
+            }
+            true
         }
         // DnD (Do Not Disturb) - cycles through normal, vibrate, priority, total silence
         shortcutButtons[2].setOnClickListener {
@@ -271,6 +299,17 @@ class HomeActivity : Activity() {
             // Toast.makeText(this, "DnD: $currentState → $newState", Toast.LENGTH_SHORT).show()
             shortcutButtons[2].setBackgroundResource(if (newState != "All") R.drawable.circle_bg_on else R.drawable.circle_bg_off)
             setShortcutIconTint(2, newState != "All")
+        }
+        // Long-press DnD: open Do Not Disturb settings
+        shortcutButtons[2].setOnLongClickListener {
+            try {
+                val intent = Intent()
+                intent.setClassName("com.android.settings", "com.android.settings.Settings\$ZenModeSettingsActivity")
+                startActivity(intent)
+            } catch (e: Exception) {
+                Toast.makeText(this, "Unable to open DnD settings", Toast.LENGTH_SHORT).show()
+            }
+            true
         }
 
 
@@ -1120,13 +1159,16 @@ class HomeActivity : Activity() {
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        // Show a toast with the name of the keycode (always, even for HOME/ENDCALL/POWER)
+        // val keyName = KeyEvent.keyCodeToString(keyCode)
+        // Toast.makeText(this, "Key pressed: $keyName", Toast.LENGTH_SHORT).show()
         val dialerKeys = setOf(
             KeyEvent.KEYCODE_0, KeyEvent.KEYCODE_1, KeyEvent.KEYCODE_2, KeyEvent.KEYCODE_3,
             KeyEvent.KEYCODE_4, KeyEvent.KEYCODE_5, KeyEvent.KEYCODE_6, KeyEvent.KEYCODE_7,
             KeyEvent.KEYCODE_8, KeyEvent.KEYCODE_9, KeyEvent.KEYCODE_STAR, KeyEvent.KEYCODE_POUND
         )
 
-    when (currentState) {
+        when (currentState) {
             LauncherState.HOME_MENU -> {
                 when (keyCode) {
                     KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER -> {
