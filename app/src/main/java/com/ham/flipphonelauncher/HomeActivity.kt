@@ -64,6 +64,7 @@ private lateinit var shortcutOverlays: List<ImageView>
 private var selectedShortcutIndex: Int = 0
 
 class HomeActivity : Activity() {
+    private var lastSelectedFolderPosition: Int = 0
     // Track if we are showing folders or apps in a folder in grid view
     private var showingFolderApps: Boolean = false
     private var currentFolder: Folder? = null
@@ -524,6 +525,7 @@ class HomeActivity : Activity() {
                 val folder = folders.getOrNull(position) ?: return@setOnItemClickListener
                 currentFolder = folder
                 showingFolderApps = true
+                lastSelectedFolderPosition = position
                 updateGridForCurrentState()
             } else {
                 // Launch app in folder
@@ -542,6 +544,8 @@ class HomeActivity : Activity() {
             gridView.numColumns = 3
             gridView.adapter = folderGridAdapter
             setSoftkeyBarText(left = "", middle = "Select", right = "")
+            // Restore last selected folder position
+            gridView.setSelection(lastSelectedFolderPosition)
         } else {
             // Show apps in current folder
             val folder = currentFolder ?: return
