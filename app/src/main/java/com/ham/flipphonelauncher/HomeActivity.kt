@@ -432,6 +432,25 @@ class HomeActivity : Activity() {
         // Build a map of appKey to ResolveInfo for fast lookup
         val appInfoMap = appInfos.associateBy { it.activityInfo.packageName + "/" + it.activityInfo.name }
 
+        // --- Load starter config for new app placement ---
+        val starterConfig = getStarterConfig()
+        // Map appKey to folderId from starter config
+        val starterAppToFolder: MutableMap<String, Int> = mutableMapOf()
+        if (starterConfig != null) {
+            val foldersJson = starterConfig.optJSONObject("folders")
+            if (foldersJson != null) {
+                for (key in foldersJson.keys()) {
+                    val folderId = key.toIntOrNull() ?: continue
+                    val folderObj = foldersJson.getJSONObject(key)
+                    val arr = folderObj.getJSONArray("apps")
+                    for (i in 0 until arr.length()) {
+                        val appKey = arr.getString(i)
+                        starterAppToFolder[appKey] = folderId
+                    }
+                }
+            }
+        }
+
         appList = mutableListOf()
         // Place apps in folders according to saved data
         for ((folderId, pair) in folderData) {
@@ -448,22 +467,39 @@ class HomeActivity : Activity() {
                 }
             }
         }
-        // Add any apps not in saved data to the last folder
+        // Add any apps not in saved data to the correct folder if present in starter config, else last folder
         val allSavedApps = folderData.values.flatMap { it.second }.toSet()
         val lastFolderId = folderIds.last()
         for (resolveInfo in appInfos) {
             val key = resolveInfo.activityInfo.packageName + "/" + resolveInfo.activityInfo.name
             if (key !in allSavedApps) {
+                val folderId = starterAppToFolder[key] ?: lastFolderId
                 val label = resolveInfo.loadLabel(pm)
                 val icon = resolveInfo.loadIcon(pm)
                 val activityInfo = resolveInfo.activityInfo
-                val appDetail = AppDetail(label, icon, activityInfo.packageName, activityInfo.name, lastFolderId)
+                val appDetail = AppDetail(label, icon, activityInfo.packageName, activityInfo.name, folderId)
                 appList.add(appDetail)
-                folderMap[lastFolderId]?.apps?.add(appDetail)
+                folderMap[folderId]?.apps?.add(appDetail)
             }
         }
         folders = folderIds.map { folderMap[it] ?: Folder(it, "Group $it") }.toMutableList()
         appList.sortBy { it.label.toString().lowercase(Locale.getDefault()) }
+    }
+
+    // Helper to get the starter config JSON from assets or a static string
+    private fun getStarterConfig(): JSONObject? {
+        // Load starter config from assets/starter_config.json
+        return try {
+            val inputStream = assets.open("starter_config.json")
+            val size = inputStream.available()
+            val buffer = ByteArray(size)
+            inputStream.read(buffer)
+            inputStream.close()
+            val json = String(buffer, Charsets.UTF_8)
+            JSONObject(json)
+        } catch (e: Exception) {
+            null
+        }
     }
 
     // Show dialog to rename folder

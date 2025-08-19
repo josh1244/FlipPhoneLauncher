@@ -1,0 +1,69 @@
+{
+  "folders": {
+    "1": {
+      "name": "Group 1",
+      "apps": [
+        "de.szalkowski.activitylauncher/de.szalkowski.activitylauncher.MainActivity"
+      ]
+    },
+    "2": {
+      "name": "Phone",
+      "apps": [
+        "com.android.dialer/com.android.dialer.app.calllog.CallLogActivity"
+      ]
+    },
+    "3": {
+      "name": "Contacts",
+      "apps": [
+        "com.android.contacts/com.android.contacts.activities.PeopleActivity"
+      ]
+    },
+    "4": {
+      "name": "Messages",
+      "apps": ["com.android.mms/com.android.mms.ui.ConversationList"]
+    },
+    "5": {
+      "name": "Schedule",
+      "apps": [
+        "com.android.calendar/com.android.calendar.AllInOneActivity",
+        "com.android.deskclock/com.android.deskclock.DeskClock"
+      ]
+    },
+    "6": {
+      "name": "Tools",
+      "apps": [
+        "com.android.calculator2/com.android.calculator2.Calculator",
+        "com.android.note/com.android.note.NotesListActivity",
+        "com.jrdcom.filemanager/com.jrdcom.filemanager.activity.FileBrowserActivity"
+      ]
+    },
+    "7": {
+      "name": "Media",
+      "apps": [
+        "com.android.camera2/com.android.camera.CameraLauncher",
+        "com.android.gallery3d/com.android.gallery3d.app.GalleryActivity",
+        "com.android.music/com.android.music.MusicBrowserActivity",
+        "com.android.soundrecorder/com.android.soundrecorder.SoundRecorder"
+      ]
+    },
+    "8": {
+      "name": "Advanced",
+      "apps": [
+        "uk.co.openweather/uk.co.openweather.MainActivity",
+        "com.groupme.android/com.groupme.android.HomeActivity",
+        "com.android.email/com.android.email.activity.Welcome",
+        "org.chromium.chrome/com.google.android.apps.chrome.Main",
+        "com.android.quicksearchbox/com.android.quicksearchbox.SearchActivity"
+      ]
+    },
+    "9": {
+      "name": "System",
+      "apps": [
+        "com.android.settings/com.android.settings.Settings",
+        "com.ham.flipphonelauncher/com.ham.flipphonelauncher.HomeActivity",
+        "com.vzw.hss.myverizon/com.vzw.hss.myverizon.ui.activities.LauncherActivity",
+        "io.github.sspanak.tt9/io.github.sspanak.tt9.preferences.PreferencesActivity"
+      ]
+    }
+  }
+}
