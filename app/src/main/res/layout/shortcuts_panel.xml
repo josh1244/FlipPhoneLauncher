@@ -8,156 +8,170 @@
     android:visibility="gone"
     android:paddingTop="32dp">
 
-    <LinearLayout
-        android:id="@+id/shortcut_wifi"
+
+    <GridLayout
+        android:id="@+id/shortcuts_grid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
+        android:layout_gravity="center"
+        android:alignmentMode="alignMargins"
+        android:columnCount="2"
+        android:rowCount="2"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/shortcuts_softkey"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        >
-        <FrameLayout
-            android:layout_width="56dp"
-            android:layout_height="56dp">
-            <ImageView
-                android:id="@+id/overlay_wifi"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:layout_gravity="center"
-                android:src="@drawable/shortcut_focus_overlay_square"
-                android:visibility="gone" />
-            <ImageButton
-                android:id="@+id/btn_wifi"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/circle_bg"
-                android:src="@drawable/ic_wifi"
-                android:contentDescription="Wi-Fi"
-                android:focusable="true"
-                android:clickable="true" />
-        </FrameLayout>
-        <TextView
+        <LinearLayout
+            android:id="@+id/shortcut_wifi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Wi-Fi"
-            android:textColor="@android:color/white"
-            android:textSize="14sp" />
-    </LinearLayout>
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_margin="16dp">
+            <FrameLayout
+                android:layout_width="56dp"
+                android:layout_height="56dp">
+                <ImageView
+                    android:id="@+id/overlay_wifi"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/shortcut_focus_overlay_square"
+                    android:visibility="gone" />
+                <ImageButton
+                    android:id="@+id/btn_wifi"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/circle_bg"
+                    android:src="@drawable/ic_wifi"
+                    android:contentDescription="Wi-Fi"
+                    android:focusable="true"
+                    android:clickable="true" />
+            </FrameLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Wi-Fi"
+                android:textColor="@android:color/white"
+                android:textSize="14sp" />
+        </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/shortcut_bluetooth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/shortcut_wifi"
-        >
-        <FrameLayout
-            android:layout_width="56dp"
-            android:layout_height="56dp">
-            <ImageView
-                android:id="@+id/overlay_bluetooth"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:layout_gravity="center"
-                android:src="@drawable/shortcut_focus_overlay_square"
-                android:visibility="gone" />
-            <ImageButton
-                android:id="@+id/btn_bluetooth"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/circle_bg"
-                android:src="@drawable/ic_bluetooth"
-                android:contentDescription="Bluetooth"
-                android:focusable="true"
-                android:clickable="true" />
-        </FrameLayout>
-        <TextView
+        <LinearLayout
+            android:id="@+id/shortcut_bluetooth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bluetooth"
-            android:textColor="@android:color/white"
-            android:textSize="14sp" />
-    </LinearLayout>
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:layout_margin="16dp">
+            <FrameLayout
+                android:layout_width="56dp"
+                android:layout_height="56dp">
+                <ImageView
+                    android:id="@+id/overlay_bluetooth"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/shortcut_focus_overlay_square"
+                    android:visibility="gone" />
+                <ImageButton
+                    android:id="@+id/btn_bluetooth"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/circle_bg"
+                    android:src="@drawable/ic_bluetooth"
+                    android:contentDescription="Bluetooth"
+                    android:focusable="true"
+                    android:clickable="true" />
+            </FrameLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bluetooth"
+                android:textColor="@android:color/white"
+                android:textSize="14sp" />
+        </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/shortcut_dnd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/shortcut_bluetooth"
-        >
-        <FrameLayout
-            android:layout_width="56dp"
-            android:layout_height="56dp">
-            <ImageView
-                android:id="@+id/overlay_dnd"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:layout_gravity="center"
-                android:src="@drawable/shortcut_focus_overlay_square"
-                android:visibility="gone" />
-            <ImageButton
-                android:id="@+id/btn_dnd"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/circle_bg"
-                android:src="@drawable/ic_dnd"
-                android:contentDescription="Do Not Disturb"
-                android:focusable="true"
-                android:clickable="true" />
-        </FrameLayout>
-        <TextView
-            android:id="@+id/shortcut_dnd_label"
+        <LinearLayout
+            android:id="@+id/shortcut_dnd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="DnD"
-            android:textColor="@android:color/white"
-            android:textSize="14sp" />
-    </LinearLayout>
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:layout_margin="16dp">
+            <FrameLayout
+                android:layout_width="56dp"
+                android:layout_height="56dp">
+                <ImageView
+                    android:id="@+id/overlay_dnd"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/shortcut_focus_overlay_square"
+                    android:visibility="gone" />
+                <ImageButton
+                    android:id="@+id/btn_dnd"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/circle_bg"
+                    android:src="@drawable/ic_dnd"
+                    android:contentDescription="Do Not Disturb"
+                    android:focusable="true"
+                    android:clickable="true" />
+            </FrameLayout>
+            <TextView
+                android:id="@+id/shortcut_dnd_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DnD"
+                android:textColor="@android:color/white"
+                android:textSize="14sp" />
+        </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/shortcut_brightness"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/shortcut_dnd"
-        app:layout_constraintEnd_toEndOf="parent"
-        >
-        <FrameLayout
-            android:layout_width="56dp"
-            android:layout_height="56dp">
-            <ImageView
-                android:id="@+id/overlay_brightness"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:layout_gravity="center"
-                android:src="@drawable/shortcut_focus_overlay_square"
-                android:visibility="gone" />
-            <ImageButton
-                android:id="@+id/btn_brightness"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/circle_bg"
-                android:src="@drawable/ic_brightness"
-                android:contentDescription="Brightness"
-                android:focusable="true"
-                android:clickable="true" />
-        </FrameLayout>
-        <TextView
+        <LinearLayout
+            android:id="@+id/shortcut_brightness"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Brightness"
-            android:textColor="@android:color/white"
-            android:textSize="14sp" />
-    </LinearLayout>
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:layout_margin="16dp">
+            <FrameLayout
+                android:layout_width="56dp"
+                android:layout_height="56dp">
+                <ImageView
+                    android:id="@+id/overlay_brightness"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/shortcut_focus_overlay_square"
+                    android:visibility="gone" />
+                <ImageButton
+                    android:id="@+id/btn_brightness"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/brightness_progress"
+                    android:src="@drawable/ic_brightness"
+                    android:contentDescription="Brightness"
+                    android:focusable="true"
+                    android:clickable="true" />
+            </FrameLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Brightness"
+                android:textColor="@android:color/white"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+    </GridLayout>
 
     <!-- Softkey label -->
     <TextView

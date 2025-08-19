@@ -132,7 +132,26 @@ class HomeActivity : Activity() {
     val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
     shortcutButtons[2].setBackgroundResource(if (audioManager.ringerMode == AudioManager.RINGER_MODE_NORMAL) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
     // For brightness, always on by default (could be improved to reflect current state)
-    shortcutButtons[3].setBackgroundResource(R.drawable.circle_bg_on)
+    // Use progress drawable for brightness
+    shortcutButtons[3].setBackgroundResource(R.drawable.brightness_progress)
+    fun setBrightnessProgress() {
+        // Always fetch the current system brightness and update the progress drawable
+        try {
+            val cResolver = contentResolver
+            val current = android.provider.Settings.System.getInt(cResolver, android.provider.Settings.System.SCREEN_BRIGHTNESS)
+            val percent = (current * 100) / 255
+            val drawable = shortcutButtons[3].background
+            if (drawable is android.graphics.drawable.LayerDrawable) {
+                val clip = drawable.findDrawableByLayerId(R.id.progress)
+                if (clip is android.graphics.drawable.ClipDrawable) {
+                    // ClipDrawable level is 0-10000
+                    clip.level = (percent * 100)
+                }
+            }
+        } catch (_: Exception) {}
+    }
+    // Set initial progress
+    setBrightnessProgress()
     
     // Helper to set icon tint
     fun setShortcutIconTint(index: Int, enabled: Boolean) {
@@ -252,8 +271,9 @@ class HomeActivity : Activity() {
             android.provider.Settings.System.putInt(cResolver, android.provider.Settings.System.SCREEN_BRIGHTNESS, newBrightness)
             val brightnessText = "Brightness: ${labels[nextIdx]}"
             Toast.makeText(this, brightnessText, Toast.LENGTH_SHORT).show()
-            shortcutButtons[3].setBackgroundResource(if (newBrightness == 255) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-            setShortcutIconTint(3, newBrightness == 255)
+            // Update progress drawable to reflect actual system brightness
+            setBrightnessProgress()
+            // setShortcutIconTint(3, newBrightness == 255)
         } catch (e: Exception) {
             Toast.makeText(this, "Brightness change failed", Toast.LENGTH_SHORT).show()
         }
