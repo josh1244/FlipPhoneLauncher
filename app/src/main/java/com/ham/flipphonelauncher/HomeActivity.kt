@@ -50,6 +50,7 @@ private var currentState: LauncherState = LauncherState.HOME_MENU
 
 private lateinit var shortcutsPanel: View
 private lateinit var shortcutButtons: List<ImageButton>
+private lateinit var shortcutButtonTints: List<Int>
 private lateinit var shortcutOverlays: List<ImageView>
 private var selectedShortcutIndex: Int = 0
 
@@ -114,6 +115,9 @@ class HomeActivity : Activity() {
             shortcutsPanel.findViewById(R.id.btn_sound),
             shortcutsPanel.findViewById(R.id.btn_location)
         )
+    // Tint colors: blue for enabled, white for disabled
+    val blue = 0xFF2196F3.toInt() // Material blue 500
+    val white = 0xFFFFFFFF.toInt()
         // Collect overlay views for focus/hover outline
         shortcutOverlays = listOf(
             shortcutsPanel.findViewById(R.id.overlay_wifi),
@@ -124,6 +128,7 @@ class HomeActivity : Activity() {
             shortcutsPanel.findViewById(R.id.overlay_location)
         )
     // Set initial backgrounds based on current state
+    
     val wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
     shortcutButtons[0].setBackgroundResource(if (wifiManager.isWifiEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
     val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
@@ -133,78 +138,99 @@ class HomeActivity : Activity() {
     val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
     shortcutButtons[4].setBackgroundResource(if (audioManager.ringerMode != AudioManager.RINGER_MODE_SILENT) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
     shortcutButtons[5].setBackgroundResource(if (isLocationOn) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-        // Wi-Fi
-        shortcutButtons[0].setOnClickListener {
-            val wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
-            val enabled = !wifiManager.isWifiEnabled
-            wifiManager.isWifiEnabled = enabled
-            Toast.makeText(this, if (enabled) "Wi-Fi Enabled" else "Wi-Fi Disabled", Toast.LENGTH_SHORT).show()
-            shortcutButtons[0].setBackgroundResource(if (enabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-        }
-        // Bluetooth
-        shortcutButtons[1].setOnClickListener {
-            val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
-            if (bluetoothAdapter != null) {
-                val enabled = !bluetoothAdapter.isEnabled
-                if (enabled) bluetoothAdapter.enable() else bluetoothAdapter.disable()
-                Toast.makeText(this, if (enabled) "Bluetooth Enabled" else "Bluetooth Disabled", Toast.LENGTH_SHORT).show()
-                shortcutButtons[1].setBackgroundResource(if (enabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-            } else {
-                Toast.makeText(this, "Bluetooth not supported", Toast.LENGTH_SHORT).show()
-            }
-        }
-        // Airplane mode (visual only, system toggle restricted)
-        shortcutButtons[2].setOnClickListener {
-            isAirplaneOn = !isAirplaneOn
-            Toast.makeText(this, if (isAirplaneOn) "Airplane Mode On (visual only)" else "Airplane Mode Off (visual only)", Toast.LENGTH_SHORT).show()
-            shortcutButtons[2].setBackgroundResource(if (isAirplaneOn) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-        }
-        // Mobile Data (visual only, system toggle restricted)
-        shortcutButtons[3].setOnClickListener {
-            isMobileDataOn = !isMobileDataOn
-            Toast.makeText(this, if (isMobileDataOn) "Mobile Data On (visual only)" else "Mobile Data Off (visual only)", Toast.LENGTH_SHORT).show()
-            shortcutButtons[3].setBackgroundResource(if (isMobileDataOn) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-        }
-        // Sound Profile
-        shortcutButtons[4].setOnClickListener {
-            val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
-            val isNormal = audioManager.ringerMode != AudioManager.RINGER_MODE_SILENT
-            if (isNormal) {
-                audioManager.ringerMode = AudioManager.RINGER_MODE_SILENT
-                Toast.makeText(this, "Sound: Silent", Toast.LENGTH_SHORT).show()
-                shortcutButtons[4].setBackgroundResource(R.drawable.circle_bg_off)
-            } else {
-                audioManager.ringerMode = AudioManager.RINGER_MODE_NORMAL
-                Toast.makeText(this, "Sound: Normal", Toast.LENGTH_SHORT).show()
-                shortcutButtons[4].setBackgroundResource(R.drawable.circle_bg_on)
-            }
-        }
-        // Location (visual only, system toggle restricted)
-        shortcutButtons[5].setOnClickListener {
-            isLocationOn = !isLocationOn
-            Toast.makeText(this, if (isLocationOn) "Location On (visual only)" else "Location Off (visual only)", Toast.LENGTH_SHORT).show()
-            shortcutButtons[5].setBackgroundResource(if (isLocationOn) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-        }
+    
+    // Helper to set icon tint
+    fun setShortcutIconTint(index: Int, enabled: Boolean) {
+        shortcutButtons[index].setColorFilter(if (enabled) blue else white)
+    }
+    setShortcutIconTint(0, wifiManager.isWifiEnabled)
+    setShortcutIconTint(1, bluetoothAdapter != null && bluetoothAdapter.isEnabled)
+    setShortcutIconTint(2, isAirplaneOn)
+    setShortcutIconTint(3, isMobileDataOn)
+    setShortcutIconTint(4, audioManager.ringerMode != AudioManager.RINGER_MODE_SILENT)
+    setShortcutIconTint(5, isLocationOn)
 
-        listView = findViewById(R.id.app_list)
-        timeTextView = findViewById(R.id.time_text)
-        dateTextView = findViewById(R.id.date_text)
-        carrierTextView = findViewById(R.id.carrier_text)
+    // Wi-Fi
+    shortcutButtons[0].setOnClickListener {
+        val wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
+        val enabled = !wifiManager.isWifiEnabled
+        wifiManager.isWifiEnabled = enabled
+        Toast.makeText(this, if (enabled) "Wi-Fi Enabled" else "Wi-Fi Disabled", Toast.LENGTH_SHORT).show()
+        shortcutButtons[0].setBackgroundResource(if (enabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+        setShortcutIconTint(0, enabled)
+    }
+    // Bluetooth
+    shortcutButtons[1].setOnClickListener {
+        val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+        if (bluetoothAdapter != null) {
+            val enabled = !bluetoothAdapter.isEnabled
+            if (enabled) bluetoothAdapter.enable() else bluetoothAdapter.disable()
+            Toast.makeText(this, if (enabled) "Bluetooth Enabled" else "Bluetooth Disabled", Toast.LENGTH_SHORT).show()
+            shortcutButtons[1].setBackgroundResource(if (enabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+            setShortcutIconTint(1, enabled)
+        } else {
+            Toast.makeText(this, "Bluetooth not supported", Toast.LENGTH_SHORT).show()
+        }
+    }
+    // Airplane mode (visual only, system toggle restricted)
+    shortcutButtons[2].setOnClickListener {
+        isAirplaneOn = !isAirplaneOn
+        Toast.makeText(this, if (isAirplaneOn) "Airplane Mode On (visual only)" else "Airplane Mode Off (visual only)", Toast.LENGTH_SHORT).show()
+        shortcutButtons[2].setBackgroundResource(if (isAirplaneOn) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+        setShortcutIconTint(2, isAirplaneOn)
+    }
+    // Mobile Data (visual only, system toggle restricted)
+    shortcutButtons[3].setOnClickListener {
+        isMobileDataOn = !isMobileDataOn
+        Toast.makeText(this, if (isMobileDataOn) "Mobile Data On (visual only)" else "Mobile Data Off (visual only)", Toast.LENGTH_SHORT).show()
+        shortcutButtons[3].setBackgroundResource(if (isMobileDataOn) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+        setShortcutIconTint(3, isMobileDataOn)
+    }
+    // Sound Profile
+    shortcutButtons[4].setOnClickListener {
+        val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        val isNormal = audioManager.ringerMode != AudioManager.RINGER_MODE_SILENT
+        if (isNormal) {
+            audioManager.ringerMode = AudioManager.RINGER_MODE_SILENT
+            Toast.makeText(this, "Sound: Silent", Toast.LENGTH_SHORT).show()
+            shortcutButtons[4].setBackgroundResource(R.drawable.circle_bg_off)
+            setShortcutIconTint(4, false)
+        } else {
+            audioManager.ringerMode = AudioManager.RINGER_MODE_NORMAL
+            Toast.makeText(this, "Sound: Normal", Toast.LENGTH_SHORT).show()
+            shortcutButtons[4].setBackgroundResource(R.drawable.circle_bg_on)
+            setShortcutIconTint(4, true)
+        }
+    }
+    // Location (visual only, system toggle restricted)
+    shortcutButtons[5].setOnClickListener {
+        isLocationOn = !isLocationOn
+        Toast.makeText(this, if (isLocationOn) "Location On (visual only)" else "Location Off (visual only)", Toast.LENGTH_SHORT).show()
+        shortcutButtons[5].setBackgroundResource(if (isLocationOn) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+        setShortcutIconTint(5, isLocationOn)
+    }
 
-        // Softkey bar setup
-        softkeyLeft = findViewById(R.id.softkey_left)
-        softkeyMiddle = findViewById(R.id.softkey_middle)
-        softkeyRight = findViewById(R.id.softkey_right)
+
+
+    listView = findViewById(R.id.app_list)
+    timeTextView = findViewById(R.id.time_text)
+    dateTextView = findViewById(R.id.date_text)
+    carrierTextView = findViewById(R.id.carrier_text)
+
+    // Softkey bar setup
+    softkeyLeft = findViewById(R.id.softkey_left)
+    softkeyMiddle = findViewById(R.id.softkey_middle)
+    softkeyRight = findViewById(R.id.softkey_right)
 
 
 
-        loadApplications()
-        setupAdapter()
-        setupClickListener()
-        setupTimeUpdater()
-        showCarrierName()
+    loadApplications()
+    setupAdapter()
+    setupClickListener()
+    setupTimeUpdater()
+    showCarrierName()
 
-        // Show info panel, hide app list at start
+    // Show info panel, hide app list at start
     updateState(LauncherState.HOME_MENU)
     }
 
