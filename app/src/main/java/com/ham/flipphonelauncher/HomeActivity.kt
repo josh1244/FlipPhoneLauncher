@@ -143,6 +143,26 @@ class HomeActivity : Activity() {
     setShortcutIconTint(2, audioManager.ringerMode == AudioManager.RINGER_MODE_NORMAL)
     setShortcutIconTint(3, true)
 
+    // Set DnD label and button state on startup
+    fun updateDndUiFromSystem() {
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as android.app.NotificationManager
+        val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        val dndTextView = shortcutsPanel.findViewById<TextView>(R.id.shortcut_dnd_label)
+        val filter = notificationManager.currentInterruptionFilter
+        val ringer = audioManager.ringerMode
+        val dndLabel = when {
+            filter == android.app.NotificationManager.INTERRUPTION_FILTER_ALL && ringer == AudioManager.RINGER_MODE_NORMAL -> "All"
+            filter == android.app.NotificationManager.INTERRUPTION_FILTER_ALL && ringer == AudioManager.RINGER_MODE_VIBRATE -> "Vibrate"
+            filter == android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY -> "Priority"
+            filter == android.app.NotificationManager.INTERRUPTION_FILTER_NONE -> "None"
+            else -> "All"
+        }
+        dndTextView?.text = "DnD: $dndLabel"
+        shortcutButtons[2].setBackgroundResource(if (dndLabel != "All") R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+        setShortcutIconTint(2, dndLabel != "All")
+    }
+    updateDndUiFromSystem()
+
     // Wi-Fi
     shortcutButtons[0].setOnClickListener {
         val wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
@@ -378,6 +398,7 @@ class HomeActivity : Activity() {
         super.onResume()
         handler.post(timeUpdateRunnable) // Start time/date updates when activity resumes
         showCarrierName() // Refresh carrier name in case it changed
+        // updateDndUiFromSystem()
     }
 
     override fun onPause() {
