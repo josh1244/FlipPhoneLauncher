@@ -446,6 +446,76 @@ class HomeActivity : Activity() {
         }
     }
 
+    // Track if a long-press was handled for D-pad keys
+    private val dpadLongPressHandled = mutableMapOf(
+        KeyEvent.KEYCODE_DPAD_UP to false,
+        KeyEvent.KEYCODE_DPAD_DOWN to false,
+        KeyEvent.KEYCODE_DPAD_LEFT to false,
+        KeyEvent.KEYCODE_DPAD_RIGHT to false
+    )
+
+    // Track if center button is held
+    private var isCenterHeld = false
+
+    // Handle long-press for D-pad app assignment
+    override fun onKeyLongPress(keyCode: Int, event: KeyEvent?): Boolean {
+        Toast.makeText(this, "onKeyLongPress: $keyCode", Toast.LENGTH_SHORT).show()
+        if (currentState == LauncherState.HOME_MENU && DPAD_KEYS.contains(keyCode)) {
+            dpadLongPressHandled[keyCode] = true
+            showDpadAppPicker(keyCode)
+            return true
+        }
+        return super.onKeyLongPress(keyCode, event)
+    }
+
+        // D-pad shortcut keys
+    private val DPAD_KEYS = listOf(
+        KeyEvent.KEYCODE_DPAD_UP,
+        KeyEvent.KEYCODE_DPAD_DOWN,
+        KeyEvent.KEYCODE_DPAD_LEFT,
+        KeyEvent.KEYCODE_DPAD_RIGHT
+    )
+    private val DPAD_PREF_KEYS = listOf(
+        "dpad_up_app",
+        "dpad_down_app",
+        "dpad_left_app",
+        "dpad_right_app"
+    )
+
+    private fun getDpadAppPackage(direction: Int): String? {
+        val idx = DPAD_KEYS.indexOf(direction)
+        if (idx == -1) return null
+        val prefs = getSharedPreferences("dpad_shortcuts", Context.MODE_PRIVATE)
+        return prefs.getString(DPAD_PREF_KEYS[idx], null)
+    }
+
+    private fun setDpadAppPackage(direction: Int, packageName: String) {
+        val idx = DPAD_KEYS.indexOf(direction)
+        if (idx == -1) return
+        val prefs = getSharedPreferences("dpad_shortcuts", Context.MODE_PRIVATE)
+        prefs.edit().putString(DPAD_PREF_KEYS[idx], packageName).apply()
+    }
+
+    // Show app picker dialog for a D-pad direction
+    private fun showDpadAppPicker(direction: Int) {
+        val pm = packageManager
+        val mainIntent = Intent(Intent.ACTION_MAIN, null)
+        mainIntent.addCategory(Intent.CATEGORY_LAUNCHER)
+        val apps = pm.queryIntentActivities(mainIntent, 0)
+        val appLabels = apps.map { it.loadLabel(pm).toString() }
+        val appPkgs = apps.map { it.activityInfo.packageName }
+        android.app.AlertDialog.Builder(this)
+            .setTitle("Select app for D-pad ${when(direction){
+                KeyEvent.KEYCODE_DPAD_UP->"UP"; KeyEvent.KEYCODE_DPAD_DOWN->"DOWN"; KeyEvent.KEYCODE_DPAD_LEFT->"LEFT"; else->"RIGHT"}}")
+            .setItems(appLabels.toTypedArray()) { _, which ->
+                setDpadAppPackage(direction, appPkgs[which])
+                Toast.makeText(this, "Shortcut set!", Toast.LENGTH_SHORT).show()
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
+
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         val dialerKeys = setOf(
             KeyEvent.KEYCODE_0, KeyEvent.KEYCODE_1, KeyEvent.KEYCODE_2, KeyEvent.KEYCODE_3,
@@ -456,6 +526,20 @@ class HomeActivity : Activity() {
         when (currentState) {
             LauncherState.HOME_MENU -> {
                 when (keyCode) {
+                    KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER -> {
+                        isCenterHeld = true
+                        return true
+                    }
+                    KeyEvent.KEYCODE_DPAD_UP, KeyEvent.KEYCODE_DPAD_DOWN, KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_DPAD_RIGHT -> {
+                        if (isCenterHeld) {
+                            showDpadAppPicker(keyCode)
+                            return true
+                        } else {
+                            dpadLongPressHandled[keyCode] = false
+                            // Let onKeyUp handle launching
+                            return false
+                        }
+                    }
                     KeyEvent.KEYCODE_SOFT_LEFT -> {
                         val intent = Intent()
                         intent.setClassName("com.android.systemui", "com.android.systemui.launcher3.NotificationActivity")
@@ -559,6 +643,40 @@ class HomeActivity : Activity() {
             }
         }
         return super.onKeyDown(keyCode, event)
+    }
+
+    override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
+        if (currentState == LauncherState.HOME_MENU) {
+            if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER || keyCode == KeyEvent.KEYCODE_ENTER) {
+                isCenterHeld = false
+                return true
+            }
+            if (DPAD_KEYS.contains(keyCode)) {
+                if (isCenterHeld) {
+                    // Already handled in onKeyDown
+                    return true
+                }
+                if (dpadLongPressHandled[keyCode] == true) {
+                    dpadLongPressHandled[keyCode] = false
+                    return true
+                } else {
+                    val pkg = getDpadAppPackage(keyCode)
+                    if (pkg != null) {
+                        val intent = packageManager.getLaunchIntentForPackage(pkg)
+                        if (intent != null) {
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            startActivity(intent)
+                        } else {
+                            Toast.makeText(this, "App not found", Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        Toast.makeText(this, "No app assigned. Hold center and press a direction to set.", Toast.LENGTH_SHORT).show()
+                    }
+                    return true
+                }
+            }
+        }
+        return super.onKeyUp(keyCode, event)
     }
 
     private fun moveShortcutFocus(delta: Int) {
