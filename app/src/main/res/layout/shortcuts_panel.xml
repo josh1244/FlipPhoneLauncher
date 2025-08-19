@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/shortcuts_panel"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:visibility="gone">
+
+    <!-- Wi-Fi Shortcut -->
+    <LinearLayout
+        android:id="@+id/shortcut_wifi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/shortcut_bluetooth"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/shortcut_bluetooth"
+        >
+        <ImageButton
+            android:id="@+id/btn_wifi"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:background="@drawable/circle_toggle_bg"
+            android:src="@drawable/ic_wifi"
+            android:contentDescription="Wi-Fi"
+            android:focusable="true"
+            android:clickable="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Wi-Fi"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <!-- Bluetooth Shortcut -->
+    <LinearLayout
+        android:id="@+id/shortcut_bluetooth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/shortcut_wifi"
+        app:layout_constraintEnd_toStartOf="@+id/shortcut_airplane"
+        >
+        <ImageButton
+            android:id="@+id/btn_bluetooth"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:background="@drawable/circle_toggle_bg"
+            android:src="@drawable/ic_bluetooth"
+            android:contentDescription="Bluetooth"
+            android:focusable="true"
+            android:clickable="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bluetooth"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <!-- Airplane Mode Shortcut -->
+    <LinearLayout
+        android:id="@+id/shortcut_airplane"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/shortcut_bluetooth"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+        <ImageButton
+            android:id="@+id/btn_airplane"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:background="@drawable/circle_toggle_bg"
+            android:src="@drawable/ic_airplane"
+            android:contentDescription="Airplane Mode"
+            android:focusable="true"
+            android:clickable="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Airplane mode"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <!-- Mobile Data Shortcut -->
+    <LinearLayout
+        android:id="@+id/shortcut_mobiledata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/shortcut_wifi"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/shortcut_sound"
+        >
+        <ImageButton
+            android:id="@+id/btn_mobiledata"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:background="@drawable/circle_toggle_bg"
+            android:src="@drawable/ic_mobiledata"
+            android:contentDescription="Mobile Data"
+            android:focusable="true"
+            android:clickable="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mobile data"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <!-- Sound Profile Shortcut -->
+    <LinearLayout
+        android:id="@+id/shortcut_sound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/shortcut_bluetooth"
+        app:layout_constraintStart_toEndOf="@id/shortcut_mobiledata"
+        app:layout_constraintEnd_toStartOf="@+id/shortcut_location"
+        >
+        <ImageButton
+            android:id="@+id/btn_sound"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:background="@drawable/circle_toggle_bg"
+            android:src="@drawable/ic_sound"
+            android:contentDescription="Sound Profile"
+            android:focusable="true"
+            android:clickable="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Normal"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <!-- Location Shortcut -->
+    <LinearLayout
+        android:id="@+id/shortcut_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/shortcut_airplane"
+        app:layout_constraintStart_toEndOf="@id/shortcut_sound"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+        <ImageButton
+            android:id="@+id/btn_location"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:background="@drawable/circle_toggle_bg"
+            android:src="@drawable/ic_location"
+            android:contentDescription="Location"
+            android:focusable="true"
+            android:clickable="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Location"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <!-- Softkey label -->
+    <TextView
+        android:id="@+id/shortcuts_softkey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

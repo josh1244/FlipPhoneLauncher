@@ -19,6 +19,11 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
+import android.widget.ImageButton
+import android.net.wifi.WifiManager
+import android.bluetooth.BluetoothAdapter
+import android.media.AudioManager
+import android.widget.Toast
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -34,7 +39,24 @@ data class AppDetail(
     val activityName: String
 )
 
+// Launcher states
+enum class LauncherState {
+    HOME_MENU,
+    APP_MENU,
+    SHORTCUTS
+}
+
+private var currentState: LauncherState = LauncherState.HOME_MENU
+
+private lateinit var shortcutsPanel: View
+private lateinit var shortcutButtons: List<ImageButton>
+private var selectedShortcutIndex: Int = 0
+
 class HomeActivity : Activity() {
+    // Track state for visual toggles (for restricted features)
+    private var isAirplaneOn = false
+    private var isMobileDataOn = false
+    private var isLocationOn = false
     private lateinit var softkeyLeft: TextView
     private lateinit var softkeyMiddle: TextView
     private lateinit var softkeyRight: TextView
@@ -76,6 +98,74 @@ class HomeActivity : Activity() {
 
         setContentView(R.layout.activity_home)
 
+        // Inflate shortcuts panel and add to root view
+        val rootView = findViewById<ViewGroup>(android.R.id.content)
+        val inflater = LayoutInflater.from(this)
+        shortcutsPanel = inflater.inflate(R.layout.shortcuts_panel, rootView, false)
+        rootView.addView(shortcutsPanel)
+
+        // Collect shortcut buttons for navigation
+        shortcutButtons = listOf(
+            shortcutsPanel.findViewById(R.id.btn_wifi),
+            shortcutsPanel.findViewById(R.id.btn_bluetooth),
+            shortcutsPanel.findViewById(R.id.btn_airplane),
+            shortcutsPanel.findViewById(R.id.btn_mobiledata),
+            shortcutsPanel.findViewById(R.id.btn_sound),
+            shortcutsPanel.findViewById(R.id.btn_location)
+        )
+        // Wi-Fi
+        shortcutButtons[0].setOnClickListener {
+            val wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
+            val enabled = !wifiManager.isWifiEnabled
+            wifiManager.isWifiEnabled = enabled
+            Toast.makeText(this, if (enabled) "Wi-Fi Enabled" else "Wi-Fi Disabled", Toast.LENGTH_SHORT).show()
+            shortcutButtons[0].alpha = if (enabled) 1.0f else 0.5f
+        }
+        // Bluetooth
+        shortcutButtons[1].setOnClickListener {
+            val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+            if (bluetoothAdapter != null) {
+                val enabled = !bluetoothAdapter.isEnabled
+                if (enabled) bluetoothAdapter.enable() else bluetoothAdapter.disable()
+                Toast.makeText(this, if (enabled) "Bluetooth Enabled" else "Bluetooth Disabled", Toast.LENGTH_SHORT).show()
+                shortcutButtons[1].alpha = if (enabled) 1.0f else 0.5f
+            } else {
+                Toast.makeText(this, "Bluetooth not supported", Toast.LENGTH_SHORT).show()
+            }
+        }
+        // Airplane mode (visual only, system toggle restricted)
+        shortcutButtons[2].setOnClickListener {
+            isAirplaneOn = !isAirplaneOn
+            Toast.makeText(this, if (isAirplaneOn) "Airplane Mode On (visual only)" else "Airplane Mode Off (visual only)", Toast.LENGTH_SHORT).show()
+            shortcutButtons[2].alpha = if (isAirplaneOn) 1.0f else 0.5f
+        }
+        // Mobile Data (visual only, system toggle restricted)
+        shortcutButtons[3].setOnClickListener {
+            isMobileDataOn = !isMobileDataOn
+            Toast.makeText(this, if (isMobileDataOn) "Mobile Data On (visual only)" else "Mobile Data Off (visual only)", Toast.LENGTH_SHORT).show()
+            shortcutButtons[3].alpha = if (isMobileDataOn) 1.0f else 0.5f
+        }
+        // Sound Profile
+        shortcutButtons[4].setOnClickListener {
+            val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+            val isNormal = audioManager.ringerMode != AudioManager.RINGER_MODE_SILENT
+            if (isNormal) {
+                audioManager.ringerMode = AudioManager.RINGER_MODE_SILENT
+                Toast.makeText(this, "Sound: Silent", Toast.LENGTH_SHORT).show()
+                shortcutButtons[4].alpha = 0.5f
+            } else {
+                audioManager.ringerMode = AudioManager.RINGER_MODE_NORMAL
+                Toast.makeText(this, "Sound: Normal", Toast.LENGTH_SHORT).show()
+                shortcutButtons[4].alpha = 1.0f
+            }
+        }
+        // Location (visual only, system toggle restricted)
+        shortcutButtons[5].setOnClickListener {
+            isLocationOn = !isLocationOn
+            Toast.makeText(this, if (isLocationOn) "Location On (visual only)" else "Location Off (visual only)", Toast.LENGTH_SHORT).show()
+            shortcutButtons[5].alpha = if (isLocationOn) 1.0f else 0.5f
+        }
+
         listView = findViewById(R.id.app_list)
         timeTextView = findViewById(R.id.time_text)
         dateTextView = findViewById(R.id.date_text)
@@ -95,28 +185,51 @@ class HomeActivity : Activity() {
         showCarrierName()
 
         // Show info panel, hide app list at start
-        showInfoPanel(true)
+    updateState(LauncherState.HOME_MENU)
     }
 
-    private fun showInfoPanel(show: Boolean) {
+    private fun updateState(newState: LauncherState) {
+        currentState = newState
         val infoPanel: View? = findViewById(R.id.info_panel)
-        val appList: View? = findViewById(R.id.app_list)
-        if (show) {
-            infoPanel?.visibility = View.VISIBLE
-            appList?.visibility = View.GONE
-            setSoftkeyBarText(
-                left = "Notification",
-                middle = "Menu",
-                right = "Shortcuts"
-            )
-        } else {
-            infoPanel?.visibility = View.GONE
-            appList?.visibility = View.VISIBLE
-            setSoftkeyBarText(
-                left = "",
-                middle = "Select",
-                right = ""
-            )
+        val appListView: View? = findViewById(R.id.app_list)
+        when (newState) {
+            LauncherState.HOME_MENU -> {
+                infoPanel?.visibility = View.VISIBLE
+                appListView?.visibility = View.GONE
+                shortcutsPanel.visibility = View.GONE
+                setSoftkeyBarText(
+                    left = "Notification",
+                    middle = "Menu",
+                    right = "Shortcuts"
+                )
+            }
+            LauncherState.APP_MENU -> {
+                infoPanel?.visibility = View.GONE
+                appListView?.visibility = View.VISIBLE
+                shortcutsPanel.visibility = View.GONE
+                setSoftkeyBarText(
+                    left = "",
+                    middle = "Select",
+                    right = ""
+                )
+                listView.requestFocus()
+                if (listView.adapter.count > 0) {
+                    listView.setSelection(0)
+                }
+            }
+            LauncherState.SHORTCUTS -> {
+                infoPanel?.visibility = View.GONE
+                appListView?.visibility = View.GONE
+                shortcutsPanel.visibility = View.VISIBLE
+                setSoftkeyBarText(
+                    left = "",
+                    middle = "Select",
+                    right = ""
+                )
+                // Focus first shortcut by default
+                selectedShortcutIndex = 0
+                updateShortcutFocus()
+            }
         }
     }
 
@@ -217,74 +330,121 @@ class HomeActivity : Activity() {
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-
-        // Handle dialer keys: 0-9, *, #
         val dialerKeys = setOf(
             KeyEvent.KEYCODE_0, KeyEvent.KEYCODE_1, KeyEvent.KEYCODE_2, KeyEvent.KEYCODE_3,
             KeyEvent.KEYCODE_4, KeyEvent.KEYCODE_5, KeyEvent.KEYCODE_6, KeyEvent.KEYCODE_7,
             KeyEvent.KEYCODE_8, KeyEvent.KEYCODE_9, KeyEvent.KEYCODE_STAR, KeyEvent.KEYCODE_POUND
         )
-        // If on home menu and left menu button pressed, launch NotificationActivity
-        if (keyCode == KeyEvent.KEYCODE_SOFT_LEFT && listView.visibility == View.GONE) {
-            val intent = Intent()
-            intent.setClassName("com.android.systemui", "com.android.systemui.launcher3.NotificationActivity")
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            try {
-                startActivity(intent)
-            } catch (e: Exception) {
-                // Optionally handle if activity not found
-            }
-            return true
-        }
-        if (keyCode in dialerKeys && listView.visibility == View.GONE) {
-            // Map keyCode to the corresponding character
-            val digit = when (keyCode) {
-                KeyEvent.KEYCODE_0 -> "0"
-                KeyEvent.KEYCODE_1 -> "1"
-                KeyEvent.KEYCODE_2 -> "2"
-                KeyEvent.KEYCODE_3 -> "3"
-                KeyEvent.KEYCODE_4 -> "4"
-                KeyEvent.KEYCODE_5 -> "5"
-                KeyEvent.KEYCODE_6 -> "6"
-                KeyEvent.KEYCODE_7 -> "7"
-                KeyEvent.KEYCODE_8 -> "8"
-                KeyEvent.KEYCODE_9 -> "9"
-                KeyEvent.KEYCODE_STAR -> "*"
-                KeyEvent.KEYCODE_POUND -> "#"
-                else -> ""
-            }
-            // Launch the dialer with the digit pre-filled
-            val intent = Intent(Intent.ACTION_DIAL)
-            intent.data = android.net.Uri.parse("tel:$digit")
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
-            return true
-        }
 
-        if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER || keyCode == KeyEvent.KEYCODE_ENTER) {
-            if (listView.visibility == View.GONE) {
-                showInfoPanel(false)
-                listView.requestFocus() // Request focus for D-Pad navigation
-                if (listView.adapter.count > 0) {
-                    listView.setSelection(0)
-                }
-                return true
-            } else if (listView.visibility == View.VISIBLE) {
-                val selectedPosition = listView.selectedItemPosition
-                if (selectedPosition != ListView.INVALID_POSITION) {
-                    launchApp(selectedPosition)
-                    return true
+        when (currentState) {
+            LauncherState.HOME_MENU -> {
+                when (keyCode) {
+                    KeyEvent.KEYCODE_SOFT_LEFT -> {
+                        val intent = Intent()
+                        intent.setClassName("com.android.systemui", "com.android.systemui.launcher3.NotificationActivity")
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        try { startActivity(intent) } catch (e: Exception) {}
+                        return true
+                    }
+                    KeyEvent.KEYCODE_SOFT_RIGHT -> {
+                        updateState(LauncherState.SHORTCUTS)
+                        return true
+                    }
+                    KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER -> {
+                        updateState(LauncherState.APP_MENU)
+                        return true
+                    }
+                    in dialerKeys -> {
+                        val digit = when (keyCode) {
+                            KeyEvent.KEYCODE_0 -> "0"
+                            KeyEvent.KEYCODE_1 -> "1"
+                            KeyEvent.KEYCODE_2 -> "2"
+                            KeyEvent.KEYCODE_3 -> "3"
+                            KeyEvent.KEYCODE_4 -> "4"
+                            KeyEvent.KEYCODE_5 -> "5"
+                            KeyEvent.KEYCODE_6 -> "6"
+                            KeyEvent.KEYCODE_7 -> "7"
+                            KeyEvent.KEYCODE_8 -> "8"
+                            KeyEvent.KEYCODE_9 -> "9"
+                            KeyEvent.KEYCODE_STAR -> "*"
+                            KeyEvent.KEYCODE_POUND -> "#"
+                            else -> ""
+                        }
+                        val intent = Intent(Intent.ACTION_DIAL)
+                        intent.data = android.net.Uri.parse("tel:$digit")
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        startActivity(intent)
+                        return true
+                    }
+                    KeyEvent.KEYCODE_BACK -> {
+                        return true
+                    }
                 }
             }
-        } else if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (listView.visibility == View.VISIBLE) {
-                showInfoPanel(true)
-                return true
-            } else {
-                return true
+            LauncherState.APP_MENU -> {
+                when (keyCode) {
+                    KeyEvent.KEYCODE_BACK -> {
+                        updateState(LauncherState.HOME_MENU)
+                        return true
+                    }
+                    KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER -> {
+                        val selectedPosition = listView.selectedItemPosition
+                        if (selectedPosition != ListView.INVALID_POSITION) {
+                            launchApp(selectedPosition)
+                            return true
+                        }
+                    }
+                }
+            }
+            LauncherState.SHORTCUTS -> {
+                when (keyCode) {
+                    KeyEvent.KEYCODE_BACK -> {
+                        updateState(LauncherState.HOME_MENU)
+                        return true
+                    }
+                    KeyEvent.KEYCODE_DPAD_LEFT -> {
+                        moveShortcutFocus(-1)
+                        return true
+                    }
+                    KeyEvent.KEYCODE_DPAD_RIGHT -> {
+                        moveShortcutFocus(1)
+                        return true
+                    }
+                    KeyEvent.KEYCODE_DPAD_UP -> {
+                        moveShortcutFocus(-3)
+                        return true
+                    }
+                    KeyEvent.KEYCODE_DPAD_DOWN -> {
+                        moveShortcutFocus(3)
+                        return true
+                    }
+                    KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER -> {
+                        shortcutButtons[selectedShortcutIndex].performClick()
+                        return true
+                    }
+                }
             }
         }
         return super.onKeyDown(keyCode, event)
+    }
+
+    private fun moveShortcutFocus(delta: Int) {
+        val count = shortcutButtons.size
+        val newIndex = (selectedShortcutIndex + delta).coerceIn(0, count - 1)
+        if (newIndex != selectedShortcutIndex) {
+            selectedShortcutIndex = newIndex
+            updateShortcutFocus()
+        }
+    }
+
+    private fun updateShortcutFocus() {
+        shortcutButtons.forEachIndexed { i, btn ->
+            btn.isFocusable = true
+            btn.isFocusableInTouchMode = true
+            btn.isSelected = (i == selectedShortcutIndex)
+            btn.requestFocus()
+        }
+        shortcutButtons[selectedShortcutIndex].requestFocus()
     }
 
     private class AppListAdapter(
