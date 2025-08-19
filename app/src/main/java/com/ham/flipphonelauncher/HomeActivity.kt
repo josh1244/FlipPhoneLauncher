@@ -68,6 +68,8 @@ private var selectedShortcutIndex: Int = 0
 
 class HomeActivity : Activity() {
     private var lastSelectedFolderPosition: Int = 0
+    // For two-step number navigation in list mode
+    private var pendingListFolderIndex: Int? = null
     // Track if we are showing folders or apps in a folder in grid view
     private var showingFolderApps: Boolean = false
     private var currentFolder: Folder? = null
@@ -654,7 +656,7 @@ class HomeActivity : Activity() {
             return if (type == TYPE_HEADER && item is Folder) {
                 val view = convertView ?: LayoutInflater.from(context).inflate(android.R.layout.simple_list_item_1, parent, false)
                 val textView = view.findViewById<TextView>(android.R.id.text1)
-                textView.text = item.name
+                textView.text = "${item.id}. ${item.name}"
                 textView.setBackgroundColor(0x22000000)
                 textView.setTextColor(0xFF2196F3.toInt())
                 textView.textSize = 18f
@@ -664,7 +666,14 @@ class HomeActivity : Activity() {
                 val iconView = view.findViewById<ImageView>(R.id.app_icon)
                 val nameView = view.findViewById<TextView>(R.id.app_name)
                 iconView.setImageDrawable(item.icon)
-                nameView.text = item.label
+                // Find the folder for this app and its index within the folder
+                val folder = folders.find { it.id == item.folderId }
+                val appIndex = folder?.apps?.indexOfFirst { it.packageName == item.packageName && it.activityName == item.activityName } ?: -1
+                if (folder != null && appIndex in 0..8) {
+                    nameView.text = "${folder.id}.${appIndex + 1} ${item.label}"
+                } else {
+                    nameView.text = item.label
+                }
                 view
             } else {
                 View(context)
@@ -695,7 +704,7 @@ class HomeActivity : Activity() {
             } else {
                 iconView.setImageDrawable(null)
             }
-            nameView.text = folder.name
+            nameView.text = "${folder.id}. ${folder.name}"
             return view
         }
     }
@@ -705,17 +714,14 @@ class HomeActivity : Activity() {
             if (!showingFolderApps) {
                 val folder = folders.getOrNull(position) ?: return@setOnItemClickListener
                 if (folder.apps.size == 1) {
-                    // Launch the single app directly
                     launchAppFromDetail(folder.apps[0])
-                } else {
-                    // Show apps in the selected folder
+                } else if (folder.apps.size > 1) {
                     currentFolder = folder
                     showingFolderApps = true
                     lastSelectedFolderPosition = position
                     updateGridForCurrentState()
                 }
             } else {
-                // Launch app in folder
                 val folder = currentFolder ?: return@setOnItemClickListener
                 val app = folder.apps.getOrNull(position) ?: return@setOnItemClickListener
                 launchAppFromDetail(app)
@@ -753,13 +759,13 @@ class HomeActivity : Activity() {
                     if (folder.apps.size == 1) {
                         val app = folder.apps[0]
                         iconView.setImageDrawable(app.icon)
-                        nameView.text = app.label
+                        nameView.text = "${folder.id}. ${app.label}"
                     } else if (folder.apps.isNotEmpty()) {
                         iconView.setImageDrawable(folder.apps[0].icon)
-                        nameView.text = folder.name
+                        nameView.text = "${folder.id}. ${folder.name}"
                     } else {
                         iconView.setImageDrawable(null)
-                        nameView.text = folder.name
+                        nameView.text = "${folder.id}. ${folder.name}"
                     }
                     return view
                 }
@@ -785,7 +791,12 @@ class HomeActivity : Activity() {
                     val iconView = view.findViewById<ImageView>(R.id.app_icon)
                     val nameView = view.findViewById<TextView>(R.id.app_name)
                     iconView.setImageDrawable(app.icon)
-                    nameView.text = app.label
+                    // Add number 1-9 in front of app name for first 9 apps
+                    if (i in 0..8) {
+                        nameView.text = "${i + 1}. ${app.label}"
+                    } else {
+                        nameView.text = app.label
+                    }
                     return view
                 }
             }
@@ -971,6 +982,17 @@ class HomeActivity : Activity() {
 
     private fun setupClickListener() {
         listView.setOnItemClickListener { parent, view, position, id ->
+            // Find which folder/app this is
+            val adapter = listView.adapter
+            if (adapter is FolderSectionedListAdapter) {
+                val item = adapter.getItem(position)
+                if (item is Folder) {
+                    if (item.apps.size == 1) {
+                        launchAppFromDetail(item.apps[0])
+                        return@setOnItemClickListener
+                    }
+                }
+            }
             launchApp(position)
         }
     }
@@ -1322,7 +1344,75 @@ class HomeActivity : Activity() {
                             }
                         }
                     }
-                  
+                    in KeyEvent.KEYCODE_1..KeyEvent.KEYCODE_9 -> {
+                        val index = keyCode - KeyEvent.KEYCODE_1
+                        if (isGridMode) {
+                            if (!showingFolderApps) {
+                                // Open folder at index, or launch app if only one
+                                if (index in folders.indices) {
+                                    val folder = folders[index]
+                                    if (folder.apps.size == 1) {
+                                        gridView.setSelection(index)
+                                        launchAppFromDetail(folder.apps[0])
+                                    } else if (folder.apps.size > 1) {
+                                        currentFolder = folder
+                                        showingFolderApps = true
+                                        lastSelectedFolderPosition = index
+                                        updateGridForCurrentState()
+                                        gridView.setSelection(0)
+                                    }
+                                    return true
+                                }
+                            } else {
+                                // Open app at index in current folder
+                                val folder = currentFolder
+                                if (folder != null && index in folder.apps.indices) {
+                                    gridView.setSelection(index)
+                                    val app = folder.apps[index]
+                                    launchAppFromDetail(app)
+                                    return true
+                                }
+                            }
+                        } else if (!isGridMode) {
+                            // Two-step number navigation in list mode
+                            if (pendingListFolderIndex == null) {
+                                // First number: select folder header or launch if only one app
+                                if (index in folders.indices) {
+                                    val folder = folders[index]
+                                    if (folder.apps.size == 1) {
+                                        gridView.setSelection(index)
+                                        launchAppFromDetail(folder.apps[0])
+                                        return true
+                                    }
+                                    val adapter = listView.adapter as? FolderSectionedListAdapter
+                                    if (adapter != null) {
+                                        var absIndex = 0
+                                        for ((fIdx, f) in folders.withIndex()) {
+                                            if (fIdx == index) {
+                                                listView.setSelection(absIndex)
+                                                pendingListFolderIndex = index
+                                                break
+                                            }
+                                            absIndex += 1 + f.apps.size
+                                        }
+                                    }
+                                    return true
+                                }
+                            } else {
+                                // Second number: open app in selected folder
+                                val folder = folders.getOrNull(pendingListFolderIndex!!)
+                                if (folder != null && index in folder.apps.indices) {
+                                    val app = folder.apps[index]
+                                    launchAppFromDetail(app)
+                                    pendingListFolderIndex = null
+                                    return true
+                                } else {
+                                    // Reset if invalid
+                                    pendingListFolderIndex = null
+                                }
+                            }
+                        }
+                    }
                 }
             }
             LauncherState.SHORTCUTS -> {
