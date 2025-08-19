@@ -382,7 +382,20 @@ class HomeActivity : Activity() {
             for (app in folder.apps) {
                 val appKey = app.packageName + "/" + app.activityName
                 if (appKey !in seenApps) {
-                    appsArray.put(appKey)
+                    val appObj = JSONObject()
+                    appObj.put("key", appKey)
+                    appObj.put("label", app.label.toString())
+                    // Try to save icon as base64 PNG (optional, fallback to null)
+                    try {
+                        val iconBitmap = (app.icon as? android.graphics.drawable.BitmapDrawable)?.bitmap
+                        if (iconBitmap != null) {
+                            val stream = java.io.ByteArrayOutputStream()
+                            iconBitmap.compress(android.graphics.Bitmap.CompressFormat.PNG, 100, stream)
+                            val iconBase64 = android.util.Base64.encodeToString(stream.toByteArray(), android.util.Base64.DEFAULT)
+                            appObj.put("icon", iconBase64)
+                        }
+                    } catch (_: Exception) {}
+                    appsArray.put(appObj)
                     seenApps.add(appKey)
                 }
             }
@@ -395,20 +408,31 @@ class HomeActivity : Activity() {
     }
 
     // Load all folder/app data from the single JSON object
-    private fun loadLauncherData(): MutableMap<Int, Pair<String, List<String>>> {
+    // Now returns: Map<folderId, Pair<folderName, List<Triple<appKey, label, iconBase64>>>>
+    private fun loadLauncherData(): MutableMap<Int, Pair<String, List<Triple<String, String, String?>>>> {
         val prefs = getSharedPreferences("launcher_data", Context.MODE_PRIVATE)
         val json = prefs.getString("folders_json", null) ?: return mutableMapOf()
         val data = JSONObject(json)
         val foldersJson = data.getJSONObject("folders")
-        val result = mutableMapOf<Int, Pair<String, List<String>>>()
+        val result = mutableMapOf<Int, Pair<String, List<Triple<String, String, String?>>>>()
         for (key in foldersJson.keys()) {
             val folderId = key.toIntOrNull() ?: continue
             val folderObj = foldersJson.getJSONObject(key)
             val name = folderObj.optString("name", "Group $key")
             val arr = folderObj.getJSONArray("apps")
-            val apps = mutableListOf<String>()
+            val apps = mutableListOf<Triple<String, String, String?>>()
             for (i in 0 until arr.length()) {
-                apps.add(arr.getString(i))
+                val appObj = arr.optJSONObject(i)
+                if (appObj != null) {
+                    val appKey = appObj.optString("key")
+                    val label = appObj.optString("label", appKey)
+                    val iconBase64 = appObj.optString("icon", null)
+                    apps.add(Triple(appKey, label, iconBase64))
+                } else {
+                    // Backward compatibility: plain string
+                    val appKey = arr.optString(i)
+                    apps.add(Triple(appKey, appKey, null))
+                }
             }
             result[folderId] = Pair(name, apps)
         }
@@ -434,7 +458,6 @@ class HomeActivity : Activity() {
 
         // --- Load starter config for new app placement ---
         val starterConfig = getStarterConfig()
-        // Map appKey to folderId from starter config
         val starterAppToFolder: MutableMap<String, Int> = mutableMapOf()
         if (starterConfig != null) {
             val foldersJson = starterConfig.optJSONObject("folders")
@@ -454,21 +477,37 @@ class HomeActivity : Activity() {
         appList = mutableListOf()
         // Place apps in folders according to saved data
         for ((folderId, pair) in folderData) {
-            val (name, appKeys) = pair
-            for (appKey in appKeys) {
+            val (name, appTriples) = pair
+            for ((appKey, savedLabel, iconBase64) in appTriples) {
                 val resolveInfo = appInfoMap[appKey]
-                if (resolveInfo != null) {
-                    val label = resolveInfo.loadLabel(pm)
-                    val icon = resolveInfo.loadIcon(pm)
-                    val activityInfo = resolveInfo.activityInfo
-                    val appDetail = AppDetail(label, icon, activityInfo.packageName, activityInfo.name, folderId)
-                    appList.add(appDetail)
-                    folderMap[folderId]?.apps?.add(appDetail)
+                val pkg = appKey.substringBefore("/")
+                val activity = appKey.substringAfter("/", "")
+                val appLabel: CharSequence = if (resolveInfo != null) {
+                    // Use system label for normal apps
+                    resolveInfo.loadLabel(pm)
+                } else {
+                    savedLabel
                 }
+                val appIcon: Drawable = if (resolveInfo != null) {
+                    resolveInfo.loadIcon(pm)
+                } else if (iconBase64 != null) {
+                    try {
+                        val bytes = android.util.Base64.decode(iconBase64, android.util.Base64.DEFAULT)
+                        val bmp = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                        android.graphics.drawable.BitmapDrawable(null, bmp)
+                    } catch (e: Exception) {
+                        applicationInfo.loadIcon(pm)
+                    }
+                } else {
+                    applicationInfo.loadIcon(pm)
+                }
+                val appDetail = AppDetail(appLabel, appIcon, pkg, activity, folderId)
+                appList.add(appDetail)
+                folderMap[folderId]?.apps?.add(appDetail)
             }
         }
         // Add any apps not in saved data to the correct folder if present in starter config, else last folder
-        val allSavedApps = folderData.values.flatMap { it.second }.toSet()
+        val allSavedApps = folderData.values.flatMap { it.second.map { it.first } }.toSet()
         val lastFolderId = folderIds.last()
         for (resolveInfo in appInfos) {
             val key = resolveInfo.activityInfo.packageName + "/" + resolveInfo.activityInfo.name
@@ -728,6 +767,7 @@ class HomeActivity : Activity() {
         val canMoveDown = appIndex < folder.apps.size - 1 || (folderPos < sortedFolders.size - 1)
         if (canMoveUp) options.add("Move Up")
         if (canMoveDown) options.add("Move Down")
+        options.add("Paste Shortcut")
         options.add("Cancel")
         android.app.AlertDialog.Builder(this)
             .setTitle(app.label)
@@ -745,7 +785,6 @@ class HomeActivity : Activity() {
                             newIndex = appIndex - 1
                             moved = true
                         } else if (folderPos > 0) {
-                            // Move to end of previous folder by folderId order
                             folder.apps.removeAt(appIndex)
                             val prevFolder = sortedFolders[folderPos - 1]
                             app.folderId = prevFolder.id
@@ -763,7 +802,6 @@ class HomeActivity : Activity() {
                             newIndex = appIndex + 1
                             moved = true
                         } else if (folderPos < sortedFolders.size - 1) {
-                            // Move to start of next folder by folderId order
                             folder.apps.removeAt(appIndex)
                             val nextFolder = sortedFolders[folderPos + 1]
                             app.folderId = nextFolder.id
@@ -772,6 +810,72 @@ class HomeActivity : Activity() {
                             newIndex = 0
                             toFolderName = nextFolder.name
                             moved = true
+                        }
+                    }
+                    "Paste Shortcut" -> {
+                        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
+                        val clip = clipboard.primaryClip
+                        if (clip != null && clip.itemCount > 0) {
+                            val item = clip.getItemAt(0)
+                            val intent = item.intent
+                            if (intent != null) {
+                                val shortcutIntent = intent.getParcelableExtra<Intent>(Intent.EXTRA_SHORTCUT_INTENT)
+                                val shortcutName = intent.getStringExtra(Intent.EXTRA_SHORTCUT_NAME)
+                                val shortcutIcon = intent.getParcelableExtra<android.graphics.Bitmap>(Intent.EXTRA_SHORTCUT_ICON)
+                                if (shortcutIntent != null && shortcutName != null) {
+                                    val pkg = shortcutIntent.component?.packageName ?: shortcutIntent.`package`
+                                    val activity = shortcutIntent.component?.className
+                                    if (pkg != null && activity != null) {
+                                        val pm = packageManager
+                                        try {
+                                            val resolveInfo = pm.resolveActivity(shortcutIntent, 0)
+                                            val label = shortcutName
+                                            val icon = if (shortcutIcon != null) android.graphics.drawable.BitmapDrawable(resources, shortcutIcon)
+                                                else resolveInfo?.loadIcon(pm) ?: applicationInfo.loadIcon(pm)
+                                            val appDetail = AppDetail(label, icon, pkg, activity, folder.id)
+                                            appList.add(appDetail)
+                                            folder.apps.add(appDetail)
+                                            saveLauncherData()
+                                            Toast.makeText(this, "Shortcut pasted: $label", Toast.LENGTH_SHORT).show()
+                                            updateGridForCurrentState()
+                                        } catch (e: Exception) {
+                                            Toast.makeText(this, "Failed to paste shortcut", Toast.LENGTH_SHORT).show()
+                                        }
+                                    }
+                                } else {
+                                    Toast.makeText(this, "Clipboard does not contain a valid shortcut intent", Toast.LENGTH_SHORT).show()
+                                }
+                            } else {
+                                // Try to parse plain text as component name
+                                val text = item.text?.toString()?.trim()
+                                if (text != null && text.contains(".")) {
+                                    val parts = text.split("/")
+                                    val comp = if (parts.size == 2) parts else listOf(text.substringBeforeLast('.'), text)
+                                    val pkg = comp[0]
+                                    val cls = if (comp.size > 1) comp[1] else text
+                                    try {
+                                        val shortcutIntent = Intent(Intent.ACTION_MAIN)
+                                        shortcutIntent.setClassName(pkg, cls)
+                                        shortcutIntent.addCategory(Intent.CATEGORY_LAUNCHER)
+                                        val pm = packageManager
+                                        val resolveInfo = pm.resolveActivity(shortcutIntent, 0)
+                                        val label = resolveInfo?.loadLabel(pm) ?: cls
+                                        val icon = resolveInfo?.loadIcon(pm) ?: applicationInfo.loadIcon(pm)
+                                        val appDetail = AppDetail(label, icon, pkg, cls, folder.id)
+                                        appList.add(appDetail)
+                                        folder.apps.add(appDetail)
+                                        saveLauncherData()
+                                        Toast.makeText(this, "Shortcut pasted: $label", Toast.LENGTH_SHORT).show()
+                                        updateGridForCurrentState()
+                                    } catch (e: Exception) {
+                                        Toast.makeText(this, "Failed to paste component shortcut", Toast.LENGTH_SHORT).show()
+                                    }
+                                } else {
+                                    Toast.makeText(this, "Clipboard does not contain an intent or component name", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                        } else {
+                            Toast.makeText(this, "Clipboard is empty", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
@@ -784,9 +888,7 @@ class HomeActivity : Activity() {
                     saveLauncherData()
                     loadApplications()
                     setupAdapter()
-                    // Refresh UI immediately
                     if (isGridMode && showingFolderApps) {
-                        // If the app moved to a different folder, switch to that folder
                         if (currentFolder != newFolder) {
                             currentFolder = newFolder
                         }
@@ -795,7 +897,6 @@ class HomeActivity : Activity() {
                         (listView.adapter as? android.widget.BaseAdapter)?.notifyDataSetChanged()
                     } else if (!isGridMode) {
                         listView.adapter = FolderSectionedListAdapter(this, folders)
-                        // Find the new absolute position of the moved app in the sectioned list, skipping headers
                         val adapter = listView.adapter as FolderSectionedListAdapter
                         var absoluteIndex = 0
                         var found = false
@@ -810,14 +911,11 @@ class HomeActivity : Activity() {
                             }
                             if (found) break
                         }
-                        // If landed on a header, skip to the next app
                         if (adapter.getItemViewType(absoluteIndex) == 0) {
                             absoluteIndex++
                         }
-                        // If out of bounds, clamp
                         if (absoluteIndex >= adapter.count) absoluteIndex = adapter.count - 1
                         listView.setSelection(absoluteIndex)
-                        // Also refresh grid view adapter so grid reflects new order
                         updateGridForCurrentState()
                     }
                 }
