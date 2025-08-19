@@ -457,18 +457,10 @@ class HomeActivity : Activity() {
     // Track if center button is held
     private var isCenterHeld = false
 
-    // Handle long-press for D-pad app assignment
-    override fun onKeyLongPress(keyCode: Int, event: KeyEvent?): Boolean {
-        Toast.makeText(this, "onKeyLongPress: $keyCode", Toast.LENGTH_SHORT).show()
-        if (currentState == LauncherState.HOME_MENU && DPAD_KEYS.contains(keyCode)) {
-            dpadLongPressHandled[keyCode] = true
-            showDpadAppPicker(keyCode)
-            return true
-        }
-        return super.onKeyLongPress(keyCode, event)
-    }
+    // Track if center was used for shortcut assignment
+    private var centerConsumed = false
 
-        // D-pad shortcut keys
+    // D-pad shortcut keys
     private val DPAD_KEYS = listOf(
         KeyEvent.KEYCODE_DPAD_UP,
         KeyEvent.KEYCODE_DPAD_DOWN,
@@ -505,10 +497,11 @@ class HomeActivity : Activity() {
         val mainIntent = Intent(Intent.ACTION_MAIN, null)
         mainIntent.addCategory(Intent.CATEGORY_LAUNCHER)
         val apps = pm.queryIntentActivities(mainIntent, 0)
+        val sortedApps = apps.sortedBy { it.loadLabel(pm).toString().lowercase(Locale.getDefault()) }
         val appLabels = mutableListOf("Recent Apps")
         val appPkgs = mutableListOf(RECENTS_SHORTCUT)
-        appLabels.addAll(apps.map { it.loadLabel(pm).toString() })
-        appPkgs.addAll(apps.map { it.activityInfo.packageName })
+        appLabels.addAll(sortedApps.map { it.loadLabel(pm).toString() })
+        appPkgs.addAll(sortedApps.map { it.activityInfo.packageName })
         android.app.AlertDialog.Builder(this)
             .setTitle("Select app for D-pad ${when(direction){
                 KeyEvent.KEYCODE_DPAD_UP->"UP"; KeyEvent.KEYCODE_DPAD_DOWN->"DOWN"; KeyEvent.KEYCODE_DPAD_LEFT->"LEFT"; else->"RIGHT"}}")
@@ -558,9 +551,13 @@ class HomeActivity : Activity() {
                 when (keyCode) {
                     KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER -> {
                         isCenterHeld = true
+                        centerConsumed = false
                         return true
                     }
                     KeyEvent.KEYCODE_DPAD_UP, KeyEvent.KEYCODE_DPAD_DOWN, KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_DPAD_RIGHT -> {
+                        if (isCenterHeld) {
+                            centerConsumed = true
+                        }
                         dpadLongPressHandled[keyCode] = false
                         // Let onKeyUp handle launching or picker
                         return false
@@ -674,6 +671,9 @@ class HomeActivity : Activity() {
         if (currentState == LauncherState.HOME_MENU) {
             if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER || keyCode == KeyEvent.KEYCODE_ENTER) {
                 isCenterHeld = false
+                if (!centerConsumed) {
+                    updateState(LauncherState.APP_MENU)
+                }
                 return true
             }
             if (DPAD_KEYS.contains(keyCode)) {
