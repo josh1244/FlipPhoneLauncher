@@ -21,15 +21,25 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/shortcut_bluetooth"
         >
-        <ImageButton
-            android:id="@+id/btn_wifi"
+        <FrameLayout
             android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:background="@drawable/circle_toggle_bg"
-            android:src="@drawable/ic_wifi"
-            android:contentDescription="Wi-Fi"
-            android:focusable="true"
-            android:clickable="true" />
+            android:layout_height="56dp">
+            <ImageButton
+                android:id="@+id/btn_wifi"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/circle_bg"
+                android:src="@drawable/ic_wifi"
+                android:contentDescription="Wi-Fi"
+                android:focusable="true"
+                android:clickable="true" />
+            <ImageView
+                android:id="@+id/overlay_wifi"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/shortcut_focus_overlay"
+                android:visibility="gone" />
+        </FrameLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,15 +59,25 @@
         app:layout_constraintStart_toEndOf="@id/shortcut_wifi"
         app:layout_constraintEnd_toStartOf="@+id/shortcut_airplane"
         >
-        <ImageButton
-            android:id="@+id/btn_bluetooth"
+        <FrameLayout
             android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:background="@drawable/circle_toggle_bg"
-            android:src="@drawable/ic_bluetooth"
-            android:contentDescription="Bluetooth"
-            android:focusable="true"
-            android:clickable="true" />
+            android:layout_height="56dp">
+            <ImageButton
+                android:id="@+id/btn_bluetooth"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/circle_bg"
+                android:src="@drawable/ic_bluetooth"
+                android:contentDescription="Bluetooth"
+                android:focusable="true"
+                android:clickable="true" />
+            <ImageView
+                android:id="@+id/overlay_bluetooth"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/shortcut_focus_overlay"
+                android:visibility="gone" />
+        </FrameLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -77,15 +97,25 @@
         app:layout_constraintStart_toEndOf="@id/shortcut_bluetooth"
         app:layout_constraintEnd_toEndOf="parent"
         >
-        <ImageButton
-            android:id="@+id/btn_airplane"
+        <FrameLayout
             android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:background="@drawable/circle_toggle_bg"
-            android:src="@drawable/ic_airplane"
-            android:contentDescription="Airplane Mode"
-            android:focusable="true"
-            android:clickable="true" />
+            android:layout_height="56dp">
+            <ImageButton
+                android:id="@+id/btn_airplane"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/circle_bg"
+                android:src="@drawable/ic_airplane"
+                android:contentDescription="Airplane Mode"
+                android:focusable="true"
+                android:clickable="true" />
+            <ImageView
+                android:id="@+id/overlay_airplane"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/shortcut_focus_overlay"
+                android:visibility="gone" />
+        </FrameLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -105,15 +135,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/shortcut_sound"
         >
-        <ImageButton
-            android:id="@+id/btn_mobiledata"
+        <FrameLayout
             android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:background="@drawable/circle_toggle_bg"
-            android:src="@drawable/ic_mobiledata"
-            android:contentDescription="Mobile Data"
-            android:focusable="true"
-            android:clickable="true" />
+            android:layout_height="56dp">
+            <ImageButton
+                android:id="@+id/btn_mobiledata"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/circle_bg"
+                android:src="@drawable/ic_mobiledata"
+                android:contentDescription="Mobile Data"
+                android:focusable="true"
+                android:clickable="true" />
+            <ImageView
+                android:id="@+id/overlay_mobiledata"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/shortcut_focus_overlay"
+                android:visibility="gone" />
+        </FrameLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -133,15 +173,25 @@
         app:layout_constraintStart_toEndOf="@id/shortcut_mobiledata"
         app:layout_constraintEnd_toStartOf="@+id/shortcut_location"
         >
-        <ImageButton
-            android:id="@+id/btn_sound"
+        <FrameLayout
             android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:background="@drawable/circle_toggle_bg"
-            android:src="@drawable/ic_sound"
-            android:contentDescription="Sound Profile"
-            android:focusable="true"
-            android:clickable="true" />
+            android:layout_height="56dp">
+            <ImageButton
+                android:id="@+id/btn_sound"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/circle_bg"
+                android:src="@drawable/ic_sound"
+                android:contentDescription="Sound Profile"
+                android:focusable="true"
+                android:clickable="true" />
+            <ImageView
+                android:id="@+id/overlay_sound"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/shortcut_focus_overlay"
+                android:visibility="gone" />
+        </FrameLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -161,15 +211,25 @@
         app:layout_constraintStart_toEndOf="@id/shortcut_sound"
         app:layout_constraintEnd_toEndOf="parent"
         >
-        <ImageButton
-            android:id="@+id/btn_location"
+        <FrameLayout
             android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:background="@drawable/circle_toggle_bg"
-            android:src="@drawable/ic_location"
-            android:contentDescription="Location"
-            android:focusable="true"
-            android:clickable="true" />
+            android:layout_height="56dp">
+            <ImageButton
+                android:id="@+id/btn_location"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/circle_bg"
+                android:src="@drawable/ic_location"
+                android:contentDescription="Location"
+                android:focusable="true"
+                android:clickable="true" />
+            <ImageView
+                android:id="@+id/overlay_location"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/shortcut_focus_overlay"
+                android:visibility="gone" />
+        </FrameLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

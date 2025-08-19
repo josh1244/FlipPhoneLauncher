@@ -50,6 +50,7 @@ private var currentState: LauncherState = LauncherState.HOME_MENU
 
 private lateinit var shortcutsPanel: View
 private lateinit var shortcutButtons: List<ImageButton>
+private lateinit var shortcutOverlays: List<ImageView>
 private var selectedShortcutIndex: Int = 0
 
 class HomeActivity : Activity() {
@@ -113,13 +114,32 @@ class HomeActivity : Activity() {
             shortcutsPanel.findViewById(R.id.btn_sound),
             shortcutsPanel.findViewById(R.id.btn_location)
         )
+        // Collect overlay views for focus/hover outline
+        shortcutOverlays = listOf(
+            shortcutsPanel.findViewById(R.id.overlay_wifi),
+            shortcutsPanel.findViewById(R.id.overlay_bluetooth),
+            shortcutsPanel.findViewById(R.id.overlay_airplane),
+            shortcutsPanel.findViewById(R.id.overlay_mobiledata),
+            shortcutsPanel.findViewById(R.id.overlay_sound),
+            shortcutsPanel.findViewById(R.id.overlay_location)
+        )
+    // Set initial backgrounds based on current state
+    val wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
+    shortcutButtons[0].setBackgroundResource(if (wifiManager.isWifiEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+    val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+    shortcutButtons[1].setBackgroundResource(if (bluetoothAdapter != null && bluetoothAdapter.isEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+    shortcutButtons[2].setBackgroundResource(if (isAirplaneOn) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+    shortcutButtons[3].setBackgroundResource(if (isMobileDataOn) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+    val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+    shortcutButtons[4].setBackgroundResource(if (audioManager.ringerMode != AudioManager.RINGER_MODE_SILENT) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+    shortcutButtons[5].setBackgroundResource(if (isLocationOn) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
         // Wi-Fi
         shortcutButtons[0].setOnClickListener {
             val wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
             val enabled = !wifiManager.isWifiEnabled
             wifiManager.isWifiEnabled = enabled
             Toast.makeText(this, if (enabled) "Wi-Fi Enabled" else "Wi-Fi Disabled", Toast.LENGTH_SHORT).show()
-            shortcutButtons[0].alpha = if (enabled) 1.0f else 0.5f
+            shortcutButtons[0].setBackgroundResource(if (enabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
         }
         // Bluetooth
         shortcutButtons[1].setOnClickListener {
@@ -128,7 +148,7 @@ class HomeActivity : Activity() {
                 val enabled = !bluetoothAdapter.isEnabled
                 if (enabled) bluetoothAdapter.enable() else bluetoothAdapter.disable()
                 Toast.makeText(this, if (enabled) "Bluetooth Enabled" else "Bluetooth Disabled", Toast.LENGTH_SHORT).show()
-                shortcutButtons[1].alpha = if (enabled) 1.0f else 0.5f
+                shortcutButtons[1].setBackgroundResource(if (enabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
             } else {
                 Toast.makeText(this, "Bluetooth not supported", Toast.LENGTH_SHORT).show()
             }
@@ -137,13 +157,13 @@ class HomeActivity : Activity() {
         shortcutButtons[2].setOnClickListener {
             isAirplaneOn = !isAirplaneOn
             Toast.makeText(this, if (isAirplaneOn) "Airplane Mode On (visual only)" else "Airplane Mode Off (visual only)", Toast.LENGTH_SHORT).show()
-            shortcutButtons[2].alpha = if (isAirplaneOn) 1.0f else 0.5f
+            shortcutButtons[2].setBackgroundResource(if (isAirplaneOn) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
         }
         // Mobile Data (visual only, system toggle restricted)
         shortcutButtons[3].setOnClickListener {
             isMobileDataOn = !isMobileDataOn
             Toast.makeText(this, if (isMobileDataOn) "Mobile Data On (visual only)" else "Mobile Data Off (visual only)", Toast.LENGTH_SHORT).show()
-            shortcutButtons[3].alpha = if (isMobileDataOn) 1.0f else 0.5f
+            shortcutButtons[3].setBackgroundResource(if (isMobileDataOn) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
         }
         // Sound Profile
         shortcutButtons[4].setOnClickListener {
@@ -152,18 +172,18 @@ class HomeActivity : Activity() {
             if (isNormal) {
                 audioManager.ringerMode = AudioManager.RINGER_MODE_SILENT
                 Toast.makeText(this, "Sound: Silent", Toast.LENGTH_SHORT).show()
-                shortcutButtons[4].alpha = 0.5f
+                shortcutButtons[4].setBackgroundResource(R.drawable.circle_bg_off)
             } else {
                 audioManager.ringerMode = AudioManager.RINGER_MODE_NORMAL
                 Toast.makeText(this, "Sound: Normal", Toast.LENGTH_SHORT).show()
-                shortcutButtons[4].alpha = 1.0f
+                shortcutButtons[4].setBackgroundResource(R.drawable.circle_bg_on)
             }
         }
         // Location (visual only, system toggle restricted)
         shortcutButtons[5].setOnClickListener {
             isLocationOn = !isLocationOn
             Toast.makeText(this, if (isLocationOn) "Location On (visual only)" else "Location Off (visual only)", Toast.LENGTH_SHORT).show()
-            shortcutButtons[5].alpha = if (isLocationOn) 1.0f else 0.5f
+            shortcutButtons[5].setBackgroundResource(if (isLocationOn) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
         }
 
         listView = findViewById(R.id.app_list)
@@ -442,7 +462,8 @@ class HomeActivity : Activity() {
             btn.isFocusable = true
             btn.isFocusableInTouchMode = true
             btn.isSelected = (i == selectedShortcutIndex)
-            btn.requestFocus()
+            // Show overlay if focused, hide otherwise
+            shortcutOverlays[i].visibility = if (i == selectedShortcutIndex) View.VISIBLE else View.GONE
         }
         shortcutButtons[selectedShortcutIndex].requestFocus()
     }
