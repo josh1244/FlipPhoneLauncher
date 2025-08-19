@@ -230,22 +230,30 @@ class HomeActivity : Activity() {
         setShortcutIconTint(2, newState != "All")
     }
     // Brightness - toggles between low, medium, high
+    // Brightness - cycle through 5 levels
     shortcutButtons[3].setOnClickListener {
         try {
+            if (!android.provider.Settings.System.canWrite(this)) {
+                Toast.makeText(this, "Grant permission to modify system settings", Toast.LENGTH_LONG).show()
+                val intent = Intent(android.provider.Settings.ACTION_MANAGE_WRITE_SETTINGS)
+                intent.data = android.net.Uri.parse("package:" + packageName)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+                return@setOnClickListener
+            }
             val cResolver = contentResolver
+            val levels = listOf(0,     15,   33,    48,    64,    79,    97,    112,   128,   130,   161,   176,   191,   209,   224,   240,   255) // Brightness levels from 0% to 100%
+            val labels = listOf("0%", "6%", "13%", "19%", "25%", "31%", "38%", "44%", "50%", "56%", "63%", "69%", "75%", "82%", "88%", "94%", "100%")
             val current = android.provider.Settings.System.getInt(cResolver, android.provider.Settings.System.SCREEN_BRIGHTNESS)
-            val newBrightness = when {
-                current < 100 -> 128 // medium
-                current < 200 -> 255 // high
-                else -> 10 // low
-            }
+            // Find the closest level
+            val idx = levels.indexOfFirst { current <= it } .let { if (it == -1) levels.size - 1 else it }
+            val nextIdx = (idx + 1) % levels.size
+            val newBrightness = levels[nextIdx]
             android.provider.Settings.System.putInt(cResolver, android.provider.Settings.System.SCREEN_BRIGHTNESS, newBrightness)
-            val brightnessText = when (newBrightness) {
-                128 -> "Brightness: Medium"
-                255 -> "Brightness: High"
-                else -> "Brightness: Low"
-            }
+            val brightnessText = "Brightness: ${labels[nextIdx]}"
             Toast.makeText(this, brightnessText, Toast.LENGTH_SHORT).show()
+            shortcutButtons[3].setBackgroundResource(if (newBrightness == 255) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+            setShortcutIconTint(3, newBrightness == 255)
         } catch (e: Exception) {
             Toast.makeText(this, "Brightness change failed", Toast.LENGTH_SHORT).show()
         }
