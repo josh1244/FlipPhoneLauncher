@@ -43,13 +43,13 @@
                     android:visibility="gone" />
                 <ImageButton
                     android:id="@+id/btn_wifi"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
                     android:background="@drawable/circle_bg"
                     android:src="@drawable/ic_wifi"
                     android:contentDescription="Wi-Fi"
-                    android:focusable="true"
-                    android:clickable="true" />
+                    android:defaultFocusHighlightEnabled="false" />
             </FrameLayout>
             <TextView
                 android:layout_width="wrap_content"
@@ -80,13 +80,13 @@
                     android:visibility="gone" />
                 <ImageButton
                     android:id="@+id/btn_bluetooth"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
                     android:background="@drawable/circle_bg"
                     android:src="@drawable/ic_bluetooth"
                     android:contentDescription="Bluetooth"
-                    android:focusable="true"
-                    android:clickable="true" />
+                    android:defaultFocusHighlightEnabled="false" />
             </FrameLayout>
             <TextView
                 android:layout_width="wrap_content"
@@ -117,13 +117,13 @@
                     android:visibility="gone" />
                 <ImageButton
                     android:id="@+id/btn_dnd"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
                     android:background="@drawable/circle_bg"
                     android:src="@drawable/ic_dnd"
                     android:contentDescription="Do Not Disturb"
-                    android:focusable="true"
-                    android:clickable="true" />
+                    android:defaultFocusHighlightEnabled="false" />
             </FrameLayout>
             <TextView
                 android:id="@+id/shortcut_dnd_label"
@@ -155,13 +155,13 @@
                     android:visibility="gone" />
                 <ImageButton
                     android:id="@+id/btn_brightness"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
                     android:background="@drawable/brightness_progress"
                     android:src="@drawable/ic_brightness"
                     android:contentDescription="Brightness"
-                    android:focusable="true"
-                    android:clickable="true" />
+                    android:defaultFocusHighlightEnabled="false" />
             </FrameLayout>
             <TextView
                 android:layout_width="wrap_content"
