@@ -148,7 +148,7 @@ class HomeActivity : Activity() {
         val wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
         val enabled = !wifiManager.isWifiEnabled
         wifiManager.isWifiEnabled = enabled
-        Toast.makeText(this, if (enabled) "Wi-Fi Enabled" else "Wi-Fi Disabled", Toast.LENGTH_SHORT).show()
+        // Toast.makeText(this, if (enabled) "Wi-Fi Enabled" else "Wi-Fi Disabled", Toast.LENGTH_SHORT).show()
         shortcutButtons[0].setBackgroundResource(if (enabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
         setShortcutIconTint(0, enabled)
     }
@@ -158,7 +158,7 @@ class HomeActivity : Activity() {
         if (bluetoothAdapter != null) {
             val enabled = !bluetoothAdapter.isEnabled
             if (enabled) bluetoothAdapter.enable() else bluetoothAdapter.disable()
-            Toast.makeText(this, if (enabled) "Bluetooth Enabled" else "Bluetooth Disabled", Toast.LENGTH_SHORT).show()
+            // Toast.makeText(this, if (enabled) "Bluetooth Enabled" else "Bluetooth Disabled", Toast.LENGTH_SHORT).show()
             shortcutButtons[1].setBackgroundResource(if (enabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
             setShortcutIconTint(1, enabled)
         } else {
@@ -175,18 +175,39 @@ class HomeActivity : Activity() {
             return@setOnClickListener
         }
         val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
-        val currentMode = audioManager.ringerMode
-        val newMode = when (currentMode) {
-            AudioManager.RINGER_MODE_NORMAL -> AudioManager.RINGER_MODE_VIBRATE
-            AudioManager.RINGER_MODE_VIBRATE -> AudioManager.RINGER_MODE_SILENT
-            AudioManager.RINGER_MODE_SILENT -> AudioManager.RINGER_MODE_NORMAL
-            else -> AudioManager.RINGER_MODE_NORMAL
+        // Track DnD state in a static variable
+        val dndStates = listOf("All", "Vibrate", "Priority", "None")
+        val sharedPref = getSharedPreferences("dnd_toggle", Context.MODE_PRIVATE)
+        val currentIndex = sharedPref.getInt("dnd_index", 0)
+        val currentState = dndStates[currentIndex]
+        val newIndex = (currentIndex + 1) % dndStates.size
+        val newState = dndStates[newIndex]
+        // Save new index
+        sharedPref.edit().putInt("dnd_index", newIndex).apply()
+        // Apply new state
+        when (newState) {
+            "All" -> {
+                notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_ALL)
+                audioManager.ringerMode = AudioManager.RINGER_MODE_NORMAL
+            }
+            "Vibrate" -> {
+                notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_ALL)
+                audioManager.ringerMode = AudioManager.RINGER_MODE_VIBRATE
+            }
+            "Priority" -> {
+                notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY)
+                audioManager.ringerMode = AudioManager.RINGER_MODE_NORMAL
+            }
+            "None" -> {
+                notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_NONE)
+                audioManager.ringerMode = AudioManager.RINGER_MODE_SILENT
+            }
         }
-        audioManager.ringerMode = newMode
-        val enabled = newMode == AudioManager.RINGER_MODE_NORMAL
-        Toast.makeText(this, if (enabled) "DnD Disabled" else "DnD Enabled", Toast.LENGTH_SHORT).show()
-        shortcutButtons[2].setBackgroundResource(if (enabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-        setShortcutIconTint(2, enabled)
+        val dndTextView = shortcutsPanel.findViewById<TextView>(R.id.shortcut_dnd_label)
+        dndTextView?.text = "$newState"
+        // Toast.makeText(this, "DnD: $currentState → $newState", Toast.LENGTH_SHORT).show()
+        shortcutButtons[2].setBackgroundResource(if (newState != "All") R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+        setShortcutIconTint(2, newState != "All")
     }
     // Brightness - toggles between low, medium, high
     shortcutButtons[3].setOnClickListener {
