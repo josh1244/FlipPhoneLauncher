@@ -24,6 +24,13 @@
         <FrameLayout
             android:layout_width="56dp"
             android:layout_height="56dp">
+            <ImageView
+                android:id="@+id/overlay_wifi"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_gravity="center"
+                android:src="@drawable/shortcut_focus_overlay_square"
+                android:visibility="gone" />
             <ImageButton
                 android:id="@+id/btn_wifi"
                 android:layout_width="match_parent"
@@ -33,12 +40,6 @@
                 android:contentDescription="Wi-Fi"
                 android:focusable="true"
                 android:clickable="true" />
-            <ImageView
-                android:id="@+id/overlay_wifi"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/shortcut_focus_overlay"
-                android:visibility="gone" />
         </FrameLayout>
         <TextView
             android:layout_width="wrap_content"
@@ -62,6 +63,13 @@
         <FrameLayout
             android:layout_width="56dp"
             android:layout_height="56dp">
+            <ImageView
+                android:id="@+id/overlay_bluetooth"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_gravity="center"
+                android:src="@drawable/shortcut_focus_overlay_square"
+                android:visibility="gone" />
             <ImageButton
                 android:id="@+id/btn_bluetooth"
                 android:layout_width="match_parent"
@@ -71,12 +79,6 @@
                 android:contentDescription="Bluetooth"
                 android:focusable="true"
                 android:clickable="true" />
-            <ImageView
-                android:id="@+id/overlay_bluetooth"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/shortcut_focus_overlay"
-                android:visibility="gone" />
         </FrameLayout>
         <TextView
             android:layout_width="wrap_content"
@@ -100,6 +102,13 @@
         <FrameLayout
             android:layout_width="56dp"
             android:layout_height="56dp">
+            <ImageView
+                android:id="@+id/overlay_airplane"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_gravity="center"
+                android:src="@drawable/shortcut_focus_overlay_square"
+                android:visibility="gone" />
             <ImageButton
                 android:id="@+id/btn_airplane"
                 android:layout_width="match_parent"
@@ -109,12 +118,6 @@
                 android:contentDescription="Airplane Mode"
                 android:focusable="true"
                 android:clickable="true" />
-            <ImageView
-                android:id="@+id/overlay_airplane"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/shortcut_focus_overlay"
-                android:visibility="gone" />
         </FrameLayout>
         <TextView
             android:layout_width="wrap_content"
@@ -138,6 +141,13 @@
         <FrameLayout
             android:layout_width="56dp"
             android:layout_height="56dp">
+            <ImageView
+                android:id="@+id/overlay_mobiledata"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_gravity="center"
+                android:src="@drawable/shortcut_focus_overlay_square"
+                android:visibility="gone" />
             <ImageButton
                 android:id="@+id/btn_mobiledata"
                 android:layout_width="match_parent"
@@ -147,12 +157,6 @@
                 android:contentDescription="Mobile Data"
                 android:focusable="true"
                 android:clickable="true" />
-            <ImageView
-                android:id="@+id/overlay_mobiledata"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/shortcut_focus_overlay"
-                android:visibility="gone" />
         </FrameLayout>
         <TextView
             android:layout_width="wrap_content"
@@ -176,6 +180,13 @@
         <FrameLayout
             android:layout_width="56dp"
             android:layout_height="56dp">
+            <ImageView
+                android:id="@+id/overlay_sound"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_gravity="center"
+                android:src="@drawable/shortcut_focus_overlay_square"
+                android:visibility="gone" />
             <ImageButton
                 android:id="@+id/btn_sound"
                 android:layout_width="match_parent"
@@ -185,12 +196,6 @@
                 android:contentDescription="Sound Profile"
                 android:focusable="true"
                 android:clickable="true" />
-            <ImageView
-                android:id="@+id/overlay_sound"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/shortcut_focus_overlay"
-                android:visibility="gone" />
         </FrameLayout>
         <TextView
             android:layout_width="wrap_content"
@@ -214,6 +219,13 @@
         <FrameLayout
             android:layout_width="56dp"
             android:layout_height="56dp">
+            <ImageView
+                android:id="@+id/overlay_location"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_gravity="center"
+                android:src="@drawable/shortcut_focus_overlay_square"
+                android:visibility="gone" />
             <ImageButton
                 android:id="@+id/btn_location"
                 android:layout_width="match_parent"
@@ -223,12 +235,6 @@
                 android:contentDescription="Location"
                 android:focusable="true"
                 android:clickable="true" />
-            <ImageView
-                android:id="@+id/overlay_location"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/shortcut_focus_overlay"
-                android:visibility="gone" />
         </FrameLayout>
         <TextView
             android:layout_width="wrap_content"
