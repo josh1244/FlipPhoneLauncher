@@ -39,12 +39,12 @@ data class AppDetail(
     val icon: Drawable,
     val packageName: String,
     val activityName: String,
-    val folder: String
+    var folder: String
 )
 
 // Data class for folders
 data class Folder(
-    val name: String,
+    var name: String,
     val apps: MutableList<AppDetail> = mutableListOf()
 )
 
@@ -328,7 +328,7 @@ class HomeActivity : Activity() {
                     setSoftkeyBarText(
                         left = "List",
                         middle = "Select",
-                        right = ""
+                        right = "Rename"
                     )
                 } else {
                     appListView?.visibility = View.VISIBLE
@@ -340,7 +340,7 @@ class HomeActivity : Activity() {
                     setSoftkeyBarText(
                         left = "Grid",
                         middle = "Select",
-                        right = ""
+                        right = "Move"
                     )
                 }
                 shortcutsPanel.visibility = View.GONE
@@ -367,13 +367,26 @@ class HomeActivity : Activity() {
         softkeyRight.text = right
     }
 
+    // Save folder names to SharedPreferences
+    private fun saveFolderNames(folderNames: List<String>) {
+        val prefs = getSharedPreferences("launcher_folder_names", Context.MODE_PRIVATE)
+        prefs.edit().putString("folder_names", folderNames.joinToString("|")) .apply()
+    }
+
+    // Load folder names from SharedPreferences
+    private fun loadFolderNames(): List<String> {
+        val prefs = getSharedPreferences("launcher_folder_names", Context.MODE_PRIVATE)
+        val saved = prefs.getString("folder_names", null)
+        return if (saved != null) saved.split("|") else listOf("Group 1", "Group 2", "Group 3", "Group 4", "Group 5", "Group 6", "Group 7", "Group 8", "Group 9")
+    }
+
     private fun loadApplications() {
         val pm = packageManager
         val mainIntent = Intent(Intent.ACTION_MAIN, null)
         mainIntent.addCategory(Intent.CATEGORY_LAUNCHER)
         val appInfos: List<ResolveInfo> = pm.queryIntentActivities(mainIntent, 0)
 
-        val folderNames = listOf("Group 1", "Group 2", "Group 3", "Group 4", "Group 5", "Group 6", "Group 7", "Group 8", "Group 9")
+        val folderNames = loadFolderNames()
         val folderMap = folderNames.associateWith { Folder(it) }.toMutableMap()
 
         appList = mutableListOf()
@@ -416,7 +429,37 @@ class HomeActivity : Activity() {
         }
 
         folders = folderNames.map { folderMap[it] ?: Folder(it) }.toMutableList()
+
+
         appList.sortBy { it.label.toString().lowercase(Locale.getDefault()) }
+    }
+
+    // Show dialog to rename folder
+    private fun showRenameFolderDialog(folder: Folder, position: Int) {
+        val input = android.widget.EditText(this)
+        input.setText(folder.name)
+        android.app.AlertDialog.Builder(this)
+            .setTitle("Rename Folder")
+            .setView(input)
+            .setPositiveButton("OK") { _, _ ->
+                val newName = input.text.toString().trim()
+                if (newName.isNotEmpty()) {
+                    val oldName = folder.name
+                    folder.name = newName
+                    // Update folders list and persist
+                    folders[position].name = newName
+                    saveFolderNames(folders.map { it.name })
+                    // Also update app folder references
+                    for (app in folder.apps) {
+                        appList.find { it.packageName == app.packageName && it.activityName == app.activityName }?.let {
+                            it.folder = newName
+                        }
+                    }
+                    updateGridForCurrentState()
+                }
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
     }
 
     // Save the order of apps in a folder
@@ -543,7 +586,7 @@ class HomeActivity : Activity() {
             val folderGridAdapter = FolderGridAdapter(this, folders)
             gridView.numColumns = 3
             gridView.adapter = folderGridAdapter
-            setSoftkeyBarText(left = "", middle = "Select", right = "")
+            setSoftkeyBarText(left = "List", middle = "Select", right = "Rename")
             // Restore last selected folder position
             gridView.setSelection(lastSelectedFolderPosition)
         } else {
@@ -565,7 +608,7 @@ class HomeActivity : Activity() {
             }
             gridView.numColumns = 3
             gridView.adapter = adapter
-            setSoftkeyBarText(left = "Back", middle = "Select", right = "")
+            setSoftkeyBarText(left = "List", middle = "Select", right = "Move")
         }
     }
 
@@ -579,18 +622,31 @@ class HomeActivity : Activity() {
         android.app.AlertDialog.Builder(this)
             .setTitle(app.label)
             .setItems(options.toTypedArray()) { _, which ->
+                var moved = false
                 when (options[which]) {
                     "Move Up" -> {
                         folder.apps.removeAt(appIndex)
                         folder.apps.add(appIndex - 1, app)
                         saveFolderAppOrder(folder)
-                        // Optionally, refresh the dialog or UI
+                        moved = true
                     }
                     "Move Down" -> {
                         folder.apps.removeAt(appIndex)
                         folder.apps.add(appIndex + 1, app)
                         saveFolderAppOrder(folder)
-                        // Optionally, refresh the dialog or UI
+                        moved = true
+                    }
+                }
+                if (moved) {
+                    // Refresh UI immediately
+                    if (isGridMode && showingFolderApps) {
+                        // App grid inside folder
+                        updateGridForCurrentState()
+                        gridView.setSelection(appIndex + (if (options[which] == "Move Up") -1 else 1))
+                    } else if (!isGridMode) {
+                        // List view
+                        (listView.adapter as? android.widget.BaseAdapter)?.notifyDataSetChanged()
+                        listView.setSelection(appIndex + (if (options[which] == "Move Up") -1 else 1))
                     }
                 }
             }
@@ -800,7 +856,7 @@ class HomeActivity : Activity() {
             KeyEvent.KEYCODE_8, KeyEvent.KEYCODE_9, KeyEvent.KEYCODE_STAR, KeyEvent.KEYCODE_POUND
         )
 
-        when (currentState) {
+    when (currentState) {
             LauncherState.HOME_MENU -> {
                 when (keyCode) {
                     KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER -> {
@@ -903,19 +959,59 @@ class HomeActivity : Activity() {
                         }
                     }
                     KeyEvent.KEYCODE_SOFT_LEFT -> {
+                        isGridMode = !isGridMode
+                        val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+                        prefs.edit().putBoolean(KEY_GRID_MODE, isGridMode).apply()
+                        updateState(LauncherState.APP_MENU)
+                        return true
+                    }
+                    KeyEvent.KEYCODE_SOFT_RIGHT -> {
                         if (isGridMode && showingFolderApps) {
-                            // Go back to folder grid
-                            showingFolderApps = false
-                            currentFolder = null
-                            updateGridForCurrentState()
-                            return true
-                        } else {
-                            isGridMode = !isGridMode
-                            // Save mode to preferences
-                            val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-                            prefs.edit().putBoolean(KEY_GRID_MODE, isGridMode).apply()
-                            updateState(LauncherState.APP_MENU)
-                            return true
+                            // Move app in folder grid view
+                            val folder = currentFolder
+                            val selectedPosition = gridView.selectedItemPosition
+                            if (folder != null && selectedPosition != GridView.INVALID_POSITION) {
+                                showMoveAppDialog(folder, selectedPosition)
+                                return true
+                            }
+                        } else if (isGridMode && !showingFolderApps) {
+                            // Rename folder in grid view
+                            val selectedPosition = gridView.selectedItemPosition
+                            if (selectedPosition != GridView.INVALID_POSITION) {
+                                val folder = folders.getOrNull(selectedPosition)
+                                if (folder != null) {
+                                    showRenameFolderDialog(folder, selectedPosition)
+                                    return true
+                                }
+                            }
+                        } else if (!isGridMode) {
+                            // Move app in list view
+                            val selectedPosition = listView.selectedItemPosition
+                            // Find which folder/app this is
+                            val adapter = listView.adapter
+                            if (adapter is FolderSectionedListAdapter) {
+                                val item = adapter.getItem(selectedPosition)
+                                if (item is AppDetail) {
+                                    val folder = folders.find { it.name == item.folder }
+                                    val appIndex = folder?.apps?.indexOfFirst { it.packageName == item.packageName && it.activityName == item.activityName } ?: -1
+                                    if (folder != null && appIndex != -1) {
+                                        showMoveAppDialog(folder, appIndex)
+                                        return true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    KeyEvent.KEYCODE_SOFT_RIGHT -> {
+                        if (isGridMode && !showingFolderApps) {
+                            val selectedPosition = gridView.selectedItemPosition
+                            if (selectedPosition != GridView.INVALID_POSITION) {
+                                val folder = folders.getOrNull(selectedPosition)
+                                if (folder != null) {
+                                    showRenameFolderDialog(folder, selectedPosition)
+                                    return true
+                                }
+                            }
                         }
                     }
                 }
