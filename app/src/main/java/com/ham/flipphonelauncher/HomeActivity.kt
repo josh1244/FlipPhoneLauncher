@@ -482,6 +482,9 @@ class HomeActivity : Activity() {
         "dpad_right_app"
     )
 
+    // Special value for recents
+    private val RECENTS_SHORTCUT = "__RECENTS__"
+
     private fun getDpadAppPackage(direction: Int): String? {
         val idx = DPAD_KEYS.indexOf(direction)
         if (idx == -1) return null
@@ -502,8 +505,10 @@ class HomeActivity : Activity() {
         val mainIntent = Intent(Intent.ACTION_MAIN, null)
         mainIntent.addCategory(Intent.CATEGORY_LAUNCHER)
         val apps = pm.queryIntentActivities(mainIntent, 0)
-        val appLabels = apps.map { it.loadLabel(pm).toString() }
-        val appPkgs = apps.map { it.activityInfo.packageName }
+        val appLabels = mutableListOf("Recent Apps")
+        val appPkgs = mutableListOf(RECENTS_SHORTCUT)
+        appLabels.addAll(apps.map { it.loadLabel(pm).toString() })
+        appPkgs.addAll(apps.map { it.activityInfo.packageName })
         android.app.AlertDialog.Builder(this)
             .setTitle("Select app for D-pad ${when(direction){
                 KeyEvent.KEYCODE_DPAD_UP->"UP"; KeyEvent.KEYCODE_DPAD_DOWN->"DOWN"; KeyEvent.KEYCODE_DPAD_LEFT->"LEFT"; else->"RIGHT"}}")
@@ -515,6 +520,31 @@ class HomeActivity : Activity() {
             .show()
     }
 
+    // Launch app or recents for D-pad shortcut
+    private fun launchDpadShortcut(keyCode: Int) {
+        val pkg = getDpadAppPackage(keyCode)
+        if (pkg == RECENTS_SHORTCUT) {
+            // Try to open recents
+            try {
+                intent.setClassName("com.android.systemui", "com.android.systemui.recents.ListRecentsActivity")
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            } catch (e: Exception) {
+                Toast.makeText(this, "Unable to open recents", Toast.LENGTH_SHORT).show()
+            }
+        } else if (pkg != null) {
+            // Try to open app
+            val intent = packageManager.getLaunchIntentForPackage(pkg)
+            if (intent != null) {
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            } else {
+                Toast.makeText(this, "App not found", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            Toast.makeText(this, "No app assigned. Hold center and press a direction to set.", Toast.LENGTH_SHORT).show()
+        }
+    }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         val dialerKeys = setOf(
@@ -531,14 +561,9 @@ class HomeActivity : Activity() {
                         return true
                     }
                     KeyEvent.KEYCODE_DPAD_UP, KeyEvent.KEYCODE_DPAD_DOWN, KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_DPAD_RIGHT -> {
-                        if (isCenterHeld) {
-                            showDpadAppPicker(keyCode)
-                            return true
-                        } else {
-                            dpadLongPressHandled[keyCode] = false
-                            // Let onKeyUp handle launching
-                            return false
-                        }
+                        dpadLongPressHandled[keyCode] = false
+                        // Let onKeyUp handle launching or picker
+                        return false
                     }
                     KeyEvent.KEYCODE_SOFT_LEFT -> {
                         val intent = Intent()
@@ -653,25 +678,14 @@ class HomeActivity : Activity() {
             }
             if (DPAD_KEYS.contains(keyCode)) {
                 if (isCenterHeld) {
-                    // Already handled in onKeyDown
+                    showDpadAppPicker(keyCode)
                     return true
                 }
                 if (dpadLongPressHandled[keyCode] == true) {
                     dpadLongPressHandled[keyCode] = false
                     return true
                 } else {
-                    val pkg = getDpadAppPackage(keyCode)
-                    if (pkg != null) {
-                        val intent = packageManager.getLaunchIntentForPackage(pkg)
-                        if (intent != null) {
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                            startActivity(intent)
-                        } else {
-                            Toast.makeText(this, "App not found", Toast.LENGTH_SHORT).show()
-                        }
-                    } else {
-                        Toast.makeText(this, "No app assigned. Hold center and press a direction to set.", Toast.LENGTH_SHORT).show()
-                    }
+                    launchDpadShortcut(keyCode)
                     return true
                 }
             }
