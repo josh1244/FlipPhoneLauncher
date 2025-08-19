@@ -32,12 +32,20 @@ import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.RelativeSizeSpan
 
-// Data class to hold app details
+
+// Data class to hold app details, now with folder membership
 data class AppDetail(
     val label: CharSequence,
     val icon: Drawable,
     val packageName: String,
-    val activityName: String
+    val activityName: String,
+    val folder: String
+)
+
+// Data class for folders
+data class Folder(
+    val name: String,
+    val apps: MutableList<AppDetail> = mutableListOf()
 )
 
 // Launcher states
@@ -56,6 +64,9 @@ private lateinit var shortcutOverlays: List<ImageView>
 private var selectedShortcutIndex: Int = 0
 
 class HomeActivity : Activity() {
+    // Track if we are showing folders or apps in a folder in grid view
+    private var showingFolderApps: Boolean = false
+    private var currentFolder: Folder? = null
     private lateinit var gridView: GridView
     private var isGridMode: Boolean = false
     private val PREFS_NAME = "launcher_prefs"
@@ -68,6 +79,7 @@ class HomeActivity : Activity() {
     private lateinit var softkeyMiddle: TextView
     private lateinit var softkeyRight: TextView
     private lateinit var appList: MutableList<AppDetail>
+    private lateinit var folders: MutableList<Folder>
     private lateinit var listView: ListView
     private lateinit var timeTextView: TextView
     private lateinit var dateTextView: TextView
@@ -360,6 +372,9 @@ class HomeActivity : Activity() {
         mainIntent.addCategory(Intent.CATEGORY_LAUNCHER)
         val appInfos: List<ResolveInfo> = pm.queryIntentActivities(mainIntent, 0)
 
+        val folderNames = listOf("Group 1", "Group 2", "Group 3", "Group 4", "Group 5", "Group 6", "Group 7", "Group 8", "Group 9")
+        val folderMap = folderNames.associateWith { Folder(it) }.toMutableMap()
+
         appList = mutableListOf()
         for (resolveInfo in appInfos) {
             val label = resolveInfo.loadLabel(pm)
@@ -367,22 +382,220 @@ class HomeActivity : Activity() {
             val activityInfo = resolveInfo.activityInfo
             val packageName = activityInfo.packageName
             val activityName = activityInfo.name
-            appList.add(AppDetail(label, icon, packageName, activityName))
+
+            // Assign folder by first letter (customize as needed)
+            val firstChar = label.firstOrNull()?.uppercaseChar() ?: 'A'
+            val folderIdx = when (firstChar) {
+                in 'A'..'I' -> 0
+                in 'J'..'R' -> 1
+                in 'S'..'Z' -> 2
+                else -> 3
+            }
+            val folderName = folderNames.getOrElse(folderIdx) { folderNames.last() }
+
+            val appDetail = AppDetail(label, icon, packageName, activityName, folderName)
+            appList.add(appDetail)
+            folderMap[folderName]?.apps?.add(appDetail)
         }
-        // Sort the app list alphabetically by label
+
+        // Load and apply saved order for each folder
+        val prefs = getSharedPreferences("launcher_app_order", Context.MODE_PRIVATE)
+        for (folder in folderMap.values) {
+            val key = "order_${folder.name}"
+            val savedOrder = prefs.getString(key, null)
+            if (savedOrder != null) {
+                val orderList = savedOrder.split("|").filter { it.isNotBlank() }
+                folder.apps.sortWith(compareBy { app ->
+                    val idx = orderList.indexOf(app.packageName + "/" + app.activityName)
+                    if (idx == -1) Int.MAX_VALUE else idx
+                })
+            } else {
+                folder.apps.sortBy { it.label.toString().lowercase(Locale.getDefault()) }
+            }
+        }
+
+        folders = folderNames.map { folderMap[it] ?: Folder(it) }.toMutableList()
         appList.sortBy { it.label.toString().lowercase(Locale.getDefault()) }
     }
 
+    // Save the order of apps in a folder
+    private fun saveFolderAppOrder(folder: Folder) {
+        val prefs = getSharedPreferences("launcher_app_order", Context.MODE_PRIVATE)
+        val key = "order_${folder.name}"
+        val orderString = folder.apps.joinToString("|") { it.packageName + "/" + it.activityName }
+        prefs.edit().putString(key, orderString).apply()
+    }
+
     private fun setupAdapter() {
-        val adapter = AppListAdapter(this, appList)
-        listView.adapter = adapter
-        gridView.adapter = adapter
+    val sectionedAdapter = FolderSectionedListAdapter(this, folders)
+    listView.adapter = sectionedAdapter
+    updateGridForCurrentState()
+    }
+
+    // Adapter for sectioned list view (folders as headers, apps as children)
+    private class FolderSectionedListAdapter(
+        val context: Context,
+        val folders: List<Folder>
+    ) : android.widget.BaseAdapter() {
+        private val items: List<Any> // Folder or AppDetail
+        init {
+            val temp = mutableListOf<Any>()
+            for (folder in folders) {
+                temp.add(folder)
+                temp.addAll(folder.apps)
+            }
+            items = temp
+        }
+
+        companion object {
+            private const val TYPE_HEADER = 0
+            private const val TYPE_APP = 1
+        }
+
+        override fun getCount() = items.size
+        override fun getItem(position: Int) = items[position]
+        override fun getItemId(position: Int) = position.toLong()
+
+        override fun getViewTypeCount(): Int = 2
+        override fun getItemViewType(position: Int): Int {
+            return when (getItem(position)) {
+                is Folder -> TYPE_HEADER
+                is AppDetail -> TYPE_APP
+                else -> TYPE_APP
+            }
+        }
+
+        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+            val type = getItemViewType(position)
+            val item = items[position]
+            return if (type == TYPE_HEADER && item is Folder) {
+                val view = convertView ?: LayoutInflater.from(context).inflate(android.R.layout.simple_list_item_1, parent, false)
+                val textView = view.findViewById<TextView>(android.R.id.text1)
+                textView.text = item.name
+                textView.setBackgroundColor(0x22000000)
+                textView.setTextColor(0xFF2196F3.toInt())
+                textView.textSize = 18f
+                view
+            } else if (type == TYPE_APP && item is AppDetail) {
+                val view = convertView ?: LayoutInflater.from(context).inflate(R.layout.list_item_app, parent, false)
+                val iconView = view.findViewById<ImageView>(R.id.app_icon)
+                val nameView = view.findViewById<TextView>(R.id.app_name)
+                iconView.setImageDrawable(item.icon)
+                nameView.text = item.label
+                view
+            } else {
+                View(context)
+            }
+        }
+
+        override fun isEnabled(position: Int): Boolean {
+            return getItemViewType(position) == TYPE_APP
+        }
+    }
+
+    // Adapter for grid view (folders only)
+    private class FolderGridAdapter(
+        val context: Context,
+        val folders: List<Folder>
+    ) : android.widget.BaseAdapter() {
+        override fun getCount() = folders.size
+        override fun getItem(position: Int) = folders[position]
+        override fun getItemId(position: Int) = position.toLong()
+
+        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+            val folder = folders[position]
+            val view = convertView ?: LayoutInflater.from(context).inflate(android.R.layout.simple_list_item_1, parent, false)
+            val textView = view.findViewById<TextView>(android.R.id.text1)
+            textView.text = folder.name
+            textView.setBackgroundColor(0x22000000)
+            textView.setTextColor(0xFFFFFFFF.toInt())
+            textView.textSize = 18f
+            textView.gravity = android.view.Gravity.CENTER
+            return view
+        }
     }
 
     private fun setupGridClickListener() {
         gridView.setOnItemClickListener { parent, view, position, id ->
-            launchApp(position)
+            if (!showingFolderApps) {
+                // Show apps in the selected folder
+                val folder = folders.getOrNull(position) ?: return@setOnItemClickListener
+                currentFolder = folder
+                showingFolderApps = true
+                updateGridForCurrentState()
+            } else {
+                // Launch app in folder
+                val folder = currentFolder ?: return@setOnItemClickListener
+                val app = folder.apps.getOrNull(position) ?: return@setOnItemClickListener
+                launchAppFromDetail(app)
+            }
         }
+    }
+
+    // Helper to update grid view adapter based on current state
+    private fun updateGridForCurrentState() {
+        if (!showingFolderApps) {
+            // Show folders
+            val folderGridAdapter = FolderGridAdapter(this, folders)
+            gridView.numColumns = 3
+            gridView.adapter = folderGridAdapter
+            setSoftkeyBarText(left = "", middle = "Select", right = "")
+        } else {
+            // Show apps in current folder
+            val folder = currentFolder ?: return
+            val adapter = object : android.widget.BaseAdapter() {
+                override fun getCount() = folder.apps.size
+                override fun getItem(i: Int) = folder.apps[i]
+                override fun getItemId(i: Int) = i.toLong()
+                override fun getView(i: Int, convertView: View?, parent: ViewGroup): View {
+                    val app = folder.apps[i]
+                    val view = convertView ?: LayoutInflater.from(this@HomeActivity).inflate(R.layout.grid_item_app, parent, false)
+                    val iconView = view.findViewById<ImageView>(R.id.app_icon)
+                    val nameView = view.findViewById<TextView>(R.id.app_name)
+                    iconView.setImageDrawable(app.icon)
+                    nameView.text = app.label
+                    return view
+                }
+            }
+            gridView.numColumns = 3
+            gridView.adapter = adapter
+            setSoftkeyBarText(left = "Back", middle = "Select", right = "")
+        }
+    }
+
+    // Show a dialog to move the app up or down in the folder
+    private fun showMoveAppDialog(folder: Folder, appIndex: Int) {
+        val app = folder.apps[appIndex]
+        val options = mutableListOf<String>()
+        if (appIndex > 0) options.add("Move Up")
+        if (appIndex < folder.apps.size - 1) options.add("Move Down")
+        options.add("Cancel")
+        android.app.AlertDialog.Builder(this)
+            .setTitle(app.label)
+            .setItems(options.toTypedArray()) { _, which ->
+                when (options[which]) {
+                    "Move Up" -> {
+                        folder.apps.removeAt(appIndex)
+                        folder.apps.add(appIndex - 1, app)
+                        saveFolderAppOrder(folder)
+                        // Optionally, refresh the dialog or UI
+                    }
+                    "Move Down" -> {
+                        folder.apps.removeAt(appIndex)
+                        folder.apps.add(appIndex + 1, app)
+                        saveFolderAppOrder(folder)
+                        // Optionally, refresh the dialog or UI
+                    }
+                }
+            }
+            .show()
+    }
+
+    private fun launchAppFromDetail(app: AppDetail) {
+        val launchIntent = Intent(Intent.ACTION_MAIN)
+        launchIntent.setClassName(app.packageName, app.activityName)
+        launchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(launchIntent)
     }
 
     private fun setupClickListener() {
@@ -642,14 +855,37 @@ class HomeActivity : Activity() {
             LauncherState.APP_MENU -> {
                 when (keyCode) {
                     KeyEvent.KEYCODE_BACK -> {
-                        updateState(LauncherState.HOME_MENU)
-                        return true
+                        if (isGridMode && showingFolderApps) {
+                            // Go back to folder grid
+                            showingFolderApps = false
+                            currentFolder = null
+                            updateGridForCurrentState()
+                            return true
+                        } else {
+                            updateState(LauncherState.HOME_MENU)
+                            return true
+                        }
                     }
                     KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER -> {
                         if (isGridMode) {
                             val selectedPosition = gridView.selectedItemPosition
                             if (selectedPosition != GridView.INVALID_POSITION) {
-                                launchApp(selectedPosition)
+                                if (!showingFolderApps) {
+                                    // Open folder
+                                    val folder = folders.getOrNull(selectedPosition)
+                                    if (folder != null) {
+                                        currentFolder = folder
+                                        showingFolderApps = true
+                                        updateGridForCurrentState()
+                                    }
+                                } else {
+                                    // Launch app in folder
+                                    val folder = currentFolder
+                                    val app = folder?.apps?.getOrNull(selectedPosition)
+                                    if (app != null) {
+                                        launchAppFromDetail(app)
+                                    }
+                                }
                                 return true
                             }
                         } else {
@@ -661,12 +897,20 @@ class HomeActivity : Activity() {
                         }
                     }
                     KeyEvent.KEYCODE_SOFT_LEFT -> {
-                        isGridMode = !isGridMode
-                        // Save mode to preferences
-                        val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-                        prefs.edit().putBoolean(KEY_GRID_MODE, isGridMode).apply()
-                        updateState(LauncherState.APP_MENU)
-                        return true
+                        if (isGridMode && showingFolderApps) {
+                            // Go back to folder grid
+                            showingFolderApps = false
+                            currentFolder = null
+                            updateGridForCurrentState()
+                            return true
+                        } else {
+                            isGridMode = !isGridMode
+                            // Save mode to preferences
+                            val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+                            prefs.edit().putBoolean(KEY_GRID_MODE, isGridMode).apply()
+                            updateState(LauncherState.APP_MENU)
+                            return true
+                        }
                     }
                 }
             }
