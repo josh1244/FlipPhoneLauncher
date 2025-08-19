@@ -504,13 +504,15 @@ class HomeActivity : Activity() {
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
             val folder = folders[position]
-            val view = convertView ?: LayoutInflater.from(context).inflate(android.R.layout.simple_list_item_1, parent, false)
-            val textView = view.findViewById<TextView>(android.R.id.text1)
-            textView.text = folder.name
-            textView.setBackgroundColor(0x22000000)
-            textView.setTextColor(0xFFFFFFFF.toInt())
-            textView.textSize = 18f
-            textView.gravity = android.view.Gravity.CENTER
+            val view = convertView ?: LayoutInflater.from(context).inflate(R.layout.grid_item_app, parent, false)
+            val iconView = view.findViewById<ImageView>(R.id.app_icon)
+            val nameView = view.findViewById<TextView>(R.id.app_name)
+            if (folder.apps.isNotEmpty()) {
+                iconView.setImageDrawable(folder.apps[0].icon)
+            } else {
+                iconView.setImageDrawable(null)
+            }
+            nameView.text = folder.name
             return view
         }
     }
