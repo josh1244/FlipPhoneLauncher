@@ -528,11 +528,11 @@ class HomeActivity : Activity() {
                         return true
                     }
                     KeyEvent.KEYCODE_DPAD_UP -> {
-                        moveShortcutFocus(-3)
+                        moveShortcutFocus(-2)
                         return true
                     }
                     KeyEvent.KEYCODE_DPAD_DOWN -> {
-                        moveShortcutFocus(3)
+                        moveShortcutFocus(2)
                         return true
                     }
                     KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER -> {
@@ -544,7 +544,6 @@ class HomeActivity : Activity() {
                             adjustBrightness(-1)
                             return true
                         } else {
-                            moveShortcutFocus(-1)
                             return true
                         }
                     }
@@ -553,7 +552,6 @@ class HomeActivity : Activity() {
                             adjustBrightness(1)
                             return true
                         } else {
-                            moveShortcutFocus(1)
                             return true
                         }
                     }
@@ -565,7 +563,8 @@ class HomeActivity : Activity() {
 
     private fun moveShortcutFocus(delta: Int) {
         val count = shortcutButtons.size
-        val newIndex = (selectedShortcutIndex + delta).coerceIn(0, count - 1)
+        var newIndex = (selectedShortcutIndex + delta) % count
+        if (newIndex < 0) newIndex += count
         if (newIndex != selectedShortcutIndex) {
             selectedShortcutIndex = newIndex
             updateShortcutFocus()
