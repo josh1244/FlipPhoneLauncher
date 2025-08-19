@@ -110,10 +110,8 @@ class HomeActivity : Activity() {
         shortcutButtons = listOf(
             shortcutsPanel.findViewById(R.id.btn_wifi),
             shortcutsPanel.findViewById(R.id.btn_bluetooth),
-            shortcutsPanel.findViewById(R.id.btn_airplane),
-            shortcutsPanel.findViewById(R.id.btn_mobiledata),
-            shortcutsPanel.findViewById(R.id.btn_sound),
-            shortcutsPanel.findViewById(R.id.btn_location)
+            shortcutsPanel.findViewById(R.id.btn_dnd),
+            shortcutsPanel.findViewById(R.id.btn_brightness)
         )
     // Tint colors: blue for enabled, white for disabled
     val blue = 0xFF2196F3.toInt() // Material blue 500
@@ -122,10 +120,8 @@ class HomeActivity : Activity() {
         shortcutOverlays = listOf(
             shortcutsPanel.findViewById(R.id.overlay_wifi),
             shortcutsPanel.findViewById(R.id.overlay_bluetooth),
-            shortcutsPanel.findViewById(R.id.overlay_airplane),
-            shortcutsPanel.findViewById(R.id.overlay_mobiledata),
-            shortcutsPanel.findViewById(R.id.overlay_sound),
-            shortcutsPanel.findViewById(R.id.overlay_location)
+            shortcutsPanel.findViewById(R.id.overlay_dnd),
+            shortcutsPanel.findViewById(R.id.overlay_brightness)
         )
     // Set initial backgrounds based on current state
     
@@ -133,11 +129,10 @@ class HomeActivity : Activity() {
     shortcutButtons[0].setBackgroundResource(if (wifiManager.isWifiEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
     val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
     shortcutButtons[1].setBackgroundResource(if (bluetoothAdapter != null && bluetoothAdapter.isEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-    shortcutButtons[2].setBackgroundResource(if (isAirplaneOn) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-    shortcutButtons[3].setBackgroundResource(if (isMobileDataOn) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
     val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
-    shortcutButtons[4].setBackgroundResource(if (audioManager.ringerMode != AudioManager.RINGER_MODE_SILENT) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-    shortcutButtons[5].setBackgroundResource(if (isLocationOn) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+    shortcutButtons[2].setBackgroundResource(if (audioManager.ringerMode == AudioManager.RINGER_MODE_NORMAL) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+    // For brightness, always on by default (could be improved to reflect current state)
+    shortcutButtons[3].setBackgroundResource(R.drawable.circle_bg_on)
     
     // Helper to set icon tint
     fun setShortcutIconTint(index: Int, enabled: Boolean) {
@@ -145,10 +140,8 @@ class HomeActivity : Activity() {
     }
     setShortcutIconTint(0, wifiManager.isWifiEnabled)
     setShortcutIconTint(1, bluetoothAdapter != null && bluetoothAdapter.isEnabled)
-    setShortcutIconTint(2, isAirplaneOn)
-    setShortcutIconTint(3, isMobileDataOn)
-    setShortcutIconTint(4, audioManager.ringerMode != AudioManager.RINGER_MODE_SILENT)
-    setShortcutIconTint(5, isLocationOn)
+    setShortcutIconTint(2, audioManager.ringerMode == AudioManager.RINGER_MODE_NORMAL)
+    setShortcutIconTint(3, true)
 
     // Wi-Fi
     shortcutButtons[0].setOnClickListener {
@@ -172,42 +165,49 @@ class HomeActivity : Activity() {
             Toast.makeText(this, "Bluetooth not supported", Toast.LENGTH_SHORT).show()
         }
     }
-    // Airplane mode (visual only, system toggle restricted)
+    // DnD (Do Not Disturb) - cycles through normal, vibrate, priority, total silence
     shortcutButtons[2].setOnClickListener {
-        isAirplaneOn = !isAirplaneOn
-        Toast.makeText(this, if (isAirplaneOn) "Airplane Mode On (visual only)" else "Airplane Mode Off (visual only)", Toast.LENGTH_SHORT).show()
-        shortcutButtons[2].setBackgroundResource(if (isAirplaneOn) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-        setShortcutIconTint(2, isAirplaneOn)
-    }
-    // Mobile Data (visual only, system toggle restricted)
-    shortcutButtons[3].setOnClickListener {
-        isMobileDataOn = !isMobileDataOn
-        Toast.makeText(this, if (isMobileDataOn) "Mobile Data On (visual only)" else "Mobile Data Off (visual only)", Toast.LENGTH_SHORT).show()
-        shortcutButtons[3].setBackgroundResource(if (isMobileDataOn) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-        setShortcutIconTint(3, isMobileDataOn)
-    }
-    // Sound Profile
-    shortcutButtons[4].setOnClickListener {
-        val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
-        val isNormal = audioManager.ringerMode != AudioManager.RINGER_MODE_SILENT
-        if (isNormal) {
-            audioManager.ringerMode = AudioManager.RINGER_MODE_SILENT
-            Toast.makeText(this, "Sound: Silent", Toast.LENGTH_SHORT).show()
-            shortcutButtons[4].setBackgroundResource(R.drawable.circle_bg_off)
-            setShortcutIconTint(4, false)
-        } else {
-            audioManager.ringerMode = AudioManager.RINGER_MODE_NORMAL
-            Toast.makeText(this, "Sound: Normal", Toast.LENGTH_SHORT).show()
-            shortcutButtons[4].setBackgroundResource(R.drawable.circle_bg_on)
-            setShortcutIconTint(4, true)
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as android.app.NotificationManager
+        if (!notificationManager.isNotificationPolicyAccessGranted) {
+            Toast.makeText(this, "Grant Do Not Disturb access in settings", Toast.LENGTH_LONG).show()
+            val intent = Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
+            startActivity(intent)
+            return@setOnClickListener
         }
+        val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        val currentMode = audioManager.ringerMode
+        val newMode = when (currentMode) {
+            AudioManager.RINGER_MODE_NORMAL -> AudioManager.RINGER_MODE_VIBRATE
+            AudioManager.RINGER_MODE_VIBRATE -> AudioManager.RINGER_MODE_SILENT
+            AudioManager.RINGER_MODE_SILENT -> AudioManager.RINGER_MODE_NORMAL
+            else -> AudioManager.RINGER_MODE_NORMAL
+        }
+        audioManager.ringerMode = newMode
+        val enabled = newMode == AudioManager.RINGER_MODE_NORMAL
+        Toast.makeText(this, if (enabled) "DnD Disabled" else "DnD Enabled", Toast.LENGTH_SHORT).show()
+        shortcutButtons[2].setBackgroundResource(if (enabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+        setShortcutIconTint(2, enabled)
     }
-    // Location (visual only, system toggle restricted)
-    shortcutButtons[5].setOnClickListener {
-        isLocationOn = !isLocationOn
-        Toast.makeText(this, if (isLocationOn) "Location On (visual only)" else "Location Off (visual only)", Toast.LENGTH_SHORT).show()
-        shortcutButtons[5].setBackgroundResource(if (isLocationOn) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-        setShortcutIconTint(5, isLocationOn)
+    // Brightness - toggles between low, medium, high
+    shortcutButtons[3].setOnClickListener {
+        try {
+            val cResolver = contentResolver
+            val current = android.provider.Settings.System.getInt(cResolver, android.provider.Settings.System.SCREEN_BRIGHTNESS)
+            val newBrightness = when {
+                current < 100 -> 128 // medium
+                current < 200 -> 255 // high
+                else -> 10 // low
+            }
+            android.provider.Settings.System.putInt(cResolver, android.provider.Settings.System.SCREEN_BRIGHTNESS, newBrightness)
+            val brightnessText = when (newBrightness) {
+                128 -> "Brightness: Medium"
+                255 -> "Brightness: High"
+                else -> "Brightness: Low"
+            }
+            Toast.makeText(this, brightnessText, Toast.LENGTH_SHORT).show()
+        } catch (e: Exception) {
+            Toast.makeText(this, "Brightness change failed", Toast.LENGTH_SHORT).show()
+        }
     }
 
 
