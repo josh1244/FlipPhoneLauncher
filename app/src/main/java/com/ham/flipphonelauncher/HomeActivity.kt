@@ -643,10 +643,28 @@ class HomeActivity : Activity() {
                         // App grid inside folder
                         updateGridForCurrentState()
                         gridView.setSelection(appIndex + (if (options[which] == "Move Up") -1 else 1))
+                        // Also refresh list view adapter so list reflects new order
+                        (listView.adapter as? android.widget.BaseAdapter)?.notifyDataSetChanged()
                     } else if (!isGridMode) {
                         // List view
-                        (listView.adapter as? android.widget.BaseAdapter)?.notifyDataSetChanged()
-                        listView.setSelection(appIndex + (if (options[which] == "Move Up") -1 else 1))
+                        // Rebuild the adapter so section headers and app order are correct
+                        val newIndex = appIndex + (if (options[which] == "Move Up") -1 else 1)
+                        listView.adapter = FolderSectionedListAdapter(this, folders)
+                        // Find the new absolute position of the moved app in the sectioned list
+                        val adapter = listView.adapter as FolderSectionedListAdapter
+                        var absoluteIndex = 0
+                        outer@ for (f in folders) {
+                            absoluteIndex++ // header
+                            for ((i, app) in f.apps.withIndex()) {
+                                if (f == folder && i == newIndex) {
+                                    break@outer
+                                }
+                                absoluteIndex++
+                            }
+                        }
+                        listView.setSelection(absoluteIndex)
+                        // Also refresh grid view adapter so grid reflects new order
+                        updateGridForCurrentState()
                     }
                 }
             }
