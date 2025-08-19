@@ -616,24 +616,53 @@ class HomeActivity : Activity() {
     private fun showMoveAppDialog(folder: Folder, appIndex: Int) {
         val app = folder.apps[appIndex]
         val options = mutableListOf<String>()
-        if (appIndex > 0) options.add("Move Up")
-        if (appIndex < folder.apps.size - 1) options.add("Move Down")
+        val folderIdx = folders.indexOf(folder)
+        val canMoveUp = appIndex > 0 || folderIdx > 0
+    val canMoveDown = appIndex < folder.apps.size - 1 || (folderIdx < folders.size - 1)
+    if (canMoveUp) options.add("Move Up")
+    if (canMoveDown) options.add("Move Down")
         options.add("Cancel")
         android.app.AlertDialog.Builder(this)
             .setTitle(app.label)
             .setItems(options.toTypedArray()) { _, which ->
                 var moved = false
+                var newFolder = folder
+                var newIndex = appIndex
                 when (options[which]) {
                     "Move Up" -> {
-                        folder.apps.removeAt(appIndex)
-                        folder.apps.add(appIndex - 1, app)
-                        saveFolderAppOrder(folder)
+                        if (appIndex > 0) {
+                            folder.apps.removeAt(appIndex)
+                            folder.apps.add(appIndex - 1, app)
+                            saveFolderAppOrder(folder)
+                            newIndex = appIndex - 1
+                        } else if (folderIdx > 0) {
+                            // Move to end of previous folder
+                            folder.apps.removeAt(appIndex)
+                            val prevFolder = folders[folderIdx - 1]
+                            prevFolder.apps.add(prevFolder.apps.size, app)
+                            saveFolderAppOrder(folder)
+                            saveFolderAppOrder(prevFolder)
+                            newFolder = prevFolder
+                            newIndex = prevFolder.apps.size - 1
+                        }
                         moved = true
                     }
                     "Move Down" -> {
-                        folder.apps.removeAt(appIndex)
-                        folder.apps.add(appIndex + 1, app)
-                        saveFolderAppOrder(folder)
+                        if (appIndex < folder.apps.size - 1) {
+                            folder.apps.removeAt(appIndex)
+                            folder.apps.add(appIndex + 1, app)
+                            saveFolderAppOrder(folder)
+                            newIndex = appIndex + 1
+                        } else if (folderIdx < folders.size - 1) {
+                            // Move to start of next folder (even if empty)
+                            folder.apps.removeAt(appIndex)
+                            val nextFolder = folders[folderIdx + 1]
+                            nextFolder.apps.add(0, app)
+                            saveFolderAppOrder(folder)
+                            saveFolderAppOrder(nextFolder)
+                            newFolder = nextFolder
+                            newIndex = 0
+                        }
                         moved = true
                     }
                 }
@@ -642,26 +671,44 @@ class HomeActivity : Activity() {
                     if (isGridMode && showingFolderApps) {
                         // App grid inside folder
                         updateGridForCurrentState()
-                        gridView.setSelection(appIndex + (if (options[which] == "Move Up") -1 else 1))
+                        // Find new index in grid
+                        val gridFolder = newFolder
+                        val gridIndex = newIndex
+                        if (currentFolder == gridFolder) {
+                            gridView.setSelection(gridIndex)
+                        } else {
+                            // If folder changed, switch to new folder in grid view
+                            currentFolder = gridFolder
+                            showingFolderApps = true
+                            updateGridForCurrentState()
+                            gridView.setSelection(gridIndex)
+                        }
                         // Also refresh list view adapter so list reflects new order
                         (listView.adapter as? android.widget.BaseAdapter)?.notifyDataSetChanged()
                     } else if (!isGridMode) {
                         // List view
-                        // Rebuild the adapter so section headers and app order are correct
-                        val newIndex = appIndex + (if (options[which] == "Move Up") -1 else 1)
                         listView.adapter = FolderSectionedListAdapter(this, folders)
-                        // Find the new absolute position of the moved app in the sectioned list
+                        // Find the new absolute position of the moved app in the sectioned list, skipping headers
                         val adapter = listView.adapter as FolderSectionedListAdapter
                         var absoluteIndex = 0
-                        outer@ for (f in folders) {
+                        var found = false
+                        for (f in folders) {
                             absoluteIndex++ // header
-                            for ((i, app) in f.apps.withIndex()) {
-                                if (f == folder && i == newIndex) {
-                                    break@outer
+                            for ((i, a) in f.apps.withIndex()) {
+                                if (f == newFolder && i == newIndex) {
+                                    found = true
+                                    break
                                 }
                                 absoluteIndex++
                             }
+                            if (found) break
                         }
+                        // If landed on a header, skip to the next app
+                        if (adapter.getItemViewType(absoluteIndex) == 0) {
+                            absoluteIndex++
+                        }
+                        // If out of bounds, clamp
+                        if (absoluteIndex >= adapter.count) absoluteIndex = adapter.count - 1
                         listView.setSelection(absoluteIndex)
                         // Also refresh grid view adapter so grid reflects new order
                         updateGridForCurrentState()
