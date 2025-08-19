@@ -338,6 +338,82 @@ class HomeActivity : Activity() {
 
         // Show info panel, hide app list at start
         updateState(LauncherState.HOME_MENU)
+
+        // --- Add wrap-around DPAD navigation for listView ---
+        listView.setOnKeyListener { v, keyCode, event ->
+            if (event.action != KeyEvent.ACTION_DOWN) return@setOnKeyListener false
+            val count = listView.adapter?.count ?: 0
+            if (count == 0) return@setOnKeyListener false
+            val selected = listView.selectedItemPosition
+            when (keyCode) {
+                KeyEvent.KEYCODE_DPAD_DOWN -> {
+                    if (selected == count - 1) {
+                        listView.setSelection(0)
+                        return@setOnKeyListener true
+                    }
+                }
+                KeyEvent.KEYCODE_DPAD_UP -> {
+                    if (selected == 0) {
+                        listView.setSelection(count - 1)
+                        return@setOnKeyListener true
+                    }
+                }
+            }
+            false
+        }
+
+        // --- Add wrap-around DPAD navigation for gridView ---
+        gridView.setOnKeyListener { v, keyCode, event ->
+            if (event.action != KeyEvent.ACTION_DOWN) return@setOnKeyListener false
+            val count = gridView.adapter?.count ?: 0
+            if (count == 0) return@setOnKeyListener false
+            val selected = gridView.selectedItemPosition
+            val numColumns = gridView.numColumns
+            when (keyCode) {
+                KeyEvent.KEYCODE_DPAD_RIGHT -> {
+                    if (selected == count - 1 || (selected + 1) % numColumns == 0) {
+                        // Last item or end of row: wrap to start of row or first item
+                        val row = selected / numColumns
+                        val start = row * numColumns
+                        val next = if (selected == count - 1) 0 else start
+                        gridView.setSelection(next)
+                        return@setOnKeyListener true
+                    }
+                }
+                KeyEvent.KEYCODE_DPAD_LEFT -> {
+                    if (selected == 0 || selected % numColumns == 0) {
+                        // First item or start of row: wrap to end of row or last item
+                        val row = selected / numColumns
+                        val end = ((row + 1) * numColumns - 1).coerceAtMost(count - 1)
+                        val prev = if (selected == 0) count - 1 else end
+                        gridView.setSelection(prev)
+                        return@setOnKeyListener true
+                    }
+                }
+                KeyEvent.KEYCODE_DPAD_DOWN -> {
+                    val next = selected + numColumns
+                    if (next >= count) {
+                        // Wrap to top of column
+                        val col = selected % numColumns
+                        gridView.setSelection(col)
+                        return@setOnKeyListener true
+                    }
+                }
+                KeyEvent.KEYCODE_DPAD_UP -> {
+                    val prev = selected - numColumns
+                    if (prev < 0) {
+                        // Wrap to bottom of column
+                        val col = selected % numColumns
+                        // Find last item in this column
+                        var last = col
+                        while (last + numColumns < count) last += numColumns
+                        gridView.setSelection(last)
+                        return@setOnKeyListener true
+                    }
+                }
+            }
+            false
+        }
     }
 
     private fun updateState(newState: LauncherState) {

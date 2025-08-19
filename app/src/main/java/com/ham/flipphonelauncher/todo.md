@@ -2,5 +2,3 @@ if I press the home button anyhere in the launcher return to the home menu - For
 
 Need to be able to hide apps and delete shortcuts
 Need to be able to find hidden apps?
-
-Should be able to move past edges and loop around.
