@@ -136,17 +136,14 @@ class HomeActivity : Activity() {
             )
         }
 
-    setContentView(R.layout.activity_home)
+        setContentView(R.layout.activity_home)
 
-    // Restore grid/list mode from preferences
-    val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-    isGridMode = prefs.getBoolean(KEY_GRID_MODE, false)
+        // Restore grid/list mode from preferences
+        val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        isGridMode = prefs.getBoolean(KEY_GRID_MODE, false)
 
-        // Inflate shortcuts panel and add to root view
-        val rootView = findViewById<ViewGroup>(android.R.id.content)
-        val inflater = LayoutInflater.from(this)
-        shortcutsPanel = inflater.inflate(R.layout.shortcuts_panel, rootView, false)
-        rootView.addView(shortcutsPanel)
+        // Get shortcuts panel from layout include
+        shortcutsPanel = findViewById(R.id.shortcuts_panel)
 
         // Collect shortcut buttons for navigation
         shortcutButtons = listOf(

@@ -23,6 +23,7 @@
 
     <include layout="@layout/app_list" />
     <include layout="@layout/app_grid" />
+    <include layout="@layout/shortcuts_panel" />
     </LinearLayout>
 
     <include
