@@ -70,6 +70,23 @@ class HomeActivity : Activity() {
     private val handler = Handler(Looper.getMainLooper())
     private lateinit var timeUpdateRunnable: Runnable
 
+    private fun setBrightnessProgress() {
+        // Always fetch the current system brightness and update the progress drawable
+        try {
+            val cResolver = contentResolver
+            val current = android.provider.Settings.System.getInt(cResolver, android.provider.Settings.System.SCREEN_BRIGHTNESS)
+            val percent = (current * 100) / 255
+            val drawable = shortcutButtons[3].background
+            if (drawable is android.graphics.drawable.LayerDrawable) {
+                val clip = drawable.findDrawableByLayerId(R.id.progress)
+                if (clip is android.graphics.drawable.ClipDrawable) {
+                    // ClipDrawable level is 0-10000
+                    clip.level = (percent * 100)
+                }
+            }
+        } catch (_: Exception) {}
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -113,194 +130,149 @@ class HomeActivity : Activity() {
             shortcutsPanel.findViewById(R.id.btn_dnd),
             shortcutsPanel.findViewById(R.id.btn_brightness)
         )
-    // Tint colors: blue for enabled, white for disabled
-    val blue = 0xFF2196F3.toInt() // Material blue 500
-    val white = 0xFFFFFFFF.toInt()
-        // Collect overlay views for focus/hover outline
-        shortcutOverlays = listOf(
-            shortcutsPanel.findViewById(R.id.overlay_wifi),
-            shortcutsPanel.findViewById(R.id.overlay_bluetooth),
-            shortcutsPanel.findViewById(R.id.overlay_dnd),
-            shortcutsPanel.findViewById(R.id.overlay_brightness)
-        )
-    // Set initial backgrounds based on current state
-    
-    val wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
-    shortcutButtons[0].setBackgroundResource(if (wifiManager.isWifiEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-    val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
-    shortcutButtons[1].setBackgroundResource(if (bluetoothAdapter != null && bluetoothAdapter.isEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-    val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
-    shortcutButtons[2].setBackgroundResource(if (audioManager.ringerMode == AudioManager.RINGER_MODE_NORMAL) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-    // For brightness, always on by default (could be improved to reflect current state)
-    // Use progress drawable for brightness
-    shortcutButtons[3].setBackgroundResource(R.drawable.brightness_progress)
-    fun setBrightnessProgress() {
-        // Always fetch the current system brightness and update the progress drawable
-        try {
-            val cResolver = contentResolver
-            val current = android.provider.Settings.System.getInt(cResolver, android.provider.Settings.System.SCREEN_BRIGHTNESS)
-            val percent = (current * 100) / 255
-            val drawable = shortcutButtons[3].background
-            if (drawable is android.graphics.drawable.LayerDrawable) {
-                val clip = drawable.findDrawableByLayerId(R.id.progress)
-                if (clip is android.graphics.drawable.ClipDrawable) {
-                    // ClipDrawable level is 0-10000
-                    clip.level = (percent * 100)
-                }
-            }
-        } catch (_: Exception) {}
-    }
-    // Set initial progress
-    setBrightnessProgress()
-    
-    // Helper to set icon tint
-    fun setShortcutIconTint(index: Int, enabled: Boolean) {
-        shortcutButtons[index].setColorFilter(if (enabled) blue else white)
-    }
-    setShortcutIconTint(0, wifiManager.isWifiEnabled)
-    setShortcutIconTint(1, bluetoothAdapter != null && bluetoothAdapter.isEnabled)
-    setShortcutIconTint(2, audioManager.ringerMode == AudioManager.RINGER_MODE_NORMAL)
-    setShortcutIconTint(3, true)
-
-    // Set DnD label and button state on startup
-    fun updateDndUiFromSystem() {
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as android.app.NotificationManager
-        val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
-        val dndTextView = shortcutsPanel.findViewById<TextView>(R.id.shortcut_dnd_label)
-        val filter = notificationManager.currentInterruptionFilter
-        val ringer = audioManager.ringerMode
-        val dndLabel = when {
-            filter == android.app.NotificationManager.INTERRUPTION_FILTER_ALL && ringer == AudioManager.RINGER_MODE_NORMAL -> "All"
-            filter == android.app.NotificationManager.INTERRUPTION_FILTER_ALL && ringer == AudioManager.RINGER_MODE_VIBRATE -> "Vibrate"
-            filter == android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY -> "Priority"
-            filter == android.app.NotificationManager.INTERRUPTION_FILTER_NONE -> "None"
-            else -> "All"
-        }
-        dndTextView?.text = "DnD: $dndLabel"
-        shortcutButtons[2].setBackgroundResource(if (dndLabel != "All") R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-        setShortcutIconTint(2, dndLabel != "All")
-    }
-    updateDndUiFromSystem()
-
-    // Wi-Fi
-    shortcutButtons[0].setOnClickListener {
+        // Tint colors: blue for enabled, white for disabled
+        val blue = 0xFF2196F3.toInt() // Material blue 500
+        val white = 0xFFFFFFFF.toInt()
+            // Collect overlay views for focus/hover outline
+            shortcutOverlays = listOf(
+                shortcutsPanel.findViewById(R.id.overlay_wifi),
+                shortcutsPanel.findViewById(R.id.overlay_bluetooth),
+                shortcutsPanel.findViewById(R.id.overlay_dnd),
+                shortcutsPanel.findViewById(R.id.overlay_brightness)
+            )
+        // Set initial backgrounds based on current state
+        
         val wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
-        val enabled = !wifiManager.isWifiEnabled
-        wifiManager.isWifiEnabled = enabled
-        // Toast.makeText(this, if (enabled) "Wi-Fi Enabled" else "Wi-Fi Disabled", Toast.LENGTH_SHORT).show()
-        shortcutButtons[0].setBackgroundResource(if (enabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-        setShortcutIconTint(0, enabled)
-    }
-    // Bluetooth
-    shortcutButtons[1].setOnClickListener {
+        shortcutButtons[0].setBackgroundResource(if (wifiManager.isWifiEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
         val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
-        if (bluetoothAdapter != null) {
-            val enabled = !bluetoothAdapter.isEnabled
-            if (enabled) bluetoothAdapter.enable() else bluetoothAdapter.disable()
-            // Toast.makeText(this, if (enabled) "Bluetooth Enabled" else "Bluetooth Disabled", Toast.LENGTH_SHORT).show()
-            shortcutButtons[1].setBackgroundResource(if (enabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-            setShortcutIconTint(1, enabled)
-        } else {
-            Toast.makeText(this, "Bluetooth not supported", Toast.LENGTH_SHORT).show()
-        }
-    }
-    // DnD (Do Not Disturb) - cycles through normal, vibrate, priority, total silence
-    shortcutButtons[2].setOnClickListener {
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as android.app.NotificationManager
-        if (!notificationManager.isNotificationPolicyAccessGranted) {
-            Toast.makeText(this, "Grant Do Not Disturb access in settings", Toast.LENGTH_LONG).show()
-            val intent = Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
-            startActivity(intent)
-            return@setOnClickListener
-        }
+        shortcutButtons[1].setBackgroundResource(if (bluetoothAdapter != null && bluetoothAdapter.isEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
         val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
-        // Track DnD state in a static variable
-        val dndStates = listOf("All", "Vibrate", "Priority", "None")
-        val sharedPref = getSharedPreferences("dnd_toggle", Context.MODE_PRIVATE)
-        val currentIndex = sharedPref.getInt("dnd_index", 0)
-        val currentState = dndStates[currentIndex]
-        val newIndex = (currentIndex + 1) % dndStates.size
-        val newState = dndStates[newIndex]
-        // Save new index
-        sharedPref.edit().putInt("dnd_index", newIndex).apply()
-        // Apply new state
-        when (newState) {
-            "All" -> {
-                notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_ALL)
-                audioManager.ringerMode = AudioManager.RINGER_MODE_NORMAL
+        shortcutButtons[2].setBackgroundResource(if (audioManager.ringerMode == AudioManager.RINGER_MODE_NORMAL) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+        // For brightness, always on by default (could be improved to reflect current state)
+        // Use progress drawable for brightness
+        shortcutButtons[3].setBackgroundResource(R.drawable.brightness_progress)
+
+        // Set initial progress
+        setBrightnessProgress()
+        
+        // Helper to set icon tint
+        fun setShortcutIconTint(index: Int, enabled: Boolean) {
+            shortcutButtons[index].setColorFilter(if (enabled) blue else white)
+        }
+        setShortcutIconTint(0, wifiManager.isWifiEnabled)
+        setShortcutIconTint(1, bluetoothAdapter != null && bluetoothAdapter.isEnabled)
+        setShortcutIconTint(2, audioManager.ringerMode == AudioManager.RINGER_MODE_NORMAL)
+        setShortcutIconTint(3, true)
+
+        // Set DnD label and button state on startup
+        fun updateDndUiFromSystem() {
+            val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as android.app.NotificationManager
+            val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+            val dndTextView = shortcutsPanel.findViewById<TextView>(R.id.shortcut_dnd_label)
+            val filter = notificationManager.currentInterruptionFilter
+            val ringer = audioManager.ringerMode
+            val dndLabel = when {
+                filter == android.app.NotificationManager.INTERRUPTION_FILTER_ALL && ringer == AudioManager.RINGER_MODE_NORMAL -> "All"
+                filter == android.app.NotificationManager.INTERRUPTION_FILTER_ALL && ringer == AudioManager.RINGER_MODE_VIBRATE -> "Vibrate"
+                filter == android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY -> "Priority"
+                filter == android.app.NotificationManager.INTERRUPTION_FILTER_NONE -> "None"
+                else -> "All"
             }
-            "Vibrate" -> {
-                notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_ALL)
-                audioManager.ringerMode = AudioManager.RINGER_MODE_VIBRATE
-            }
-            "Priority" -> {
-                notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY)
-                audioManager.ringerMode = AudioManager.RINGER_MODE_NORMAL
-            }
-            "None" -> {
-                notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_NONE)
-                audioManager.ringerMode = AudioManager.RINGER_MODE_SILENT
+            dndTextView?.text = "DnD: $dndLabel"
+            shortcutButtons[2].setBackgroundResource(if (dndLabel != "All") R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+            setShortcutIconTint(2, dndLabel != "All")
+        }
+        updateDndUiFromSystem()
+
+        // Wi-Fi
+        shortcutButtons[0].setOnClickListener {
+            val wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
+            val enabled = !wifiManager.isWifiEnabled
+            wifiManager.isWifiEnabled = enabled
+            // Toast.makeText(this, if (enabled) "Wi-Fi Enabled" else "Wi-Fi Disabled", Toast.LENGTH_SHORT).show()
+            shortcutButtons[0].setBackgroundResource(if (enabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+            setShortcutIconTint(0, enabled)
+        }
+        // Bluetooth
+        shortcutButtons[1].setOnClickListener {
+            val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+            if (bluetoothAdapter != null) {
+                val enabled = !bluetoothAdapter.isEnabled
+                if (enabled) bluetoothAdapter.enable() else bluetoothAdapter.disable()
+                // Toast.makeText(this, if (enabled) "Bluetooth Enabled" else "Bluetooth Disabled", Toast.LENGTH_SHORT).show()
+                shortcutButtons[1].setBackgroundResource(if (enabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+                setShortcutIconTint(1, enabled)
+            } else {
+                Toast.makeText(this, "Bluetooth not supported", Toast.LENGTH_SHORT).show()
             }
         }
-        val dndTextView = shortcutsPanel.findViewById<TextView>(R.id.shortcut_dnd_label)
-        dndTextView?.text = "$newState"
-        // Toast.makeText(this, "DnD: $currentState → $newState", Toast.LENGTH_SHORT).show()
-        shortcutButtons[2].setBackgroundResource(if (newState != "All") R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-        setShortcutIconTint(2, newState != "All")
-    }
-    // Brightness - toggles between low, medium, high
-    // Brightness - cycle through 5 levels
-    shortcutButtons[3].setOnClickListener {
-        try {
-            if (!android.provider.Settings.System.canWrite(this)) {
-                Toast.makeText(this, "Grant permission to modify system settings", Toast.LENGTH_LONG).show()
-                val intent = Intent(android.provider.Settings.ACTION_MANAGE_WRITE_SETTINGS)
-                intent.data = android.net.Uri.parse("package:" + packageName)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        // DnD (Do Not Disturb) - cycles through normal, vibrate, priority, total silence
+        shortcutButtons[2].setOnClickListener {
+            val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as android.app.NotificationManager
+            if (!notificationManager.isNotificationPolicyAccessGranted) {
+                Toast.makeText(this, "Grant Do Not Disturb access in settings", Toast.LENGTH_LONG).show()
+                val intent = Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
                 startActivity(intent)
                 return@setOnClickListener
             }
-            val cResolver = contentResolver
-            val levels = listOf(0,     15,   33,    48,    64,    79,    97,    112,   128,   130,   161,   176,   191,   209,   224,   240,   255) // Brightness levels from 0% to 100%
-            val labels = listOf("0%", "6%", "13%", "19%", "25%", "31%", "38%", "44%", "50%", "56%", "63%", "69%", "75%", "82%", "88%", "94%", "100%")
-            val current = android.provider.Settings.System.getInt(cResolver, android.provider.Settings.System.SCREEN_BRIGHTNESS)
-            // Find the closest level
-            val idx = levels.indexOfFirst { current <= it } .let { if (it == -1) levels.size - 1 else it }
-            val nextIdx = (idx + 1) % levels.size
-            val newBrightness = levels[nextIdx]
-            android.provider.Settings.System.putInt(cResolver, android.provider.Settings.System.SCREEN_BRIGHTNESS, newBrightness)
-            val brightnessText = "Brightness: ${labels[nextIdx]}"
-            Toast.makeText(this, brightnessText, Toast.LENGTH_SHORT).show()
-            // Update progress drawable to reflect actual system brightness
-            setBrightnessProgress()
-            // setShortcutIconTint(3, newBrightness == 255)
-        } catch (e: Exception) {
-            Toast.makeText(this, "Brightness change failed", Toast.LENGTH_SHORT).show()
+            val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+            // Track DnD state in a static variable
+            val dndStates = listOf("All", "Vibrate", "Priority", "None")
+            val sharedPref = getSharedPreferences("dnd_toggle", Context.MODE_PRIVATE)
+            val currentIndex = sharedPref.getInt("dnd_index", 0)
+            val currentState = dndStates[currentIndex]
+            val newIndex = (currentIndex + 1) % dndStates.size
+            val newState = dndStates[newIndex]
+            // Save new index
+            sharedPref.edit().putInt("dnd_index", newIndex).apply()
+            // Apply new state
+            when (newState) {
+                "All" -> {
+                    notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_ALL)
+                    audioManager.ringerMode = AudioManager.RINGER_MODE_NORMAL
+                }
+                "Vibrate" -> {
+                    notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_ALL)
+                    audioManager.ringerMode = AudioManager.RINGER_MODE_VIBRATE
+                }
+                "Priority" -> {
+                    notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY)
+                    audioManager.ringerMode = AudioManager.RINGER_MODE_NORMAL
+                }
+                "None" -> {
+                    notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_NONE)
+                    audioManager.ringerMode = AudioManager.RINGER_MODE_SILENT
+                }
+            }
+            val dndTextView = shortcutsPanel.findViewById<TextView>(R.id.shortcut_dnd_label)
+            dndTextView?.text = "$newState"
+            // Toast.makeText(this, "DnD: $currentState → $newState", Toast.LENGTH_SHORT).show()
+            shortcutButtons[2].setBackgroundResource(if (newState != "All") R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+            setShortcutIconTint(2, newState != "All")
         }
-    }
 
 
 
-    listView = findViewById(R.id.app_list)
-    timeTextView = findViewById(R.id.time_text)
-    dateTextView = findViewById(R.id.date_text)
-    carrierTextView = findViewById(R.id.carrier_text)
+        listView = findViewById(R.id.app_list)
+        timeTextView = findViewById(R.id.time_text)
+        dateTextView = findViewById(R.id.date_text)
+        carrierTextView = findViewById(R.id.carrier_text)
 
-    // Softkey bar setup
-    softkeyLeft = findViewById(R.id.softkey_left)
-    softkeyMiddle = findViewById(R.id.softkey_middle)
-    softkeyRight = findViewById(R.id.softkey_right)
+        // Softkey bar setup
+        softkeyLeft = findViewById(R.id.softkey_left)
+        softkeyMiddle = findViewById(R.id.softkey_middle)
+        softkeyRight = findViewById(R.id.softkey_right)
 
 
 
-    loadApplications()
-    setupAdapter()
-    setupClickListener()
-    setupTimeUpdater()
-    showCarrierName()
+        loadApplications()
+        setupAdapter()
+        setupClickListener()
+        setupTimeUpdater()
+        showCarrierName()
 
-    // Show info panel, hide app list at start
-    updateState(LauncherState.HOME_MENU)
+        // Show info panel, hide app list at start
+        updateState(LauncherState.HOME_MENU)
     }
 
     private fun updateState(newState: LauncherState) {
@@ -445,6 +417,35 @@ class HomeActivity : Activity() {
         }
     }
 
+    // Helper to adjust brightness up/down by one step
+    private fun adjustBrightness(direction: Int) {
+        try {
+            if (!android.provider.Settings.System.canWrite(this)) {
+                Toast.makeText(this, "Grant permission to modify system settings", Toast.LENGTH_LONG).show()
+                val intent = Intent(android.provider.Settings.ACTION_MANAGE_WRITE_SETTINGS)
+                intent.data = android.net.Uri.parse("package:" + packageName)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+                return
+            }
+            val cResolver = contentResolver
+            val levels = listOf(0, 15, 33, 48, 64, 79, 97, 112, 128, 130, 161, 176, 191, 209, 224, 240, 255)
+            val labels = listOf("0%", "6%", "13%", "19%", "25%", "31%", "38%", "44%", "50%", "56%", "63%", "69%", "75%", "82%", "88%", "94%", "100%")
+            val current = android.provider.Settings.System.getInt(cResolver, android.provider.Settings.System.SCREEN_BRIGHTNESS)
+            val idx = levels.indexOfFirst { current <= it }.let { if (it == -1) levels.size - 1 else it }
+            var newIdx = idx + direction
+            if (newIdx < 0) newIdx = 0
+            if (newIdx >= levels.size) newIdx = levels.size - 1
+            val newBrightness = levels[newIdx]
+            android.provider.Settings.System.putInt(cResolver, android.provider.Settings.System.SCREEN_BRIGHTNESS, newBrightness)
+            val brightnessText = "Brightness: ${labels[newIdx]}"
+            Toast.makeText(this, brightnessText, Toast.LENGTH_SHORT).show()
+            setBrightnessProgress()
+        } catch (e: Exception) {
+            Toast.makeText(this, "Brightness change failed", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         val dialerKeys = setOf(
             KeyEvent.KEYCODE_0, KeyEvent.KEYCODE_1, KeyEvent.KEYCODE_2, KeyEvent.KEYCODE_3,
@@ -538,6 +539,24 @@ class HomeActivity : Activity() {
                         shortcutButtons[selectedShortcutIndex].performClick()
                         return true
                     }
+                    KeyEvent.KEYCODE_SOFT_LEFT -> {
+                        if (selectedShortcutIndex == 3) {
+                            adjustBrightness(-1)
+                            return true
+                        } else {
+                            moveShortcutFocus(-1)
+                            return true
+                        }
+                    }
+                    KeyEvent.KEYCODE_SOFT_RIGHT -> {
+                        if (selectedShortcutIndex == 3) {
+                            adjustBrightness(1)
+                            return true
+                        } else {
+                            moveShortcutFocus(1)
+                            return true
+                        }
+                    }
                 }
             }
         }
@@ -562,6 +581,12 @@ class HomeActivity : Activity() {
             shortcutOverlays[i].visibility = if (i == selectedShortcutIndex) View.VISIBLE else View.GONE
         }
         shortcutButtons[selectedShortcutIndex].requestFocus()
+        // Update softkey bar for brightness shortcut
+        if (selectedShortcutIndex == 3) {
+            setSoftkeyBarText(left = "Down", middle = "Select", right = "Up")
+        } else {
+            setSoftkeyBarText(left = "", middle = "Select", right = "")
+        }
     }
 
     private class AppListAdapter(
