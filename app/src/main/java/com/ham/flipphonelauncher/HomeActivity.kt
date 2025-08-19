@@ -18,6 +18,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.ListView
+import android.widget.GridView
 import android.widget.TextView
 import android.widget.ImageButton
 import android.net.wifi.WifiManager
@@ -55,6 +56,10 @@ private lateinit var shortcutOverlays: List<ImageView>
 private var selectedShortcutIndex: Int = 0
 
 class HomeActivity : Activity() {
+    private lateinit var gridView: GridView
+    private var isGridMode: Boolean = false
+    private val PREFS_NAME = "launcher_prefs"
+    private val KEY_GRID_MODE = "grid_mode"
     // Track state for visual toggles (for restricted features)
     private var isAirplaneOn = false
     private var isMobileDataOn = false
@@ -115,7 +120,11 @@ class HomeActivity : Activity() {
             )
         }
 
-        setContentView(R.layout.activity_home)
+    setContentView(R.layout.activity_home)
+
+    // Restore grid/list mode from preferences
+    val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+    isGridMode = prefs.getBoolean(KEY_GRID_MODE, false)
 
         // Inflate shortcuts panel and add to root view
         val rootView = findViewById<ViewGroup>(android.R.id.content)
@@ -254,6 +263,7 @@ class HomeActivity : Activity() {
 
 
         listView = findViewById(R.id.app_list)
+        gridView = findViewById(R.id.app_grid)
         timeTextView = findViewById(R.id.time_text)
         dateTextView = findViewById(R.id.date_text)
         carrierTextView = findViewById(R.id.carrier_text)
@@ -268,6 +278,7 @@ class HomeActivity : Activity() {
         loadApplications()
         setupAdapter()
         setupClickListener()
+        setupGridClickListener()
         setupTimeUpdater()
         showCarrierName()
 
@@ -279,10 +290,12 @@ class HomeActivity : Activity() {
         currentState = newState
         val infoPanel: View? = findViewById(R.id.info_panel)
         val appListView: View? = findViewById(R.id.app_list)
+        val appGridView: View? = findViewById(R.id.app_grid)
         when (newState) {
             LauncherState.HOME_MENU -> {
                 infoPanel?.visibility = View.VISIBLE
                 appListView?.visibility = View.GONE
+                appGridView?.visibility = View.GONE
                 shortcutsPanel.visibility = View.GONE
                 setSoftkeyBarText(
                     left = "Notification",
@@ -292,17 +305,32 @@ class HomeActivity : Activity() {
             }
             LauncherState.APP_MENU -> {
                 infoPanel?.visibility = View.GONE
-                appListView?.visibility = View.VISIBLE
-                shortcutsPanel.visibility = View.GONE
-                setSoftkeyBarText(
-                    left = "",
-                    middle = "Select",
-                    right = ""
-                )
-                listView.requestFocus()
-                if (listView.adapter.count > 0) {
-                    listView.setSelection(0)
+                if (isGridMode) {
+                    appListView?.visibility = View.GONE
+                    appGridView?.visibility = View.VISIBLE
+                    gridView.requestFocus()
+                    if (gridView.adapter != null && gridView.adapter.count > 0) {
+                        gridView.setSelection(0)
+                    }
+                    setSoftkeyBarText(
+                        left = "List",
+                        middle = "Select",
+                        right = ""
+                    )
+                } else {
+                    appListView?.visibility = View.VISIBLE
+                    appGridView?.visibility = View.GONE
+                    listView.requestFocus()
+                    if (listView.adapter != null && listView.adapter.count > 0) {
+                        listView.setSelection(0)
+                    }
+                    setSoftkeyBarText(
+                        left = "Grid",
+                        middle = "Select",
+                        right = ""
+                    )
                 }
+                shortcutsPanel.visibility = View.GONE
             }
             LauncherState.SHORTCUTS -> {
                 infoPanel?.visibility = View.GONE
@@ -348,6 +376,13 @@ class HomeActivity : Activity() {
     private fun setupAdapter() {
         val adapter = AppListAdapter(this, appList)
         listView.adapter = adapter
+        gridView.adapter = adapter
+    }
+
+    private fun setupGridClickListener() {
+        gridView.setOnItemClickListener { parent, view, position, id ->
+            launchApp(position)
+        }
     }
 
     private fun setupClickListener() {
@@ -611,11 +646,27 @@ class HomeActivity : Activity() {
                         return true
                     }
                     KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER -> {
-                        val selectedPosition = listView.selectedItemPosition
-                        if (selectedPosition != ListView.INVALID_POSITION) {
-                            launchApp(selectedPosition)
-                            return true
+                        if (isGridMode) {
+                            val selectedPosition = gridView.selectedItemPosition
+                            if (selectedPosition != GridView.INVALID_POSITION) {
+                                launchApp(selectedPosition)
+                                return true
+                            }
+                        } else {
+                            val selectedPosition = listView.selectedItemPosition
+                            if (selectedPosition != ListView.INVALID_POSITION) {
+                                launchApp(selectedPosition)
+                                return true
+                            }
                         }
+                    }
+                    KeyEvent.KEYCODE_SOFT_LEFT -> {
+                        isGridMode = !isGridMode
+                        // Save mode to preferences
+                        val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+                        prefs.edit().putBoolean(KEY_GRID_MODE, isGridMode).apply()
+                        updateState(LauncherState.APP_MENU)
+                        return true
                     }
                 }
             }
@@ -729,12 +780,16 @@ class HomeActivity : Activity() {
             var view = convertView
             val holder: ViewHolder
 
-            if (view == null) {
-                view = LayoutInflater.from(context).inflate(R.layout.list_item_app, parent, false)
+            val isGrid = parent is GridView
+            val layoutId = if (isGrid) R.layout.grid_item_app else R.layout.list_item_app
+
+            if (view == null || view.getTag(R.id.view_type_tag) != layoutId) {
+                view = LayoutInflater.from(context).inflate(layoutId, parent, false)
                 holder = ViewHolder()
                 holder.iconView = view.findViewById(R.id.app_icon)
                 holder.nameView = view.findViewById(R.id.app_name)
                 view.tag = holder
+                view.setTag(R.id.view_type_tag, layoutId)
             } else {
                 holder = view.tag as ViewHolder
             }
