@@ -20,7 +20,7 @@
         android:verticalSpacing="8dp"
         android:horizontalSpacing="8dp"
         android:visibility="gone"
-        android:paddingBottom="48dp" />
+        android:paddingBottom="40dp" />
 
     <!-- Softkey bar anchored to bottom -->
     <com.ham.flipphonelauncher.ui.SoftkeyBarView

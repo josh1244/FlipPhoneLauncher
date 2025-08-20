@@ -1,18 +1,36 @@
+
 package com.ham.flipphonelauncher.adapter
 
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import com.ham.flipphonelauncher.model.FolderItem
 import com.ham.flipphonelauncher.model.AppItem
 
-class AppGridAdapter(private val apps: List<AppItem>) : BaseAdapter() {
-    override fun getCount() = apps.size
-    override fun getItem(position: Int) = apps[position]
+class AppGridAdapter(
+    private val folders: List<FolderItem>,
+    private val onFolderClick: ((FolderItem) -> Unit)? = null,
+    private val onAppClick: ((AppItem) -> Unit)? = null
+) : BaseAdapter() {
+    // Show only folders, or the single app if only one app in the folder
+    private val items: List<Any> = buildList {
+        for (folder in folders) {
+            if (folder.apps.size == 1) {
+                add(folder.apps[0])
+            } else if (folder.apps.isNotEmpty()) {
+                add(folder)
+            }
+        }
+    }
+
+    override fun getCount() = items.size
+    override fun getItem(position: Int) = items[position]
     override fun getItemId(position: Int) = position.toLong()
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val viewHolder: ViewHolder
+        val item = getItem(position)
         val view: View
+        val viewHolder: ViewHolder
         if (convertView == null) {
             view = android.view.LayoutInflater.from(parent?.context).inflate(
                 com.ham.flipphonelauncher.R.layout.app_item_grid, parent, false)
@@ -25,9 +43,17 @@ class AppGridAdapter(private val apps: List<AppItem>) : BaseAdapter() {
             view = convertView
             viewHolder = view.tag as ViewHolder
         }
-        val app = getItem(position)
-        viewHolder.icon.setImageDrawable(app.icon)
-        viewHolder.name.text = app.label
+        when (item) {
+            is FolderItem -> {
+                val icon = item.apps.firstOrNull()?.icon
+                viewHolder.icon.setImageDrawable(icon)
+                viewHolder.name.text = item.name
+            }
+            is AppItem -> {
+                viewHolder.icon.setImageDrawable(item.icon)
+                viewHolder.name.text = item.label
+            }
+        }
         return view
     }
 

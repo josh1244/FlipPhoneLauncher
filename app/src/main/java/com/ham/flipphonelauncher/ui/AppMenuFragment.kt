@@ -67,9 +67,25 @@ class AppMenuFragment : Fragment(), KeyEventHandler {
         } else {
             listView?.visibility = View.GONE
             gridView?.visibility = View.VISIBLE
-            gridView?.adapter = AppGridAdapter(state.apps)
+            val adapter = AppGridAdapter(state.folders)
+            gridView?.adapter = adapter
+            gridView?.setOnItemClickListener { _, _, position, _ ->
+                val item = adapter.getItem(position)
+                when (item) {
+                    is com.ham.flipphonelauncher.model.FolderItem -> openFolderMenu(item)
+                    is com.ham.flipphonelauncher.model.AppItem -> launchApp(item)
+                }
+            }
             softKeyBarView?.setSoftkeyBarText(left = "List", middle = "Select", right = "")
         }
+    }
+
+    private fun openFolderMenu(folder: com.ham.flipphonelauncher.model.FolderItem) {
+        if (folder.apps.isEmpty()) return
+        val dialog = FolderMenuDialog(requireContext(), folder) { appItem ->
+            launchApp(appItem)
+        }
+        dialog.show()
     }
 
     private fun launchApp(appItem: com.ham.flipphonelauncher.model.AppItem) {

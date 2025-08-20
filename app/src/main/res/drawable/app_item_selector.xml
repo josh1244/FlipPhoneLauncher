@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_activated="true" android:drawable="@color/app_item_selected_bg" />
-    <item android:state_selected="true" android:drawable="@color/app_item_selected_bg" />
+    <item android:state_activated="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/app_item_selected_bg" />
+            <corners android:radius="18dp" />
+            <padding
+                android:left="8dp"
+                android:top="8dp"
+                android:right="8dp"
+                android:bottom="8dp" />
+        </shape>
+    </item>
+    <item android:state_selected="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/app_item_selected_bg" />
+            <corners android:radius="18dp" />
+            <padding
+                android:left="8dp"
+                android:top="8dp"
+                android:right="8dp"
+                android:bottom="8dp" />
+        </shape>
+    </item>
     <item android:state_pressed="true" android:drawable="@color/app_item_pressed_bg" />
     <item android:drawable="@android:color/transparent" />
 </selector>
