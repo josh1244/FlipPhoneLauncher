@@ -1,23 +1,24 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.FlipPhoneLauncher" parent="@android:style/Theme.Wallpaper.NoTitleBar">
-        <!-- Primary brand color - you may not need these if the UI is minimal -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color - you may not need these -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
+    <style name="Theme.FlipPhoneLauncher" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <!-- <item name="android:windowTranslucentStatus">true</item> -->
+    <!-- Primary brand color - you may not need these if the UI is minimal -->
+    <item name="colorPrimary">@color/purple_500</item>
+    <item name="colorPrimaryVariant">@color/purple_700</item>
+    <item name="colorOnPrimary">@color/white</item>
+    <!-- Secondary brand color - you may not need these -->
+    <item name="colorSecondary">@color/teal_200</item>
+    <item name="colorSecondaryVariant">@color/teal_700</item>
+    <item name="colorOnSecondary">@color/black</item>
 
-        <!-- Status bar color -->
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <!-- For light wallpapers, use dark status bar icons. For dark wallpapers, use light icons.
-             This might need dynamic adjustment or a sensible default.
-             true = dark icons, false = light icons. You may need to remove one or adjust based on typical wallpapers. -->
-        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+    <!-- Status bar color -->
+    <item name="android:statusBarColor">@android:color/transparent</item>
+    <!-- For light wallpapers, use dark status bar icons. For dark wallpapers, use light icons.
+            This might need dynamic adjustment or a sensible default.
+            true = dark icons, false = light icons. You may need to remove one or adjust based on typical wallpapers. -->
+    <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
 
-        <!-- Ensure the window background is transparent to show wallpaper -->
-        <item name="android:windowBackground">@android:color/transparent</item>
+    <!-- Ensure the window background is null to show wallpaper set in code -->
+    <item name="android:windowBackground">@null</item>
     </style>
 </resources>
