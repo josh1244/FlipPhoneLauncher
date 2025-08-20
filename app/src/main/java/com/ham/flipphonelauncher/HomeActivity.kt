@@ -74,9 +74,21 @@ class HomeActivity : AppCompatActivity() {
         }
 
         // Draw wallpaper under the status bar
-        window.decorView.systemUiVisibility =
-            View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-        window.statusBarColor = Color.TRANSPARENT
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+            androidx.core.view.WindowCompat.setDecorFitsSystemWindows(window, false)
+            window.insetsController?.apply {
+                setSystemBarsAppearance(0, android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
+                // Set layout to draw behind status bar
+                hide(android.view.WindowInsets.Type.statusBars())
+                show(android.view.WindowInsets.Type.statusBars())
+            }
+        } else {
+            @Suppress("DEPRECATION")
+            window.statusBarColor = Color.TRANSPARENT
+            @Suppress("DEPRECATION")
+            window.decorView.systemUiVisibility =
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        }
 
         // Remove bottom system window inset padding (for physical button devices)
         window.decorView.setOnApplyWindowInsetsListener { v, insets ->
@@ -107,7 +119,8 @@ class HomeActivity : AppCompatActivity() {
                 // TODO: Replace with your actual ShortcutsMenuFragment
                 try {
                     val clazz = Class.forName("com.ham.flipphonelauncher.ui.ShortcutsMenuFragment")
-                    clazz.newInstance() as Fragment
+                    clazz.getDeclaredConstructor().newInstance() as? Fragment
+                        ?: com.ham.flipphonelauncher.ui.HomeMenuFragment() // fallback if cast fails
                 } catch (e: Exception) {
                     com.ham.flipphonelauncher.ui.HomeMenuFragment() // fallback
                 }
@@ -116,7 +129,8 @@ class HomeActivity : AppCompatActivity() {
                 // TODO: Replace with your actual AppMenuFragment
                 try {
                     val clazz = Class.forName("com.ham.flipphonelauncher.ui.AppMenuFragment")
-                    clazz.newInstance() as Fragment
+                    clazz.getDeclaredConstructor().newInstance() as? Fragment
+                        ?: com.ham.flipphonelauncher.ui.HomeMenuFragment() // fallback if cast fails
                 } catch (e: Exception) {
                     com.ham.flipphonelauncher.ui.HomeMenuFragment() // fallback
                 }
