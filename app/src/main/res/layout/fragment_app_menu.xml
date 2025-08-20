@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
-        android:paddingBottom="36dp" />
+        android:paddingBottom="36dp"
+        android:background="#242020" />
 
     <GridView
         android:id="@+id/app_grid_view"
