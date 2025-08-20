@@ -17,7 +17,11 @@
         android:text="12:00 AM"
         android:textColor="#FFFFFF"
         android:fontFamily="sans-serif-medium"
-        android:includeFontPadding="false" />
+        android:includeFontPadding="false"
+        android:shadowColor="#CC000000"
+        android:shadowDx="0"
+        android:shadowDy="2"
+        android:shadowRadius="4" />
 
     <!-- Date (uppercase, smaller) -->
     <TextView
@@ -31,7 +35,11 @@
         android:textColor="#FFFFFF"
         android:fontFamily="sans-serif"
         android:includeFontPadding="false"
-        android:paddingBottom="8dp" />
+        android:paddingBottom="8dp"
+        android:shadowColor="#CC000000"
+        android:shadowDx="0"
+        android:shadowDy="2"
+        android:shadowRadius="4" />
 
     <!-- Carrier -->
     <TextView
@@ -44,5 +52,9 @@
         android:text="Carrier"
         android:textColor="#FFFFFF"
         android:fontFamily="sans-serif"
-        android:includeFontPadding="false" />
+        android:includeFontPadding="false"
+        android:shadowColor="#CC000000"
+        android:shadowDx="0"
+        android:shadowDy="2"
+        android:shadowRadius="4" />
 </LinearLayout>

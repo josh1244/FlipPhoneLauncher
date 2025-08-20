@@ -41,7 +41,7 @@ class AppMenuFragment : Fragment(), KeyEventHandler {
         val view = inflater.inflate(R.layout.fragment_app_menu, container, false)
 
         softKeyBarView = view.findViewById(R.id.softkey_bar)
-        softKeyBarView?.setSoftkeyBarText("???", "Select", "")
+        softKeyBarView?.setSoftkeyBarText("", "Select", "")
 
 
         return view
@@ -57,6 +57,12 @@ class AppMenuFragment : Fragment(), KeyEventHandler {
         listView = view.findViewById(R.id.app_list_view)
         gridView = view.findViewById(R.id.app_grid_view)
         updateViewMode()
+        // Select the first app by default
+        if (appMenuState?.layoutType == LayoutType.LIST) {
+            listView?.setSelection(0)
+        } else {
+            gridView?.setSelection(0)
+        }
     }
 
     private fun updateViewMode() {
@@ -66,6 +72,10 @@ class AppMenuFragment : Fragment(), KeyEventHandler {
             gridView?.visibility = View.GONE
             listView?.adapter = AppListAdapter(state.folders) { appItem ->
                 launchApp(appItem)
+            }
+            listView?.post {
+                listView?.setSelection(0)
+                listView?.requestFocus()
             }
             softKeyBarView?.setSoftkeyBarText(left = "Grid", middle = "Select", right = "")
         } else {
@@ -79,6 +89,10 @@ class AppMenuFragment : Fragment(), KeyEventHandler {
                     is com.ham.flipphonelauncher.model.FolderItem -> openFolderMenu(item)
                     is com.ham.flipphonelauncher.model.AppItem -> launchApp(item)
                 }
+            }
+            gridView?.post {
+                gridView?.setSelection(0)
+                gridView?.requestFocus()
             }
             softKeyBarView?.setSoftkeyBarText(left = "List", middle = "Select", right = "")
         }

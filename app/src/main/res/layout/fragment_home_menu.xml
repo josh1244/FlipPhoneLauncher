@@ -6,8 +6,10 @@
     <!-- Info Panel -->
     <com.ham.flipphonelauncher.ui.InfoPanelView
         android:id="@+id/info_panel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:paddingBottom="56dp" />
 
     <!-- Softkey bar anchored to bottom -->
     <com.ham.flipphonelauncher.ui.SoftkeyBarView
