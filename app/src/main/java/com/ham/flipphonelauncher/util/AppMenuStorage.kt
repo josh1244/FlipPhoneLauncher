@@ -109,8 +109,8 @@ object AppMenuStorage {
         val folderData = loadLauncherData(context)
         val folderIds = if (folderData.isNotEmpty()) folderData.keys.sorted() else (1..9).toList()
         val folderMap = folderIds.associateWith { id ->
-            val (name, apps) = folderData[id] ?: ("Group $id" to mutableListOf())
-            FolderItem(id, name, apps)
+            val (name, _) = folderData[id] ?: ("Group $id" to mutableListOf())
+            FolderItem(id, name, mutableListOf()) // Start with empty app list
         }.toMutableMap()
 
         // Build a map of appKey to ResolveInfo for fast lookup
@@ -134,30 +134,19 @@ object AppMenuStorage {
             }
         }
 
-
         appList = mutableListOf<AppItem>()
-        // To avoid ConcurrentModificationException, collect appDetails to add to each folder after iteration
         val folderAppDetailsToAdd = mutableMapOf<Int, MutableList<AppItem>>()
         for ((folderId, pair) in folderData) {
-            val (name, appItems) = pair
+            val (_, appItems) = pair
             for (appItem in appItems) {
                 val resolveInfo = appInfoMap[appItem.packageName + "/" + appItem.activityName]
-                val appLabel: CharSequence = if (resolveInfo != null) {
-                    // Use system label for normal apps
-                    resolveInfo.loadLabel(pm)
-                } else {
-                    appItem.label
+                if (resolveInfo != null) {
+                    val appLabel: CharSequence = resolveInfo.loadLabel(pm)
+                    val appIcon: android.graphics.drawable.Drawable = resolveInfo.loadIcon(pm)
+                    val appDetail = AppItem(appLabel, appIcon, appItem.packageName, appItem.activityName, folderId)
+                    appList.add(appDetail)
+                    folderAppDetailsToAdd.getOrPut(folderId) { mutableListOf() }.add(appDetail)
                 }
-                val appIcon: android.graphics.drawable.Drawable = if (resolveInfo != null) {
-                    resolveInfo.loadIcon(pm)
-                } else if (appItem.icon != null) {
-                    appItem.icon
-                } else {
-                    context.applicationInfo.loadIcon(pm)
-                }
-                val appDetail = AppItem(appLabel, appIcon, appItem.packageName, appItem.activityName, folderId)
-                appList.add(appDetail)
-                folderAppDetailsToAdd.getOrPut(folderId) { mutableListOf() }.add(appDetail)
             }
         }
         // Add any apps not in saved data to the correct folder if present in starter config, else last folder
