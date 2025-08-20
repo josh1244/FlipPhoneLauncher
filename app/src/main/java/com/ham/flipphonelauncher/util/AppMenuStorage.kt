@@ -149,9 +149,10 @@ object AppMenuStorage {
                 }
             }
         }
-        // Add any apps not in saved data to the correct folder if present in starter config, else last folder
+        // Add any apps not in saved data to the correct folder if present in starter config, else 8th folder
         val allSavedApps = folderData.values.flatMap { it.second.map { appItem -> appItem.packageName + "/" + appItem.activityName } }.toSet()
-        val lastFolderId = folderIds.last()
+        // Place new apps in the 8th folder if it exists, otherwise use the last folder
+        val lastFolderId = if (folderIds.size >= 8) folderIds[7] else folderIds.last()
         for (resolveInfo in appInfos) {
             val key = resolveInfo.activityInfo.packageName + "/" + resolveInfo.activityInfo.name
             if (key !in allSavedApps) {

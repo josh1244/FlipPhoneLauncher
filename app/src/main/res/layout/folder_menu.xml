@@ -3,14 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/folder_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textColor="@android:color/white"
-        android:layout_gravity="center_horizontal"
-        android:paddingBottom="8dp" />
 
     <GridView
         android:id="@+id/folder_app_grid"
@@ -19,7 +11,7 @@
         android:numColumns="3"
         android:verticalSpacing="8dp"
         android:horizontalSpacing="8dp"
-        android:visibility="gone"
-        android:paddingBottom="48dp" />
+        android:paddingBottom="40dp"
+        android:background="#242020" />
 
 </FrameLayout>

@@ -177,6 +177,15 @@ class HomeMenuFragment : Fragment(), KeyEventHandler {
             KeyEvent.KEYCODE_BACK -> {
                 return true
             }
+            KeyEvent.KEYCODE_CALL -> {
+                // Open recent calls
+                val intent = android.content.Intent().apply {
+                    setClassName("com.android.dialer", "com.android.dialer.app.calllog.CallLogActivity")
+                    addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK)
+                }
+                try { startActivity(intent) } catch (e: Exception) { android.util.Log.e("HomeMenuFragment", "CallLogActivity not found", e) }
+                return true
+            }
         }
         return false
     }

@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="0dp"
-    android:background="@drawable/app_item_selector">
+    android:background="@drawable/app_item_grid_selector">
 
 
     <ImageView
@@ -13,7 +13,8 @@
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_gravity="center"
-        android:contentDescription="@null" />
+        android:contentDescription="@null"
+        android:paddingTop="4dp" />
 
     <TextView
         android:id="@+id/app_name"

@@ -50,6 +50,10 @@ class AppMenuFragment : Fragment(), KeyEventHandler {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         appMenuState = AppMenuStorage.loadApplications(requireContext())
+        // Load saved grid/list mode preference
+        val prefs = requireContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val gridMode = prefs.getBoolean(KEY_GRID_MODE, false)
+        appMenuState = appMenuState?.copy(layoutType = if (gridMode) LayoutType.GRID else LayoutType.LIST)
         listView = view.findViewById(R.id.app_list_view)
         gridView = view.findViewById(R.id.app_grid_view)
         updateViewMode()
@@ -82,10 +86,14 @@ class AppMenuFragment : Fragment(), KeyEventHandler {
 
     private fun openFolderMenu(folder: com.ham.flipphonelauncher.model.FolderItem) {
         if (folder.apps.isEmpty()) return
-        val dialog = FolderMenuDialog(requireContext(), folder) { appItem ->
+        val fragment = FolderMenuFragment.newInstance(folder)
+        fragment.setOnAppClickListener { appItem ->
             launchApp(appItem)
         }
-        dialog.show()
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.home_fragment_container, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 
     private fun launchApp(appItem: com.ham.flipphonelauncher.model.AppItem) {
