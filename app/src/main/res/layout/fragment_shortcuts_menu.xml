@@ -5,8 +5,8 @@
     android:id="@+id/shortcuts_panel"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent"
-    android:paddingTop="16dp">
+    android:paddingTop="16dp"
+    android:background="#33000000">
 
 
     <GridLayout

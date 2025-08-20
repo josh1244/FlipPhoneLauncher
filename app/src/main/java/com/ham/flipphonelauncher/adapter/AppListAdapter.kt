@@ -9,8 +9,30 @@ class AppListAdapter(private val apps: List<AppItem>) : BaseAdapter() {
     override fun getCount() = apps.size
     override fun getItem(position: Int) = apps[position]
     override fun getItemId(position: Int) = position.toLong()
+
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        // TODO: Inflate and bind app list item view
-        TODO("Not yet implemented")
+        val viewHolder: ViewHolder
+        val view: View
+        if (convertView == null) {
+            view = android.view.LayoutInflater.from(parent?.context).inflate(
+                com.ham.flipphonelauncher.R.layout.app_item_list, parent, false)
+            viewHolder = ViewHolder(
+                view.findViewById(com.ham.flipphonelauncher.R.id.app_icon),
+                view.findViewById(com.ham.flipphonelauncher.R.id.app_name)
+            )
+            view.tag = viewHolder
+        } else {
+            view = convertView
+            viewHolder = view.tag as ViewHolder
+        }
+        val app = getItem(position)
+        viewHolder.icon.setImageDrawable(app.icon)
+        viewHolder.name.text = app.label
+        return view
     }
+
+    private data class ViewHolder(
+        val icon: android.widget.ImageView,
+        val name: android.widget.TextView
+    )
 }

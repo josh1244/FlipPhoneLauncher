@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <!-- TODO: Add ListView and GridView, show/hide based on state -->
+    android:layout_height="match_parent"
+    android:background="#33000000">
+
+    <ListView
+        android:id="@+id/app_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:paddingBottom="36dp" />
+
+    <GridView
+        android:id="@+id/app_grid_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:numColumns="3"
+        android:verticalSpacing="8dp"
+        android:horizontalSpacing="8dp"
+        android:visibility="gone"
+        android:paddingBottom="48dp" />
+
+    <!-- Softkey bar anchored to bottom -->
+    <com.ham.flipphonelauncher.ui.SoftkeyBarView
+        android:id="@+id/softkey_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom" />
+
+
 </FrameLayout>

@@ -22,6 +22,7 @@ import com.ham.flipphonelauncher.KeyEventHandler
 class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
     private var isActive: Boolean = true
     fun setActive(active: Boolean) { isActive = active }
+    
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {

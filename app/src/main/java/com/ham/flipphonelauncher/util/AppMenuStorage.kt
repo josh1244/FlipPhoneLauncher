@@ -13,90 +13,195 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.Color
 
 object AppMenuStorage {
-    private const val FILE_NAME = "app_menu_layout.json"
+    // Holds the list of folders in memory
+    private var folders: MutableList<FolderItem> = mutableListOf()
 
+    // Holds the list of apps in memory
+    private var appList: MutableList<AppItem> = mutableListOf()
 
-    /**
-     * Saves an AppMenuState to a JSON string in the format:
-     * {
-     *   "layoutType": "LIST",
-     *   "folders": { "1": { "name": ..., "apps": [ ... ] }, ... }
-     * }
-     */
-    fun save(state: AppMenuState): String {
-        val obj = JSONObject()
-        obj.put("layoutType", state.layoutType.name)
+    // Save all folder/app data as a single JSON object
+    private fun saveLauncherData(context: Context) {
+        val data = JSONObject()
         val foldersJson = JSONObject()
-        for (folder in state.folders) {
+        val seenApps = mutableSetOf<String>()
+        for (folder in folders) {
             val folderObj = JSONObject()
             folderObj.put("name", folder.name)
-            val appsArr = JSONArray()
+            val appsArray = JSONArray()
             for (app in folder.apps) {
                 val appKey = app.packageName + "/" + app.activityName
-                appsArr.put(appKey)
+                if (appKey !in seenApps) {
+                    val appObj = JSONObject()
+                    appObj.put("key", appKey)
+                    appObj.put("label", app.label.toString())
+                    // Try to save icon as base64 PNG (optional, fallback to null)
+                    try {
+                        val iconBitmap = (app.icon as? android.graphics.drawable.BitmapDrawable)?.bitmap
+                        if (iconBitmap != null) {
+                            val stream = java.io.ByteArrayOutputStream()
+                            iconBitmap.compress(android.graphics.Bitmap.CompressFormat.PNG, 100, stream)
+                            val iconBase64 = android.util.Base64.encodeToString(stream.toByteArray(), android.util.Base64.DEFAULT)
+                            appObj.put("icon", iconBase64)
+                        }
+                    } catch (_: Exception) {}
+                    appsArray.put(appObj)
+                    seenApps.add(appKey)
+                }
             }
-            folderObj.put("apps", appsArr)
-            foldersJson.put(folder.id, folderObj)
+            folderObj.put("apps", appsArray)
+            foldersJson.put(folder.id.toString(), folderObj)
         }
-        obj.put("folders", foldersJson)
-        return obj.toString(2) // pretty print
+        data.put("folders", foldersJson)
+        val prefs = context.getSharedPreferences("launcher_data", Context.MODE_PRIVATE)
+        prefs.edit().putString("folders_json", data.toString()).apply()
     }
 
-    /**
-     * Loads a JSON string in the format:
-     * {
-     *   "layoutType": "LIST",
-     *   "folders": { "1": { "name": ..., "apps": [ ... ] }, ... }
-     * }
-     * and converts it to AppMenuState.
-     * Uses placeholder label/icon for AppItem.
-     */
-    fun load(context: Context): AppMenuState? {
-        try {
-            val file = File(context.filesDir, FILE_NAME)
-            if (!file.exists()) return null
-            val json = file.readText()
-            val obj = JSONObject(json)
-            val layoutType = when (obj.optString("layoutType", "LIST")) {
-                "GRID" -> LayoutType.GRID
-                else -> LayoutType.LIST
-            }
-            val foldersJson = obj.getJSONObject("folders")
-            val folders = mutableListOf<FolderItem>()
-            val allApps = mutableListOf<AppItem>()
-            for (key in foldersJson.keys()) {
-                val folderObj = foldersJson.getJSONObject(key)
-                val name = folderObj.optString("name", "Group $key")
-                val appsArr = folderObj.getJSONArray("apps")
-                val apps = mutableListOf<AppItem>()
-                for (i in 0 until appsArr.length()) {
-                    val appStr = appsArr.optString(i)
-                    val parts = appStr.split("/", limit = 2)
-                    val pkg = parts.getOrNull(0) ?: ""
-                    val act = parts.getOrNull(1) ?: ""
-                    // Use a colored square as a placeholder icon
-                    val icon = ColorDrawable(Color.LTGRAY)
-                    val app = AppItem(
-                        label = appStr,
-                        icon = icon,
-                        packageName = pkg,
-                        activityName = act,
-                        folderId = key.toIntOrNull() ?: -1
-                    )
-                    apps.add(app)
-                    allApps.add(app)
+    // Load all folder/app data from the single JSON object
+    // Now returns: Map<folderId, Pair<folderName, List<Triple<appKey, label, iconBase64>>>>
+    private fun loadLauncherData(context: Context): MutableMap<Int, Pair<String, MutableList<AppItem>>> {
+        val prefs = context.getSharedPreferences("launcher_data", Context.MODE_PRIVATE)
+        val json = prefs.getString("folders_json", null) ?: return mutableMapOf()
+        val data = JSONObject(json)
+        val foldersJson = data.getJSONObject("folders")
+        val result = mutableMapOf<Int, Pair<String, MutableList<AppItem>>>()
+        for (key in foldersJson.keys()) {
+            val folderId = key.toIntOrNull() ?: continue
+            val folderObj = foldersJson.getJSONObject(key)
+            val name = folderObj.optString("name", "Group $key")
+            val arr = folderObj.getJSONArray("apps")
+            val apps = mutableListOf<Triple<String, String, String?>>()
+            for (i in 0 until arr.length()) {
+                val appObj = arr.optJSONObject(i)
+                if (appObj != null) {
+                    val appKey = appObj.optString("key")
+                    val label = appObj.optString("label", appKey)
+                    val iconBase64 = appObj.optString("icon", null)
+                    apps.add(Triple(appKey, label, iconBase64))
+                } else {
+                    // Backward compatibility: plain string
+                    val appKey = arr.optString(i)
+                    apps.add(Triple(appKey, appKey, null))
                 }
-                folders.add(FolderItem(id = key, name = name, apps = apps))
             }
-            return AppMenuState(
-                layoutType = layoutType,
-                folders = folders,
-                apps = allApps,
-                currentFolder = null
-            )
+            // Convert the list of Triple<String, String, String?> to MutableList<AppItem>
+            val appItems = apps.map { (appKey, label, iconBase64) ->
+                // You may need to provide default/fake icon and folderId here, as we don't have context or PackageManager
+                AppItem(
+                    label = label,
+                    icon = ColorDrawable(Color.TRANSPARENT), // Placeholder icon
+                    packageName = appKey.substringBefore("/"),
+                    activityName = appKey.substringAfter("/", ""),
+                    folderId = folderId
+                )
+            }.toMutableList()
+            result[folderId] = Pair(name, appItems)
+        }
+        return result
+    }
+
+    // Replace loadApplications to use the new structure
+    public fun loadApplications(context: Context): AppMenuState {
+        val pm = context.packageManager
+        val mainIntent = android.content.Intent(android.content.Intent.ACTION_MAIN, null)
+        mainIntent.addCategory(android.content.Intent.CATEGORY_LAUNCHER)
+        val appInfos: List<android.content.pm.ResolveInfo> = pm.queryIntentActivities(mainIntent, 0)
+
+        val folderData = loadLauncherData(context)
+        val folderIds = if (folderData.isNotEmpty()) folderData.keys.sorted() else (1..9).toList()
+        val folderMap = folderIds.associateWith { id ->
+            val (name, apps) = folderData[id] ?: ("Group $id" to mutableListOf())
+            FolderItem(id, name, apps)
+        }.toMutableMap()
+
+        // Build a map of appKey to ResolveInfo for fast lookup
+        val appInfoMap = appInfos.associateBy { it.activityInfo.packageName + "/" + it.activityInfo.name }
+
+        // --- Load starter config for new app placement ---
+        val starterConfig = getStarterConfig(context)
+        val starterAppToFolder: MutableMap<String, Int> = mutableMapOf()
+        if (starterConfig != null) {
+            val foldersJson = starterConfig.optJSONObject("folders")
+            if (foldersJson != null) {
+                for (key in foldersJson.keys()) {
+                    val folderId = key.toIntOrNull() ?: continue
+                    val folderObj = foldersJson.getJSONObject(key)
+                    val arr = folderObj.getJSONArray("apps")
+                    for (i in 0 until arr.length()) {
+                        val appKey = arr.getString(i)
+                        starterAppToFolder[appKey] = folderId
+                    }
+                }
+            }
+        }
+
+
+        appList = mutableListOf<AppItem>()
+        // To avoid ConcurrentModificationException, collect appDetails to add to each folder after iteration
+        val folderAppDetailsToAdd = mutableMapOf<Int, MutableList<AppItem>>()
+        for ((folderId, pair) in folderData) {
+            val (name, appItems) = pair
+            for (appItem in appItems) {
+                val resolveInfo = appInfoMap[appItem.packageName + "/" + appItem.activityName]
+                val appLabel: CharSequence = if (resolveInfo != null) {
+                    // Use system label for normal apps
+                    resolveInfo.loadLabel(pm)
+                } else {
+                    appItem.label
+                }
+                val appIcon: android.graphics.drawable.Drawable = if (resolveInfo != null) {
+                    resolveInfo.loadIcon(pm)
+                } else if (appItem.icon != null) {
+                    appItem.icon
+                } else {
+                    context.applicationInfo.loadIcon(pm)
+                }
+                val appDetail = AppItem(appLabel, appIcon, appItem.packageName, appItem.activityName, folderId)
+                appList.add(appDetail)
+                folderAppDetailsToAdd.getOrPut(folderId) { mutableListOf() }.add(appDetail)
+            }
+        }
+        // Add any apps not in saved data to the correct folder if present in starter config, else last folder
+        val allSavedApps = folderData.values.flatMap { it.second.map { appItem -> appItem.packageName + "/" + appItem.activityName } }.toSet()
+        val lastFolderId = folderIds.last()
+        for (resolveInfo in appInfos) {
+            val key = resolveInfo.activityInfo.packageName + "/" + resolveInfo.activityInfo.name
+            if (key !in allSavedApps) {
+                val folderId = starterAppToFolder[key] ?: lastFolderId
+                val label = resolveInfo.loadLabel(pm)
+                val icon = resolveInfo.loadIcon(pm)
+                val activityInfo = resolveInfo.activityInfo
+                val appDetail = AppItem(label, icon, activityInfo.packageName, activityInfo.name, folderId)
+                appList.add(appDetail)
+                folderAppDetailsToAdd.getOrPut(folderId) { mutableListOf() }.add(appDetail)
+            }
+        }
+        // Now add all collected appDetails to each folder's apps list
+        for ((folderId, appDetails) in folderAppDetailsToAdd) {
+            folderMap[folderId]?.apps?.addAll(appDetails)
+        }
+        folders = folderIds.map { folderMap[it] ?: FolderItem(it, "Group $it") }.toMutableList()
+        appList.sortBy { it.label.toString().lowercase(java.util.Locale.getDefault()) }
+
+        val prefs = context.getSharedPreferences("launcher_data", Context.MODE_PRIVATE)
+        val KEY_GRID_MODE = "grid_mode"
+        val layoutType = if (prefs.getBoolean(KEY_GRID_MODE, false)) LayoutType.GRID else LayoutType.LIST
+
+        return AppMenuState(layoutType, folders.toList(), appList.toList())
+    }
+
+    // Helper to get the starter config JSON from assets or a static string
+    private fun getStarterConfig(context: Context): JSONObject? {
+        // Load starter config from assets/starter_config.json
+        return try {
+            val inputStream = context.assets.open("starter_config.json")
+            val size = inputStream.available()
+            val buffer = ByteArray(size)
+            inputStream.read(buffer)
+            inputStream.close()
+            val json = String(buffer, Charsets.UTF_8)
+            JSONObject(json)
         } catch (e: Exception) {
-            e.printStackTrace()
-            return null
+            null
         }
     }
 }
