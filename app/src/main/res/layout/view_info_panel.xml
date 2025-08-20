@@ -29,7 +29,6 @@
         android:gravity="center"
         android:text="SUN, JAN 1"
         android:textColor="#FFFFFF"
-        android:textStyle="bold"
         android:fontFamily="sans-serif"
         android:includeFontPadding="false" />
 
