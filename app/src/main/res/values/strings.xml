@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">FlipPhoneLauncher</string>
+    <string name="shortcut_wifi">Wi-Fi</string>
+    <string name="shortcut_bluetooth">Bluetooth</string>
+    <string name="shortcut_dnd">DnD</string>
+    <string name="shortcut_brightness">Brightness</string>
 </resources>

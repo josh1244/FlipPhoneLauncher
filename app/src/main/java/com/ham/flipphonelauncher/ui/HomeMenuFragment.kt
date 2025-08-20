@@ -11,6 +11,9 @@ import com.ham.flipphonelauncher.ui.InfoPanelView
 import com.ham.flipphonelauncher.KeyEventHandler
 
 class HomeMenuFragment : Fragment(), KeyEventHandler {
+    private var isActive: Boolean = true
+    fun setActive(active: Boolean) { isActive = active }
+
     // UI references
     private var infoPanelView: InfoPanelView? = null
     private var softKeyBarView: SoftkeyBarView? = null
@@ -120,6 +123,8 @@ class HomeMenuFragment : Fragment(), KeyEventHandler {
     // --- Key event handling ---
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (!isActive) return false
+        
         // Dialer key mapping
         val dialerMap = mapOf(
             KeyEvent.KEYCODE_0 to "0",
@@ -177,6 +182,7 @@ class HomeMenuFragment : Fragment(), KeyEventHandler {
     }
 
     override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
+        if (!isActive) return false
         if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER || keyCode == KeyEvent.KEYCODE_ENTER) {
             isCenterHeld = false
             if (!centerConsumed) {

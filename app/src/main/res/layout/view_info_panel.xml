@@ -30,7 +30,8 @@
         android:text="SUN, JAN 1"
         android:textColor="#FFFFFF"
         android:fontFamily="sans-serif"
-        android:includeFontPadding="false" />
+        android:includeFontPadding="false"
+        android:paddingBottom="8dp" />
 
     <!-- Carrier -->
     <TextView

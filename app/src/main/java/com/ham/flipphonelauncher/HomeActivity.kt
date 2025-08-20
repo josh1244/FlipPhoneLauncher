@@ -13,6 +13,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.appcompat.app.AppCompatActivity
 import com.ham.flipphonelauncher.ui.HomeMenuFragment
+import com.ham.flipphonelauncher.ui.ShortcutsMenuFragment
 
 enum class LauncherState {
     HOME_MENU,
@@ -29,15 +30,24 @@ interface KeyEventHandler {
 class HomeActivity : AppCompatActivity() {
     private var currentMenuState: LauncherState = LauncherState.HOME_MENU
     private val REQUEST_READ_EXTERNAL_STORAGE = 1001
+    private var homeMenuFragment: HomeMenuFragment? = null
+    private var shortcutsMenuFragment: ShortcutsMenuFragment? = null
+    private var appMenuFragment: Fragment? = null
 
     override fun dispatchKeyEvent(event: KeyEvent): Boolean {
-        val fragment = supportFragmentManager.findFragmentById(R.id.home_fragment_container)
-        if (fragment != null && fragment is KeyEventHandler) {
-            return when (event.action) {
-                KeyEvent.ACTION_DOWN -> fragment.onKeyDown(event.keyCode, event)
-                KeyEvent.ACTION_UP -> fragment.onKeyUp(event.keyCode, event)
-                else -> super.dispatchKeyEvent(event)
+        // Only send key events to the active fragment
+        val activeFragment = when (currentMenuState) {
+            LauncherState.HOME_MENU -> homeMenuFragment
+            LauncherState.SHORTCUTS_MENU -> shortcutsMenuFragment
+            LauncherState.APP_MENU -> appMenuFragment
+        }
+        if (activeFragment is KeyEventHandler && activeFragment.isVisible) {
+            val handled = when (event.action) {
+                KeyEvent.ACTION_DOWN -> activeFragment.onKeyDown(event.keyCode, event)
+                KeyEvent.ACTION_UP -> activeFragment.onKeyUp(event.keyCode, event)
+                else -> false
             }
+            if (handled) return true
         }
         return super.dispatchKeyEvent(event)
     }
@@ -74,21 +84,9 @@ class HomeActivity : AppCompatActivity() {
         }
 
         // Draw wallpaper under the status bar
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
-            androidx.core.view.WindowCompat.setDecorFitsSystemWindows(window, false)
-            window.insetsController?.apply {
-                setSystemBarsAppearance(0, android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
-                // Set layout to draw behind status bar
-                hide(android.view.WindowInsets.Type.statusBars())
-                show(android.view.WindowInsets.Type.statusBars())
-            }
-        } else {
-            @Suppress("DEPRECATION")
-            window.statusBarColor = Color.TRANSPARENT
-            @Suppress("DEPRECATION")
-            window.decorView.systemUiVisibility =
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-        }
+        window.decorView.systemUiVisibility =
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        window.statusBarColor = Color.TRANSPARENT
 
         // Remove bottom system window inset padding (for physical button devices)
         window.decorView.setOnApplyWindowInsetsListener { v, insets ->
@@ -103,41 +101,69 @@ class HomeActivity : AppCompatActivity() {
 
 		setContentView(R.layout.activity_home)
 
-		if (savedInstanceState == null) {
-			supportFragmentManager.beginTransaction()
-				.replace(R.id.home_fragment_container, HomeMenuFragment())
-				.commit()
-		}
+        if (savedInstanceState == null) {
+            homeMenuFragment = HomeMenuFragment()
+            supportFragmentManager.beginTransaction()
+                .add(R.id.home_fragment_container, homeMenuFragment!!, "home")
+                .commit()
+        } else {
+            homeMenuFragment = supportFragmentManager.findFragmentByTag("home") as? HomeMenuFragment
+            shortcutsMenuFragment = supportFragmentManager.findFragmentByTag("shortcuts") as? ShortcutsMenuFragment
+            appMenuFragment = supportFragmentManager.findFragmentByTag("appmenu")
+        }
 	}
 
     fun updateState(newState: LauncherState) {
         if (currentMenuState == newState) return
-        currentMenuState = newState
-        val fragment = when (newState) {
-            LauncherState.HOME_MENU -> com.ham.flipphonelauncher.ui.HomeMenuFragment()
-            LauncherState.SHORTCUTS_MENU -> {
-                // TODO: Replace with your actual ShortcutsMenuFragment
-                try {
-                    val clazz = Class.forName("com.ham.flipphonelauncher.ui.ShortcutsMenuFragment")
-                    clazz.getDeclaredConstructor().newInstance() as? Fragment
-                        ?: com.ham.flipphonelauncher.ui.HomeMenuFragment() // fallback if cast fails
-                } catch (e: Exception) {
-                    com.ham.flipphonelauncher.ui.HomeMenuFragment() // fallback
+        val fm = supportFragmentManager
+        val transaction = fm.beginTransaction()
+
+        // Hide all fragments first
+        homeMenuFragment?.let { transaction.hide(it) }
+        shortcutsMenuFragment?.let { transaction.hide(it) }
+        appMenuFragment?.let { transaction.hide(it) }
+
+        when (newState) {
+            LauncherState.HOME_MENU -> {
+                if (homeMenuFragment == null) {
+                    homeMenuFragment = HomeMenuFragment()
+                    transaction.add(R.id.home_fragment_container, homeMenuFragment!!, "home")
+                } else {
+                    transaction.show(homeMenuFragment!!)
                 }
+                // Enable key events for home
+                homeMenuFragment?.setActive(true)
+            }
+            LauncherState.SHORTCUTS_MENU -> {
+                if (shortcutsMenuFragment == null) {
+                    shortcutsMenuFragment = ShortcutsMenuFragment()
+                    transaction.add(R.id.home_fragment_container, shortcutsMenuFragment!!, "shortcuts")
+                } else {
+                    transaction.show(shortcutsMenuFragment!!)
+                }
+                // Disable key events for home
+                homeMenuFragment?.setActive(false)
             }
             LauncherState.APP_MENU -> {
-                // TODO: Replace with your actual AppMenuFragment
-                try {
-                    val clazz = Class.forName("com.ham.flipphonelauncher.ui.AppMenuFragment")
-                    clazz.getDeclaredConstructor().newInstance() as? Fragment
-                        ?: com.ham.flipphonelauncher.ui.HomeMenuFragment() // fallback if cast fails
-                } catch (e: Exception) {
-                    com.ham.flipphonelauncher.ui.HomeMenuFragment() // fallback
+                if (appMenuFragment == null) {
+                    // TODO: Replace with your actual AppMenuFragment
+                    appMenuFragment = try {
+                        val clazz = Class.forName("com.ham.flipphonelauncher.ui.AppMenuFragment")
+                        clazz.getDeclaredConstructor().newInstance() as? Fragment
+                    } catch (e: Exception) {
+                        null
+                    }
+                    if (appMenuFragment != null) {
+                        transaction.add(R.id.home_fragment_container, appMenuFragment!!, "appmenu")
+                    }
+                } else {
+                    transaction.show(appMenuFragment!!)
                 }
+                // Disable key events for home
+                homeMenuFragment?.setActive(false)
             }
         }
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.home_fragment_container, fragment)
-            .commit()
+        transaction.commit()
+        currentMenuState = newState
     }
 }

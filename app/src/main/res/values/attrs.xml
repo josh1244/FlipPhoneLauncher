@@ -1,0 +1,7 @@
+<resources>
+    <declare-styleable name="ShortcutItemView">
+        <attr name="shortcutIcon" format="reference"/>
+        <attr name="shortcutLabel" format="string"/>
+        <attr name="shortcutContentDescription" format="string"/>
+    </declare-styleable>
+</resources>
