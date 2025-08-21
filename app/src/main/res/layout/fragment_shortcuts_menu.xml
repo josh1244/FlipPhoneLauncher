@@ -5,8 +5,7 @@
     android:id="@+id/shortcuts_panel"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="16dp"
-    android:background="#33000000">
+    android:paddingTop="16dp">
 
 
     <GridLayout
@@ -55,7 +54,11 @@
                 android:layout_height="wrap_content"
                 android:text="@string/shortcut_wifi"
                 android:textColor="@android:color/white"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:shadowColor="#CC000000"
+                android:shadowDx="0"
+                android:shadowDy="2"
+                android:shadowRadius="4" />
         </LinearLayout>
 
         <LinearLayout
@@ -92,7 +95,11 @@
                 android:layout_height="wrap_content"
                 android:text="@string/shortcut_bluetooth"
                 android:textColor="@android:color/white"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:shadowColor="#CC000000"
+                android:shadowDx="0"
+                android:shadowDy="2"
+                android:shadowRadius="4" />
         </LinearLayout>
 
         <LinearLayout
@@ -130,7 +137,11 @@
                 android:layout_height="wrap_content"
                 android:text="@string/shortcut_dnd"
                 android:textColor="@android:color/white"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:shadowColor="#CC000000"
+                android:shadowDx="0"
+                android:shadowDy="2"
+                android:shadowRadius="4" />
         </LinearLayout>
 
         <LinearLayout
@@ -167,7 +178,11 @@
                 android:layout_height="wrap_content"
                 android:text="@string/shortcut_brightness"
                 android:textColor="@android:color/white"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:shadowColor="#CC000000"
+                android:shadowDx="0"
+                android:shadowDy="2"
+                android:shadowRadius="4" />
         </LinearLayout>
 
     </GridLayout>

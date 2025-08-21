@@ -2,23 +2,50 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="8dp"
-    android:gravity="center_vertical"
-    android:background="@drawable/app_item_list_selector">
-
-    <ImageView
-        android:id="@+id/app_icon"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginEnd="8dp"
-        android:contentDescription="@null" />
+    android:orientation="vertical"
+    android:padding="0dp"
+    android:background="@android:color/transparent">
 
     <TextView
-        android:id="@+id/app_name"
-        android:layout_width="wrap_content"
+        android:id="@+id/header_text"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textColor="@android:color/white" />
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="4dp"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        android:visibility="gone"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/app_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:gravity="center_vertical"
+        android:background="@drawable/app_item_list_selector">
+
+        <ImageView
+            android:id="@+id/app_icon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@null" />
+
+        <TextView
+            android:id="@+id/app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:shadowColor="#CC000000"
+            android:shadowDx="0"
+            android:shadowDy="2"
+            android:shadowRadius="4" />
+
+    </LinearLayout>
 
 </LinearLayout>

@@ -146,7 +146,7 @@ class AppMenuFragment : Fragment(), KeyEventHandler {
             val digit = if (keyCode == KeyEvent.KEYCODE_0) 0 else keyCode - KeyEvent.KEYCODE_1 + 1
             numberInputBuffer += digit.toString()
             if (numberInputBuffer.length == 1) {
-                // Select folder or launch if only one app
+                // Select first app in folder or launch if only one app
                 val folderIdx = digit
                 if (folderIdx in 1..state.folders.size) {
                     val folder = state.folders[folderIdx - 1]
@@ -155,16 +155,14 @@ class AppMenuFragment : Fragment(), KeyEventHandler {
                         numberInputBuffer = ""
                         return true
                     } else {
-                        // Find the position of the folder in the list adapter
+                        // Find the position of the first app in the folder in the list adapter
                         val adapter = listView?.adapter
                         for (i in 0 until (adapter?.count ?: 0)) {
                             val item = adapter?.getItem(i)
-                            val folderClass = item?.javaClass?.simpleName
-                            if (folderClass == "NumberedFolder" || folderClass == "AppListAdapter\$NumberedFolder") {
-                                val folderField = item.javaClass.getDeclaredField("folderIndex")
-                                folderField.isAccessible = true
-                                val idx = folderField.get(item) as Int
-                                if (idx == folderIdx) {
+                            // AppListAdapter exposes only AppItem, so check folderId and index
+                            if (item is com.ham.flipphonelauncher.model.AppItem) {
+                                val app = item
+                                if (app.folderId == folder.id && folder.apps.isNotEmpty() && app == folder.apps[0]) {
                                     listView?.setSelection(i)
                                     break
                                 }
@@ -173,31 +171,17 @@ class AppMenuFragment : Fragment(), KeyEventHandler {
                     }
                 }
             } else if (numberInputBuffer.length == 2) {
-                // Launch app in folder
+                // Launch app in folder (flat list)
                 val folderIdx = numberInputBuffer[0].digitToIntOrNull() ?: 0
                 val appIdx = numberInputBuffer[1].digitToIntOrNull() ?: 0
-                val adapter = listView?.adapter
-                for (i in 0 until (adapter?.count ?: 0)) {
-                    val item = adapter?.getItem(i)
-                    val appClass = item?.javaClass?.simpleName
-                    if (appClass == "NumberedApp" || appClass == "AppListAdapter\$NumberedApp") {
-                        val folderField = item.javaClass.getDeclaredField("folderIndex")
-                        val appField = item.javaClass.getDeclaredField("appIndex")
-                        folderField.isAccessible = true
-                        appField.isAccessible = true
-                        val idx = folderField.get(item) as Int
-                        val aidx = appField.get(item) as Int
-                        if (idx == folderIdx && aidx == appIdx) {
-                            // Launch
-                            val appFieldObj = item.javaClass.getDeclaredField("app")
-                            appFieldObj.isAccessible = true
-                            val appItem = appFieldObj.get(item) as? com.ham.flipphonelauncher.model.AppItem
-                            if (appItem != null) {
-                                launchApp(appItem)
-                                numberInputBuffer = ""
-                                return true
-                            }
-                        }
+                val stateFolders = state.folders
+                if (folderIdx in 1..stateFolders.size) {
+                    val folder = stateFolders[folderIdx - 1]
+                    if (appIdx in 1..folder.apps.size) {
+                        val app = folder.apps[appIdx - 1]
+                        launchApp(app)
+                        numberInputBuffer = ""
+                        return true
                     }
                 }
                 // Reset buffer after attempt
