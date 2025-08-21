@@ -44,10 +44,7 @@ class FolderMenuFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_app_menu, container, false)
         gridView = view.findViewById(R.id.app_grid_view)
-        
         softKeyBarView = view.findViewById(R.id.softkey_bar)
-        softKeyBarView?.setSoftkeyBarText("", "Select", "")
-
         return view
     }
 
@@ -87,16 +84,59 @@ class FolderMenuFragment : Fragment() {
         // Ensure the gridView is focusable to receive dpad and key events
         gridView?.isFocusableInTouchMode = true
         gridView?.requestFocus()
-        // Add number key navigation for folder grid
+
+        // Listen for selection changes to update softkey
+        gridView?.setOnItemSelectedListener(object : android.widget.AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: android.widget.AdapterView<*>, view: View?, position: Int, id: Long) {
+                updateSoftkeyForSelection()
+            }
+            override fun onNothingSelected(parent: android.widget.AdapterView<*>) {
+                updateSoftkeyForSelection()
+            }
+        })
+        updateSoftkeyForSelection()
+
+        // Add number key navigation for folder grid and handle softkey right
         gridView?.setOnKeyListener { _, keyCode, event ->
-            if (event.action == android.view.KeyEvent.ACTION_DOWN && keyCode in android.view.KeyEvent.KEYCODE_1..android.view.KeyEvent.KEYCODE_9) {
-                val idx = keyCode - android.view.KeyEvent.KEYCODE_1
-                if (idx in folder.apps.indices) {
-                    onAppClick?.invoke(folder.apps[idx])
-                    return@setOnKeyListener true
+            if (event.action == android.view.KeyEvent.ACTION_DOWN) {
+                if (keyCode in android.view.KeyEvent.KEYCODE_1..android.view.KeyEvent.KEYCODE_9) {
+                    val idx = keyCode - android.view.KeyEvent.KEYCODE_1
+                    if (idx in folder.apps.indices) {
+                        onAppClick?.invoke(folder.apps[idx])
+                        return@setOnKeyListener true
+                    }
+                } else if (keyCode == android.view.KeyEvent.KEYCODE_SOFT_RIGHT) {
+                    // Open app settings for selected app
+                    val pos = gridView?.selectedItemPosition ?: -1
+                    if (pos in folder.apps.indices) {
+                        openAppSettings(folder.apps[pos])
+                        return@setOnKeyListener true
+                    }
                 }
             }
             false
+        }
+    }
+
+    private fun updateSoftkeyForSelection() {
+        val pos = gridView?.selectedItemPosition ?: -1
+        val adapter = gridView?.adapter
+        val item = if (pos >= 0 && adapter != null && adapter.count > pos) adapter.getItem(pos) else null
+        if (item is AppItem) {
+            softKeyBarView?.setSoftkeyBarText(left = "", middle = "Select", right = "More")
+        } else {
+            softKeyBarView?.setSoftkeyBarText(left = "", middle = "Select", right = "")
+        }
+    }
+
+    private fun openAppSettings(appItem: AppItem) {
+        try {
+            val intent = android.content.Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+            intent.data = android.net.Uri.parse("package:" + appItem.packageName)
+            intent.flags = android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+        } catch (e: Exception) {
+            android.widget.Toast.makeText(requireContext(), "Unable to open app settings", android.widget.Toast.LENGTH_SHORT).show()
         }
     }
 
