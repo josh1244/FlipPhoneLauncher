@@ -136,8 +136,8 @@ class AppMenuFragment : Fragment(), KeyEventHandler {
         if (!isActive) return false
         
         val state = appMenuState ?: return false
-        // Handle number key navigation in LIST mode
-        if (state.layoutType == LayoutType.LIST && keyCode in KeyEvent.KEYCODE_0..KeyEvent.KEYCODE_9) {
+        // Handle number key navigation in LIST or GRID mode
+        if ((state.layoutType == LayoutType.LIST || state.layoutType == LayoutType.GRID) && keyCode in KeyEvent.KEYCODE_0..KeyEvent.KEYCODE_9) {
             val now = System.currentTimeMillis()
             if (now - numberInputTime > numberInputTimeoutMs) {
                 numberInputBuffer = ""
@@ -146,7 +146,7 @@ class AppMenuFragment : Fragment(), KeyEventHandler {
             val digit = if (keyCode == KeyEvent.KEYCODE_0) 0 else keyCode - KeyEvent.KEYCODE_1 + 1
             numberInputBuffer += digit.toString()
             if (numberInputBuffer.length == 1) {
-                // Select first app in folder or launch if only one app
+                // List: select first app or launch if only one app. Grid: open folder if multiple, launch if only one.
                 val folderIdx = digit
                 if (folderIdx in 1..state.folders.size) {
                     val folder = state.folders[folderIdx - 1]
@@ -155,18 +155,24 @@ class AppMenuFragment : Fragment(), KeyEventHandler {
                         numberInputBuffer = ""
                         return true
                     } else {
-                        // Find the position of the first app in the folder in the list adapter
-                        val adapter = listView?.adapter
-                        for (i in 0 until (adapter?.count ?: 0)) {
-                            val item = adapter?.getItem(i)
-                            // AppListAdapter exposes only AppItem, so check folderId and index
-                            if (item is com.ham.flipphonelauncher.model.AppItem) {
-                                val app = item
-                                if (app.folderId == folder.id && folder.apps.isNotEmpty() && app == folder.apps[0]) {
-                                    listView?.setSelection(i)
-                                    break
+                        if (state.layoutType == LayoutType.LIST) {
+                            // Find the position of the first app in the folder in the list adapter
+                            val adapter = listView?.adapter
+                            for (i in 0 until (adapter?.count ?: 0)) {
+                                val item = adapter?.getItem(i)
+                                if (item is com.ham.flipphonelauncher.model.AppItem) {
+                                    val app = item
+                                    if (app.folderId == folder.id && folder.apps.isNotEmpty() && app == folder.apps[0]) {
+                                        listView?.setSelection(i)
+                                        break
+                                    }
                                 }
                             }
+                        } else if (state.layoutType == LayoutType.GRID) {
+                            // Open the folder menu for multi-app folders
+                            openFolderMenu(folder)
+                            numberInputBuffer = ""
+                            return true
                         }
                     }
                 }

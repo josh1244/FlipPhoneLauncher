@@ -83,6 +83,21 @@ class FolderMenuFragment : Fragment() {
         gridView?.setOnItemClickListener { _, _, position, _ ->
             onAppClick?.invoke(folder.apps[position])
         }
+
+        // Ensure the gridView is focusable to receive dpad and key events
+        gridView?.isFocusableInTouchMode = true
+        gridView?.requestFocus()
+        // Add number key navigation for folder grid
+        gridView?.setOnKeyListener { _, keyCode, event ->
+            if (event.action == android.view.KeyEvent.ACTION_DOWN && keyCode in android.view.KeyEvent.KEYCODE_1..android.view.KeyEvent.KEYCODE_9) {
+                val idx = keyCode - android.view.KeyEvent.KEYCODE_1
+                if (idx in folder.apps.indices) {
+                    onAppClick?.invoke(folder.apps[idx])
+                    return@setOnKeyListener true
+                }
+            }
+            false
+        }
     }
 
     fun setOnAppClickListener(listener: (AppItem) -> Unit) {
