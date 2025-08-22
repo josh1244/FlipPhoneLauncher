@@ -137,35 +137,42 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
                 startActivity(intent)
                 return@setOnClickListener
             }
-            val audioManager = requireContext().getSystemService(Context.AUDIO_SERVICE) as AudioManager
-            val dndStates = listOf("All", "Vibrate", "Priority", "None")
-            val sharedPref = requireContext().getSharedPreferences("dnd_toggle", Context.MODE_PRIVATE)
-            val currentIndex = sharedPref.getInt("dnd_index", 0)
-            val newIndex = (currentIndex + 1) % dndStates.size
-            val newState = dndStates[newIndex]
-            sharedPref.edit().putInt("dnd_index", newIndex).apply()
-            when (newState) {
-                "All" -> {
-                    notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_ALL)
-                    audioManager.ringerMode = AudioManager.RINGER_MODE_NORMAL
+                val audioManager = requireContext().getSystemService(Context.AUDIO_SERVICE) as AudioManager
+                val dndStates = listOf("All", "Vibrate", "Priority", "None")
+                val dndIcons = listOf(
+                    R.drawable.ic_dnd_all,
+                    R.drawable.ic_dnd_vibrate,
+                    R.drawable.ic_dnd_priority,
+                    R.drawable.ic_dnd_none
+                )
+                val sharedPref = requireContext().getSharedPreferences("dnd_toggle", Context.MODE_PRIVATE)
+                val currentIndex = sharedPref.getInt("dnd_index", 0)
+                val newIndex = (currentIndex + 1) % dndStates.size
+                val newState = dndStates[newIndex]
+                sharedPref.edit().putInt("dnd_index", newIndex).apply()
+                when (newState) {
+                    "All" -> {
+                        notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_ALL)
+                        audioManager.ringerMode = AudioManager.RINGER_MODE_NORMAL
+                    }
+                    "Vibrate" -> {
+                        notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_ALL)
+                        audioManager.ringerMode = AudioManager.RINGER_MODE_VIBRATE
+                    }
+                    "Priority" -> {
+                        notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY)
+                        audioManager.ringerMode = AudioManager.RINGER_MODE_NORMAL
+                    }
+                    "None" -> {
+                        notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_NONE)
+                        audioManager.ringerMode = AudioManager.RINGER_MODE_SILENT
+                    }
                 }
-                "Vibrate" -> {
-                    notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_ALL)
-                    audioManager.ringerMode = AudioManager.RINGER_MODE_VIBRATE
-                }
-                "Priority" -> {
-                    notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY)
-                    audioManager.ringerMode = AudioManager.RINGER_MODE_NORMAL
-                }
-                "None" -> {
-                    notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_NONE)
-                    audioManager.ringerMode = AudioManager.RINGER_MODE_SILENT
-                }
-            }
-            val dndTextView = shortcutsPanel.findViewById<TextView>(R.id.shortcut_dnd_label)
-            dndTextView?.text = newState
-            shortcutButtons[2].setBackgroundResource(if (newState != "All") R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-            setShortcutIconTint(2, newState != "All")
+                val dndTextView = shortcutsPanel.findViewById<TextView>(R.id.shortcut_dnd_label)
+                dndTextView?.text = newState
+                shortcutButtons[2].setBackgroundResource(if (newState != "All" && newState != "Vibrate") R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+                setShortcutIconTint(2, newState != "All" && newState != "Vibrate")
+                shortcutButtons[2].setImageResource(dndIcons[newIndex])
         }
         // Long-press DnD: open Do Not Disturb settings
         shortcutButtons[2].setOnLongClickListener {
@@ -211,9 +218,16 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
             filter == android.app.NotificationManager.INTERRUPTION_FILTER_NONE -> "None"
             else -> "All"
         }
-        dndTextView?.text = dndLabel
-        shortcutButtons[2].setBackgroundResource(if (dndLabel != "All") R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-        setShortcutIconTint(2, dndLabel != "All")
+            val dndIcons = mapOf(
+                "All" to R.drawable.ic_dnd_all,
+                "Vibrate" to R.drawable.ic_dnd_vibrate,
+                "Priority" to R.drawable.ic_dnd_priority,
+                "None" to R.drawable.ic_dnd_none
+            )
+            dndTextView?.text = dndLabel
+            shortcutButtons[2].setBackgroundResource(if (dndLabel != "All") R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+            setShortcutIconTint(2, dndLabel != "All")
+            shortcutButtons[2].setImageResource(dndIcons[dndLabel] ?: R.drawable.ic_dnd_none)
     }
 
 
