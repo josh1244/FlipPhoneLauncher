@@ -8,6 +8,8 @@ import android.view.View
 import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -15,11 +17,13 @@ import androidx.appcompat.app.AppCompatActivity
 import com.ham.flipphonelauncher.ui.HomeMenuFragment
 import com.ham.flipphonelauncher.ui.ShortcutsMenuFragment
 import com.ham.flipphonelauncher.ui.AppMenuFragment
+import com.ham.flipphonelauncher.ui.FolderMenuFragment
 
 enum class LauncherState {
     HOME_MENU,
     SHORTCUTS_MENU,
-    APP_MENU
+    APP_MENU,
+    FOLDER_MENU
 }
 
 // Interface for fragments to handle key events
@@ -34,6 +38,14 @@ class HomeActivity : AppCompatActivity() {
     private var homeMenuFragment: HomeMenuFragment? = null
     private var shortcutsMenuFragment: ShortcutsMenuFragment? = null
     private var appMenuFragment: AppMenuFragment? = null
+    private var folderMenuFragment: FolderMenuFragment? = null
+    private var wallpaperDrawable: Drawable = ColorDrawable(Color.BLACK)
+
+    override fun onResume() {
+        super.onResume()
+        // Always return to home menu on resume
+        updateState(LauncherState.HOME_MENU)
+    }
 
     override fun dispatchKeyEvent(event: KeyEvent): Boolean {
         // Only send key events to the active fragment
@@ -41,6 +53,7 @@ class HomeActivity : AppCompatActivity() {
             LauncherState.HOME_MENU -> homeMenuFragment
             LauncherState.SHORTCUTS_MENU -> shortcutsMenuFragment
             LauncherState.APP_MENU -> appMenuFragment
+            LauncherState.FOLDER_MENU -> folderMenuFragment
         }
         if (activeFragment is KeyEventHandler && activeFragment.isVisible) {
             val handled = when (event.action) {
@@ -57,7 +70,7 @@ class HomeActivity : AppCompatActivity() {
     private fun setWallpaperBackground() {
         val wallpaperManager = WallpaperManager.getInstance(this)
         try {
-            val wallpaperDrawable = wallpaperManager.drawable
+            wallpaperDrawable = wallpaperManager.drawable ?: ColorDrawable(Color.BLACK)
             window.setBackgroundDrawable(wallpaperDrawable)
         } catch (e: SecurityException) {
             e.printStackTrace()
@@ -104,13 +117,21 @@ class HomeActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             homeMenuFragment = HomeMenuFragment()
-            supportFragmentManager.beginTransaction()
-                .add(R.id.home_fragment_container, homeMenuFragment!!, "home")
-                .commit()
+            shortcutsMenuFragment = ShortcutsMenuFragment()
+            appMenuFragment = AppMenuFragment()
+            folderMenuFragment = null
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.add(R.id.home_fragment_container, homeMenuFragment!!, "home")
+            transaction.add(R.id.home_fragment_container, shortcutsMenuFragment!!, "shortcuts")
+            transaction.add(R.id.home_fragment_container, appMenuFragment!!, "appmenu")
+            transaction.hide(shortcutsMenuFragment!!)
+            transaction.hide(appMenuFragment!!)
+            transaction.commit()
         } else {
             homeMenuFragment = supportFragmentManager.findFragmentByTag("home") as? HomeMenuFragment
             shortcutsMenuFragment = supportFragmentManager.findFragmentByTag("shortcuts") as? ShortcutsMenuFragment
             appMenuFragment = supportFragmentManager.findFragmentByTag("appmenu") as? AppMenuFragment
+            folderMenuFragment = supportFragmentManager.findFragmentByTag("foldermenu") as? com.ham.flipphonelauncher.ui.FolderMenuFragment
         }
 	}
 
@@ -123,46 +144,72 @@ class HomeActivity : AppCompatActivity() {
         homeMenuFragment?.let { transaction.hide(it) }
         shortcutsMenuFragment?.let { transaction.hide(it) }
         appMenuFragment?.let { transaction.hide(it) }
+        folderMenuFragment?.let { transaction.hide(it) }
 
         when (newState) {
             LauncherState.HOME_MENU -> {
-                if (homeMenuFragment == null) {
-                    homeMenuFragment = HomeMenuFragment()
-                    transaction.add(R.id.home_fragment_container, homeMenuFragment!!, "home")
-                } else {
-                    transaction.show(homeMenuFragment!!)
-                }
-                // Enable key events for home
+                window.setBackgroundDrawable(wallpaperDrawable)
+                transaction.show(homeMenuFragment!!)
                 homeMenuFragment?.setActive(true)
                 shortcutsMenuFragment?.setActive(false)
                 appMenuFragment?.setActive(false)
+                folderMenuFragment?.setActive(false)
             }
             LauncherState.SHORTCUTS_MENU -> {
-                if (shortcutsMenuFragment == null) {
-                    shortcutsMenuFragment = ShortcutsMenuFragment()
-                    transaction.add(R.id.home_fragment_container, shortcutsMenuFragment!!, "shortcuts")
-                } else {
-                    transaction.show(shortcutsMenuFragment!!)
-                }
-                // Disable key events for home
+                window.setBackgroundDrawable(wallpaperDrawable)
+                transaction.show(shortcutsMenuFragment!!)
                 homeMenuFragment?.setActive(false)
                 shortcutsMenuFragment?.setActive(true)
                 appMenuFragment?.setActive(false)
+                folderMenuFragment?.setActive(false)
             }
             LauncherState.APP_MENU -> {
-                if (appMenuFragment == null) {
-                    appMenuFragment = AppMenuFragment()
-                    transaction.add(R.id.home_fragment_container, appMenuFragment!!, "appmenu")
-                } else {
-                    transaction.show(appMenuFragment!!)
-                }
-                // Disable key events for home
+                window.setBackgroundDrawable(ColorDrawable(Color.BLACK))
+                transaction.show(appMenuFragment!!)
                 homeMenuFragment?.setActive(false)
                 shortcutsMenuFragment?.setActive(false)
                 appMenuFragment?.setActive(true)
+                folderMenuFragment?.setActive(false)
+            }
+            LauncherState.FOLDER_MENU -> {
+                window.setBackgroundDrawable(ColorDrawable(Color.BLACK))
+                if (folderMenuFragment != null) {
+                    transaction.show(folderMenuFragment!!)
+                    folderMenuFragment?.setActive(true)
+                }
+                homeMenuFragment?.setActive(false)
+                shortcutsMenuFragment?.setActive(false)
+                appMenuFragment?.setActive(false)
             }
         }
+
         transaction.commit()
         currentMenuState = newState
+    }
+
+    fun showFolderMenu(folder: com.ham.flipphonelauncher.model.FolderItem) {
+        val fm = supportFragmentManager
+        val existing = folderMenuFragment
+        if (existing != null) {
+            fm.beginTransaction().remove(existing).commitNowAllowingStateLoss()
+        }
+        val fragment = com.ham.flipphonelauncher.ui.FolderMenuFragment.newInstance(folder)
+        fragment.setOnAppClickListener { appItem ->
+            appMenuFragment?.launchApp(appItem)
+        }
+        folderMenuFragment = fragment
+        fm.beginTransaction()
+            .add(R.id.home_fragment_container, fragment, "foldermenu")
+            .hide(appMenuFragment!!)
+            .commit()
+        updateState(LauncherState.FOLDER_MENU)
+    }
+
+    fun hideFolderMenu() {
+        folderMenuFragment?.let {
+            supportFragmentManager.beginTransaction().remove(it).commit()
+            folderMenuFragment = null
+        }
+        updateState(LauncherState.APP_MENU)
     }
 }

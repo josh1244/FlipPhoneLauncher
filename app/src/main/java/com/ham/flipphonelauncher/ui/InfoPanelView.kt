@@ -26,6 +26,7 @@ class InfoPanelView @JvmOverloads constructor(
     private val timeTextView: TextView
     private val dateTextView: TextView
     private val carrierTextView: TextView
+    private var carrierRetryRunnable: Runnable? = null
 
     init {
         LayoutInflater.from(context).inflate(R.layout.view_info_panel, this, true)
@@ -67,9 +68,34 @@ class InfoPanelView @JvmOverloads constructor(
         try {
             val tm = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
             val carrier = tm.networkOperatorName
-            carrierTextView.text = if (carrier.isNullOrBlank()) "No Service" else carrier
+            if (carrier.isNullOrBlank()) {
+                carrierTextView.text = "No Service"
+                // Schedule a retry after 60 seconds if not already scheduled
+                if (carrierRetryRunnable == null) {
+                    carrierRetryRunnable = Runnable {
+                        carrierRetryRunnable = null
+                        showCarrierName()
+                    }
+                    handler.postDelayed(carrierRetryRunnable!!, 60000)
+                }
+            } else {
+                carrierTextView.text = carrier
+                // Cancel any pending retry if carrier is available
+                carrierRetryRunnable?.let {
+                    handler.removeCallbacks(it)
+                    carrierRetryRunnable = null
+                }
+            }
         } catch (e: Exception) {
             carrierTextView.text = "No Service"
+            // Schedule a retry after 60 seconds if not already scheduled
+            if (carrierRetryRunnable == null) {
+                carrierRetryRunnable = Runnable {
+                    carrierRetryRunnable = null
+                    showCarrierName()
+                }
+                handler.postDelayed(carrierRetryRunnable!!, 60000)
+            }
         }
     }
 
@@ -80,5 +106,9 @@ class InfoPanelView @JvmOverloads constructor(
 
     fun onPause() {
         handler.removeCallbacks(timeUpdateRunnable)
+        carrierRetryRunnable?.let {
+            handler.removeCallbacks(it)
+            carrierRetryRunnable = null
+        }
     }
 }

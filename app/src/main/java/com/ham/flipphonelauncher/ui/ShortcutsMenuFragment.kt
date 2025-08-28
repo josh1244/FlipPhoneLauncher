@@ -21,12 +21,29 @@ import com.ham.flipphonelauncher.KeyEventHandler
 
 class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
     private var isActive: Boolean = true
-    fun setActive(active: Boolean) { isActive = active }
+    fun setActive(active: Boolean) {
+        isActive = active
+        if (active) {
+            selectedShortcutIndex = 0
+            if (this::shortcutButtons.isInitialized && this::shortcutOverlays.isInitialized) {
+                updateShortcutFocus()
+            }
+        }
+    }
     
+    override fun onResume() {
+        super.onResume()
+        if (isActive) {
+            (activity as? com.ham.flipphonelauncher.HomeActivity)?.updateState(com.ham.flipphonelauncher.LauncherState.HOME_MENU)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_shortcuts_menu, container, false)
+    val view = inflater.inflate(R.layout.fragment_shortcuts_menu, container, false)
+        // Reset shortcut selection when menu is opened
+        selectedShortcutIndex = 0
 
         softKeyBarView = view.findViewById(R.id.softkey_bar)
         softKeyBarView?.setSoftkeyBarText("", "Select", "")

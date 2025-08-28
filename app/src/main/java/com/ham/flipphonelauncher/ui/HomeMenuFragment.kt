@@ -28,6 +28,22 @@ class HomeMenuFragment : Fragment(), KeyEventHandler {
     private var isCenterHeld = false
     private var centerConsumed = false
 
+    // Dialer key mapping
+    private val dialerMap = mapOf(
+        KeyEvent.KEYCODE_0 to "0",
+        KeyEvent.KEYCODE_1 to "1",
+        KeyEvent.KEYCODE_2 to "2",
+        KeyEvent.KEYCODE_3 to "3",
+        KeyEvent.KEYCODE_4 to "4",
+        KeyEvent.KEYCODE_5 to "5",
+        KeyEvent.KEYCODE_6 to "6",
+        KeyEvent.KEYCODE_7 to "7",
+        KeyEvent.KEYCODE_8 to "8",
+        KeyEvent.KEYCODE_9 to "9",
+        KeyEvent.KEYCODE_STAR to "*",
+        KeyEvent.KEYCODE_POUND to "#"
+    )
+
     // SharedPreferences for D-pad shortcuts
     private val prefs by lazy {
         requireContext().getSharedPreferences(PREFS_NAME, android.content.Context.MODE_PRIVATE)
@@ -125,21 +141,7 @@ class HomeMenuFragment : Fragment(), KeyEventHandler {
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         if (!isActive) return false
         
-        // Dialer key mapping
-        val dialerMap = mapOf(
-            KeyEvent.KEYCODE_0 to "0",
-            KeyEvent.KEYCODE_1 to "1",
-            KeyEvent.KEYCODE_2 to "2",
-            KeyEvent.KEYCODE_3 to "3",
-            KeyEvent.KEYCODE_4 to "4",
-            KeyEvent.KEYCODE_5 to "5",
-            KeyEvent.KEYCODE_6 to "6",
-            KeyEvent.KEYCODE_7 to "7",
-            KeyEvent.KEYCODE_8 to "8",
-            KeyEvent.KEYCODE_9 to "9",
-            KeyEvent.KEYCODE_STAR to "*",
-            KeyEvent.KEYCODE_POUND to "#"
-        )
+
 
         when (keyCode) {
             KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER -> {
@@ -153,17 +155,8 @@ class HomeMenuFragment : Fragment(), KeyEventHandler {
                 // Let onKeyUp handle launching or picker
                 return false
             }
-            KeyEvent.KEYCODE_SOFT_LEFT -> {
-                val intent = android.content.Intent().apply {
-                    setClassName("com.android.systemui", "com.android.systemui.launcher3.NotificationActivity")
-                    addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK)
-                }
-                try { startActivity(intent) } catch (e: Exception) { android.util.Log.e("HomeMenuFragment", "NotificationActivity not found", e) }
-                return true
-            }
-            KeyEvent.KEYCODE_SOFT_RIGHT -> {
-                (activity as? com.ham.flipphonelauncher.HomeActivity)?.updateState(com.ham.flipphonelauncher.LauncherState.SHORTCUTS_MENU)
-                return true
+            KeyEvent.KEYCODE_SOFT_LEFT, KeyEvent.KEYCODE_SOFT_RIGHT -> {
+                return false
             }
             in dialerMap.keys -> {
                 val digit = dialerMap[keyCode] ?: return false
@@ -209,6 +202,20 @@ class HomeMenuFragment : Fragment(), KeyEventHandler {
                 return true
             } else {
                 launchDpadShortcut(keyCode)
+                return true
+            }
+        }
+        when (keyCode) {
+            KeyEvent.KEYCODE_SOFT_LEFT -> {
+                val intent = android.content.Intent().apply {
+                    setClassName("com.android.systemui", "com.android.systemui.launcher3.NotificationActivity")
+                    addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK)
+                }
+                try { startActivity(intent) } catch (e: Exception) { android.util.Log.e("HomeMenuFragment", "NotificationActivity not found", e) }
+                return true
+            }
+            KeyEvent.KEYCODE_SOFT_RIGHT -> {
+                (activity as? com.ham.flipphonelauncher.HomeActivity)?.updateState(com.ham.flipphonelauncher.LauncherState.SHORTCUTS_MENU)
                 return true
             }
         }

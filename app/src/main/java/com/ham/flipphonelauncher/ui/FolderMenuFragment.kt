@@ -12,6 +12,8 @@ import com.ham.flipphonelauncher.model.FolderItem
 import com.ham.flipphonelauncher.model.AppItem
 
 class FolderMenuFragment : Fragment() {
+    private var isActive: Boolean = false
+    fun setActive(active: Boolean) { isActive = active }
     private var folder: FolderItem? = null
     private var onAppClick: ((AppItem) -> Unit)? = null
     private var gridView: GridView? = null
@@ -112,6 +114,9 @@ class FolderMenuFragment : Fragment() {
                         openAppSettings(folder.apps[pos])
                         return@setOnKeyListener true
                     }
+                } else if (keyCode == android.view.KeyEvent.KEYCODE_BACK) {
+                    (activity as? com.ham.flipphonelauncher.HomeActivity)?.hideFolderMenu()
+                    return@setOnKeyListener true
                 }
             }
             false

@@ -11,6 +11,16 @@ import com.ham.flipphonelauncher.model.AppItem
 import com.ham.flipphonelauncher.model.LayoutType
 import android.graphics.drawable.ColorDrawable
 import android.graphics.Color
+import android.graphics.drawable.Drawable
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.util.Base64
+import java.io.ByteArrayOutputStream
+
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 
 object AppMenuStorage {
     // Holds the list of folders in memory
@@ -18,6 +28,10 @@ object AppMenuStorage {
 
     // Holds the list of apps in memory
     private var appList: MutableList<AppItem> = mutableListOf()
+
+    // In-memory cache for app icons and labels
+    private val iconCache = mutableMapOf<String, android.graphics.drawable.Drawable>()
+    private val labelCache = mutableMapOf<String, CharSequence>()
 
     // Save all folder/app data as a single JSON object
     private fun saveLauncherData(context: Context) {
@@ -34,7 +48,11 @@ object AppMenuStorage {
                     val appObj = JSONObject()
                     appObj.put("key", appKey)
                     appObj.put("label", app.label.toString())
-                    // No icon saving
+                    // Save icon as Base64 PNG
+                    val iconBase64 = drawableToBase64Png(app.icon)
+                    if (iconBase64 != null) {
+                        appObj.put("iconBase64", iconBase64)
+                    }
                     appsArray.put(appObj)
                     seenApps.add(appKey)
                 }
@@ -65,9 +83,11 @@ object AppMenuStorage {
                 if (appObj != null) {
                     val appKey = appObj.optString("key")
                     val label = appObj.optString("label", appKey)
+                    val iconBase64 = appObj.optString("iconBase64", null)
+                    val icon = if (iconBase64 != null) base64ToDrawable(iconBase64) else ColorDrawable(Color.TRANSPARENT)
                     AppItem(
                         label = label,
-                        icon = ColorDrawable(Color.TRANSPARENT), // Placeholder icon
+                        icon = icon,
                         packageName = appKey.substringBefore("/"),
                         activityName = appKey.substringAfter("/", ""),
                         folderId = folderId
@@ -88,9 +108,42 @@ object AppMenuStorage {
         }
         return result
     }
+    // Helper: Convert Drawable to Base64 PNG string
+    private fun drawableToBase64Png(drawable: Drawable?): String? {
+        if (drawable == null) return null
+        return try {
+            val bitmap = if (drawable is android.graphics.drawable.BitmapDrawable) {
+                drawable.bitmap
+            } else {
+                val width = drawable.intrinsicWidth.takeIf { it > 0 } ?: 1
+                val height = drawable.intrinsicHeight.takeIf { it > 0 } ?: 1
+                val bmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+                val canvas = Canvas(bmp)
+                drawable.setBounds(0, 0, canvas.width, canvas.height)
+                drawable.draw(canvas)
+                bmp
+            }
+            val outputStream = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+            val byteArray = outputStream.toByteArray()
+            Base64.encodeToString(byteArray, Base64.DEFAULT)
+        } catch (e: Exception) {
+            null
+        }
+    }
 
-    // Replace loadApplications to use the new structure
-    public fun loadApplications(context: Context): AppMenuState {
+    // Helper: Convert Base64 PNG string to Drawable
+    private fun base64ToDrawable(base64: String?): Drawable {
+        return try {
+            val bytes = Base64.decode(base64, Base64.DEFAULT)
+            val bmp = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+            android.graphics.drawable.BitmapDrawable(null, bmp)
+        } catch (e: Exception) {
+            ColorDrawable(Color.TRANSPARENT)
+        }
+    }
+
+    public fun loadApplications(context: Context): AppMenuState = runBlocking {
         val pm = context.packageManager
         val mainIntent = android.content.Intent(android.content.Intent.ACTION_MAIN, null)
         mainIntent.addCategory(android.content.Intent.CATEGORY_LAUNCHER)
@@ -128,36 +181,48 @@ object AppMenuStorage {
         val folderAppMap = folderIds.associateWith { mutableListOf<AppItem>() }.toMutableMap()
         val allAppItems = mutableListOf<AppItem>()
 
-        // Add saved apps that are still installed
-        for ((folderId, pair) in folderData) {
+        // Add saved apps that are still installed (parallelized, with cache)
+        val savedAppDeferred = folderData.flatMap { (folderId, pair) ->
             val (_, appItems) = pair
-            for (appItem in appItems) {
-                val key = appItem.packageName + "/" + appItem.activityName
-                val resolveInfo = appInfoMap[key]
-                if (resolveInfo != null) {
-                    val appLabel = resolveInfo.loadLabel(pm)
-                    val appIcon = resolveInfo.loadIcon(pm)
-                    val appDetail = AppItem(appLabel, appIcon, appItem.packageName, appItem.activityName, folderId)
-                    allAppItems.add(appDetail)
-                    folderAppMap[folderId]?.add(appDetail)
+            appItems.map { appItem ->
+                async(Dispatchers.Default) {
+                    val key = appItem.packageName + "/" + appItem.activityName
+                    val resolveInfo = appInfoMap[key]
+                    if (resolveInfo != null) {
+                        val appLabel = labelCache.getOrPut(key) { withContext(Dispatchers.Default) { resolveInfo.loadLabel(pm) } }
+                        val appIcon = iconCache.getOrPut(key) { withContext(Dispatchers.Default) { resolveInfo.loadIcon(pm) } }
+                        val appDetail = AppItem(appLabel, appIcon, appItem.packageName, appItem.activityName, folderId)
+                        Pair(folderId, appDetail)
+                    } else null
                 }
             }
         }
+        val savedAppResults = savedAppDeferred.mapNotNull { it.await() }
+        for ((folderId, appDetail) in savedAppResults) {
+            allAppItems.add(appDetail)
+            folderAppMap[folderId]?.add(appDetail)
+        }
 
-        // Add new apps not in saved data
+        // Add new apps not in saved data (parallelized, with cache)
         var newAppsAdded = false
-        for (resolveInfo in appInfos) {
-            val key = resolveInfo.activityInfo.packageName + "/" + resolveInfo.activityInfo.name
-            if (key !in allSavedApps) {
-                val folderId = starterAppToFolder[key] ?: lastFolderId
-                val label = resolveInfo.loadLabel(pm)
-                val icon = resolveInfo.loadIcon(pm)
-                val activityInfo = resolveInfo.activityInfo
-                val appDetail = AppItem(label, icon, activityInfo.packageName, activityInfo.name, folderId)
-                allAppItems.add(appDetail)
-                folderAppMap[folderId]?.add(appDetail)
-                newAppsAdded = true
+        val newAppDeferred = appInfos.map { resolveInfo ->
+            async(Dispatchers.Default) {
+                val key = resolveInfo.activityInfo.packageName + "/" + resolveInfo.activityInfo.name
+                if (key !in allSavedApps) {
+                    val folderId = starterAppToFolder[key] ?: lastFolderId
+                    val label = labelCache.getOrPut(key) { withContext(Dispatchers.Default) { resolveInfo.loadLabel(pm) } }
+                    val icon = iconCache.getOrPut(key) { withContext(Dispatchers.Default) { resolveInfo.loadIcon(pm) } }
+                    val activityInfo = resolveInfo.activityInfo
+                    val appDetail = AppItem(label, icon, activityInfo.packageName, activityInfo.name, folderId)
+                    newAppsAdded = true
+                    Pair(folderId, appDetail)
+                } else null
             }
+        }
+        val newAppResults = newAppDeferred.mapNotNull { it.await() }
+        for ((folderId, appDetail) in newAppResults) {
+            allAppItems.add(appDetail)
+            folderAppMap[folderId]?.add(appDetail)
         }
 
         // Assign apps to folders
@@ -177,7 +242,29 @@ object AppMenuStorage {
         val KEY_GRID_MODE = "grid_mode"
         val layoutType = if (prefs.getBoolean(KEY_GRID_MODE, false)) LayoutType.GRID else LayoutType.LIST
 
-        return AppMenuState(layoutType, folders.toList(), appList.toList())
+        AppMenuState(layoutType, folders.toList(), appList.toList())
+    }
+
+    // Loads applications only from saved config, not using PackageManager
+    fun loadApplicationsFromConfigOnly(context: Context): AppMenuState = runBlocking {
+        val folderData = loadLauncherData(context)
+        val folderIds = if (folderData.isNotEmpty()) folderData.keys.sorted() else (1..9).toList()
+        val folderMap = folderIds.associateWith { id ->
+            val (name, appItems) = folderData[id] ?: ("Group $id" to mutableListOf())
+            // Use the saved appItems as-is (with icons and labels from config)
+            FolderItem(id, name, appItems.toMutableList())
+        }.toMutableMap()
+
+        val allAppItems = folderMap.values.flatMap { it.apps }.toMutableList()
+        allAppItems.sortBy { it.label.toString().lowercase(java.util.Locale.getDefault()) }
+        folders = folderIds.map { folderMap[it] ?: FolderItem(it, "Group $it") }.toMutableList()
+        appList = allAppItems
+
+        val prefs = context.getSharedPreferences("launcher_data", Context.MODE_PRIVATE)
+        val KEY_GRID_MODE = "grid_mode"
+        val layoutType = if (prefs.getBoolean(KEY_GRID_MODE, false)) LayoutType.GRID else LayoutType.LIST
+
+        AppMenuState(layoutType, folders.toList(), appList.toList())
     }
 
     // Helper to get the starter config JSON from assets or a static string

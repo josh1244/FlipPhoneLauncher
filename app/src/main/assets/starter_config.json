@@ -60,7 +60,6 @@
       "name": "System",
       "apps": [
         "com.android.settings/com.android.settings.Settings",
-        "com.ham.flipphonelauncher/com.ham.flipphonelauncher.HomeActivity",
         "com.vzw.hss.myverizon/com.vzw.hss.myverizon.ui.activities.LauncherActivity",
         "io.github.sspanak.tt9/io.github.sspanak.tt9.preferences.PreferencesActivity"
       ]

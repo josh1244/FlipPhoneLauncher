@@ -35,6 +35,13 @@ class AppMenuFragment : Fragment(), KeyEventHandler {
     private val PREFS_NAME = "launcher_prefs"
     private val KEY_GRID_MODE = "grid_mode"
 
+    override fun onResume() {
+        super.onResume()
+        if (isActive) {
+            (activity as? com.ham.flipphonelauncher.HomeActivity)?.updateState(com.ham.flipphonelauncher.LauncherState.HOME_MENU)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -141,17 +148,10 @@ class AppMenuFragment : Fragment(), KeyEventHandler {
 
     private fun openFolderMenu(folder: com.ham.flipphonelauncher.model.FolderItem) {
         if (folder.apps.isEmpty()) return
-        val fragment = FolderMenuFragment.newInstance(folder)
-        fragment.setOnAppClickListener { appItem ->
-            launchApp(appItem)
-        }
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.home_fragment_container, fragment)
-            .addToBackStack(null)
-            .commit()
+        (activity as? com.ham.flipphonelauncher.HomeActivity)?.showFolderMenu(folder)
     }
 
-    private fun launchApp(appItem: com.ham.flipphonelauncher.model.AppItem) {
+    public fun launchApp(appItem: com.ham.flipphonelauncher.model.AppItem) {
         try {
             val intent = android.content.Intent(android.content.Intent.ACTION_MAIN)
             intent.addCategory(android.content.Intent.CATEGORY_LAUNCHER)
