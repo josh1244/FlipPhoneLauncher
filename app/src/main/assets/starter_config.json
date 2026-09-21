@@ -1,7 +1,7 @@
 {
   "folders": {
     "1": {
-      "name": "Group 1",
+      "name": "Activity Launcher",
       "apps": [
         "de.szalkowski.activitylauncher/de.szalkowski.activitylauncher.MainActivity"
       ]
@@ -61,7 +61,8 @@
       "apps": [
         "com.android.settings/com.android.settings.Settings",
         "com.vzw.hss.myverizon/com.vzw.hss.myverizon.ui.activities.LauncherActivity",
-        "io.github.sspanak.tt9/io.github.sspanak.tt9.preferences.PreferencesActivity"
+        "io.github.sspanak.tt9/io.github.sspanak.tt9.preferences.PreferencesActivity",
+        "com.ham.flipphonelauncher/com.ham.flipphonelauncher.HomeActivity"
       ]
     }
   }

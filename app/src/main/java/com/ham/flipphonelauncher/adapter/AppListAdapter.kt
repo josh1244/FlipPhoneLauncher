@@ -43,6 +43,17 @@ class AppListAdapter(
         }
     }
 
+    // Map folderId -> first position of its first AppItem in the flat list for quick navigation.
+    private val firstPositionByFolderId: Map<Int, Int> = run {
+        val map = mutableMapOf<Int, Int>()
+        for ((index, entry) in items.withIndex()) {
+            if (entry.isFirstInFolder) {
+                map[entry.app.folderId] = index
+            }
+        }
+        map
+    }
+
     override fun getCount() = items.size
     override fun getItem(position: Int) = items[position].app
     override fun getItemId(position: Int) = position.toLong()
@@ -82,6 +93,13 @@ class AppListAdapter(
             viewHolder.name.text = entry.app.label
         }
         return view
+    }
+
+    /**
+     * Return the adapter position of the first app for the given folder id, or -1 if not found.
+     */
+    fun getFirstAppPositionForFolder(folderId: Int): Int {
+        return firstPositionByFolderId[folderId] ?: -1
     }
 
     private data class AppViewHolder(

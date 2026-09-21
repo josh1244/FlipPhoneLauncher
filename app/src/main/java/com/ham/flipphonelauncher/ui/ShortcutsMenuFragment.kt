@@ -11,12 +11,18 @@ import android.widget.TextView
 import android.widget.Toast
 import android.content.Context
 import android.content.Intent
-import android.net.wifi.WifiManager
 import android.bluetooth.BluetoothAdapter
 import android.media.AudioManager
 import androidx.fragment.app.Fragment
 import com.ham.flipphonelauncher.R
 import com.ham.flipphonelauncher.KeyEventHandler
+
+// Static constants to avoid recreating lists repeatedly
+private val BRIGHTNESS_LEVELS = listOf(0, 15, 33, 48, 64, 79, 97, 112, 128, 130, 161, 176, 191, 209, 224, 240, 255)
+private val BRIGHTNESS_LABELS = listOf("0%", "6%", "13%", "19%", "25%", "31%", "38%", "44%", "50%", "56%", "63%", "69%", "75%", "82%", "88%", "94%", "100%")
+private val DND_STATES = listOf("All", "Vibrate", "Priority", "None")
+private val DND_ICONS = listOf(R.drawable.ic_dnd_all, R.drawable.ic_dnd_vibrate, R.drawable.ic_dnd_priority, R.drawable.ic_dnd_none)
+private val DND_ICON_BY_LABEL = DND_STATES.mapIndexed { i, s -> s to DND_ICONS[i] }.toMap()
 
 
 class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
@@ -27,6 +33,8 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
             selectedShortcutIndex = 0
             if (this::shortcutButtons.isInitialized && this::shortcutOverlays.isInitialized) {
                 updateShortcutFocus()
+                updateDndUiFromSystem()
+                setBrightnessProgress()
             }
         }
     }
@@ -36,12 +44,51 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
         if (isActive) {
             (activity as? com.ham.flipphonelauncher.HomeActivity)?.updateState(com.ham.flipphonelauncher.LauncherState.HOME_MENU)
         }
+        try {
+            // Register receiver for connectivity and setting changes
+            val filter = android.content.IntentFilter().apply {
+                addAction(android.content.Intent.ACTION_AIRPLANE_MODE_CHANGED)
+                addAction(android.bluetooth.BluetoothAdapter.ACTION_STATE_CHANGED)
+                addAction(android.media.AudioManager.RINGER_MODE_CHANGED_ACTION)
+                addAction(android.location.LocationManager.PROVIDERS_CHANGED_ACTION)
+            }
+            requireContext().registerReceiver(systemStateReceiver, filter)
+        } catch (_: Exception) {}
+        
+        // Refresh states on resume to capture changes made in settings screen
+        if (this::shortcutButtons.isInitialized) {
+            val mobileDataEnabled = isMobileDataEnabled()
+            shortcutButtons.getOrNull(0)?.setBackgroundResource(if (mobileDataEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+            setShortcutIconTint(0, mobileDataEnabled)
+
+            val airplaneModeEnabled = isAirplaneModeEnabled()
+            shortcutButtons.getOrNull(2)?.setBackgroundResource(if (airplaneModeEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+            setShortcutIconTint(2, airplaneModeEnabled)
+
+            val locationEnabled = isLocationEnabled()
+            shortcutButtons.getOrNull(4)?.setBackgroundResource(if (locationEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+            setShortcutIconTint(4, locationEnabled)
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        try { requireContext().unregisterReceiver(systemStateReceiver) } catch (_: Exception) {}
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        // Clear cached references to avoid leaks
+        bluetoothAdapterCached = null
+        audioManagerCached = null
+        notificationManagerCached = null
+        dndTextView = null
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-    val view = inflater.inflate(R.layout.fragment_shortcuts_menu, container, false)
+        val view = inflater.inflate(R.layout.fragment_shortcuts_menu, container, false)
         // Reset shortcut selection when menu is opened
         selectedShortcutIndex = 0
 
@@ -51,19 +98,26 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
         // Get shortcuts panel from layout include
         shortcutsPanel = view.findViewById(R.id.shortcuts_panel)
 
-        // Collect shortcut buttons for navigation
+        // Collect shortcut buttons for navigation (Grid: 2 cols x 3 rows)
+        // Row 0: 0=Mobile Data, 1=Bluetooth
+        // Row 1: 2=Airplane Mode, 3=DnD
+        // Row 2: 4=Location, 5=Brightness
         shortcutButtons = listOf(
-            shortcutsPanel.findViewById(R.id.btn_wifi),
+            shortcutsPanel.findViewById(R.id.btn_mobile_data),
             shortcutsPanel.findViewById(R.id.btn_bluetooth),
+            shortcutsPanel.findViewById(R.id.btn_airplane_mode),
             shortcutsPanel.findViewById(R.id.btn_dnd),
+            shortcutsPanel.findViewById(R.id.btn_location),
             shortcutsPanel.findViewById(R.id.btn_brightness)
         )
 
         // Collect overlay views for focus/hover outline
         shortcutOverlays = listOf(
-            shortcutsPanel.findViewById(R.id.overlay_wifi),
+            shortcutsPanel.findViewById(R.id.overlay_mobile_data),
             shortcutsPanel.findViewById(R.id.overlay_bluetooth),
+            shortcutsPanel.findViewById(R.id.overlay_airplane_mode),
             shortcutsPanel.findViewById(R.id.overlay_dnd),
+            shortcutsPanel.findViewById(R.id.overlay_location),
             shortcutsPanel.findViewById(R.id.overlay_brightness)
         )
 
@@ -78,20 +132,102 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
     private var selectedShortcutIndex: Int = 0
     private var softKeyBarView: SoftkeyBarView? = null
 
+    // Cached system services and views to avoid repeated lookups
+    private var bluetoothAdapterCached: BluetoothAdapter? = null
+    private var audioManagerCached: AudioManager? = null
+    private var notificationManagerCached: android.app.NotificationManager? = null
+    private var dndTextView: TextView? = null
 
+    @android.annotation.SuppressLint("MissingPermission")
+    private fun isMobileDataEnabled(): Boolean {
+        return try {
+            val tm = requireContext().getSystemService(Context.TELEPHONY_SERVICE) as? android.telephony.TelephonyManager
+            tm?.isDataEnabled == true
+        } catch (_: Exception) {
+            false
+        }
+    }
+
+    private fun isAirplaneModeEnabled(): Boolean {
+        return try {
+            android.provider.Settings.Global.getInt(
+                requireContext().contentResolver,
+                android.provider.Settings.Global.AIRPLANE_MODE_ON, 0
+            ) != 0
+        } catch (_: Exception) {
+            false
+        }
+    }
+
+    private fun isLocationEnabled(): Boolean {
+        return try {
+            val lm = requireContext().getSystemService(Context.LOCATION_SERVICE) as? android.location.LocationManager
+            lm?.isProviderEnabled(android.location.LocationManager.GPS_PROVIDER) == true ||
+                    lm?.isProviderEnabled(android.location.LocationManager.NETWORK_PROVIDER) == true
+        } catch (_: Exception) {
+            false
+        }
+    }
+
+    // Receiver to update UI when system settings change
+    private val systemStateReceiver = object : android.content.BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: android.content.Intent?) {
+            // Update UI elements conservatively
+            try {
+                // Mobile Data State
+                val mobileDataEnabled = isMobileDataEnabled()
+                shortcutButtons.getOrNull(0)?.setBackgroundResource(if (mobileDataEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+                setShortcutIconTint(0, mobileDataEnabled)
+                
+                // Bluetooth
+                val btEnabled = bluetoothAdapterCached != null && bluetoothAdapterCached!!.isEnabled
+                shortcutButtons.getOrNull(1)?.setBackgroundResource(if (btEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+                setShortcutIconTint(1, btEnabled)
+                
+                // Airplane Mode
+                val airplaneModeEnabled = isAirplaneModeEnabled()
+                shortcutButtons.getOrNull(2)?.setBackgroundResource(if (airplaneModeEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+                setShortcutIconTint(2, airplaneModeEnabled)
+                
+                // DnD and ringer
+                updateDndUiFromSystem()
+                
+                // Location State
+                val locationEnabled = isLocationEnabled()
+                shortcutButtons.getOrNull(4)?.setBackgroundResource(if (locationEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+                setShortcutIconTint(4, locationEnabled)
+
+                // Brightness progress
+                setBrightnessProgress()
+            } catch (_: Exception) {}
+        }
+    }
 
     private fun setupInitialShortcuts() {
+        // Cache system services
+        bluetoothAdapterCached = BluetoothAdapter.getDefaultAdapter()
+        audioManagerCached = requireContext().getSystemService(Context.AUDIO_SERVICE) as? AudioManager
+        notificationManagerCached = requireContext().getSystemService(Context.NOTIFICATION_SERVICE) as? android.app.NotificationManager
+        dndTextView = shortcutsPanel.findViewById(R.id.shortcut_dnd_label)
+
         // Set initial backgrounds based on current state
-        val wifiManager = requireContext().applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
-        shortcutButtons[0].setBackgroundResource(if (wifiManager.isWifiEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-        val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
-        shortcutButtons[1].setBackgroundResource(if (bluetoothAdapter != null && bluetoothAdapter.isEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-        val audioManager = requireContext().getSystemService(Context.AUDIO_SERVICE) as AudioManager
-        shortcutButtons[2].setBackgroundResource(if (audioManager.ringerMode == AudioManager.RINGER_MODE_NORMAL) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-        // For brightness, always on by default (could be improved to reflect current state)
-        shortcutButtons[3].setBackgroundResource(R.drawable.brightness_progress)
+        val mobileDataEnabled = isMobileDataEnabled()
+        shortcutButtons[0].setBackgroundResource(if (mobileDataEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+        
+        val btEnabled = bluetoothAdapterCached != null && bluetoothAdapterCached!!.isEnabled
+        shortcutButtons[1].setBackgroundResource(if (btEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+        
+        val airplaneModeEnabled = isAirplaneModeEnabled()
+        shortcutButtons[2].setBackgroundResource(if (airplaneModeEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+        
+        val ringerNormal = audioManagerCached?.ringerMode == AudioManager.RINGER_MODE_NORMAL
+        shortcutButtons[3].setBackgroundResource(if (ringerNormal) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+        
+        val locationEnabled = isLocationEnabled()
+        shortcutButtons[4].setBackgroundResource(if (locationEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
 
-
+        // For brightness, always on by default
+        shortcutButtons[5].setBackgroundResource(R.drawable.brightness_progress)
 
         // Set initial progress
         setBrightnessProgress()
@@ -99,37 +235,42 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
         // Set the focused item
         updateShortcutFocus()
 
-
-        setShortcutIconTint(0, wifiManager.isWifiEnabled)
-        setShortcutIconTint(1, bluetoothAdapter != null && bluetoothAdapter.isEnabled)
-        setShortcutIconTint(2, audioManager.ringerMode == AudioManager.RINGER_MODE_NORMAL)
-        setShortcutIconTint(3, true)
+        setShortcutIconTint(0, mobileDataEnabled)
+        setShortcutIconTint(1, btEnabled)
+        setShortcutIconTint(2, airplaneModeEnabled)
+        setShortcutIconTint(3, ringerNormal)
+        setShortcutIconTint(4, locationEnabled)
+        setShortcutIconTint(5, true)
 
         updateDndUiFromSystem()
 
-        // Wi-Fi
+        // Mobile Data Click
         shortcutButtons[0].setOnClickListener {
-            val wifiManager = requireContext().applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
-            val enabled = !wifiManager.isWifiEnabled
-            wifiManager.isWifiEnabled = enabled
-            shortcutButtons[0].setBackgroundResource(if (enabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-            setShortcutIconTint(0, enabled)
+            try {
+                startActivity(Intent(android.provider.Settings.ACTION_DATA_ROAMING_SETTINGS))
+            } catch (e: Exception) {
+                try {
+                    startActivity(Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS))
+                } catch (_: Exception) {
+                    Toast.makeText(requireContext(), "Unable to open Cellular Network settings", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
-        // Long-press Wi-Fi: open Wi-Fi settings
         shortcutButtons[0].setOnLongClickListener {
             try {
-                startActivity(Intent(android.provider.Settings.ACTION_WIFI_SETTINGS))
+                startActivity(Intent(android.provider.Settings.ACTION_DATA_ROAMING_SETTINGS))
             } catch (e: Exception) {
-                Toast.makeText(requireContext(), "Unable to open Wi-Fi settings", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS))
             }
             true
         }
+
         // Bluetooth
         shortcutButtons[1].setOnClickListener {
-            val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
-            if (bluetoothAdapter != null) {
-                val enabled = !bluetoothAdapter.isEnabled
-                if (enabled) bluetoothAdapter.enable() else bluetoothAdapter.disable()
+            val bt = bluetoothAdapterCached
+            if (bt != null) {
+                val enabled = !bt.isEnabled
+                if (enabled) bt.enable() else bt.disable()
                 shortcutButtons[1].setBackgroundResource(if (enabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
                 setShortcutIconTint(1, enabled)
             } else {
@@ -145,54 +286,64 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
             }
             true
         }
-        // DnD (Do Not Disturb) - cycles through normal, vibrate, priority, total silence
+
+        // Airplane Mode Click
         shortcutButtons[2].setOnClickListener {
-            val notificationManager = requireContext().getSystemService(Context.NOTIFICATION_SERVICE) as android.app.NotificationManager
+            try {
+                startActivity(Intent(android.provider.Settings.ACTION_AIRPLANE_MODE_SETTINGS))
+            } catch (e: Exception) {
+                Toast.makeText(requireContext(), "Unable to open Airplane Mode settings", Toast.LENGTH_SHORT).show()
+            }
+        }
+        shortcutButtons[2].setOnLongClickListener {
+            try {
+                startActivity(Intent(android.provider.Settings.ACTION_AIRPLANE_MODE_SETTINGS))
+            } catch (e: Exception) {
+                Toast.makeText(requireContext(), "Unable to open Airplane Mode settings", Toast.LENGTH_SHORT).show()
+            }
+            true
+        }
+
+        // DnD (Do Not Disturb) - cycles through states using cached resources
+        shortcutButtons[3].setOnClickListener {
+            val notificationManager = notificationManagerCached ?: return@setOnClickListener
             if (!notificationManager.isNotificationPolicyAccessGranted) {
                 Toast.makeText(requireContext(), "Grant Do Not Disturb access in settings", Toast.LENGTH_LONG).show()
                 val intent = Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
                 startActivity(intent)
                 return@setOnClickListener
             }
-                val audioManager = requireContext().getSystemService(Context.AUDIO_SERVICE) as AudioManager
-                val dndStates = listOf("All", "Vibrate", "Priority", "None")
-                val dndIcons = listOf(
-                    R.drawable.ic_dnd_all,
-                    R.drawable.ic_dnd_vibrate,
-                    R.drawable.ic_dnd_priority,
-                    R.drawable.ic_dnd_none
-                )
-                val sharedPref = requireContext().getSharedPreferences("dnd_toggle", Context.MODE_PRIVATE)
-                val currentIndex = sharedPref.getInt("dnd_index", 0)
-                val newIndex = (currentIndex + 1) % dndStates.size
-                val newState = dndStates[newIndex]
-                sharedPref.edit().putInt("dnd_index", newIndex).apply()
-                when (newState) {
-                    "All" -> {
-                        notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_ALL)
-                        audioManager.ringerMode = AudioManager.RINGER_MODE_NORMAL
-                    }
-                    "Vibrate" -> {
-                        notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_ALL)
-                        audioManager.ringerMode = AudioManager.RINGER_MODE_VIBRATE
-                    }
-                    "Priority" -> {
-                        notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY)
-                        audioManager.ringerMode = AudioManager.RINGER_MODE_NORMAL
-                    }
-                    "None" -> {
-                        notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_NONE)
-                        audioManager.ringerMode = AudioManager.RINGER_MODE_SILENT
-                    }
+            val audioManager = audioManagerCached ?: return@setOnClickListener
+            val sharedPref = requireContext().getSharedPreferences("dnd_toggle", Context.MODE_PRIVATE)
+            val currentIndex = sharedPref.getInt("dnd_index", 0)
+            val newIndex = (currentIndex + 1) % DND_STATES.size
+            val newState = DND_STATES[newIndex]
+            sharedPref.edit().putInt("dnd_index", newIndex).apply()
+            when (newState) {
+                "All" -> {
+                    notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_ALL)
+                    audioManager.ringerMode = AudioManager.RINGER_MODE_NORMAL
                 }
-                val dndTextView = shortcutsPanel.findViewById<TextView>(R.id.shortcut_dnd_label)
-                dndTextView?.text = newState
-                shortcutButtons[2].setBackgroundResource(if (newState != "All" && newState != "Vibrate") R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-                setShortcutIconTint(2, newState != "All" && newState != "Vibrate")
-                shortcutButtons[2].setImageResource(dndIcons[newIndex])
+                "Vibrate" -> {
+                    notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_ALL)
+                    audioManager.ringerMode = AudioManager.RINGER_MODE_VIBRATE
+                }
+                "Priority" -> {
+                    notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY)
+                    audioManager.ringerMode = AudioManager.RINGER_MODE_NORMAL
+                }
+                "None" -> {
+                    notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_NONE)
+                    audioManager.ringerMode = AudioManager.RINGER_MODE_SILENT
+                }
+            }
+            dndTextView?.text = newState
+            shortcutButtons[3].setBackgroundResource(if (newState != "All" && newState != "Vibrate") R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+            setShortcutIconTint(3, newState != "All" && newState != "Vibrate")
+            shortcutButtons[3].setImageResource(DND_ICONS[newIndex])
         }
         // Long-press DnD: open Do Not Disturb settings
-        shortcutButtons[2].setOnLongClickListener {
+        shortcutButtons[3].setOnLongClickListener {
             try {
                 val intent = Intent()
                 intent.setClassName("com.android.settings", "com.android.settings.Settings\$ZenModeSettingsActivity")
@@ -203,12 +354,29 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
             true
         }
 
+        // Location Click
+        shortcutButtons[4].setOnClickListener {
+            try {
+                startActivity(Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+            } catch (e: Exception) {
+                Toast.makeText(requireContext(), "Unable to open Location settings", Toast.LENGTH_SHORT).show()
+            }
+        }
+        shortcutButtons[4].setOnLongClickListener {
+            try {
+                startActivity(Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+            } catch (e: Exception) {
+                Toast.makeText(requireContext(), "Unable to open Location settings", Toast.LENGTH_SHORT).show()
+            }
+            true
+        }
+
         // Brightness
-        shortcutButtons[3].setOnClickListener {
+        shortcutButtons[5].setOnClickListener {
             adjustBrightness(1)
         }
         // Long-press Brightness: open Display settings
-        shortcutButtons[3].setOnLongClickListener {
+        shortcutButtons[5].setOnLongClickListener {
             try {
                 startActivity(Intent(android.provider.Settings.ACTION_DISPLAY_SETTINGS))
             } catch (e: Exception) {
@@ -223,9 +391,8 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
 
     // Set DnD label and button state on startup
     private fun updateDndUiFromSystem() {
-        val notificationManager = requireContext().getSystemService(Context.NOTIFICATION_SERVICE) as android.app.NotificationManager
-        val audioManager = requireContext().getSystemService(Context.AUDIO_SERVICE) as AudioManager
-        val dndTextView = shortcutsPanel.findViewById<TextView>(R.id.shortcut_dnd_label)
+        val notificationManager = notificationManagerCached ?: requireContext().getSystemService(Context.NOTIFICATION_SERVICE) as android.app.NotificationManager
+        val audioManager = audioManagerCached ?: requireContext().getSystemService(Context.AUDIO_SERVICE) as AudioManager
         val filter = notificationManager.currentInterruptionFilter
         val ringer = audioManager.ringerMode
         val dndLabel = when {
@@ -235,16 +402,11 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
             filter == android.app.NotificationManager.INTERRUPTION_FILTER_NONE -> "None"
             else -> "All"
         }
-            val dndIcons = mapOf(
-                "All" to R.drawable.ic_dnd_all,
-                "Vibrate" to R.drawable.ic_dnd_vibrate,
-                "Priority" to R.drawable.ic_dnd_priority,
-                "None" to R.drawable.ic_dnd_none
-            )
-            dndTextView?.text = dndLabel
-            shortcutButtons[2].setBackgroundResource(if (dndLabel != "All") R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-            setShortcutIconTint(2, dndLabel != "All")
-            shortcutButtons[2].setImageResource(dndIcons[dndLabel] ?: R.drawable.ic_dnd_none)
+        dndTextView?.text = dndLabel
+        shortcutButtons[3].setBackgroundResource(if (dndLabel != "All") R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+        setShortcutIconTint(3, dndLabel != "All")
+        val iconRes = DND_ICON_BY_LABEL[dndLabel] ?: R.drawable.ic_dnd_none
+        shortcutButtons[3].setImageResource(iconRes)
     }
 
 
@@ -256,7 +418,7 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
             val cResolver = requireContext().contentResolver
             val current = android.provider.Settings.System.getInt(cResolver, android.provider.Settings.System.SCREEN_BRIGHTNESS)
             val percent = (current * 100) / 255
-            val drawable = shortcutButtons[3].background
+            val drawable = shortcutButtons[5].background
             if (drawable is android.graphics.drawable.LayerDrawable) {
                 val clip = drawable.findDrawableByLayerId(R.id.progress)
                 if (clip is android.graphics.drawable.ClipDrawable) {
@@ -280,16 +442,14 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
                 return
             }
             val cResolver = context.contentResolver
-            val levels = listOf(0, 15, 33, 48, 64, 79, 97, 112, 128, 130, 161, 176, 191, 209, 224, 240, 255)
-            val labels = listOf("0%", "6%", "13%", "19%", "25%", "31%", "38%", "44%", "50%", "56%", "63%", "69%", "75%", "82%", "88%", "94%", "100%")
             val current = android.provider.Settings.System.getInt(cResolver, android.provider.Settings.System.SCREEN_BRIGHTNESS)
-            val idx = levels.indexOfFirst { current <= it }.let { if (it == -1) levels.size - 1 else it }
+            val idx = BRIGHTNESS_LEVELS.indexOfFirst { current <= it }.let { if (it == -1) BRIGHTNESS_LEVELS.size - 1 else it }
             var newIdx = idx + direction
             if (newIdx < 0) newIdx = 0
-            if (newIdx >= levels.size) newIdx = levels.size - 1
-            val newBrightness = levels[newIdx]
+            if (newIdx >= BRIGHTNESS_LEVELS.size) newIdx = BRIGHTNESS_LEVELS.size - 1
+            val newBrightness = BRIGHTNESS_LEVELS[newIdx]
             android.provider.Settings.System.putInt(cResolver, android.provider.Settings.System.SCREEN_BRIGHTNESS, newBrightness)
-            val brightnessText = "Brightness: ${labels[newIdx]}"
+            val brightnessText = "Brightness: ${BRIGHTNESS_LABELS[newIdx]}"
             Toast.makeText(context, brightnessText, Toast.LENGTH_SHORT).show()
             setBrightnessProgress()
         } catch (e: Exception) {
@@ -320,7 +480,7 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
         }
         shortcutButtons[selectedShortcutIndex].requestFocus()
         // Update softkey bar for brightness shortcut
-        if (selectedShortcutIndex == 3) {
+        if (selectedShortcutIndex == 5) {
             softKeyBarView?.setSoftkeyBarText(left = "Down", middle = "Select", right = "Up")
         } else {
             softKeyBarView?.setSoftkeyBarText(left = "", middle = "Select", right = "")
@@ -362,7 +522,7 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
                 return true
             }
             KeyEvent.KEYCODE_SOFT_LEFT -> {
-                if (selectedShortcutIndex == 3) {
+                if (selectedShortcutIndex == 5) {
                     adjustBrightness(-1)
                     return true
                 } else {
@@ -370,7 +530,7 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
                 }
             }
             KeyEvent.KEYCODE_SOFT_RIGHT -> {
-                if (selectedShortcutIndex == 3) {
+                if (selectedShortcutIndex == 5) {
                     adjustBrightness(1)
                     return true
                 } else {
@@ -383,9 +543,6 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
 
     override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
         if (!isActive) return false
-        // Handle key events (e.g., D-pad navigation)
         return false
     }
 }
-
-

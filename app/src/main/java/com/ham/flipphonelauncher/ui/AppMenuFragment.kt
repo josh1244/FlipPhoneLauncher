@@ -31,6 +31,9 @@ class AppMenuFragment : Fragment(), KeyEventHandler {
     private var appMenuState: AppMenuState? = null
     private var listView: ListView? = null
     private var gridView: GridView? = null
+    private var listAdapter: com.ham.flipphonelauncher.adapter.AppListAdapter? = null
+    private var gridAdapter: com.ham.flipphonelauncher.adapter.AppGridAdapter? = null
+    private var prefs: android.content.SharedPreferences? = null
     
     private val PREFS_NAME = "launcher_prefs"
     private val KEY_GRID_MODE = "grid_mode"
@@ -56,22 +59,26 @@ class AppMenuFragment : Fragment(), KeyEventHandler {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        appMenuState = AppMenuStorage.loadApplications(requireContext())
-        // Load saved grid/list mode preference
-        val prefs = requireContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        val gridMode = prefs.getBoolean(KEY_GRID_MODE, false)
+        val ctx = requireContext()
+        appMenuState = AppMenuStorage.loadApplications(ctx)
+        // Load saved grid/list mode preference once
+        prefs = ctx.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val gridMode = prefs?.getBoolean(KEY_GRID_MODE, false) ?: false
         appMenuState = appMenuState?.copy(layoutType = if (gridMode) LayoutType.GRID else LayoutType.LIST)
         listView = view.findViewById(R.id.app_list_view)
         gridView = view.findViewById(R.id.app_grid_view)
-        updateViewMode()
-        // Select the first app by default
-        if (appMenuState?.layoutType == LayoutType.LIST) {
-            listView?.setSelection(0)
-        } else {
-            gridView?.setSelection(0)
+        // Initialize adapters if needed
+        if (listAdapter == null && appMenuState != null) {
+            listAdapter = com.ham.flipphonelauncher.adapter.AppListAdapter(appMenuState!!.folders) { appItem -> launchApp(appItem) }
         }
-
-        // Listen for selection changes to update right softkey
+        if (gridAdapter == null && appMenuState != null) {
+            // Pass null for folder click here; click handled explicitly on the GridView later
+            gridAdapter = com.ham.flipphonelauncher.adapter.AppGridAdapter(appMenuState!!.folders, null, { appItem -> launchApp(appItem) })
+        }
+        updateViewMode()
+        // Select first app and set selection listeners once
+        listView?.adapter = listAdapter
+        gridView?.adapter = gridAdapter
         listView?.setOnItemSelectedListener(object : android.widget.AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: android.widget.AdapterView<*>, view: View?, position: Int, id: Long) {
                 updateSoftkeyForSelection()
@@ -88,6 +95,17 @@ class AppMenuFragment : Fragment(), KeyEventHandler {
                 updateSoftkeyForSelection()
             }
         })
+        if (appMenuState?.layoutType == LayoutType.LIST) {
+            listView?.post {
+                listView?.setSelection(0)
+                listView?.requestFocus()
+            }
+        } else {
+            gridView?.post {
+                gridView?.setSelection(0)
+                gridView?.requestFocus()
+            }
+        }
         updateSoftkeyForSelection()
     }
 
@@ -96,8 +114,12 @@ class AppMenuFragment : Fragment(), KeyEventHandler {
         if (state.layoutType == LayoutType.LIST) {
             listView?.visibility = View.VISIBLE
             gridView?.visibility = View.GONE
-            listView?.adapter = AppListAdapter(state.folders) { appItem ->
-                launchApp(appItem)
+            // Reuse adapter to avoid reallocating
+            if (listAdapter == null) {
+                listAdapter = com.ham.flipphonelauncher.adapter.AppListAdapter(state.folders) { appItem -> launchApp(appItem) }
+                listView?.adapter = listAdapter
+            } else {
+                listView?.adapter = listAdapter
             }
             listView?.post {
                 listView?.setSelection(0)
@@ -106,10 +128,15 @@ class AppMenuFragment : Fragment(), KeyEventHandler {
         } else {
             listView?.visibility = View.GONE
             gridView?.visibility = View.VISIBLE
-            val adapter = AppGridAdapter(state.folders)
-            gridView?.adapter = adapter
+            if (gridAdapter == null) {
+                gridAdapter = com.ham.flipphonelauncher.adapter.AppGridAdapter(state.folders, { folder -> openFolderMenu(folder) }, { app -> launchApp(app) })
+                gridView?.adapter = gridAdapter
+            } else {
+                gridView?.adapter = gridAdapter
+            }
+            // Ensure click listener is set (adapter passed callbacks already)
             gridView?.setOnItemClickListener { _, _, position, _ ->
-                val item = adapter.getItem(position)
+                val item = gridAdapter?.getItem(position)
                 when (item) {
                     is com.ham.flipphonelauncher.model.FolderItem -> openFolderMenu(item)
                     is com.ham.flipphonelauncher.model.AppItem -> launchApp(item)
@@ -197,18 +224,9 @@ class AppMenuFragment : Fragment(), KeyEventHandler {
                         return true
                     } else {
                         if (state.layoutType == LayoutType.LIST) {
-                            // Find the position of the first app in the folder in the list adapter
-                            val adapter = listView?.adapter
-                            for (i in 0 until (adapter?.count ?: 0)) {
-                                val item = adapter?.getItem(i)
-                                if (item is com.ham.flipphonelauncher.model.AppItem) {
-                                    val app = item
-                                    if (app.folderId == folder.id && folder.apps.isNotEmpty() && app == folder.apps[0]) {
-                                        listView?.setSelection(i)
-                                        break
-                                    }
-                                }
-                            }
+                            // Use adapter helper for O(1) lookup of first app position
+                            val pos = listAdapter?.getFirstAppPositionForFolder(folder.id) ?: -1
+                            if (pos >= 0) listView?.setSelection(pos)
                         } else if (state.layoutType == LayoutType.GRID) {
                             // Open the folder menu for multi-app folders
                             openFolderMenu(folder)

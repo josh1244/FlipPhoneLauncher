@@ -28,9 +28,13 @@ class SoftkeyBarView @JvmOverloads constructor(
     }
 
 
-    public fun setSoftkeyBarText(left: String, middle: String, right: String) {
-        softkeyLeft.text = left
-        softkeyMiddle.text = middle
-        softkeyRight.text = right
+    /**
+     * Set the softkey labels. Only updates views when the text actually changes to avoid
+     * unnecessary layout/draw work.
+     */
+    fun setSoftkeyBarText(left: CharSequence?, middle: CharSequence?, right: CharSequence?) {
+        if (softkeyLeft.text != left) softkeyLeft.text = left
+        if (softkeyMiddle.text != middle) softkeyMiddle.text = middle
+        if (softkeyRight.text != right) softkeyRight.text = right
     }
 }

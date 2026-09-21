@@ -33,6 +33,38 @@ object AppMenuStorage {
     private val iconCache = mutableMapOf<String, android.graphics.drawable.Drawable>()
     private val labelCache = mutableMapOf<String, CharSequence>()
 
+    // Configuration file management
+    private fun getConfigFile(context: Context): File {
+        val externalDir = context.getExternalFilesDir(null)
+        return File(externalDir, "launcher_config.json")
+    }
+
+    private fun saveConfigToExternalStorage(context: Context, jsonData: String): Boolean {
+        return try {
+            val configFile = getConfigFile(context)
+            configFile.parentFile?.mkdirs() // Ensure directory exists
+            configFile.writeText(jsonData)
+            true
+        } catch (e: Exception) {
+            android.util.Log.e("AppMenuStorage", "Failed to save config to external storage", e)
+            false
+        }
+    }
+
+    private fun loadConfigFromExternalStorage(context: Context): String? {
+        return try {
+            val configFile = getConfigFile(context)
+            if (configFile.exists()) {
+                configFile.readText()
+            } else {
+                null
+            }
+        } catch (e: Exception) {
+            android.util.Log.e("AppMenuStorage", "Failed to load config from external storage", e)
+            null
+        }
+    }
+
     // Save all folder/app data as a single JSON object
     private fun saveLauncherData(context: Context) {
         val data = JSONObject()
@@ -48,6 +80,7 @@ object AppMenuStorage {
                     val appObj = JSONObject()
                     appObj.put("key", appKey)
                     appObj.put("label", app.label.toString())
+                    appObj.put("hidden", app.isHidden)
                     // Save icon as Base64 PNG
                     val iconBase64 = drawableToBase64Png(app.icon)
                     if (iconBase64 != null) {
@@ -61,22 +94,58 @@ object AppMenuStorage {
             foldersJson.put(folder.id.toString(), folderObj)
         }
         data.put("folders", foldersJson)
-        val prefs = context.getSharedPreferences("launcher_data", Context.MODE_PRIVATE)
-        prefs.edit().putString("folders_json", data.toString()).apply()
+        
+        // Try to save to external storage first, fallback to SharedPreferences
+        val jsonString = data.toString()
+        if (!saveConfigToExternalStorage(context, jsonString)) {
+            // Fallback to SharedPreferences
+            val prefs = context.getSharedPreferences("launcher_data", Context.MODE_PRIVATE)
+            prefs.edit().putString("folders_json", jsonString).apply()
+            android.util.Log.w("AppMenuStorage", "Saved to SharedPreferences as fallback")
+        } else {
+            android.util.Log.i("AppMenuStorage", "Saved to external storage: ${getConfigFile(context).absolutePath}")
+        }
     }
 
     // Load all folder/app data from the single JSON object
     // Now returns: Map<folderId, Pair<folderName, List<Triple<appKey, label, iconBase64>>>>
     private fun loadLauncherData(context: Context): MutableMap<Int, Pair<String, MutableList<AppItem>>> {
-        val prefs = context.getSharedPreferences("launcher_data", Context.MODE_PRIVATE)
-        val json = prefs.getString("folders_json", null) ?: return mutableMapOf()
+
+        // Try to load from external storage first, fallback to SharedPreferences
+        var json = loadConfigFromExternalStorage(context)
+        if (json == null) {
+            val prefs = context.getSharedPreferences("launcher_data", Context.MODE_PRIVATE)
+            json = prefs.getString("folders_json", null)
+            android.util.Log.i("AppMenuStorage", "Loaded from SharedPreferences as fallback")
+        } else {
+            android.util.Log.i("AppMenuStorage", "Loaded from external storage: ${getConfigFile(context).absolutePath}")
+        }
+        
+        if (json == null) return mutableMapOf()
         val data = JSONObject(json)
         val foldersJson = data.getJSONObject("folders")
         val result = mutableMapOf<Int, Pair<String, MutableList<AppItem>>>()
+        
+        // Get folder names from starter config for defaults
+        val starterConfig = getStarterConfig(context)
+        val starterFolderNames = starterConfig?.optJSONObject("folders")?.let { starterFoldersJson ->
+            buildMap<Int, String> {
+                for (key in starterFoldersJson.keys()) {
+                    val folderId = key.toIntOrNull() ?: continue
+                    val folderObj = starterFoldersJson.getJSONObject(key)
+                    val folderName = folderObj.optString("name", "")
+                    if (folderName.isNotEmpty()) {
+                        put(folderId, folderName)
+                    }
+                }
+            }
+        } ?: emptyMap()
+        
         for (key in foldersJson.keys()) {
             val folderId = key.toIntOrNull() ?: continue
             val folderObj = foldersJson.getJSONObject(key)
-            val name = folderObj.optString("name", "Group $key")
+            val defaultName = starterFolderNames[folderId] ?:"Group $key"
+            val name = folderObj.optString("name", defaultName)
             val arr = folderObj.getJSONArray("apps")
             val appItems = MutableList(arr.length()) { i ->
                 val appObj = arr.optJSONObject(i)
@@ -84,13 +153,15 @@ object AppMenuStorage {
                     val appKey = appObj.optString("key")
                     val label = appObj.optString("label", appKey)
                     val iconBase64 = appObj.optString("iconBase64", null)
+                    val isHidden = appObj.optBoolean("hidden", false)
                     val icon = if (iconBase64 != null) base64ToDrawable(iconBase64) else ColorDrawable(Color.TRANSPARENT)
                     AppItem(
                         label = label,
                         icon = icon,
                         packageName = appKey.substringBefore("/"),
                         activityName = appKey.substringAfter("/", ""),
-                        folderId = folderId
+                        folderId = folderId,
+                        isHidden = isHidden
                     )
                 } else {
                     // Backward compatibility: plain string
@@ -100,7 +171,8 @@ object AppMenuStorage {
                         icon = ColorDrawable(Color.TRANSPARENT),
                         packageName = appKey.substringBefore("/"),
                         activityName = appKey.substringAfter("/", ""),
-                        folderId = folderId
+                        folderId = folderId,
+                        isHidden = false
                     )
                 }
             }
@@ -151,8 +223,25 @@ object AppMenuStorage {
 
         val folderData = loadLauncherData(context)
         val folderIds = if (folderData.isNotEmpty()) folderData.keys.sorted() else (1..9).toList()
+        
+        // Get folder names from starter config
+        val starterConfig = getStarterConfig(context)
+        val starterFolderNames = starterConfig?.optJSONObject("folders")?.let { foldersJson ->
+            buildMap<Int, String> {
+                for (key in foldersJson.keys()) {
+                    val folderId = key.toIntOrNull() ?: continue
+                    val folderObj = foldersJson.getJSONObject(key)
+                    val folderName = folderObj.optString("name", "")
+                    if (folderName.isNotEmpty()) {
+                        put(folderId, folderName)
+                    }
+                }
+            }
+        } ?: emptyMap()
+        
         val folderMap = folderIds.associateWith { id ->
-            val (name, _) = folderData[id] ?: ("Group $id" to mutableListOf())
+            val defaultName = starterFolderNames[id] ?: "Group $id"
+            val (name, _) = folderData[id] ?: (defaultName to mutableListOf())
             FolderItem(id, name, mutableListOf())
         }.toMutableMap()
 
@@ -191,7 +280,7 @@ object AppMenuStorage {
                     if (resolveInfo != null) {
                         val appLabel = labelCache.getOrPut(key) { withContext(Dispatchers.Default) { resolveInfo.loadLabel(pm) } }
                         val appIcon = iconCache.getOrPut(key) { withContext(Dispatchers.Default) { resolveInfo.loadIcon(pm) } }
-                        val appDetail = AppItem(appLabel, appIcon, appItem.packageName, appItem.activityName, folderId)
+                        val appDetail = AppItem(appLabel, appIcon, appItem.packageName, appItem.activityName, folderId, appItem.isHidden)
                         Pair(folderId, appDetail)
                     } else null
                 }
@@ -213,7 +302,7 @@ object AppMenuStorage {
                     val label = labelCache.getOrPut(key) { withContext(Dispatchers.Default) { resolveInfo.loadLabel(pm) } }
                     val icon = iconCache.getOrPut(key) { withContext(Dispatchers.Default) { resolveInfo.loadIcon(pm) } }
                     val activityInfo = resolveInfo.activityInfo
-                    val appDetail = AppItem(label, icon, activityInfo.packageName, activityInfo.name, folderId)
+                    val appDetail = AppItem(label, icon, activityInfo.packageName, activityInfo.name, folderId, false)
                     newAppsAdded = true
                     Pair(folderId, appDetail)
                 } else null
@@ -225,40 +314,25 @@ object AppMenuStorage {
             folderAppMap[folderId]?.add(appDetail)
         }
 
-        // Assign apps to folders
+        // Assign apps to folders, filtering out hidden apps
         for ((folderId, appListForFolder) in folderAppMap) {
-            folderMap[folderId]?.apps?.addAll(appListForFolder)
+            val visibleApps = appListForFolder.filter { !it.isHidden }
+            folderMap[folderId]?.apps?.addAll(visibleApps)
         }
-        folders = folderIds.map { folderMap[it] ?: FolderItem(it, "Group $it") }.toMutableList()
-        allAppItems.sortBy { it.label.toString().lowercase(java.util.Locale.getDefault()) }
-        appList = allAppItems
+        folders = folderIds.map { 
+            val defaultName = starterFolderNames[it] ?: "Group $it"
+            folderMap[it] ?: FolderItem(it, defaultName) 
+        }.toMutableList()
+        
+        // Filter out hidden apps from the main app list
+        val visibleAppItems = allAppItems.filter { !it.isHidden }.toMutableList()
+        visibleAppItems.sortBy { it.label.toString().lowercase(java.util.Locale.getDefault()) }
+        appList = visibleAppItems
 
         // Save config if new apps were added
         if (newAppsAdded) {
             saveLauncherData(context)
         }
-
-        val prefs = context.getSharedPreferences("launcher_data", Context.MODE_PRIVATE)
-        val KEY_GRID_MODE = "grid_mode"
-        val layoutType = if (prefs.getBoolean(KEY_GRID_MODE, false)) LayoutType.GRID else LayoutType.LIST
-
-        AppMenuState(layoutType, folders.toList(), appList.toList())
-    }
-
-    // Loads applications only from saved config, not using PackageManager
-    fun loadApplicationsFromConfigOnly(context: Context): AppMenuState = runBlocking {
-        val folderData = loadLauncherData(context)
-        val folderIds = if (folderData.isNotEmpty()) folderData.keys.sorted() else (1..9).toList()
-        val folderMap = folderIds.associateWith { id ->
-            val (name, appItems) = folderData[id] ?: ("Group $id" to mutableListOf())
-            // Use the saved appItems as-is (with icons and labels from config)
-            FolderItem(id, name, appItems.toMutableList())
-        }.toMutableMap()
-
-        val allAppItems = folderMap.values.flatMap { it.apps }.toMutableList()
-        allAppItems.sortBy { it.label.toString().lowercase(java.util.Locale.getDefault()) }
-        folders = folderIds.map { folderMap[it] ?: FolderItem(it, "Group $it") }.toMutableList()
-        appList = allAppItems
 
         val prefs = context.getSharedPreferences("launcher_data", Context.MODE_PRIVATE)
         val KEY_GRID_MODE = "grid_mode"
@@ -281,5 +355,88 @@ object AppMenuStorage {
         } catch (e: Exception) {
             null
         }
+    }
+
+    /**
+     * Hide an app from the launcher
+     */
+    fun hideApp(context: Context, packageName: String, activityName: String): Boolean {
+        val appKey = "$packageName/$activityName"
+        var found = false
+        
+        // Update in folders
+        for (folder in folders) {
+            for (app in folder.apps) {
+                if (app.packageName == packageName && app.activityName == activityName) {
+                    app.isHidden = true
+                    found = true
+                }
+            }
+        }
+        
+        // Update in main app list
+        for (app in appList) {
+            if (app.packageName == packageName && app.activityName == activityName) {
+                app.isHidden = true
+                found = true
+            }
+        }
+        
+        if (found) {
+            saveLauncherData(context)
+        }
+        
+        return found
+    }
+
+    /**
+     * Show a previously hidden app
+     */
+    fun showApp(context: Context, packageName: String, activityName: String): Boolean {
+        val appKey = "$packageName/$activityName"
+        var found = false
+        
+        // Update in folders
+        for (folder in folders) {
+            for (app in folder.apps) {
+                if (app.packageName == packageName && app.activityName == activityName) {
+                    app.isHidden = false
+                    found = true
+                }
+            }
+        }
+        
+        // Update in main app list
+        for (app in appList) {
+            if (app.packageName == packageName && app.activityName == activityName) {
+                app.isHidden = false
+                found = true
+            }
+        }
+        
+        if (found) {
+            saveLauncherData(context)
+        }
+        
+        return found
+    }
+
+    /**
+     * Get all hidden apps (loads fresh data from config)
+     */
+    fun getHiddenApps(context: Context): List<AppItem> {
+        val folderData = loadLauncherData(context)
+        val hiddenApps = mutableListOf<AppItem>()
+        
+        for ((_, pair) in folderData) {
+            val (_, appItems) = pair
+            for (app in appItems) {
+                if (app.isHidden) {
+                    hiddenApps.add(app)
+                }
+            }
+        }
+        
+        return hiddenApps
     }
 }

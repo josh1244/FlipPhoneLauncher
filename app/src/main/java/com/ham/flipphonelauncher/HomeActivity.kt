@@ -33,13 +33,18 @@ interface KeyEventHandler {
 }
 
 class HomeActivity : AppCompatActivity() {
+    companion object {
+        private const val TAG_HOME = "home"
+        private const val TAG_SHORTCUTS = "shortcuts"
+        private const val TAG_APPMENU = "appmenu"
+        private const val TAG_FOLDERMENU = "foldermenu"
+        private const val REQUEST_READ_EXTERNAL_STORAGE = 1001
+    }
     private var currentMenuState: LauncherState = LauncherState.HOME_MENU
-    private val REQUEST_READ_EXTERNAL_STORAGE = 1001
     private var homeMenuFragment: HomeMenuFragment? = null
     private var shortcutsMenuFragment: ShortcutsMenuFragment? = null
     private var appMenuFragment: AppMenuFragment? = null
     private var folderMenuFragment: FolderMenuFragment? = null
-    private var wallpaperDrawable: Drawable = ColorDrawable(Color.BLACK)
 
     override fun onResume() {
         super.onResume()
@@ -70,7 +75,7 @@ class HomeActivity : AppCompatActivity() {
     private fun setWallpaperBackground() {
         val wallpaperManager = WallpaperManager.getInstance(this)
         try {
-            wallpaperDrawable = wallpaperManager.drawable ?: ColorDrawable(Color.BLACK)
+            val wallpaperDrawable = wallpaperManager.drawable
             window.setBackgroundDrawable(wallpaperDrawable)
         } catch (e: SecurityException) {
             e.printStackTrace()
@@ -115,23 +120,17 @@ class HomeActivity : AppCompatActivity() {
 
 		setContentView(R.layout.activity_home)
 
+        // Lazily create non-home fragments to reduce allocations at cold start.
         if (savedInstanceState == null) {
             homeMenuFragment = HomeMenuFragment()
-            shortcutsMenuFragment = ShortcutsMenuFragment()
-            appMenuFragment = AppMenuFragment()
-            folderMenuFragment = null
-            val transaction = supportFragmentManager.beginTransaction()
-            transaction.add(R.id.home_fragment_container, homeMenuFragment!!, "home")
-            transaction.add(R.id.home_fragment_container, shortcutsMenuFragment!!, "shortcuts")
-            transaction.add(R.id.home_fragment_container, appMenuFragment!!, "appmenu")
-            transaction.hide(shortcutsMenuFragment!!)
-            transaction.hide(appMenuFragment!!)
-            transaction.commit()
+            supportFragmentManager.beginTransaction()
+                .add(R.id.home_fragment_container, homeMenuFragment!!, TAG_HOME)
+                .commit()
         } else {
-            homeMenuFragment = supportFragmentManager.findFragmentByTag("home") as? HomeMenuFragment
-            shortcutsMenuFragment = supportFragmentManager.findFragmentByTag("shortcuts") as? ShortcutsMenuFragment
-            appMenuFragment = supportFragmentManager.findFragmentByTag("appmenu") as? AppMenuFragment
-            folderMenuFragment = supportFragmentManager.findFragmentByTag("foldermenu") as? com.ham.flipphonelauncher.ui.FolderMenuFragment
+            homeMenuFragment = supportFragmentManager.findFragmentByTag(TAG_HOME) as? HomeMenuFragment
+            shortcutsMenuFragment = supportFragmentManager.findFragmentByTag(TAG_SHORTCUTS) as? ShortcutsMenuFragment
+            appMenuFragment = supportFragmentManager.findFragmentByTag(TAG_APPMENU) as? AppMenuFragment
+            folderMenuFragment = supportFragmentManager.findFragmentByTag(TAG_FOLDERMENU) as? com.ham.flipphonelauncher.ui.FolderMenuFragment
         }
 	}
 
@@ -139,16 +138,34 @@ class HomeActivity : AppCompatActivity() {
         if (currentMenuState == newState) return
         val fm = supportFragmentManager
         val transaction = fm.beginTransaction()
+        // Ensure base/home fragment exists
+        if (homeMenuFragment == null) {
+            homeMenuFragment = fm.findFragmentByTag(TAG_HOME) as? HomeMenuFragment
+                ?: HomeMenuFragment().also { transaction.add(R.id.home_fragment_container, it, TAG_HOME) }
+        }
 
-        // Hide all fragments first
-        homeMenuFragment?.let { transaction.hide(it) }
-        shortcutsMenuFragment?.let { transaction.hide(it) }
-        appMenuFragment?.let { transaction.hide(it) }
-        folderMenuFragment?.let { transaction.hide(it) }
+        // Helper to ensure optional fragments exist when needed
+        fun ensureShortcutFragment() {
+            if (shortcutsMenuFragment == null) {
+                shortcutsMenuFragment = fm.findFragmentByTag(TAG_SHORTCUTS) as? ShortcutsMenuFragment
+                    ?: ShortcutsMenuFragment().also { transaction.add(R.id.home_fragment_container, it, TAG_SHORTCUTS); transaction.hide(it) }
+            }
+        }
+
+        fun ensureAppFragment() {
+            if (appMenuFragment == null) {
+                appMenuFragment = fm.findFragmentByTag(TAG_APPMENU) as? AppMenuFragment
+                    ?: AppMenuFragment().also { transaction.add(R.id.home_fragment_container, it, TAG_APPMENU); transaction.hide(it) }
+            }
+        }
+
+        // Hide everything first (if attached)
+        listOf(homeMenuFragment, shortcutsMenuFragment, appMenuFragment, folderMenuFragment).forEach { frag ->
+            frag?.let { transaction.hide(it) }
+        }
 
         when (newState) {
             LauncherState.HOME_MENU -> {
-                window.setBackgroundDrawable(wallpaperDrawable)
                 transaction.show(homeMenuFragment!!)
                 homeMenuFragment?.setActive(true)
                 shortcutsMenuFragment?.setActive(false)
@@ -156,7 +173,7 @@ class HomeActivity : AppCompatActivity() {
                 folderMenuFragment?.setActive(false)
             }
             LauncherState.SHORTCUTS_MENU -> {
-                window.setBackgroundDrawable(wallpaperDrawable)
+                ensureShortcutFragment()
                 transaction.show(shortcutsMenuFragment!!)
                 homeMenuFragment?.setActive(false)
                 shortcutsMenuFragment?.setActive(true)
@@ -164,7 +181,7 @@ class HomeActivity : AppCompatActivity() {
                 folderMenuFragment?.setActive(false)
             }
             LauncherState.APP_MENU -> {
-                window.setBackgroundDrawable(ColorDrawable(Color.BLACK))
+                ensureAppFragment()
                 transaction.show(appMenuFragment!!)
                 homeMenuFragment?.setActive(false)
                 shortcutsMenuFragment?.setActive(false)
@@ -172,7 +189,7 @@ class HomeActivity : AppCompatActivity() {
                 folderMenuFragment?.setActive(false)
             }
             LauncherState.FOLDER_MENU -> {
-                window.setBackgroundDrawable(ColorDrawable(Color.BLACK))
+                // folder is managed separately via showFolderMenu which adds it; show if present
                 if (folderMenuFragment != null) {
                     transaction.show(folderMenuFragment!!)
                     folderMenuFragment?.setActive(true)
@@ -195,12 +212,18 @@ class HomeActivity : AppCompatActivity() {
         }
         val fragment = com.ham.flipphonelauncher.ui.FolderMenuFragment.newInstance(folder)
         fragment.setOnAppClickListener { appItem ->
+            // ensure app fragment exists before delegating
+            if (appMenuFragment == null) {
+                appMenuFragment = fm.findFragmentByTag(TAG_APPMENU) as? AppMenuFragment ?: AppMenuFragment().also {
+                    fm.beginTransaction().add(R.id.home_fragment_container, it, TAG_APPMENU).hide(it).commit()
+                }
+            }
             appMenuFragment?.launchApp(appItem)
         }
         folderMenuFragment = fragment
         fm.beginTransaction()
-            .add(R.id.home_fragment_container, fragment, "foldermenu")
-            .hide(appMenuFragment!!)
+            .add(R.id.home_fragment_container, fragment, TAG_FOLDERMENU)
+            .hide(appMenuFragment ?: homeMenuFragment!!)
             .commit()
         updateState(LauncherState.FOLDER_MENU)
     }

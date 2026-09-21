@@ -7,5 +7,6 @@ data class AppItem(
     val icon: Drawable,
     val packageName: String,
     val activityName: String,
-    var folderId: Int
+    var folderId: Int,
+    var isHidden: Boolean = false
 )

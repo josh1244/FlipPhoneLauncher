@@ -19,8 +19,8 @@ class FolderMenuFragment : Fragment() {
     private var gridView: GridView? = null
 
     private var softKeyBarView: SoftkeyBarView? = null
-
-    private data class AppViewHolder(
+    private var folderAdapter: android.widget.BaseAdapter? = null
+    private data class FolderAppViewHolder(
         val icon: android.widget.ImageView,
         val name: android.widget.TextView
     )
@@ -53,34 +53,20 @@ class FolderMenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val folder = folder ?: return
-        val adapter = object : android.widget.BaseAdapter() {
-            override fun getCount() = folder.apps.size
-            override fun getItem(position: Int) = folder.apps[position]
-            override fun getItemId(position: Int) = position.toLong()
-            override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-                val app = getItem(position) as AppItem
-                val v: View
-                val vh: AppViewHolder
-                if (convertView == null) {
-                    v = LayoutInflater.from(parent?.context).inflate(R.layout.app_item_grid, parent, false)
-                    vh = AppViewHolder(
-                        v.findViewById(R.id.app_icon),
-                        v.findViewById(R.id.app_name)
-                    )
-                    v.tag = vh
-                } else {
-                    v = convertView
-                    vh = v.tag as AppViewHolder
-                }
-                vh.icon.setImageDrawable(app.icon)
-                vh.name.text = app.label
-                return v
+        if (folderAdapter == null) {
+            val adapter = com.ham.flipphonelauncher.adapter.FolderAppsAdapter(folder) { app ->
+                onAppClick?.invoke(app)
             }
+            folderAdapter = adapter
+            gridView?.adapter = adapter
+        } else {
+            (folderAdapter as? com.ham.flipphonelauncher.adapter.FolderAppsAdapter)?.updateFolder(folder)
+            gridView?.adapter = folderAdapter
         }
-        gridView?.adapter = adapter
         gridView?.visibility = View.VISIBLE
         gridView?.setOnItemClickListener { _, _, position, _ ->
-            onAppClick?.invoke(folder.apps[position])
+            val app = folder.apps.getOrNull(position)
+            if (app != null) onAppClick?.invoke(app)
         }
 
         // Ensure the gridView is focusable to receive dpad and key events
