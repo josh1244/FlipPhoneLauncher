@@ -29,7 +29,20 @@ class AppMenuFragment : Fragment(), KeyEventHandler {
     private var numberInputTime: Long = 0L
     private val numberInputTimeoutMs = 1500L
     private var isActive: Boolean = true
-    fun setActive(active: Boolean) { isActive = active }
+    fun setActive(active: Boolean) {
+        isActive = active
+        // Re-entering the App Menu resets the highlight to the first item, like the old version.
+        if (active) resetSelectionToFirst()
+    }
+
+    private fun resetSelectionToFirst() {
+        when (appMenuState?.layoutType) {
+            LayoutType.LIST -> { listAdapter?.setSelected(0); listRecycler?.scrollToPosition(0) }
+            LayoutType.GRID -> { gridAdapter?.setSelected(0); gridRecycler?.scrollToPosition(0) }
+            else -> {}
+        }
+        updateSoftkeyForSelection()
+    }
 
     private var softKeyBarView: SoftkeyBarView? = null
 
