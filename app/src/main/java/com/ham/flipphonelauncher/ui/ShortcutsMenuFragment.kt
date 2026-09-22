@@ -159,6 +159,9 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
     private var audioManagerCached: AudioManager? = null
     private var notificationManagerCached: android.app.NotificationManager? = null
     private var dndTextView: TextView? = null
+    // After a manual DnD toggle, ignore receiver-driven refreshes briefly: setInterruptionFilter is
+    // async, so a ringer-change broadcast can re-read a stale filter and revert the tile (None->All).
+    private var suppressDndSyncUntil = 0L
 
     @android.annotation.SuppressLint("MissingPermission")
     private fun isMobileDataEnabled(): Boolean {
@@ -263,8 +266,9 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
                 shortcutButtons.getOrNull(2)?.setBackgroundResource(if (airplaneModeEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
                 setShortcutIconTint(2, airplaneModeEnabled)
                 
-                // DnD and ringer
-                updateDndUiFromSystem()
+                // DnD and ringer (skip right after a manual toggle so a stale mid-transition
+                // read doesn't revert the tile)
+                if (System.currentTimeMillis() >= suppressDndSyncUntil) updateDndUiFromSystem()
                 
                 // Location State
                 val locationEnabled = isLocationEnabled()
@@ -401,6 +405,8 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
             shortcutButtons[3].setBackgroundResource(if (newState != "All" && newState != "Vibrate") R.drawable.circle_bg_on else R.drawable.circle_bg_off)
             setShortcutIconTint(3, newState != "All" && newState != "Vibrate")
             shortcutButtons[3].setImageResource(DND_ICONS[newIndex])
+            // Hold the optimistic UI while the interruption-filter change settles.
+            suppressDndSyncUntil = System.currentTimeMillis() + 1500
         }
         // Long-press DnD: open Do Not Disturb settings
         shortcutButtons[3].setOnLongClickListener {
