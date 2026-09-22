@@ -4,6 +4,21 @@ A minimal Android home-screen launcher built for flip phones and other keypad or
 devices without a touchscreen. Everything is driven by the number keys, D-pad, OK/center,
 and the two softkeys. Targets Android 8 (API 26) and up.
 
+## Screenshots
+
+<table>
+  <tr>
+    <td align="center">Home<br><img src="screenshots/home.png" width="150"></td>
+    <td align="center">App Menu — list<br><img src="screenshots/appmenu_list.png" width="150"></td>
+    <td align="center">App Menu — grid<br><img src="screenshots/appmenu_grid.png" width="150"></td>
+  </tr>
+  <tr>
+    <td align="center">Folder<br><img src="screenshots/folder.png" width="150"></td>
+    <td align="center">Shortcuts<br><img src="screenshots/shortcuts.png" width="150"></td>
+    <td></td>
+  </tr>
+</table>
+
 ## Screens
 
 **Home.** Shows the time, date, and carrier name. Softkeys: left opens notifications,
