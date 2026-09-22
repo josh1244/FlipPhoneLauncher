@@ -26,19 +26,30 @@ private val DND_ICON_BY_LABEL = DND_STATES.mapIndexed { i, s -> s to DND_ICONS[i
 
 
 class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
+
+    // One tile = its button, focus overlay, and its click / long-press / refresh behavior.
+    // The list is the single source of truth; order MUST match the visual grid (row-major),
+    // since D-pad navigation moves by index. Adding a tile is one entry here.
+    private class ShortcutTile(
+        val button: ImageButton,
+        val overlay: ImageView,
+        val onClick: () -> Unit,
+        val onLongClick: () -> Unit,
+        val refresh: () -> Unit
+    )
+
     private var isActive: Boolean = true
     fun setActive(active: Boolean) {
         isActive = active
         if (active) {
             selectedShortcutIndex = 0
-            if (this::shortcutButtons.isInitialized && this::shortcutOverlays.isInitialized) {
+            if (this::tiles.isInitialized) {
                 updateShortcutFocus()
-                updateDndUiFromSystem()
-                setBrightnessProgress()
+                refreshAll()
             }
         }
     }
-    
+
     // Guards against double register/unregister across the resume + hidden lifecycles.
     private var receiverRegistered = false
 
@@ -72,20 +83,7 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
                 receiverRegistered = true
             } catch (_: Exception) {}
         }
-        // Refresh states to capture changes made in a settings screen
-        if (this::shortcutButtons.isInitialized) {
-            val mobileDataEnabled = isMobileDataEnabled()
-            shortcutButtons.getOrNull(IDX_MOBILE_DATA)?.setBackgroundResource(if (mobileDataEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-            setShortcutIconTint(IDX_MOBILE_DATA, mobileDataEnabled)
-
-            val airplaneModeEnabled = isAirplaneModeEnabled()
-            shortcutButtons.getOrNull(2)?.setBackgroundResource(if (airplaneModeEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-            setShortcutIconTint(2, airplaneModeEnabled)
-
-            val locationEnabled = isLocationEnabled()
-            shortcutButtons.getOrNull(4)?.setBackgroundResource(if (locationEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-            setShortcutIconTint(4, locationEnabled)
-        }
+        refreshAll()  // capture any changes made in a settings screen
     }
 
     private fun stopSystemStateWatch() {
@@ -107,51 +105,40 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_shortcuts_menu, container, false)
-        // Reset shortcut selection when menu is opened
         selectedShortcutIndex = 0
 
         softKeyBarView = view.findViewById(R.id.softkey_bar)
         softKeyBarView?.setSoftkeyBarText("", "Select", "")
-
-        // Get shortcuts panel from layout include
         shortcutsPanel = view.findViewById(R.id.shortcuts_panel)
 
-        // Collect shortcut buttons for navigation. List order MUST match the visual grid
-        // (row-major), since D-pad moves by index. (Grid: 3 cols x 2 rows)
-        // Row 0: 0=Brightness, 1=Bluetooth, 2=Airplane Mode
-        // Row 1: 3=DnD, 4=Location, 5=Mobile Data
-        shortcutButtons = listOf(
-            shortcutsPanel.findViewById(R.id.btn_brightness),
-            shortcutsPanel.findViewById(R.id.btn_bluetooth),
-            shortcutsPanel.findViewById(R.id.btn_airplane_mode),
-            shortcutsPanel.findViewById(R.id.btn_dnd),
-            shortcutsPanel.findViewById(R.id.btn_location),
-            shortcutsPanel.findViewById(R.id.btn_mobile_data)
-        )
+        // Cache system services / views the tile behaviors depend on.
+        bluetoothAdapterCached = BluetoothAdapter.getDefaultAdapter()
+        audioManagerCached = requireContext().getSystemService(Context.AUDIO_SERVICE) as? AudioManager
+        notificationManagerCached = requireContext().getSystemService(Context.NOTIFICATION_SERVICE) as? android.app.NotificationManager
+        dndTextView = shortcutsPanel.findViewById(R.id.shortcut_dnd_label)
 
-        // Collect overlay views for focus/hover outline (same order as buttons)
-        shortcutOverlays = listOf(
-            shortcutsPanel.findViewById(R.id.overlay_brightness),
-            shortcutsPanel.findViewById(R.id.overlay_bluetooth),
-            shortcutsPanel.findViewById(R.id.overlay_airplane_mode),
-            shortcutsPanel.findViewById(R.id.overlay_dnd),
-            shortcutsPanel.findViewById(R.id.overlay_location),
-            shortcutsPanel.findViewById(R.id.overlay_mobile_data)
-        )
+        tiles = buildTiles()
+        shortcutButtons = tiles.map { it.button }
+        shortcutOverlays = tiles.map { it.overlay }
 
-        setupInitialShortcuts()
-
+        setupTiles()
         return view
     }
 
     private lateinit var shortcutsPanel: View
+    private lateinit var tiles: List<ShortcutTile>
     private lateinit var shortcutButtons: List<ImageButton>
     private lateinit var shortcutOverlays: List<ImageView>
     private var selectedShortcutIndex: Int = 0
     private var softKeyBarView: SoftkeyBarView? = null
 
-    // Tile index = visual position (row-major). Brightness is first (top-left), Mobile Data last.
+    // Tile index = visual position (row-major). Row 0: Brightness, Bluetooth, Airplane Mode.
+    // Row 1: DnD, Location, Mobile Data.
     private val IDX_BRIGHTNESS = 0
+    private val IDX_BLUETOOTH = 1
+    private val IDX_AIRPLANE = 2
+    private val IDX_DND = 3
+    private val IDX_LOCATION = 4
     private val IDX_MOBILE_DATA = 5
 
     // Cached system services and views to avoid repeated lookups
@@ -162,6 +149,76 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
     // After a manual DnD toggle, ignore receiver-driven refreshes briefly: setInterruptionFilter is
     // async, so a ringer-change broadcast can re-read a stale filter and revert the tile (None->All).
     private var suppressDndSyncUntil = 0L
+
+    private fun buildTiles(): List<ShortcutTile> = listOf(
+        ShortcutTile(
+            button = shortcutsPanel.findViewById(R.id.btn_brightness),
+            overlay = shortcutsPanel.findViewById(R.id.overlay_brightness),
+            onClick = { adjustBrightness(1) },
+            onLongClick = { openSettings(android.provider.Settings.ACTION_DISPLAY_SETTINGS, "Display") },
+            refresh = { setBrightnessProgress() }
+        ),
+        ShortcutTile(
+            button = shortcutsPanel.findViewById(R.id.btn_bluetooth),
+            overlay = shortcutsPanel.findViewById(R.id.overlay_bluetooth),
+            onClick = { toggleBluetooth() },
+            onLongClick = { openSettings(android.provider.Settings.ACTION_BLUETOOTH_SETTINGS, "Bluetooth") },
+            refresh = { renderToggle(IDX_BLUETOOTH, btEnabled()) }
+        ),
+        ShortcutTile(
+            button = shortcutsPanel.findViewById(R.id.btn_airplane_mode),
+            overlay = shortcutsPanel.findViewById(R.id.overlay_airplane_mode),
+            // Airplane can't be truly toggled by an app on this OS (the radio switch needs a
+            // system-protected broadcast), so open the settings screen instead.
+            onClick = { openSettings(android.provider.Settings.ACTION_AIRPLANE_MODE_SETTINGS, "Airplane Mode") },
+            onLongClick = { openSettings(android.provider.Settings.ACTION_AIRPLANE_MODE_SETTINGS, "Airplane Mode") },
+            refresh = { renderToggle(IDX_AIRPLANE, isAirplaneModeEnabled()) }
+        ),
+        ShortcutTile(
+            button = shortcutsPanel.findViewById(R.id.btn_dnd),
+            overlay = shortcutsPanel.findViewById(R.id.overlay_dnd),
+            onClick = { cycleDnd() },
+            onLongClick = { openZenModeSettings() },
+            refresh = { if (System.currentTimeMillis() >= suppressDndSyncUntil) updateDndUiFromSystem() }
+        ),
+        ShortcutTile(
+            button = shortcutsPanel.findViewById(R.id.btn_location),
+            overlay = shortcutsPanel.findViewById(R.id.overlay_location),
+            onClick = { toggleLocation() },
+            onLongClick = { openSettings(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS, "Location") },
+            refresh = { renderToggle(IDX_LOCATION, isLocationEnabled()) }
+        ),
+        ShortcutTile(
+            button = shortcutsPanel.findViewById(R.id.btn_mobile_data),
+            overlay = shortcutsPanel.findViewById(R.id.overlay_mobile_data),
+            onClick = { openMobileDataSettings() },
+            onLongClick = { openMobileDataSettings() },
+            refresh = { renderToggle(IDX_MOBILE_DATA, isMobileDataEnabled()) }
+        )
+    )
+
+    private fun setupTiles() {
+        tiles.forEach { tile ->
+            tile.button.setOnClickListener { tile.onClick() }
+            tile.button.setOnLongClickListener { tile.onLongClick(); true }
+        }
+        // Brightness tile shows a progress ring (static background) and is always "on".
+        shortcutButtons[IDX_BRIGHTNESS].setBackgroundResource(R.drawable.brightness_progress)
+        setShortcutIconTint(IDX_BRIGHTNESS, true)
+        refreshAll()
+        updateShortcutFocus()
+    }
+
+    // Re-render every tile from the current system state (single place; used on entry and by the receiver).
+    private fun refreshAll() {
+        if (!this::tiles.isInitialized) return
+        tiles.forEach { it.refresh() }
+    }
+
+    private fun renderToggle(index: Int, enabled: Boolean) {
+        shortcutButtons[index].setBackgroundResource(if (enabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+        setShortcutIconTint(index, enabled)
+    }
 
     @android.annotation.SuppressLint("MissingPermission")
     private fun isMobileDataEnabled(): Boolean {
@@ -193,6 +250,8 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
             false
         }
     }
+
+    private fun btEnabled(): Boolean = bluetoothAdapterCached?.isEnabled == true
 
     // WRITE_SECURE_SETTINGS is a system permission granted out-of-band (adb); if it's missing we
     // fall back to opening the relevant settings screen instead of toggling directly.
@@ -227,6 +286,17 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
         }
     }
 
+    private fun toggleBluetooth() {
+        val bt = bluetoothAdapterCached
+        if (bt != null) {
+            val enabled = !bt.isEnabled
+            if (enabled) bt.enable() else bt.disable()
+            renderToggle(IDX_BLUETOOTH, enabled)
+        } else {
+            Toast.makeText(requireContext(), "Bluetooth not supported", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     private fun toggleLocation() {
         if (!hasSecureSettings()) {
             openSettings(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS, "Location")
@@ -239,215 +309,68 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
             android.provider.Settings.Secure.putInt(
                 requireContext().contentResolver, android.provider.Settings.Secure.LOCATION_MODE, mode
             )
-            shortcutButtons.getOrNull(4)?.setBackgroundResource(if (newEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-            setShortcutIconTint(4, newEnabled)
+            renderToggle(IDX_LOCATION, newEnabled)
         } catch (e: Exception) {
             openSettings(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS, "Location")
+        }
+    }
+
+    // Cycle DnD: All -> Vibrate -> Priority -> None -> All. Step is derived from the live system
+    // state (not a stored index, which drifts) so e.g. None -> All lands correctly.
+    private fun cycleDnd() {
+        val notificationManager = notificationManagerCached ?: return
+        if (!notificationManager.isNotificationPolicyAccessGranted) {
+            Toast.makeText(requireContext(), "Grant Do Not Disturb access in settings", Toast.LENGTH_LONG).show()
+            startActivity(Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS))
+            return
+        }
+        val audioManager = audioManagerCached ?: return
+        val currentIndex = DND_STATES.indexOf(currentDndLabel()).coerceAtLeast(0)
+        val newIndex = (currentIndex + 1) % DND_STATES.size
+        val newState = DND_STATES[newIndex]
+        when (newState) {
+            "All" -> {
+                notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_ALL)
+                audioManager.ringerMode = AudioManager.RINGER_MODE_NORMAL
+            }
+            "Vibrate" -> {
+                notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_ALL)
+                audioManager.ringerMode = AudioManager.RINGER_MODE_VIBRATE
+            }
+            "Priority" -> {
+                notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY)
+                audioManager.ringerMode = AudioManager.RINGER_MODE_NORMAL
+            }
+            "None" -> {
+                notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_NONE)
+                audioManager.ringerMode = AudioManager.RINGER_MODE_SILENT
+            }
+        }
+        dndTextView?.text = newState
+        val restricting = newState != "All" && newState != "Vibrate"
+        shortcutButtons[IDX_DND].setBackgroundResource(if (restricting) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+        setShortcutIconTint(IDX_DND, restricting)
+        shortcutButtons[IDX_DND].setImageResource(DND_ICONS[newIndex])
+        // Hold the optimistic UI while the interruption-filter change settles.
+        suppressDndSyncUntil = System.currentTimeMillis() + 1500
+    }
+
+    private fun openZenModeSettings() {
+        try {
+            val intent = Intent()
+            intent.setClassName("com.android.settings", "com.android.settings.Settings\$ZenModeSettingsActivity")
+            startActivity(intent)
+        } catch (e: Exception) {
+            Toast.makeText(requireContext(), "Unable to open DnD settings", Toast.LENGTH_SHORT).show()
         }
     }
 
     // Receiver to update UI when system settings change
     private val systemStateReceiver = object : android.content.BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: android.content.Intent?) {
-            // Update UI elements conservatively
-            try {
-                // Mobile Data State
-                val mobileDataEnabled = isMobileDataEnabled()
-                shortcutButtons.getOrNull(IDX_MOBILE_DATA)?.setBackgroundResource(if (mobileDataEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-                setShortcutIconTint(IDX_MOBILE_DATA, mobileDataEnabled)
-                
-                // Bluetooth
-                val btEnabled = bluetoothAdapterCached != null && bluetoothAdapterCached!!.isEnabled
-                shortcutButtons.getOrNull(1)?.setBackgroundResource(if (btEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-                setShortcutIconTint(1, btEnabled)
-                
-                // Airplane Mode
-                val airplaneModeEnabled = isAirplaneModeEnabled()
-                shortcutButtons.getOrNull(2)?.setBackgroundResource(if (airplaneModeEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-                setShortcutIconTint(2, airplaneModeEnabled)
-                
-                // DnD and ringer (skip right after a manual toggle so a stale mid-transition
-                // read doesn't revert the tile)
-                if (System.currentTimeMillis() >= suppressDndSyncUntil) updateDndUiFromSystem()
-                
-                // Location State
-                val locationEnabled = isLocationEnabled()
-                shortcutButtons.getOrNull(4)?.setBackgroundResource(if (locationEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-                setShortcutIconTint(4, locationEnabled)
-
-                // Brightness progress
-                setBrightnessProgress()
-            } catch (_: Exception) {}
+            try { refreshAll() } catch (_: Exception) {}
         }
     }
-
-    private fun setupInitialShortcuts() {
-        // Cache system services
-        bluetoothAdapterCached = BluetoothAdapter.getDefaultAdapter()
-        audioManagerCached = requireContext().getSystemService(Context.AUDIO_SERVICE) as? AudioManager
-        notificationManagerCached = requireContext().getSystemService(Context.NOTIFICATION_SERVICE) as? android.app.NotificationManager
-        dndTextView = shortcutsPanel.findViewById(R.id.shortcut_dnd_label)
-
-        // Set initial backgrounds based on current state
-        val mobileDataEnabled = isMobileDataEnabled()
-        shortcutButtons[IDX_MOBILE_DATA].setBackgroundResource(if (mobileDataEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-        
-        val btEnabled = bluetoothAdapterCached != null && bluetoothAdapterCached!!.isEnabled
-        shortcutButtons[1].setBackgroundResource(if (btEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-        
-        val airplaneModeEnabled = isAirplaneModeEnabled()
-        shortcutButtons[2].setBackgroundResource(if (airplaneModeEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-        
-        val ringerNormal = audioManagerCached?.ringerMode == AudioManager.RINGER_MODE_NORMAL
-        shortcutButtons[3].setBackgroundResource(if (ringerNormal) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-        
-        val locationEnabled = isLocationEnabled()
-        shortcutButtons[4].setBackgroundResource(if (locationEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-
-        // For brightness, always on by default
-        shortcutButtons[IDX_BRIGHTNESS].setBackgroundResource(R.drawable.brightness_progress)
-
-        // Set initial progress
-        setBrightnessProgress()
-
-        // Set the focused item
-        updateShortcutFocus()
-
-        setShortcutIconTint(IDX_MOBILE_DATA, mobileDataEnabled)
-        setShortcutIconTint(1, btEnabled)
-        setShortcutIconTint(2, airplaneModeEnabled)
-        setShortcutIconTint(3, ringerNormal)
-        setShortcutIconTint(4, locationEnabled)
-        setShortcutIconTint(IDX_BRIGHTNESS, true)
-
-        updateDndUiFromSystem()
-
-        // Mobile Data Click
-        shortcutButtons[IDX_MOBILE_DATA].setOnClickListener {
-            openMobileDataSettings()
-        }
-        shortcutButtons[IDX_MOBILE_DATA].setOnLongClickListener {
-            openMobileDataSettings()
-            true
-        }
-
-        // Bluetooth
-        shortcutButtons[1].setOnClickListener {
-            val bt = bluetoothAdapterCached
-            if (bt != null) {
-                val enabled = !bt.isEnabled
-                if (enabled) bt.enable() else bt.disable()
-                shortcutButtons[1].setBackgroundResource(if (enabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-                setShortcutIconTint(1, enabled)
-            } else {
-                Toast.makeText(requireContext(), "Bluetooth not supported", Toast.LENGTH_SHORT).show()
-            }
-        }
-        // Long-press Bluetooth: open Bluetooth settings
-        shortcutButtons[1].setOnLongClickListener {
-            try {
-                startActivity(Intent(android.provider.Settings.ACTION_BLUETOOTH_SETTINGS))
-            } catch (e: Exception) {
-                Toast.makeText(requireContext(), "Unable to open Bluetooth settings", Toast.LENGTH_SHORT).show()
-            }
-            true
-        }
-
-        // Airplane can't be truly toggled by an app on this OS: writing the setting works but the
-        // radio switch needs a system-protected broadcast, so the radios wouldn't actually change.
-        // Open the settings screen instead of flipping a setting that has no real effect.
-        shortcutButtons[2].setOnClickListener {
-            openSettings(android.provider.Settings.ACTION_AIRPLANE_MODE_SETTINGS, "Airplane Mode")
-        }
-        shortcutButtons[2].setOnLongClickListener {
-            try {
-                startActivity(Intent(android.provider.Settings.ACTION_AIRPLANE_MODE_SETTINGS))
-            } catch (e: Exception) {
-                Toast.makeText(requireContext(), "Unable to open Airplane Mode settings", Toast.LENGTH_SHORT).show()
-            }
-            true
-        }
-
-        // DnD (Do Not Disturb) - cycles through states using cached resources
-        shortcutButtons[3].setOnClickListener {
-            val notificationManager = notificationManagerCached ?: return@setOnClickListener
-            if (!notificationManager.isNotificationPolicyAccessGranted) {
-                Toast.makeText(requireContext(), "Grant Do Not Disturb access in settings", Toast.LENGTH_LONG).show()
-                val intent = Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
-                startActivity(intent)
-                return@setOnClickListener
-            }
-            val audioManager = audioManagerCached ?: return@setOnClickListener
-            // Derive the current step from the live system state, not a stored index (which drifts
-            // out of sync when DND changes elsewhere) — that desync is what broke e.g. None -> All.
-            val currentIndex = DND_STATES.indexOf(currentDndLabel()).coerceAtLeast(0)
-            val newIndex = (currentIndex + 1) % DND_STATES.size
-            val newState = DND_STATES[newIndex]
-            when (newState) {
-                "All" -> {
-                    notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_ALL)
-                    audioManager.ringerMode = AudioManager.RINGER_MODE_NORMAL
-                }
-                "Vibrate" -> {
-                    notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_ALL)
-                    audioManager.ringerMode = AudioManager.RINGER_MODE_VIBRATE
-                }
-                "Priority" -> {
-                    notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY)
-                    audioManager.ringerMode = AudioManager.RINGER_MODE_NORMAL
-                }
-                "None" -> {
-                    notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_NONE)
-                    audioManager.ringerMode = AudioManager.RINGER_MODE_SILENT
-                }
-            }
-            dndTextView?.text = newState
-            shortcutButtons[3].setBackgroundResource(if (newState != "All" && newState != "Vibrate") R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-            setShortcutIconTint(3, newState != "All" && newState != "Vibrate")
-            shortcutButtons[3].setImageResource(DND_ICONS[newIndex])
-            // Hold the optimistic UI while the interruption-filter change settles.
-            suppressDndSyncUntil = System.currentTimeMillis() + 1500
-        }
-        // Long-press DnD: open Do Not Disturb settings
-        shortcutButtons[3].setOnLongClickListener {
-            try {
-                val intent = Intent()
-                intent.setClassName("com.android.settings", "com.android.settings.Settings\$ZenModeSettingsActivity")
-                startActivity(intent)
-            } catch (e: Exception) {
-                Toast.makeText(requireContext(), "Unable to open DnD settings", Toast.LENGTH_SHORT).show()
-            }
-            true
-        }
-
-        // Location Click: toggle directly (long-press opens settings)
-        shortcutButtons[4].setOnClickListener {
-            toggleLocation()
-        }
-        shortcutButtons[4].setOnLongClickListener {
-            try {
-                startActivity(Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS))
-            } catch (e: Exception) {
-                Toast.makeText(requireContext(), "Unable to open Location settings", Toast.LENGTH_SHORT).show()
-            }
-            true
-        }
-
-        // Brightness
-        shortcutButtons[IDX_BRIGHTNESS].setOnClickListener {
-            adjustBrightness(1)
-        }
-        // Long-press Brightness: open Display settings
-        shortcutButtons[IDX_BRIGHTNESS].setOnLongClickListener {
-            try {
-                startActivity(Intent(android.provider.Settings.ACTION_DISPLAY_SETTINGS))
-            } catch (e: Exception) {
-                Toast.makeText(requireContext(), "Unable to open Display settings", Toast.LENGTH_SHORT).show()
-            }
-            true
-        }
-    }
-
 
     // --- DnD handling ---
 
@@ -471,17 +394,15 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
         val dndLabel = currentDndLabel()
         dndTextView?.text = dndLabel
         val restricting = dndLabel != "All" && dndLabel != "Vibrate"
-        shortcutButtons[3].setBackgroundResource(if (restricting) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-        setShortcutIconTint(3, restricting)
+        shortcutButtons[IDX_DND].setBackgroundResource(if (restricting) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+        setShortcutIconTint(IDX_DND, restricting)
         val iconRes = DND_ICON_BY_LABEL[dndLabel] ?: R.drawable.ic_dnd_none
-        shortcutButtons[3].setImageResource(iconRes)
+        shortcutButtons[IDX_DND].setImageResource(iconRes)
     }
-
 
     // --- Brightness handling ---
 
     private fun setBrightnessProgress() {
-        // Always fetch the current system brightness and update the progress drawable
         try {
             val cResolver = requireContext().contentResolver
             val current = android.provider.Settings.System.getInt(cResolver, android.provider.Settings.System.SCREEN_BRIGHTNESS)
@@ -490,14 +411,12 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
             if (drawable is android.graphics.drawable.LayerDrawable) {
                 val clip = drawable.findDrawableByLayerId(R.id.progress)
                 if (clip is android.graphics.drawable.ClipDrawable) {
-                    // ClipDrawable level is 0-10000
-                    clip.level = (percent * 100)
+                    clip.level = (percent * 100)  // ClipDrawable level is 0-10000
                 }
             }
         } catch (_: Exception) {}
     }
 
-    // Helper to adjust brightness up/down by one step
     private fun adjustBrightness(direction: Int) {
         try {
             val context = requireContext()
@@ -517,14 +436,12 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
             if (newIdx >= BRIGHTNESS_LEVELS.size) newIdx = BRIGHTNESS_LEVELS.size - 1
             val newBrightness = BRIGHTNESS_LEVELS[newIdx]
             android.provider.Settings.System.putInt(cResolver, android.provider.Settings.System.SCREEN_BRIGHTNESS, newBrightness)
-            val brightnessText = "Brightness: ${BRIGHTNESS_LABELS[newIdx]}"
-            Toast.makeText(context, brightnessText, Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Brightness: ${BRIGHTNESS_LABELS[newIdx]}", Toast.LENGTH_SHORT).show()
             setBrightnessProgress()
         } catch (e: Exception) {
             Toast.makeText(requireContext(), "Brightness change failed", Toast.LENGTH_SHORT).show()
         }
     }
-
 
     // --- Shortcut focus handling ---
 
@@ -543,11 +460,10 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
             btn.isFocusable = true
             btn.isFocusableInTouchMode = true
             btn.isSelected = (i == selectedShortcutIndex)
-            // Show overlay if focused, hide otherwise
             shortcutOverlays[i].visibility = if (i == selectedShortcutIndex) View.VISIBLE else View.GONE
         }
         shortcutButtons[selectedShortcutIndex].requestFocus()
-        // Update softkey bar for brightness shortcut
+        // Brightness is adjusted with the softkeys, so show Down/Up hints only for it.
         if (selectedShortcutIndex == IDX_BRIGHTNESS) {
             softKeyBarView?.setSoftkeyBarText(left = "Down", middle = "Select", right = "Up")
         } else {
@@ -555,14 +471,11 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
         }
     }
 
-    // Helper to set icon tint
     private fun setShortcutIconTint(index: Int, enabled: Boolean) {
-        // Tint colors: blue for enabled, white for disabled
         val blue = 0xFF2196F3.toInt()
         val white = 0xFFFFFFFF.toInt()
         shortcutButtons[index].setColorFilter(if (enabled) blue else white)
     }
-
 
     // --- Key event handling ---
 
@@ -573,37 +486,17 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
                 (activity as? com.ham.flipphonelauncher.HomeActivity)?.updateState(com.ham.flipphonelauncher.LauncherState.HOME_MENU)
                 return true
             }
-            KeyEvent.KEYCODE_DPAD_LEFT -> {
-                moveShortcutFocus(-1)
-                return true
-            }
-            KeyEvent.KEYCODE_DPAD_RIGHT -> {
-                moveShortcutFocus(1)
-                return true
-            }
-            KeyEvent.KEYCODE_DPAD_UP -> {
-                moveShortcutFocus(-3)
-                return true
-            }
-            KeyEvent.KEYCODE_DPAD_DOWN -> {
-                moveShortcutFocus(3)
-                return true
-            }
+            KeyEvent.KEYCODE_DPAD_LEFT -> { moveShortcutFocus(-1); return true }
+            KeyEvent.KEYCODE_DPAD_RIGHT -> { moveShortcutFocus(1); return true }
+            KeyEvent.KEYCODE_DPAD_UP -> { moveShortcutFocus(-3); return true }
+            KeyEvent.KEYCODE_DPAD_DOWN -> { moveShortcutFocus(3); return true }
             KeyEvent.KEYCODE_SOFT_LEFT -> {
-                if (selectedShortcutIndex == IDX_BRIGHTNESS) {
-                    adjustBrightness(-1)
-                    return true
-                } else {
-                    return true
-                }
+                if (selectedShortcutIndex == IDX_BRIGHTNESS) adjustBrightness(-1)
+                return true
             }
             KeyEvent.KEYCODE_SOFT_RIGHT -> {
-                if (selectedShortcutIndex == IDX_BRIGHTNESS) {
-                    adjustBrightness(1)
-                    return true
-                } else {
-                    return true
-                }
+                if (selectedShortcutIndex == IDX_BRIGHTNESS) adjustBrightness(1)
+                return true
             }
         }
         return false
