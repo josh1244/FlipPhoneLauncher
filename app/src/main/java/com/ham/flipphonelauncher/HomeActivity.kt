@@ -85,15 +85,10 @@ class HomeActivity : AppCompatActivity() {
     }
 
     override fun dispatchKeyEvent(event: KeyEvent): Boolean {
-        // TEMPORARY DIAGNOSTIC: shows the keycode of each key press so we can identify the
-        // physical Home key. Remove after diagnosis.
-        if (event.action == KeyEvent.ACTION_DOWN) {
-            android.widget.Toast.makeText(this, "key=${event.keyCode}", android.widget.Toast.LENGTH_SHORT).show()
-        }
-
-        // Physical home / end-call key always returns to the main menu, from any screen.
-        // On this hardware these arrive as key events (the app already receives KEYCODE_CALL),
-        // not as a re-delivered HOME intent, so onResume/onNewIntent never see them.
+        // If the home/end-call key is delivered to the app as a key event, return to the main menu.
+        // Note: on this phone the OS consumes the Home key itself while the launcher is already
+        // foreground (it reaches neither dispatchKeyEvent nor onNewIntent), so this is a best-effort
+        // net that mainly covers the end-call key and other hardware.
         if (event.keyCode == KeyEvent.KEYCODE_HOME || event.keyCode == KeyEvent.KEYCODE_ENDCALL) {
             if (event.action == KeyEvent.ACTION_UP) goHome()
             return true
