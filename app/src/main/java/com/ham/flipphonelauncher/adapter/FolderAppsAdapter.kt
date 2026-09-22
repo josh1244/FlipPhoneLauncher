@@ -7,9 +7,12 @@ import android.widget.BaseAdapter
 import com.ham.flipphonelauncher.R
 import com.ham.flipphonelauncher.model.AppItem
 import com.ham.flipphonelauncher.model.FolderItem
+import com.ham.flipphonelauncher.util.AppIconLoader
+import kotlinx.coroutines.CoroutineScope
 
 class FolderAppsAdapter(
     private var folder: FolderItem,
+    private val scope: CoroutineScope,
     private val onAppClick: ((AppItem) -> Unit)? = null
 ) : BaseAdapter() {
 
@@ -37,7 +40,7 @@ class FolderAppsAdapter(
             v = convertView
             vh = v.tag as VH
         }
-        vh.icon.setImageDrawable(app.icon)
+        AppIconLoader.bind(vh.icon, app.packageName, app.activityName, scope)
         vh.name.text = app.label
         return v
     }

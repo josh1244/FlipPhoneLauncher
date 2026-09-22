@@ -78,11 +78,11 @@ class AppMenuFragment : Fragment(), KeyEventHandler {
         gridView = view.findViewById(R.id.app_grid_view)
         // Initialize adapters if needed
         if (listAdapter == null && appMenuState != null) {
-            listAdapter = com.ham.flipphonelauncher.adapter.AppListAdapter(appMenuState!!.folders) { appItem -> launchApp(appItem) }
+            listAdapter = com.ham.flipphonelauncher.adapter.AppListAdapter(appMenuState!!.folders, viewLifecycleOwner.lifecycleScope) { appItem -> launchApp(appItem) }
         }
         if (gridAdapter == null && appMenuState != null) {
             // Pass null for folder click here; click handled explicitly on the GridView later
-            gridAdapter = com.ham.flipphonelauncher.adapter.AppGridAdapter(appMenuState!!.folders, null, { appItem -> launchApp(appItem) })
+            gridAdapter = com.ham.flipphonelauncher.adapter.AppGridAdapter(appMenuState!!.folders, viewLifecycleOwner.lifecycleScope, null, { appItem -> launchApp(appItem) })
         }
         updateViewMode()
         // Select first app and set selection listeners once
@@ -125,7 +125,7 @@ class AppMenuFragment : Fragment(), KeyEventHandler {
             gridView?.visibility = View.GONE
             // Reuse adapter to avoid reallocating
             if (listAdapter == null) {
-                listAdapter = com.ham.flipphonelauncher.adapter.AppListAdapter(state.folders) { appItem -> launchApp(appItem) }
+                listAdapter = com.ham.flipphonelauncher.adapter.AppListAdapter(state.folders, viewLifecycleOwner.lifecycleScope) { appItem -> launchApp(appItem) }
                 listView?.adapter = listAdapter
             } else {
                 listView?.adapter = listAdapter
@@ -138,7 +138,7 @@ class AppMenuFragment : Fragment(), KeyEventHandler {
             listView?.visibility = View.GONE
             gridView?.visibility = View.VISIBLE
             if (gridAdapter == null) {
-                gridAdapter = com.ham.flipphonelauncher.adapter.AppGridAdapter(state.folders, { folder -> openFolderMenu(folder) }, { app -> launchApp(app) })
+                gridAdapter = com.ham.flipphonelauncher.adapter.AppGridAdapter(state.folders, viewLifecycleOwner.lifecycleScope, { folder -> openFolderMenu(folder) }, { app -> launchApp(app) })
                 gridView?.adapter = gridAdapter
             } else {
                 gridView?.adapter = gridAdapter

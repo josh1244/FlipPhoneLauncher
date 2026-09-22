@@ -6,9 +6,12 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import com.ham.flipphonelauncher.model.FolderItem
 import com.ham.flipphonelauncher.model.AppItem
+import com.ham.flipphonelauncher.util.AppIconLoader
+import kotlinx.coroutines.CoroutineScope
 
 class AppGridAdapter(
     private val folders: List<FolderItem>,
+    private val scope: CoroutineScope,
     private val onFolderClick: ((FolderItem) -> Unit)? = null,
     private val onAppClick: ((AppItem) -> Unit)? = null
 ) : BaseAdapter() {
@@ -45,12 +48,16 @@ class AppGridAdapter(
         }
         when (item) {
             is FolderItem -> {
-                val icon = item.apps.firstOrNull()?.icon
-                viewHolder.icon.setImageDrawable(icon)
+                val first = item.apps.firstOrNull()
+                if (first != null) {
+                    AppIconLoader.bind(viewHolder.icon, first.packageName, first.activityName, scope)
+                } else {
+                    viewHolder.icon.setImageDrawable(null)
+                }
                 viewHolder.name.text = item.name
             }
             is AppItem -> {
-                viewHolder.icon.setImageDrawable(item.icon)
+                AppIconLoader.bind(viewHolder.icon, item.packageName, item.activityName, scope)
                 viewHolder.name.text = item.label
             }
         }

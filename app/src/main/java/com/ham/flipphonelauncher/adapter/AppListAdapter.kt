@@ -5,10 +5,13 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import com.ham.flipphonelauncher.model.AppItem
 import com.ham.flipphonelauncher.model.FolderItem
+import com.ham.flipphonelauncher.util.AppIconLoader
+import kotlinx.coroutines.CoroutineScope
 
 
 class AppListAdapter(
     folders: List<FolderItem>,
+    private val scope: CoroutineScope,
     private val onAppClick: ((AppItem) -> Unit)? = null
 ) : BaseAdapter() {
     // For each app, store its folder name and whether it's the first in the folder
@@ -84,7 +87,7 @@ class AppListAdapter(
             viewHolder.header.text = ""
         }
         viewHolder.icon.visibility = View.VISIBLE
-        viewHolder.icon.setImageDrawable(entry.app.icon)
+        AppIconLoader.bind(viewHolder.icon, entry.app.packageName, entry.app.activityName, scope)
         if (entry.folderHasMultiple) {
             viewHolder.name.text = "${entry.folderIndex}.${entry.appIndex} ${entry.app.label}"
         } else if (entry.isOnlyAppInFolder) {

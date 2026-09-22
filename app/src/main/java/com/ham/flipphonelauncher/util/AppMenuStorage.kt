@@ -9,8 +9,6 @@ import java.io.File
 import com.ham.flipphonelauncher.model.FolderItem
 import com.ham.flipphonelauncher.model.AppItem
 import com.ham.flipphonelauncher.model.LayoutType
-import android.graphics.drawable.ColorDrawable
-import android.graphics.Color
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -20,8 +18,7 @@ object AppMenuStorage {
     // Holds the full list of folders in memory (including hidden apps, so saves stay complete)
     private var folders: MutableList<FolderItem> = mutableListOf()
 
-    // In-memory cache for app icons and labels
-    private val iconCache = mutableMapOf<String, android.graphics.drawable.Drawable>()
+    // In-memory cache for app labels (icons are cached separately by AppIconLoader, loaded lazily)
     private val labelCache = mutableMapOf<String, CharSequence>()
 
     // Built app/folder snapshot, reused across opens until invalidated (see invalidate()).
@@ -146,7 +143,6 @@ object AppMenuStorage {
                     val isHidden = appObj.optBoolean("hidden", false)
                     AppItem(
                         label = label,
-                        icon = ColorDrawable(Color.TRANSPARENT),
                         packageName = appKey.substringBefore("/"),
                         activityName = appKey.substringAfter("/", ""),
                         folderId = folderId,
@@ -157,7 +153,6 @@ object AppMenuStorage {
                     val appKey = arr.optString(i)
                     AppItem(
                         label = appKey,
-                        icon = ColorDrawable(Color.TRANSPARENT),
                         packageName = appKey.substringBefore("/"),
                         activityName = appKey.substringAfter("/", ""),
                         folderId = folderId,
@@ -235,8 +230,7 @@ object AppMenuStorage {
                     val resolveInfo = appInfoMap[key]
                     if (resolveInfo != null) {
                         val appLabel = labelCache.getOrPut(key) { resolveInfo.loadLabel(pm) }
-                        val appIcon = iconCache.getOrPut(key) { resolveInfo.loadIcon(pm) }
-                        val appDetail = AppItem(appLabel, appIcon, appItem.packageName, appItem.activityName, folderId, appItem.isHidden)
+                        val appDetail = AppItem(appLabel, appItem.packageName, appItem.activityName, folderId, appItem.isHidden)
                         Pair(folderId, appDetail)
                     } else null
                 }
@@ -254,9 +248,8 @@ object AppMenuStorage {
                 if (key !in allSavedApps) {
                     val folderId = starterAppToFolder[key] ?: lastFolderId
                     val label = labelCache.getOrPut(key) { resolveInfo.loadLabel(pm) }
-                    val icon = iconCache.getOrPut(key) { resolveInfo.loadIcon(pm) }
                     val activityInfo = resolveInfo.activityInfo
-                    val appDetail = AppItem(label, icon, activityInfo.packageName, activityInfo.name, folderId, false)
+                    val appDetail = AppItem(label, activityInfo.packageName, activityInfo.name, folderId, false)
                     Pair(folderId, appDetail)
                 } else null
             }
@@ -299,8 +292,8 @@ object AppMenuStorage {
     fun onPackageChanged(packageName: String?) {
         if (packageName != null) {
             val prefix = "$packageName/"
-            iconCache.keys.removeAll { it.startsWith(prefix) }
             labelCache.keys.removeAll { it.startsWith(prefix) }
+            AppIconLoader.clearPackage(packageName)
         }
         invalidate()
     }

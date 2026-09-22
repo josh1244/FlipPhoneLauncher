@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.GridView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.ham.flipphonelauncher.R
 import com.ham.flipphonelauncher.adapter.AppGridAdapter
 import com.ham.flipphonelauncher.model.FolderItem
@@ -58,7 +59,7 @@ class FolderMenuFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val folder = folder ?: return
         if (folderAdapter == null) {
-            val adapter = com.ham.flipphonelauncher.adapter.FolderAppsAdapter(folder) { app ->
+            val adapter = com.ham.flipphonelauncher.adapter.FolderAppsAdapter(folder, viewLifecycleOwner.lifecycleScope) { app ->
                 onAppClick?.invoke(app)
             }
             folderAdapter = adapter
