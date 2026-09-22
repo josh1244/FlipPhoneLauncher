@@ -371,11 +371,11 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
                 return@setOnClickListener
             }
             val audioManager = audioManagerCached ?: return@setOnClickListener
-            val sharedPref = requireContext().getSharedPreferences("dnd_toggle", Context.MODE_PRIVATE)
-            val currentIndex = sharedPref.getInt("dnd_index", 0)
+            // Derive the current step from the live system state, not a stored index (which drifts
+            // out of sync when DND changes elsewhere) — that desync is what broke e.g. None -> All.
+            val currentIndex = DND_STATES.indexOf(currentDndLabel()).coerceAtLeast(0)
             val newIndex = (currentIndex + 1) % DND_STATES.size
             val newState = DND_STATES[newIndex]
-            sharedPref.edit().putInt("dnd_index", newIndex).apply()
             when (newState) {
                 "All" -> {
                     notificationManager.setInterruptionFilter(android.app.NotificationManager.INTERRUPTION_FILTER_ALL)
@@ -442,22 +442,28 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
 
     // --- DnD handling ---
 
-    // Set DnD label and button state on startup
-    private fun updateDndUiFromSystem() {
-        val notificationManager = notificationManagerCached ?: requireContext().getSystemService(Context.NOTIFICATION_SERVICE) as android.app.NotificationManager
-        val audioManager = audioManagerCached ?: requireContext().getSystemService(Context.AUDIO_SERVICE) as AudioManager
-        val filter = notificationManager.currentInterruptionFilter
-        val ringer = audioManager.ringerMode
-        val dndLabel = when {
+    // Current DnD state as one of DND_STATES, read from the live system (single source of truth).
+    private fun currentDndLabel(): String {
+        val nm = notificationManagerCached ?: requireContext().getSystemService(Context.NOTIFICATION_SERVICE) as android.app.NotificationManager
+        val am = audioManagerCached ?: requireContext().getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        val filter = nm.currentInterruptionFilter
+        val ringer = am.ringerMode
+        return when {
             filter == android.app.NotificationManager.INTERRUPTION_FILTER_ALL && ringer == AudioManager.RINGER_MODE_NORMAL -> "All"
             filter == android.app.NotificationManager.INTERRUPTION_FILTER_ALL && ringer == AudioManager.RINGER_MODE_VIBRATE -> "Vibrate"
             filter == android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY -> "Priority"
             filter == android.app.NotificationManager.INTERRUPTION_FILTER_NONE -> "None"
             else -> "All"
         }
+    }
+
+    // Reflect the current DnD state on the tile (label, icon, highlight).
+    private fun updateDndUiFromSystem() {
+        val dndLabel = currentDndLabel()
         dndTextView?.text = dndLabel
-        shortcutButtons[3].setBackgroundResource(if (dndLabel != "All") R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-        setShortcutIconTint(3, dndLabel != "All")
+        val restricting = dndLabel != "All" && dndLabel != "Vibrate"
+        shortcutButtons[3].setBackgroundResource(if (restricting) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+        setShortcutIconTint(3, restricting)
         val iconRes = DND_ICON_BY_LABEL[dndLabel] ?: R.drawable.ic_dnd_none
         shortcutButtons[3].setImageResource(iconRes)
     }
