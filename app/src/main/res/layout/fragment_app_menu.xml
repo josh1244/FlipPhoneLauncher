@@ -12,15 +12,13 @@
         android:paddingBottom="36dp"
         android:clipToPadding="false" />
 
-    <GridView
-        android:id="@+id/app_grid_view"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/app_grid_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:numColumns="3"
-        android:verticalSpacing="8dp"
-        android:horizontalSpacing="8dp"
         android:visibility="gone"
-        android:paddingBottom="40dp" />
+        android:paddingBottom="40dp"
+        android:clipToPadding="false" />
 
     <!-- Softkey bar anchored to bottom -->
     <com.ham.flipphonelauncher.ui.SoftkeyBarView

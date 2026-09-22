@@ -1,31 +1,31 @@
 package com.ham.flipphonelauncher.ui
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.GridView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.ham.flipphonelauncher.KeyEventHandler
 import com.ham.flipphonelauncher.R
-import com.ham.flipphonelauncher.adapter.AppGridAdapter
+import com.ham.flipphonelauncher.adapter.AppGridRecyclerAdapter
 import com.ham.flipphonelauncher.model.FolderItem
 import com.ham.flipphonelauncher.model.AppItem
 import com.ham.flipphonelauncher.util.AppMenuStorage
 
-class FolderMenuFragment : Fragment() {
+class FolderMenuFragment : Fragment(), KeyEventHandler {
     private var isActive: Boolean = false
     fun setActive(active: Boolean) { isActive = active }
     private var folder: FolderItem? = null
     private var onAppClick: ((AppItem) -> Unit)? = null
-    private var gridView: GridView? = null
-
+    private var gridRecycler: RecyclerView? = null
+    private var gridAdapter: AppGridRecyclerAdapter? = null
     private var softKeyBarView: SoftkeyBarView? = null
-    private var folderAdapter: android.widget.BaseAdapter? = null
-    private data class FolderAppViewHolder(
-        val icon: android.widget.ImageView,
-        val name: android.widget.TextView
-    )
+
+    private val GRID_COLS = 3
 
     companion object {
         private const val ARG_FOLDER_ID = "folder_id"
@@ -50,7 +50,7 @@ class FolderMenuFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_app_menu, container, false)
-        gridView = view.findViewById(R.id.app_grid_view)
+        gridRecycler = view.findViewById(R.id.app_grid_recycler)
         softKeyBarView = view.findViewById(R.id.softkey_bar)
         return view
     }
@@ -58,71 +58,65 @@ class FolderMenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val folder = folder ?: return
-        if (folderAdapter == null) {
-            val adapter = com.ham.flipphonelauncher.adapter.FolderAppsAdapter(folder, viewLifecycleOwner.lifecycleScope) { app ->
-                onAppClick?.invoke(app)
-            }
-            folderAdapter = adapter
-            gridView?.adapter = adapter
-        } else {
-            (folderAdapter as? com.ham.flipphonelauncher.adapter.FolderAppsAdapter)?.updateFolder(folder)
-            gridView?.adapter = folderAdapter
+        gridRecycler?.layoutManager = GridLayoutManager(requireContext(), GRID_COLS)
+        gridAdapter = AppGridRecyclerAdapter(folder.apps.toList(), viewLifecycleOwner.lifecycleScope) { item ->
+            (item as? AppItem)?.let { onAppClick?.invoke(it) }
         }
-        gridView?.visibility = View.VISIBLE
-        gridView?.setOnItemClickListener { _, _, position, _ ->
-            val app = folder.apps.getOrNull(position)
-            if (app != null) onAppClick?.invoke(app)
-        }
-
-        // Ensure the gridView is focusable to receive dpad and key events
-        gridView?.isFocusableInTouchMode = true
-        gridView?.requestFocus()
-
-        // Listen for selection changes to update softkey
-        gridView?.setOnItemSelectedListener(object : android.widget.AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: android.widget.AdapterView<*>, view: View?, position: Int, id: Long) {
-                updateSoftkeyForSelection()
-            }
-            override fun onNothingSelected(parent: android.widget.AdapterView<*>) {
-                updateSoftkeyForSelection()
-            }
-        })
+        gridRecycler?.adapter = gridAdapter
+        gridRecycler?.visibility = View.VISIBLE
         updateSoftkeyForSelection()
+    }
 
-        // Add number key navigation for folder grid and handle softkey right
-        gridView?.setOnKeyListener { _, keyCode, event ->
-            if (event.action == android.view.KeyEvent.ACTION_DOWN) {
-                if (keyCode in android.view.KeyEvent.KEYCODE_1..android.view.KeyEvent.KEYCODE_9) {
-                    val idx = keyCode - android.view.KeyEvent.KEYCODE_1
-                    if (idx in folder.apps.indices) {
-                        onAppClick?.invoke(folder.apps[idx])
-                        return@setOnKeyListener true
-                    }
-                } else if (keyCode == android.view.KeyEvent.KEYCODE_SOFT_RIGHT) {
-                    // Open app settings for selected app
-                    val pos = gridView?.selectedItemPosition ?: -1
-                    if (pos in folder.apps.indices) {
-                        openAppSettings(folder.apps[pos])
-                        return@setOnKeyListener true
-                    }
-                } else if (keyCode == android.view.KeyEvent.KEYCODE_BACK) {
-                    (activity as? com.ham.flipphonelauncher.HomeActivity)?.hideFolderMenu()
-                    return@setOnKeyListener true
-                }
-            }
-            false
+    private fun moveSelection(delta: Int) {
+        val adapter = gridAdapter ?: return
+        if (adapter.itemCount == 0) return
+        val next = (adapter.selectedPosition + delta).coerceIn(0, adapter.itemCount - 1)
+        if (adapter.setSelected(next)) {
+            gridRecycler?.smoothScrollToPosition(next)
+            updateSoftkeyForSelection()
         }
     }
 
+    private fun selectedApp(): AppItem? = folder?.apps?.getOrNull(gridAdapter?.selectedPosition ?: -1)
+
     private fun updateSoftkeyForSelection() {
-        val pos = gridView?.selectedItemPosition ?: -1
-        val adapter = gridView?.adapter
-        val item = if (pos >= 0 && adapter != null && adapter.count > pos) adapter.getItem(pos) else null
-        if (item is AppItem) {
-            softKeyBarView?.setSoftkeyBarText(left = "", middle = "Select", right = "More")
-        } else {
-            softKeyBarView?.setSoftkeyBarText(left = "", middle = "Select", right = "")
+        val hasApp = selectedApp() != null
+        softKeyBarView?.setSoftkeyBarText(left = "", middle = "Select", right = if (hasApp) "More" else "")
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (!isActive) return false
+        val folder = folder ?: return false
+        if (keyCode in KeyEvent.KEYCODE_1..KeyEvent.KEYCODE_9) {
+            val idx = keyCode - KeyEvent.KEYCODE_1
+            if (idx in folder.apps.indices) {
+                onAppClick?.invoke(folder.apps[idx])
+                return true
+            }
+            return true
         }
+        when (keyCode) {
+            KeyEvent.KEYCODE_BACK -> {
+                (activity as? com.ham.flipphonelauncher.HomeActivity)?.hideFolderMenu()
+                return true
+            }
+            KeyEvent.KEYCODE_DPAD_LEFT -> { moveSelection(-1); return true }
+            KeyEvent.KEYCODE_DPAD_RIGHT -> { moveSelection(1); return true }
+            KeyEvent.KEYCODE_DPAD_UP -> { moveSelection(-GRID_COLS); return true }
+            KeyEvent.KEYCODE_DPAD_DOWN -> { moveSelection(GRID_COLS); return true }
+            KeyEvent.KEYCODE_SOFT_RIGHT -> {
+                selectedApp()?.let { openAppSettings(it); return true }
+            }
+            KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER, KeyEvent.KEYCODE_NUMPAD_ENTER, 23, 66 -> {
+                selectedApp()?.let { onAppClick?.invoke(it); return true }
+            }
+        }
+        return false
+    }
+
+    override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
+        if (!isActive) return false
+        return false
     }
 
     private fun openAppSettings(appItem: AppItem) {
