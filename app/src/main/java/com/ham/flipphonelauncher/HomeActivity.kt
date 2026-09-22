@@ -3,6 +3,10 @@ package com.ham.flipphonelauncher
 
 
 import android.app.WallpaperManager
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.view.View
 import android.view.KeyEvent
@@ -14,10 +18,15 @@ import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import com.ham.flipphonelauncher.ui.HomeMenuFragment
 import com.ham.flipphonelauncher.ui.ShortcutsMenuFragment
 import com.ham.flipphonelauncher.ui.AppMenuFragment
 import com.ham.flipphonelauncher.ui.FolderMenuFragment
+import com.ham.flipphonelauncher.util.AppMenuStorage
 
 enum class LauncherState {
     HOME_MENU,
@@ -46,14 +55,45 @@ class HomeActivity : AppCompatActivity() {
     private var appMenuFragment: AppMenuFragment? = null
     private var folderMenuFragment: FolderMenuFragment? = null
 
+    // Invalidates the cached app list when apps are installed/removed/updated (no polling).
+    private val packageChangeReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            AppMenuStorage.onPackageChanged(intent?.data?.schemeSpecificPart)
+        }
+    }
+
     override fun onResume() {
         super.onResume()
-        // Always return to home menu on resume
+        // Always return to home menu on resume (e.g. after closing an app)
+        goHome()
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        // Fires when the system re-delivers the HOME intent (e.g. home pressed from another app).
+        goHome()
+    }
+
+    // Reset to the main menu from any screen, clearing any transient folder view.
+    fun goHome() {
+        folderMenuFragment?.let {
+            supportFragmentManager.beginTransaction().remove(it).commitAllowingStateLoss()
+            folderMenuFragment = null
+        }
         updateState(LauncherState.HOME_MENU)
     }
 
     override fun dispatchKeyEvent(event: KeyEvent): Boolean {
-        // Only send key events to the active fragment
+        // Physical home / end-call key always returns to the main menu, from any screen.
+        // On this hardware these arrive as key events (the app already receives KEYCODE_CALL),
+        // not as a re-delivered HOME intent, so onResume/onNewIntent never see them.
+        if (event.keyCode == KeyEvent.KEYCODE_HOME || event.keyCode == KeyEvent.KEYCODE_ENDCALL) {
+            if (event.action == KeyEvent.ACTION_UP) goHome()
+            return true
+        }
+
+        // Otherwise send key events to the active fragment
         val activeFragment = when (currentMenuState) {
             LauncherState.HOME_MENU -> homeMenuFragment
             LauncherState.SHORTCUTS_MENU -> shortcutsMenuFragment
@@ -73,12 +113,16 @@ class HomeActivity : AppCompatActivity() {
 
 
     private fun setWallpaperBackground() {
-        val wallpaperManager = WallpaperManager.getInstance(this)
-        try {
-            val wallpaperDrawable = wallpaperManager.drawable
-            window.setBackgroundDrawable(wallpaperDrawable)
-        } catch (e: SecurityException) {
-            e.printStackTrace()
+        // Decoding the wallpaper bitmap can be slow; keep it off the cold-start main thread.
+        lifecycleScope.launch {
+            val drawable = withContext(Dispatchers.IO) {
+                try {
+                    WallpaperManager.getInstance(this@HomeActivity).drawable
+                } catch (e: SecurityException) {
+                    null
+                }
+            }
+            if (drawable != null) window.setBackgroundDrawable(drawable)
         }
     }
 
@@ -132,7 +176,21 @@ class HomeActivity : AppCompatActivity() {
             appMenuFragment = supportFragmentManager.findFragmentByTag(TAG_APPMENU) as? AppMenuFragment
             folderMenuFragment = supportFragmentManager.findFragmentByTag(TAG_FOLDERMENU) as? com.ham.flipphonelauncher.ui.FolderMenuFragment
         }
+
+        val pkgFilter = IntentFilter().apply {
+            addAction(Intent.ACTION_PACKAGE_ADDED)
+            addAction(Intent.ACTION_PACKAGE_REMOVED)
+            addAction(Intent.ACTION_PACKAGE_REPLACED)
+            addAction(Intent.ACTION_PACKAGE_CHANGED)
+            addDataScheme("package")
+        }
+        registerReceiver(packageChangeReceiver, pkgFilter)
 	}
+
+    override fun onDestroy() {
+        super.onDestroy()
+        try { unregisterReceiver(packageChangeReceiver) } catch (_: Exception) {}
+    }
 
     fun updateState(newState: LauncherState) {
         if (currentMenuState == newState) return

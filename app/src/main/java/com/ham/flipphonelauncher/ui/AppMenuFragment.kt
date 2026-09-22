@@ -17,6 +17,8 @@ import com.ham.flipphonelauncher.adapter.AppGridAdapter
 import android.widget.ListView
 import android.widget.GridView
 import android.content.Context
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 
 class AppMenuFragment : Fragment(), KeyEventHandler {
     // For number navigation
@@ -60,7 +62,14 @@ class AppMenuFragment : Fragment(), KeyEventHandler {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val ctx = requireContext()
-        appMenuState = AppMenuStorage.loadApplications(ctx)
+        // loadApplications hits PackageManager and every app icon/label, so keep it off the UI thread.
+        viewLifecycleOwner.lifecycleScope.launch {
+            appMenuState = AppMenuStorage.loadApplications(ctx)
+            setupViews(view, ctx)
+        }
+    }
+
+    private fun setupViews(view: View, ctx: Context) {
         // Load saved grid/list mode preference once
         prefs = ctx.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val gridMode = prefs?.getBoolean(KEY_GRID_MODE, false) ?: false

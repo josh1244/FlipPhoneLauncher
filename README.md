@@ -1,44 +1,56 @@
-# FlipPhoneLauncher: Adding Custom Shortcuts via Activity Launcher
+# FlipPhoneLauncher
 
-This launcher allows you to add shortcuts to any activity, including hidden or system activities, using the built-in "Paste Shortcut" feature. This guide is tailored for use on a flip phone, where you may need to sideload apps and use the keypad for navigation and copying.
+A minimal Android home-screen launcher built for flip phones and other keypad or D-pad
+devices without a touchscreen. Everything is driven by the number keys, D-pad, OK/center,
+and the two softkeys. Targets Android 8 (API 26) and up.
 
-## How to Add a Custom Shortcut Using Activity Launcher
+## Screens
 
-1. **Install Activity Launcher (via ADB Sideload)**
+**Home.** Shows the time, date, and carrier name. Softkeys: left opens notifications,
+middle (OK) opens the App Menu, right opens the Shortcuts menu.
 
-   - Download the Activity Launcher APK from a trusted source (such as [F-Droid](https://f-droid.org/packages/de.szalkowski.activitylauncher/)).
-   - Connect your flip phone to your computer via USB.
-   - Enable Developer Options and USB Debugging on your phone.
-   - Use the following command to install the APK:
+- Number and `*` keys open the dialer pre-filled with that digit. `#` dials `#`; long-press
+  `#` toggles vibrate.
+- Each D-pad direction can launch an assigned app. Hold OK and press a direction to pick the
+  app for that direction (the picker includes a "Recent Apps" entry).
+- The call key opens the recent-calls log.
 
-     ```sh
-     adb install path/to/ActivityLauncher.apk
-     ```
+**App Menu (OK from Home).** Lists installed apps grouped into folders. Toggle between list
+and grid with the left softkey; the choice is remembered. Apps are numbered by folder, so
+pressing a number jumps to or launches an app. The right softkey opens the selected app's
+system settings. A folder with a single app launches it directly; a folder with several apps
+opens a folder grid.
 
-2. **Find the Activity You Want to Add **
+**Folder Menu.** A grid of the apps in one folder. Number keys launch, the right softkey
+opens app settings, and Back returns to the App Menu.
 
-   - Open Activity Launcher using your phone's keypad.
-   - Use the keypad to navigate and select the app and activity you want to add as a shortcut.
-   - Highlight the activity you want and open its options.
-   - Copy the Class name using the keypad (the copied text will look like `com.android.settings/.Settings$LanguageAndInputSettingActivity`).
+**Shortcuts (right softkey from Home).** A 2x3 grid of quick toggles navigated with the
+D-pad: Mobile Data, Bluetooth, Airplane Mode, Do Not Disturb, Location, and Brightness.
+Bluetooth and DnD toggle in place; Brightness steps through levels; the others and a
+long-press on any tile open the matching system settings screen.
 
-3. **Paste the Shortcut in FlipPhoneLauncher**
+## Configuration
 
-   - Open FlipPhoneLauncher.
-   - Use the keypad to open the move app dialog for any app (usually via the menu or long-press/OK key).
-   - Select the "Paste Shortcut" option using the keypad.
-   - The launcher will detect the component name in your clipboard and add it as a shortcut to the current folder.
+- App-to-folder assignments come from `app/src/main/assets/starter_config.json` the first
+  time an app is seen.
+- The live layout is persisted to `launcher_config.json` in the app's external files
+  directory, so it survives restarts.
 
-4. **Done!**
-   - The new shortcut will appear in your launcher and persist after restarts.
+## Permissions
 
-## Notes
+Some toggles need special access that Android grants outside the normal permission prompt:
 
-- This process is designed for flip phones, where touchscreen gestures may not be available.
-- You can use this method to add any activity, even those not normally visible in the app drawer.
-- If the activity is not launchable or requires special permissions, it may not work as a shortcut.
-- The launcher will try to use the correct icon and label if available; otherwise, it will use a default icon and the class name.
+- **Modify system settings** (`WRITE_SETTINGS`) for the brightness control.
+- **Do Not Disturb access** for the DnD toggle.
 
----
+The app requests these the first time you use the relevant control and sends you to the right
+settings screen if access is missing.
 
-Enjoy customizing your FlipPhoneLauncher!
+## Building
+
+Standard Android Gradle project:
+
+```sh
+./gradlew assembleDebug
+adb install app/build/outputs/apk/debug/app-debug.apk
+```

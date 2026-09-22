@@ -107,10 +107,16 @@ class InfoPanelView @JvmOverloads constructor(
         }
     }
 
+    // Start the clock, ensuring only one update chain is ever pending.
+    private fun startTimeUpdates() {
+        handler.removeCallbacks(timeUpdateRunnable)
+        handler.post(timeUpdateRunnable)
+    }
+
     // Use view attachment lifecycle so updates stop when view isn't visible/attached.
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        handler.post(timeUpdateRunnable)
+        startTimeUpdates()
         showCarrierName()
     }
 
@@ -126,7 +132,7 @@ class InfoPanelView @JvmOverloads constructor(
     // Keep old lifecycle-style methods for callers that still use them.
     fun onResume() {
         // Start updates (idempotent)
-        handler.post(timeUpdateRunnable)
+        startTimeUpdates()
         showCarrierName()
     }
 

@@ -78,7 +78,14 @@ class HomeMenuFragment : Fragment(), KeyEventHandler {
 
     override fun onResume() {
         super.onResume()
-        infoPanelView?.onResume()
+        if (!isHidden) infoPanelView?.onResume()
+    }
+
+    // show/hide transactions don't fire onPause, so stop the clock here to avoid
+    // waking up every minute while the Home screen is hidden behind another menu.
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (hidden) infoPanelView?.onPause() else infoPanelView?.onResume()
     }
 
     override fun onPause() {

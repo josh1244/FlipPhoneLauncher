@@ -39,23 +39,43 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
         }
     }
     
+    // Guards against double register/unregister across the resume + hidden lifecycles.
+    private var receiverRegistered = false
+
     override fun onResume() {
         super.onResume()
         if (isActive) {
             (activity as? com.ham.flipphonelauncher.HomeActivity)?.updateState(com.ham.flipphonelauncher.LauncherState.HOME_MENU)
         }
-        try {
-            // Register receiver for connectivity and setting changes
-            val filter = android.content.IntentFilter().apply {
-                addAction(android.content.Intent.ACTION_AIRPLANE_MODE_CHANGED)
-                addAction(android.bluetooth.BluetoothAdapter.ACTION_STATE_CHANGED)
-                addAction(android.media.AudioManager.RINGER_MODE_CHANGED_ACTION)
-                addAction(android.location.LocationManager.PROVIDERS_CHANGED_ACTION)
-            }
-            requireContext().registerReceiver(systemStateReceiver, filter)
-        } catch (_: Exception) {}
-        
-        // Refresh states on resume to capture changes made in settings screen
+        if (!isHidden) startSystemStateWatch()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        stopSystemStateWatch()
+    }
+
+    // show/hide transactions don't fire onPause, so release the receiver here too; otherwise it
+    // keeps waking the app on every connectivity/ringer broadcast while Shortcuts is hidden.
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (hidden) stopSystemStateWatch() else if (isResumed) startSystemStateWatch()
+    }
+
+    private fun startSystemStateWatch() {
+        if (!receiverRegistered) {
+            try {
+                val filter = android.content.IntentFilter().apply {
+                    addAction(android.content.Intent.ACTION_AIRPLANE_MODE_CHANGED)
+                    addAction(android.bluetooth.BluetoothAdapter.ACTION_STATE_CHANGED)
+                    addAction(android.media.AudioManager.RINGER_MODE_CHANGED_ACTION)
+                    addAction(android.location.LocationManager.PROVIDERS_CHANGED_ACTION)
+                }
+                requireContext().registerReceiver(systemStateReceiver, filter)
+                receiverRegistered = true
+            } catch (_: Exception) {}
+        }
+        // Refresh states to capture changes made in a settings screen
         if (this::shortcutButtons.isInitialized) {
             val mobileDataEnabled = isMobileDataEnabled()
             shortcutButtons.getOrNull(0)?.setBackgroundResource(if (mobileDataEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
@@ -71,9 +91,10 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
         }
     }
 
-    override fun onPause() {
-        super.onPause()
+    private fun stopSystemStateWatch() {
+        if (!receiverRegistered) return
         try { requireContext().unregisterReceiver(systemStateReceiver) } catch (_: Exception) {}
+        receiverRegistered = false
     }
 
     override fun onDestroyView() {

@@ -10,6 +10,7 @@ import com.ham.flipphonelauncher.R
 import com.ham.flipphonelauncher.adapter.AppGridAdapter
 import com.ham.flipphonelauncher.model.FolderItem
 import com.ham.flipphonelauncher.model.AppItem
+import com.ham.flipphonelauncher.util.AppMenuStorage
 
 class FolderMenuFragment : Fragment() {
     private var isActive: Boolean = false
@@ -26,11 +27,13 @@ class FolderMenuFragment : Fragment() {
     )
 
     companion object {
-        private const val ARG_FOLDER = "folder"
+        private const val ARG_FOLDER_ID = "folder_id"
+        // Store only the id; the folder (which holds non-serializable Drawables) is rehydrated
+        // from AppMenuStorage so state restore can't hit a NotSerializableException.
         fun newInstance(folder: FolderItem): FolderMenuFragment {
             val fragment = FolderMenuFragment()
             val args = Bundle()
-            args.putSerializable(ARG_FOLDER, folder)
+            args.putInt(ARG_FOLDER_ID, folder.id)
             fragment.arguments = args
             return fragment
         }
@@ -38,7 +41,8 @@ class FolderMenuFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        folder = arguments?.getSerializable(ARG_FOLDER) as? FolderItem
+        val folderId = arguments?.getInt(ARG_FOLDER_ID, -1) ?: -1
+        folder = if (folderId >= 0) AppMenuStorage.getFolderById(folderId) else null
     }
 
     override fun onCreateView(

@@ -14,7 +14,6 @@
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- Note: Mobile data and airplane mode toggling is restricted for third-party apps on modern
     Android -->
 
@@ -29,6 +28,7 @@
         android:theme="@style/Theme.FlipPhoneLauncher">
         <activity
             android:name=".HomeActivity"
+            android:launchMode="singleTask"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
