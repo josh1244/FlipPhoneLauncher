@@ -59,6 +59,9 @@ class FolderMenuFragment : Fragment(), KeyEventHandler {
         super.onViewCreated(view, savedInstanceState)
         val folder = folder ?: return
         gridRecycler?.layoutManager = GridLayoutManager(requireContext(), GRID_COLS)
+        gridRecycler?.itemAnimator = null
+        val gridSpace = (4 * resources.displayMetrics.density).toInt()
+        gridRecycler?.addItemDecoration(com.ham.flipphonelauncher.util.GridSpacingItemDecoration(gridSpace))
         gridAdapter = AppGridRecyclerAdapter(folder.apps.toList(), viewLifecycleOwner.lifecycleScope) { item ->
             (item as? AppItem)?.let { onAppClick?.invoke(it) }
         }
