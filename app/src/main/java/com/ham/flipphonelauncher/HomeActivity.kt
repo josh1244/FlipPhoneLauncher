@@ -85,11 +85,6 @@ class HomeActivity : AppCompatActivity() {
     }
 
     override fun dispatchKeyEvent(event: KeyEvent): Boolean {
-        // TEMP DIAGNOSTIC: toast each keycode so we can identify the top-left button. Remove after.
-        if (event.action == KeyEvent.ACTION_DOWN) {
-            android.widget.Toast.makeText(this, "key=${event.keyCode}", android.widget.Toast.LENGTH_SHORT).show()
-        }
-
         // If the home/end-call key is delivered to the app as a key event, return to the main menu.
         // Note: on this phone the OS consumes the Home key itself while the launcher is already
         // foreground (it reaches neither dispatchKeyEvent nor onNewIntent), so this is a best-effort
