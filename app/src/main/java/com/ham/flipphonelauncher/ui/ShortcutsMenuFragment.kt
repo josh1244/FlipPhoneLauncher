@@ -44,9 +44,6 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
 
     override fun onResume() {
         super.onResume()
-        if (isActive) {
-            (activity as? com.ham.flipphonelauncher.HomeActivity)?.updateState(com.ham.flipphonelauncher.LauncherState.HOME_MENU)
-        }
         if (!isHidden) startSystemStateWatch()
     }
 

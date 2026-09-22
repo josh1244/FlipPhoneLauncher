@@ -44,13 +44,6 @@ class AppMenuFragment : Fragment(), KeyEventHandler {
     private val KEY_GRID_MODE = "grid_mode"
     private val GRID_COLS = 3
 
-    override fun onResume() {
-        super.onResume()
-        if (isActive) {
-            (activity as? com.ham.flipphonelauncher.HomeActivity)?.updateState(com.ham.flipphonelauncher.LauncherState.HOME_MENU)
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
