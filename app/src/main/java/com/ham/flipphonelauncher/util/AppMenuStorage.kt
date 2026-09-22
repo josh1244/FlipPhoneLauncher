@@ -15,11 +15,14 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 
 object AppMenuStorage {
-    // Holds the full list of folders in memory (including hidden apps, so saves stay complete)
-    private var folders: MutableList<FolderItem> = mutableListOf()
+    // Holds the full list of folders in memory (including hidden apps, so saves stay complete).
+    // Volatile: assigned on a background thread in loadApplications, read on the main thread; the
+    // reference swap is atomic so readers see a consistent old-or-new list.
+    @Volatile private var folders: MutableList<FolderItem> = mutableListOf()
 
-    // In-memory cache for app labels (icons are cached separately by AppIconLoader, loaded lazily)
-    private val labelCache = mutableMapOf<String, CharSequence>()
+    // Label cache. ConcurrentHashMap because loadApplications populates it from parallel coroutines,
+    // where a plain HashMap could corrupt or throw under concurrent getOrPut.
+    private val labelCache = java.util.concurrent.ConcurrentHashMap<String, CharSequence>()
 
     // Built app/folder snapshot, reused across opens until invalidated (see invalidate()).
     @Volatile private var cachedState: AppMenuState? = null
@@ -273,9 +276,9 @@ object AppMenuStorage {
             saveLauncherData(context)
         }
 
-        val prefs = context.getSharedPreferences("launcher_data", Context.MODE_PRIVATE)
-        val KEY_GRID_MODE = "grid_mode"
-        val layoutType = if (prefs.getBoolean(KEY_GRID_MODE, false)) LayoutType.GRID else LayoutType.LIST
+        // Same prefs file/key AppMenuFragment writes to, so the layout mode is consistent.
+        val prefs = context.getSharedPreferences("launcher_prefs", Context.MODE_PRIVATE)
+        val layoutType = if (prefs.getBoolean("grid_mode", false)) LayoutType.GRID else LayoutType.LIST
 
         val state = AppMenuState(layoutType, visibleFolders())
         cachedState = state
@@ -307,20 +310,19 @@ object AppMenuStorage {
     // Look up a folder (visible apps only) for the folder menu.
     fun getFolderById(id: Int): FolderItem? = visibleFolders().firstOrNull { it.id == id }
 
-    // Helper to get the starter config JSON from assets or a static string
+    // Starter config from assets, parsed once and memoized (the asset never changes).
+    @Volatile private var starterConfigLoaded = false
+    @Volatile private var starterConfigCache: JSONObject? = null
     private fun getStarterConfig(context: Context): JSONObject? {
-        // Load starter config from assets/starter_config.json
-        return try {
-            val inputStream = context.assets.open("starter_config.json")
-            val size = inputStream.available()
-            val buffer = ByteArray(size)
-            inputStream.read(buffer)
-            inputStream.close()
-            val json = String(buffer, Charsets.UTF_8)
+        if (starterConfigLoaded) return starterConfigCache
+        starterConfigCache = try {
+            val json = context.assets.open("starter_config.json").use { it.readBytes() }.toString(Charsets.UTF_8)
             JSONObject(json)
         } catch (e: Exception) {
             null
         }
+        starterConfigLoaded = true
+        return starterConfigCache
     }
 
     /**
