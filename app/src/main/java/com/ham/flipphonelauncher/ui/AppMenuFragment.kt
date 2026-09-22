@@ -12,12 +12,13 @@ import com.ham.flipphonelauncher.model.LayoutType
 import com.ham.flipphonelauncher.util.AppMenuStorage
 import com.ham.flipphonelauncher.R
 import com.ham.flipphonelauncher.KeyEventHandler
-import com.ham.flipphonelauncher.adapter.AppListAdapter
+import com.ham.flipphonelauncher.adapter.AppListRecyclerAdapter
 import com.ham.flipphonelauncher.adapter.AppGridAdapter
-import android.widget.ListView
 import android.widget.GridView
 import android.content.Context
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.launch
 
 class AppMenuFragment : Fragment(), KeyEventHandler {
@@ -31,12 +32,12 @@ class AppMenuFragment : Fragment(), KeyEventHandler {
     private var softKeyBarView: SoftkeyBarView? = null
 
     private var appMenuState: AppMenuState? = null
-    private var listView: ListView? = null
+    private var listRecycler: RecyclerView? = null
     private var gridView: GridView? = null
-    private var listAdapter: com.ham.flipphonelauncher.adapter.AppListAdapter? = null
-    private var gridAdapter: com.ham.flipphonelauncher.adapter.AppGridAdapter? = null
+    private var listAdapter: AppListRecyclerAdapter? = null
+    private var gridAdapter: AppGridAdapter? = null
     private var prefs: android.content.SharedPreferences? = null
-    
+
     private val PREFS_NAME = "launcher_prefs"
     private val KEY_GRID_MODE = "grid_mode"
 
@@ -51,11 +52,8 @@ class AppMenuFragment : Fragment(), KeyEventHandler {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_app_menu, container, false)
-
         softKeyBarView = view.findViewById(R.id.softkey_bar)
         softKeyBarView?.setSoftkeyBarText("", "Select", "")
-
-
         return view
     }
 
@@ -70,46 +68,45 @@ class AppMenuFragment : Fragment(), KeyEventHandler {
     }
 
     private fun setupViews(view: View, ctx: Context) {
-        // Load saved grid/list mode preference once
         prefs = ctx.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val gridMode = prefs?.getBoolean(KEY_GRID_MODE, false) ?: false
         appMenuState = appMenuState?.copy(layoutType = if (gridMode) LayoutType.GRID else LayoutType.LIST)
-        listView = view.findViewById(R.id.app_list_view)
+        val state = appMenuState ?: return
+
+        listRecycler = view.findViewById(R.id.app_list_recycler)
         gridView = view.findViewById(R.id.app_grid_view)
-        // Initialize adapters if needed
-        if (listAdapter == null && appMenuState != null) {
-            listAdapter = com.ham.flipphonelauncher.adapter.AppListAdapter(appMenuState!!.folders, viewLifecycleOwner.lifecycleScope) { appItem -> launchApp(appItem) }
-        }
-        if (gridAdapter == null && appMenuState != null) {
-            // Pass null for folder click here; click handled explicitly on the GridView later
-            gridAdapter = com.ham.flipphonelauncher.adapter.AppGridAdapter(appMenuState!!.folders, viewLifecycleOwner.lifecycleScope, null, { appItem -> launchApp(appItem) })
-        }
-        updateViewMode()
-        // Select first app and set selection listeners once
-        listView?.adapter = listAdapter
+        listRecycler?.layoutManager = LinearLayoutManager(ctx)
+
+        listAdapter = AppListRecyclerAdapter(state.folders, viewLifecycleOwner.lifecycleScope) { appItem -> launchApp(appItem) }
+        gridAdapter = AppGridAdapter(state.folders, viewLifecycleOwner.lifecycleScope, { folder -> openFolderMenu(folder) }, { app -> launchApp(app) })
+        listRecycler?.adapter = listAdapter
         gridView?.adapter = gridAdapter
-        listView?.setOnItemSelectedListener(object : android.widget.AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: android.widget.AdapterView<*>, view: View?, position: Int, id: Long) {
-                updateSoftkeyForSelection()
-            }
-            override fun onNothingSelected(parent: android.widget.AdapterView<*>) {
-                updateSoftkeyForSelection()
-            }
-        })
+
+        // Grid keeps GridView's native selection; refresh softkey as it changes.
         gridView?.setOnItemSelectedListener(object : android.widget.AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: android.widget.AdapterView<*>, view: View?, position: Int, id: Long) {
-                updateSoftkeyForSelection()
-            }
-            override fun onNothingSelected(parent: android.widget.AdapterView<*>) {
-                updateSoftkeyForSelection()
-            }
+            override fun onItemSelected(parent: android.widget.AdapterView<*>, v: View?, position: Int, id: Long) { updateSoftkeyForSelection() }
+            override fun onNothingSelected(parent: android.widget.AdapterView<*>) { updateSoftkeyForSelection() }
         })
-        if (appMenuState?.layoutType == LayoutType.LIST) {
-            listView?.post {
-                listView?.setSelection(0)
-                listView?.requestFocus()
+        gridView?.setOnItemClickListener { _, _, position, _ ->
+            when (val item = gridAdapter?.getItem(position)) {
+                is com.ham.flipphonelauncher.model.FolderItem -> openFolderMenu(item)
+                is com.ham.flipphonelauncher.model.AppItem -> launchApp(item)
             }
+        }
+
+        updateViewMode()
+    }
+
+    private fun updateViewMode() {
+        val state = appMenuState ?: return
+        if (state.layoutType == LayoutType.LIST) {
+            listRecycler?.visibility = View.VISIBLE
+            gridView?.visibility = View.GONE
+            listAdapter?.setSelected(0)
+            listRecycler?.scrollToPosition(0)
         } else {
+            listRecycler?.visibility = View.GONE
+            gridView?.visibility = View.VISIBLE
             gridView?.post {
                 gridView?.setSelection(0)
                 gridView?.requestFocus()
@@ -118,67 +115,45 @@ class AppMenuFragment : Fragment(), KeyEventHandler {
         updateSoftkeyForSelection()
     }
 
-    private fun updateViewMode() {
-        val state = appMenuState ?: return
-        if (state.layoutType == LayoutType.LIST) {
-            listView?.visibility = View.VISIBLE
-            gridView?.visibility = View.GONE
-            // Reuse adapter to avoid reallocating
-            if (listAdapter == null) {
-                listAdapter = com.ham.flipphonelauncher.adapter.AppListAdapter(state.folders, viewLifecycleOwner.lifecycleScope) { appItem -> launchApp(appItem) }
-                listView?.adapter = listAdapter
-            } else {
-                listView?.adapter = listAdapter
-            }
-            listView?.post {
-                listView?.setSelection(0)
-                listView?.requestFocus()
-            }
-        } else {
-            listView?.visibility = View.GONE
-            gridView?.visibility = View.VISIBLE
-            if (gridAdapter == null) {
-                gridAdapter = com.ham.flipphonelauncher.adapter.AppGridAdapter(state.folders, viewLifecycleOwner.lifecycleScope, { folder -> openFolderMenu(folder) }, { app -> launchApp(app) })
-                gridView?.adapter = gridAdapter
-            } else {
-                gridView?.adapter = gridAdapter
-            }
-            // Ensure click listener is set (adapter passed callbacks already)
-            gridView?.setOnItemClickListener { _, _, position, _ ->
-                val item = gridAdapter?.getItem(position)
-                when (item) {
-                    is com.ham.flipphonelauncher.model.FolderItem -> openFolderMenu(item)
-                    is com.ham.flipphonelauncher.model.AppItem -> launchApp(item)
-                }
-            }
-            gridView?.post {
-                gridView?.setSelection(0)
-                gridView?.requestFocus()
-            }
+    // Move the list selection by delta (list mode only), clamped, keeping it on screen.
+    private fun moveListSelection(delta: Int) {
+        val adapter = listAdapter ?: return
+        val count = adapter.itemCount
+        if (count == 0) return
+        val next = (adapter.selectedPosition + delta).coerceIn(0, count - 1)
+        if (adapter.setSelected(next)) {
+            listRecycler?.smoothScrollToPosition(next)
+            updateSoftkeyForSelection()
+        }
+    }
+
+    private fun selectListPosition(pos: Int) {
+        if (pos < 0) return
+        if (listAdapter?.setSelected(pos) == true) {
+            listRecycler?.smoothScrollToPosition(pos)
         }
         updateSoftkeyForSelection()
     }
 
     private fun updateSoftkeyForSelection() {
         val state = appMenuState ?: return
+        val item = selectedItem()
         if (state.layoutType == LayoutType.LIST) {
-            val pos = listView?.selectedItemPosition ?: -1
-            val adapter = listView?.adapter
-            val item = if (pos >= 0 && adapter != null && adapter.count > pos) adapter.getItem(pos) else null
-            if (item is com.ham.flipphonelauncher.model.AppItem) {
-                softKeyBarView?.setSoftkeyBarText(left = "Grid", middle = "Select", right = "More")
-            } else {
-                softKeyBarView?.setSoftkeyBarText(left = "Grid", middle = "Select", right = "")
-            }
+            softKeyBarView?.setSoftkeyBarText(left = "Grid", middle = "Select", right = if (item is com.ham.flipphonelauncher.model.AppItem) "More" else "")
+        } else {
+            softKeyBarView?.setSoftkeyBarText(left = "List", middle = "Select", right = if (item is com.ham.flipphonelauncher.model.AppItem) "More" else "")
+        }
+    }
+
+    // The currently highlighted item in whichever view mode is active.
+    private fun selectedItem(): Any? {
+        val state = appMenuState ?: return null
+        return if (state.layoutType == LayoutType.LIST) {
+            listAdapter?.let { it.itemAt(it.selectedPosition) }
         } else {
             val pos = gridView?.selectedItemPosition ?: -1
             val adapter = gridView?.adapter
-            val item = if (pos >= 0 && adapter != null && adapter.count > pos) adapter.getItem(pos) else null
-            if (item is com.ham.flipphonelauncher.model.AppItem) {
-                softKeyBarView?.setSoftkeyBarText(left = "List", middle = "Select", right = "More")
-            } else {
-                softKeyBarView?.setSoftkeyBarText(left = "List", middle = "Select", right = "")
-            }
+            if (pos >= 0 && adapter != null && adapter.count > pos) adapter.getItem(pos) else null
         }
     }
 
@@ -203,27 +178,23 @@ class AppMenuFragment : Fragment(), KeyEventHandler {
         val state = appMenuState ?: return
         val newType = if (state.layoutType == LayoutType.LIST) LayoutType.GRID else LayoutType.LIST
         appMenuState = state.copy(layoutType = newType)
-        // Save new state
-        val prefs = requireContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        prefs.edit().putBoolean(KEY_GRID_MODE, appMenuState?.layoutType == LayoutType.GRID).apply()
+        requireContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+            .edit().putBoolean(KEY_GRID_MODE, newType == LayoutType.GRID).apply()
         updateViewMode()
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         if (!isActive) return false
-        
+
         val state = appMenuState ?: return false
-        // Handle number key navigation in LIST or GRID mode
-        if ((state.layoutType == LayoutType.LIST || state.layoutType == LayoutType.GRID) && keyCode in KeyEvent.KEYCODE_0..KeyEvent.KEYCODE_9) {
+        // Number key navigation (LIST or GRID)
+        if (keyCode in KeyEvent.KEYCODE_0..KeyEvent.KEYCODE_9) {
             val now = System.currentTimeMillis()
-            if (now - numberInputTime > numberInputTimeoutMs) {
-                numberInputBuffer = ""
-            }
+            if (now - numberInputTime > numberInputTimeoutMs) numberInputBuffer = ""
             numberInputTime = now
             val digit = if (keyCode == KeyEvent.KEYCODE_0) 0 else keyCode - KeyEvent.KEYCODE_1 + 1
             numberInputBuffer += digit.toString()
             if (numberInputBuffer.length == 1) {
-                // List: select first app or launch if only one app. Grid: open folder if multiple, launch if only one.
                 val folderIdx = digit
                 if (folderIdx in 1..state.folders.size) {
                     val folder = state.folders[folderIdx - 1]
@@ -231,34 +202,26 @@ class AppMenuFragment : Fragment(), KeyEventHandler {
                         launchApp(folder.apps[0])
                         numberInputBuffer = ""
                         return true
-                    } else {
-                        if (state.layoutType == LayoutType.LIST) {
-                            // Use adapter helper for O(1) lookup of first app position
-                            val pos = listAdapter?.getFirstAppPositionForFolder(folder.id) ?: -1
-                            if (pos >= 0) listView?.setSelection(pos)
-                        } else if (state.layoutType == LayoutType.GRID) {
-                            // Open the folder menu for multi-app folders
-                            openFolderMenu(folder)
-                            numberInputBuffer = ""
-                            return true
-                        }
-                    }
-                }
-            } else if (numberInputBuffer.length == 2) {
-                // Launch app in folder (flat list)
-                val folderIdx = numberInputBuffer[0].digitToIntOrNull() ?: 0
-                val appIdx = numberInputBuffer[1].digitToIntOrNull() ?: 0
-                val stateFolders = state.folders
-                if (folderIdx in 1..stateFolders.size) {
-                    val folder = stateFolders[folderIdx - 1]
-                    if (appIdx in 1..folder.apps.size) {
-                        val app = folder.apps[appIdx - 1]
-                        launchApp(app)
+                    } else if (state.layoutType == LayoutType.LIST) {
+                        val pos = listAdapter?.firstPositionForFolder(folder.id) ?: -1
+                        selectListPosition(pos)
+                    } else if (state.layoutType == LayoutType.GRID) {
+                        openFolderMenu(folder)
                         numberInputBuffer = ""
                         return true
                     }
                 }
-                // Reset buffer after attempt
+            } else if (numberInputBuffer.length == 2) {
+                val folderIdx = numberInputBuffer[0].digitToIntOrNull() ?: 0
+                val appIdx = numberInputBuffer[1].digitToIntOrNull() ?: 0
+                if (folderIdx in 1..state.folders.size) {
+                    val folder = state.folders[folderIdx - 1]
+                    if (appIdx in 1..folder.apps.size) {
+                        launchApp(folder.apps[appIdx - 1])
+                        numberInputBuffer = ""
+                        return true
+                    }
+                }
                 numberInputBuffer = ""
             }
             return true
@@ -273,52 +236,31 @@ class AppMenuFragment : Fragment(), KeyEventHandler {
                 return true
             }
             KeyEvent.KEYCODE_SOFT_RIGHT -> {
-                // Launch app settings if an app is selected
-                val appItem = getSelectedAppItem()
+                val appItem = selectedItem() as? com.ham.flipphonelauncher.model.AppItem
                 if (appItem != null) {
                     openAppSettings(appItem)
                     return true
                 }
             }
+            // List needs explicit D-pad selection (RecyclerView has none); grid keeps GridView's.
+            KeyEvent.KEYCODE_DPAD_UP -> {
+                if (state.layoutType == LayoutType.LIST) { moveListSelection(-1); return true }
+            }
+            KeyEvent.KEYCODE_DPAD_DOWN -> {
+                if (state.layoutType == LayoutType.LIST) { moveListSelection(1); return true }
+            }
             KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER, KeyEvent.KEYCODE_NUMPAD_ENTER, 23, 66 -> {
-                // Center/Enter/OK pressed
-                if (state.layoutType == LayoutType.LIST) {
-                    val pos = listView?.selectedItemPosition ?: -1
-                    if (pos >= 0) {
-                        val item = listView?.adapter?.getItem(pos)
-                        if (item is com.ham.flipphonelauncher.model.AppItem) {
-                            launchApp(item)
-                            return true
-                        }
-                    }
-                } else {
-                    val pos = gridView?.selectedItemPosition ?: -1
-                    if (pos >= 0) {
-                        val item = gridView?.adapter?.getItem(pos)
-                        if (item is com.ham.flipphonelauncher.model.AppItem) {
-                            launchApp(item)
-                            return true
-                        }
-                    }
+                val item = selectedItem()
+                if (item is com.ham.flipphonelauncher.model.AppItem) {
+                    launchApp(item)
+                    return true
+                } else if (item is com.ham.flipphonelauncher.model.FolderItem) {
+                    openFolderMenu(item)
+                    return true
                 }
             }
         }
         return false
-    }
-
-    private fun getSelectedAppItem(): com.ham.flipphonelauncher.model.AppItem? {
-        val state = appMenuState ?: return null
-        if (state.layoutType == LayoutType.LIST) {
-            val pos = listView?.selectedItemPosition ?: -1
-            val adapter = listView?.adapter
-            val item = if (pos >= 0 && adapter != null && adapter.count > pos) adapter.getItem(pos) else null
-            return item as? com.ham.flipphonelauncher.model.AppItem
-        } else {
-            val pos = gridView?.selectedItemPosition ?: -1
-            val adapter = gridView?.adapter
-            val item = if (pos >= 0 && adapter != null && adapter.count > pos) adapter.getItem(pos) else null
-            return item as? com.ham.flipphonelauncher.model.AppItem
-        }
     }
 
     private fun openAppSettings(appItem: com.ham.flipphonelauncher.model.AppItem) {
@@ -334,8 +276,6 @@ class AppMenuFragment : Fragment(), KeyEventHandler {
 
     override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
         if (!isActive) return false
-
-        // Handle key events (e.g., D-pad navigation)
         return false
     }
 }
