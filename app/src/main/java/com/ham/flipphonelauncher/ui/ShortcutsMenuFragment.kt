@@ -209,6 +209,24 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
         }
     }
 
+    // Prefer the Qualcomm network-settings app if present so mobile-data settings open directly
+    // (no chooser, no sticky wrong-default). Fall back to the generic settings screens otherwise.
+    private fun openMobileDataSettings() {
+        val pm = requireContext().packageManager
+        val roaming = Intent(android.provider.Settings.ACTION_DATA_ROAMING_SETTINGS)
+        val direct = Intent(roaming).setPackage("com.qualcomm.qti.networksetting")
+        val intent = when {
+            direct.resolveActivity(pm) != null -> direct
+            roaming.resolveActivity(pm) != null -> roaming
+            else -> Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS)
+        }
+        try {
+            startActivity(intent)
+        } catch (e: Exception) {
+            Toast.makeText(requireContext(), "Unable to open Cellular Network settings", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     private fun toggleLocation() {
         if (!hasSecureSettings()) {
             openSettings(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS, "Location")
@@ -305,22 +323,10 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
 
         // Mobile Data Click
         shortcutButtons[IDX_MOBILE_DATA].setOnClickListener {
-            try {
-                startActivity(Intent(android.provider.Settings.ACTION_DATA_ROAMING_SETTINGS))
-            } catch (e: Exception) {
-                try {
-                    startActivity(Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS))
-                } catch (_: Exception) {
-                    Toast.makeText(requireContext(), "Unable to open Cellular Network settings", Toast.LENGTH_SHORT).show()
-                }
-            }
+            openMobileDataSettings()
         }
         shortcutButtons[IDX_MOBILE_DATA].setOnLongClickListener {
-            try {
-                startActivity(Intent(android.provider.Settings.ACTION_DATA_ROAMING_SETTINGS))
-            } catch (e: Exception) {
-                startActivity(Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS))
-            }
+            openMobileDataSettings()
             true
         }
 
