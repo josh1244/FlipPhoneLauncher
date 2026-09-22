@@ -24,10 +24,12 @@ opens a folder grid.
 **Folder Menu.** A grid of the apps in one folder. Number keys launch, the right softkey
 opens app settings, and Back returns to the App Menu.
 
-**Shortcuts (right softkey from Home).** A 2x3 grid of quick toggles navigated with the
+**Shortcuts (right softkey from Home).** A 3x2 grid of quick toggles navigated with the
 D-pad: Mobile Data, Bluetooth, Airplane Mode, Do Not Disturb, Location, and Brightness.
-Bluetooth and DnD toggle in place; Brightness steps through levels; the others and a
-long-press on any tile open the matching system settings screen.
+Bluetooth, Do Not Disturb, and Brightness act directly; Location toggles too when the extra
+permission below is granted. Mobile Data and Airplane Mode open the matching settings screen
+(Android blocks third-party apps from switching those directly), and a long-press on any tile
+opens its settings screen.
 
 ## Configuration
 
@@ -45,6 +47,32 @@ Some toggles need special access that Android grants outside the normal permissi
 
 The app requests these the first time you use the relevant control and sends you to the right
 settings screen if access is missing.
+
+### Location toggle: `WRITE_SECURE_SETTINGS`
+
+The Location tile toggles GPS on/off directly, which needs `WRITE_SECURE_SETTINGS`. This is a
+system permission that can't be granted by the normal prompt or by signing the app with your
+own key. Grant it once over adb:
+
+```sh
+adb shell pm grant com.ham.flipphonelauncher android.permission.WRITE_SECURE_SETTINGS
+```
+
+Without it, the Location tile safely falls back to opening the Location settings screen.
+
+Notes:
+
+- The grant **survives app updates** (`adb install -r`) but is **lost on uninstall**. Reinstalling
+  a build signed with a different key forces an uninstall first, which wipes it — re-run the
+  command above afterward.
+- To keep the grant across builds, always sign with the **same key** so every install is an
+  in-place update, never an uninstall.
+- Signing alone cannot grant this permission. The only ways to hold it without adb are to
+  platform-sign the app (custom ROM) or install it as a privileged system app under
+  `/system/priv-app` with a `privapp-permissions` allowlist entry (requires root).
+- Airplane Mode and Mobile Data can't be toggled even with this permission (the airplane radio
+  switch needs a system-protected broadcast; mobile data needs a signature-level permission), so
+  those tiles open their settings screens.
 
 ## Building
 

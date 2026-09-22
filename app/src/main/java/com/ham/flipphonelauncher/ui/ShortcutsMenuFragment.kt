@@ -78,8 +78,8 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
         // Refresh states to capture changes made in a settings screen
         if (this::shortcutButtons.isInitialized) {
             val mobileDataEnabled = isMobileDataEnabled()
-            shortcutButtons.getOrNull(0)?.setBackgroundResource(if (mobileDataEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-            setShortcutIconTint(0, mobileDataEnabled)
+            shortcutButtons.getOrNull(IDX_MOBILE_DATA)?.setBackgroundResource(if (mobileDataEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+            setShortcutIconTint(IDX_MOBILE_DATA, mobileDataEnabled)
 
             val airplaneModeEnabled = isAirplaneModeEnabled()
             shortcutButtons.getOrNull(2)?.setBackgroundResource(if (airplaneModeEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
@@ -119,27 +119,27 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
         // Get shortcuts panel from layout include
         shortcutsPanel = view.findViewById(R.id.shortcuts_panel)
 
-        // Collect shortcut buttons for navigation (Grid: 2 cols x 3 rows)
-        // Row 0: 0=Mobile Data, 1=Bluetooth
-        // Row 1: 2=Airplane Mode, 3=DnD
-        // Row 2: 4=Location, 5=Brightness
+        // Collect shortcut buttons for navigation. List order MUST match the visual grid
+        // (row-major), since D-pad moves by index. (Grid: 3 cols x 2 rows)
+        // Row 0: 0=Brightness, 1=Bluetooth, 2=Airplane Mode
+        // Row 1: 3=DnD, 4=Location, 5=Mobile Data
         shortcutButtons = listOf(
-            shortcutsPanel.findViewById(R.id.btn_mobile_data),
+            shortcutsPanel.findViewById(R.id.btn_brightness),
             shortcutsPanel.findViewById(R.id.btn_bluetooth),
             shortcutsPanel.findViewById(R.id.btn_airplane_mode),
             shortcutsPanel.findViewById(R.id.btn_dnd),
             shortcutsPanel.findViewById(R.id.btn_location),
-            shortcutsPanel.findViewById(R.id.btn_brightness)
+            shortcutsPanel.findViewById(R.id.btn_mobile_data)
         )
 
-        // Collect overlay views for focus/hover outline
+        // Collect overlay views for focus/hover outline (same order as buttons)
         shortcutOverlays = listOf(
-            shortcutsPanel.findViewById(R.id.overlay_mobile_data),
+            shortcutsPanel.findViewById(R.id.overlay_brightness),
             shortcutsPanel.findViewById(R.id.overlay_bluetooth),
             shortcutsPanel.findViewById(R.id.overlay_airplane_mode),
             shortcutsPanel.findViewById(R.id.overlay_dnd),
             shortcutsPanel.findViewById(R.id.overlay_location),
-            shortcutsPanel.findViewById(R.id.overlay_brightness)
+            shortcutsPanel.findViewById(R.id.overlay_mobile_data)
         )
 
         setupInitialShortcuts()
@@ -152,6 +152,10 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
     private lateinit var shortcutOverlays: List<ImageView>
     private var selectedShortcutIndex: Int = 0
     private var softKeyBarView: SoftkeyBarView? = null
+
+    // Tile index = visual position (row-major). Brightness is first (top-left), Mobile Data last.
+    private val IDX_BRIGHTNESS = 0
+    private val IDX_MOBILE_DATA = 5
 
     // Cached system services and views to avoid repeated lookups
     private var bluetoothAdapterCached: BluetoothAdapter? = null
@@ -190,6 +194,40 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
         }
     }
 
+    // WRITE_SECURE_SETTINGS is a system permission granted out-of-band (adb); if it's missing we
+    // fall back to opening the relevant settings screen instead of toggling directly.
+    private fun hasSecureSettings(): Boolean =
+        androidx.core.content.ContextCompat.checkSelfPermission(
+            requireContext(), android.Manifest.permission.WRITE_SECURE_SETTINGS
+        ) == android.content.pm.PackageManager.PERMISSION_GRANTED
+
+    private fun openSettings(action: String, label: String) {
+        try {
+            startActivity(Intent(action))
+        } catch (e: Exception) {
+            Toast.makeText(requireContext(), "Unable to open $label settings", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun toggleLocation() {
+        if (!hasSecureSettings()) {
+            openSettings(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS, "Location")
+            return
+        }
+        val newEnabled = !isLocationEnabled()
+        val mode = if (newEnabled) android.provider.Settings.Secure.LOCATION_MODE_HIGH_ACCURACY
+                   else android.provider.Settings.Secure.LOCATION_MODE_OFF
+        try {
+            android.provider.Settings.Secure.putInt(
+                requireContext().contentResolver, android.provider.Settings.Secure.LOCATION_MODE, mode
+            )
+            shortcutButtons.getOrNull(4)?.setBackgroundResource(if (newEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+            setShortcutIconTint(4, newEnabled)
+        } catch (e: Exception) {
+            openSettings(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS, "Location")
+        }
+    }
+
     // Receiver to update UI when system settings change
     private val systemStateReceiver = object : android.content.BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: android.content.Intent?) {
@@ -197,8 +235,8 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
             try {
                 // Mobile Data State
                 val mobileDataEnabled = isMobileDataEnabled()
-                shortcutButtons.getOrNull(0)?.setBackgroundResource(if (mobileDataEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
-                setShortcutIconTint(0, mobileDataEnabled)
+                shortcutButtons.getOrNull(IDX_MOBILE_DATA)?.setBackgroundResource(if (mobileDataEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+                setShortcutIconTint(IDX_MOBILE_DATA, mobileDataEnabled)
                 
                 // Bluetooth
                 val btEnabled = bluetoothAdapterCached != null && bluetoothAdapterCached!!.isEnabled
@@ -233,7 +271,7 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
 
         // Set initial backgrounds based on current state
         val mobileDataEnabled = isMobileDataEnabled()
-        shortcutButtons[0].setBackgroundResource(if (mobileDataEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
+        shortcutButtons[IDX_MOBILE_DATA].setBackgroundResource(if (mobileDataEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
         
         val btEnabled = bluetoothAdapterCached != null && bluetoothAdapterCached!!.isEnabled
         shortcutButtons[1].setBackgroundResource(if (btEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
@@ -248,7 +286,7 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
         shortcutButtons[4].setBackgroundResource(if (locationEnabled) R.drawable.circle_bg_on else R.drawable.circle_bg_off)
 
         // For brightness, always on by default
-        shortcutButtons[5].setBackgroundResource(R.drawable.brightness_progress)
+        shortcutButtons[IDX_BRIGHTNESS].setBackgroundResource(R.drawable.brightness_progress)
 
         // Set initial progress
         setBrightnessProgress()
@@ -256,17 +294,17 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
         // Set the focused item
         updateShortcutFocus()
 
-        setShortcutIconTint(0, mobileDataEnabled)
+        setShortcutIconTint(IDX_MOBILE_DATA, mobileDataEnabled)
         setShortcutIconTint(1, btEnabled)
         setShortcutIconTint(2, airplaneModeEnabled)
         setShortcutIconTint(3, ringerNormal)
         setShortcutIconTint(4, locationEnabled)
-        setShortcutIconTint(5, true)
+        setShortcutIconTint(IDX_BRIGHTNESS, true)
 
         updateDndUiFromSystem()
 
         // Mobile Data Click
-        shortcutButtons[0].setOnClickListener {
+        shortcutButtons[IDX_MOBILE_DATA].setOnClickListener {
             try {
                 startActivity(Intent(android.provider.Settings.ACTION_DATA_ROAMING_SETTINGS))
             } catch (e: Exception) {
@@ -277,7 +315,7 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
                 }
             }
         }
-        shortcutButtons[0].setOnLongClickListener {
+        shortcutButtons[IDX_MOBILE_DATA].setOnLongClickListener {
             try {
                 startActivity(Intent(android.provider.Settings.ACTION_DATA_ROAMING_SETTINGS))
             } catch (e: Exception) {
@@ -308,13 +346,11 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
             true
         }
 
-        // Airplane Mode Click
+        // Airplane can't be truly toggled by an app on this OS: writing the setting works but the
+        // radio switch needs a system-protected broadcast, so the radios wouldn't actually change.
+        // Open the settings screen instead of flipping a setting that has no real effect.
         shortcutButtons[2].setOnClickListener {
-            try {
-                startActivity(Intent(android.provider.Settings.ACTION_AIRPLANE_MODE_SETTINGS))
-            } catch (e: Exception) {
-                Toast.makeText(requireContext(), "Unable to open Airplane Mode settings", Toast.LENGTH_SHORT).show()
-            }
+            openSettings(android.provider.Settings.ACTION_AIRPLANE_MODE_SETTINGS, "Airplane Mode")
         }
         shortcutButtons[2].setOnLongClickListener {
             try {
@@ -375,13 +411,9 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
             true
         }
 
-        // Location Click
+        // Location Click: toggle directly (long-press opens settings)
         shortcutButtons[4].setOnClickListener {
-            try {
-                startActivity(Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS))
-            } catch (e: Exception) {
-                Toast.makeText(requireContext(), "Unable to open Location settings", Toast.LENGTH_SHORT).show()
-            }
+            toggleLocation()
         }
         shortcutButtons[4].setOnLongClickListener {
             try {
@@ -393,11 +425,11 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
         }
 
         // Brightness
-        shortcutButtons[5].setOnClickListener {
+        shortcutButtons[IDX_BRIGHTNESS].setOnClickListener {
             adjustBrightness(1)
         }
         // Long-press Brightness: open Display settings
-        shortcutButtons[5].setOnLongClickListener {
+        shortcutButtons[IDX_BRIGHTNESS].setOnLongClickListener {
             try {
                 startActivity(Intent(android.provider.Settings.ACTION_DISPLAY_SETTINGS))
             } catch (e: Exception) {
@@ -439,7 +471,7 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
             val cResolver = requireContext().contentResolver
             val current = android.provider.Settings.System.getInt(cResolver, android.provider.Settings.System.SCREEN_BRIGHTNESS)
             val percent = (current * 100) / 255
-            val drawable = shortcutButtons[5].background
+            val drawable = shortcutButtons[IDX_BRIGHTNESS].background
             if (drawable is android.graphics.drawable.LayerDrawable) {
                 val clip = drawable.findDrawableByLayerId(R.id.progress)
                 if (clip is android.graphics.drawable.ClipDrawable) {
@@ -501,7 +533,7 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
         }
         shortcutButtons[selectedShortcutIndex].requestFocus()
         // Update softkey bar for brightness shortcut
-        if (selectedShortcutIndex == 5) {
+        if (selectedShortcutIndex == IDX_BRIGHTNESS) {
             softKeyBarView?.setSoftkeyBarText(left = "Down", middle = "Select", right = "Up")
         } else {
             softKeyBarView?.setSoftkeyBarText(left = "", middle = "Select", right = "")
@@ -535,15 +567,15 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
                 return true
             }
             KeyEvent.KEYCODE_DPAD_UP -> {
-                moveShortcutFocus(-2)
+                moveShortcutFocus(-3)
                 return true
             }
             KeyEvent.KEYCODE_DPAD_DOWN -> {
-                moveShortcutFocus(2)
+                moveShortcutFocus(3)
                 return true
             }
             KeyEvent.KEYCODE_SOFT_LEFT -> {
-                if (selectedShortcutIndex == 5) {
+                if (selectedShortcutIndex == IDX_BRIGHTNESS) {
                     adjustBrightness(-1)
                     return true
                 } else {
@@ -551,7 +583,7 @@ class ShortcutsMenuFragment : Fragment(), KeyEventHandler {
                 }
             }
             KeyEvent.KEYCODE_SOFT_RIGHT -> {
-                if (selectedShortcutIndex == 5) {
+                if (selectedShortcutIndex == IDX_BRIGHTNESS) {
                     adjustBrightness(1)
                     return true
                 } else {
