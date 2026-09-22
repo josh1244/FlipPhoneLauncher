@@ -76,8 +76,8 @@ class AppMenuFragment : Fragment(), KeyEventHandler {
         // Match the old ListView/GridView feel: no selection cross-fade, and grid tile spacing.
         listRecycler?.itemAnimator = null
         gridRecycler?.itemAnimator = null
-        val gridSpace = (4 * resources.displayMetrics.density).toInt()
-        gridRecycler?.addItemDecoration(com.ham.flipphonelauncher.util.GridSpacingItemDecoration(gridSpace))
+        val gridSpace = (8 * resources.displayMetrics.density).toInt()
+        gridRecycler?.addItemDecoration(com.ham.flipphonelauncher.util.GridSpacingItemDecoration(GRID_COLS, gridSpace))
 
         listAdapter = AppListRecyclerAdapter(state.folders, viewLifecycleOwner.lifecycleScope) { appItem -> launchApp(appItem) }
         // Grid shows one entry per folder: the folder itself, or its single app.
