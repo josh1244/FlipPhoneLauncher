@@ -13,8 +13,12 @@ Software for the Alcatel Go Flip 2 (model 4051S, Android 8.1 / API 27, keypad + 
   bubble tails, and **dark + light** variants. It's a decompiled/patched third-party APK,
   so the full apktool source lives in `app/` with a `build.sh`; see its README.
 
+- **[apps/basic-camera/](apps/basic-camera/)** — the Sunbeam "Basic Camera" app, patched
+  with the same soft-key mapping (top-left = Menu, top-right = Back). Decompiled/patched
+  APK; full apktool source in `app/` with a `build.sh`; see its README.
+
 ## CI
 
-`.github/workflows/build.yml` builds all three on push/PR: the launcher (Gradle) and both
-messaging variants (apktool). `.github/workflows/release.yml` cuts signed launcher releases
-on `v*` tags.
+`.github/workflows/build.yml` builds everything on push/PR: the launcher (Gradle) and the
+Basic Messaging + Basic Camera side-load apps (apktool). `.github/workflows/release.yml`
+cuts signed launcher releases on `v*` tags.

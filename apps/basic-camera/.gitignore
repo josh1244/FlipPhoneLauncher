@@ -1,0 +1,6 @@
+# build outputs
+BasicCamera*.apk
+app/build/
+app/dist/
+*.apk
+*.idsig

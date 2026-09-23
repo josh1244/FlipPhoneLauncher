@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="auto">自动</string>
+    <string name="back">回去</string>
+    <string name="camera_error">无法启动相机。</string>
+    <string name="flash_turned_off">闪光灯关闭</string>
+    <string name="flash_turned_on">闪光灯已开启</string>
+    <string name="menu_flash_mode">闪光模式</string>
+    <string name="menu_flash_off">熄灭</string>
+    <string name="menu_flash_on">快闪</string>
+    <string name="menu_gallery">照片库</string>
+    <string name="menu_image_capture">图像捕捉</string>
+    <string name="menu_save_to_internal">保存到内部</string>
+    <string name="menu_save_to_sd">保存到标清</string>
+    <string name="menu_video_capture">视频截取</string>
+    <string name="off">关</string>
+    <string name="on">上</string>
+    <string name="options">选件</string>
+</resources>

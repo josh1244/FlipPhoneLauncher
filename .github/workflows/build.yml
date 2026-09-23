@@ -40,8 +40,12 @@ jobs:
           path: apps/launcher/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
 
-  messaging:
+  basic-apps:
     runs-on: ubuntu-latest
+    env:
+      APKTOOL: ${{ runner.temp }}/apktool.jar
+      BT: ${{ env.ANDROID_HOME }}/build-tools/35.0.0
+      JAVA: java
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -61,17 +65,25 @@ jobs:
         run: curl -fsSL -o "$RUNNER_TEMP/apktool.jar" https://github.com/iBotPeaches/Apktool/releases/download/v2.11.1/apktool_2.11.1.jar
 
       - name: Build Basic Messaging (dark + light)
-        env:
-          APKTOOL: ${{ runner.temp }}/apktool.jar
-          BT: ${{ env.ANDROID_HOME }}/build-tools/35.0.0
-          JAVA: java
         run: |
           chmod +x apps/basic-messaging/build.sh
           apps/basic-messaging/build.sh both
+
+      - name: Build Basic Camera
+        run: |
+          chmod +x apps/basic-camera/build.sh
+          apps/basic-camera/build.sh
 
       - name: Upload messaging APKs
         uses: actions/upload-artifact@v4
         with:
           name: basic-messaging
           path: apps/basic-messaging/BasicMessaging-*.apk
+          if-no-files-found: error
+
+      - name: Upload camera APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: basic-camera
+          path: apps/basic-camera/BasicCamera.apk
           if-no-files-found: error
