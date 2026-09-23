@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Only wakes for com.android.mms window changes; used to redirect the hardware messaging key. -->
+<!-- Wakes for stock messaging/camera window changes; redirects the hardware keys to Basic Phones apps. -->
 <accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
     android:accessibilityEventTypes="typeWindowStateChanged"
     android:accessibilityFeedbackType="feedbackGeneric"
     android:notificationTimeout="100"
-    android:packageNames="com.android.mms"
+    android:packageNames="com.android.mms,com.android.camera2"
     android:description="@string/messaging_redirect_desc" />
