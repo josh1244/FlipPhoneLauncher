@@ -1,0 +1,10 @@
+# host tooling and device-specific / large / proprietary artifacts — not version-tracked
+.venv/
+loaders/*
+!loaders/.gitkeep
+backup/
+patched/
+*.mbn
+*.img
+*.bin
+firmware/
