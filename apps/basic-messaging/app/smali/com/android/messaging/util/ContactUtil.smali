@@ -191,6 +191,9 @@
     const/4 v0, 0x1
 
     :goto_1
+    # forced true: Alcatel contacts provider has no index_in_sim column (Sunbeam-only)
+    const/4 v0, 0x1
+
     sput-boolean v0, Lcom/android/messaging/util/ContactUtil;->IS_PROBABLY_AN_EMULATOR:Z
 
     return-void
