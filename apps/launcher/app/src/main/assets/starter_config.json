@@ -40,7 +40,7 @@
     "7": {
       "name": "Media",
       "apps": [
-        "com.android.camera2/com.android.camera.CameraLauncher",
+        "com.basicphones.camera/com.basicphones.camera.ui.MainActivity",
         "com.android.gallery3d/com.android.gallery3d.app.GalleryActivity",
         "com.android.music/com.android.music.MusicBrowserActivity",
         "com.android.soundrecorder/com.android.soundrecorder.SoundRecorder"

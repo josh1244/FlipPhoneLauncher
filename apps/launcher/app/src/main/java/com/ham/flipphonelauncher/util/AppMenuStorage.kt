@@ -15,6 +15,23 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 
 object AppMenuStorage {
+    // OEM apps replaced by their Basic Phones equivalents on this phone.
+    private val HIDDEN_OEM_PACKAGES = setOf("com.android.mms", "com.android.camera2")
+    // OEM launcher key -> Basic replacement launcher key (references get remapped on load).
+    private val OEM_TO_BASIC = mapOf(
+        "com.android.mms/com.android.mms.ui.ConversationList"
+            to "com.basicphones.messaging/com.basicphones.messaging.ui.conversationlist.ConversationListActivity",
+        "com.android.camera2/com.android.camera.CameraLauncher"
+            to "com.basicphones.camera/com.basicphones.camera.ui.MainActivity"
+    )
+    // Basic replacement key -> (display label, OEM icon key): show the familiar label/icon, launch Basic.
+    private val BASIC_DISPLAY = mapOf(
+        "com.basicphones.messaging/com.basicphones.messaging.ui.conversationlist.ConversationListActivity"
+            to Pair("Messages", "com.android.mms/com.android.mms.ui.ConversationList"),
+        "com.basicphones.camera/com.basicphones.camera.ui.MainActivity"
+            to Pair("Camera", "com.android.camera2/com.android.camera.CameraLauncher")
+    )
+
     // Holds the full list of folders in memory (including hidden apps, so saves stay complete).
     // Volatile: assigned on a background thread in loadApplications, read on the main thread; the
     // reference swap is atomic so readers see a consistent old-or-new list.
@@ -175,22 +192,21 @@ object AppMenuStorage {
         val mainIntent = android.content.Intent(android.content.Intent.ACTION_MAIN, null)
         mainIntent.addCategory(android.content.Intent.CATEGORY_LAUNCHER)
         val appInfos = pm.queryIntentActivities(mainIntent, 0)
-            // Hide the OEM messaging app; Basic Messaging supersedes it on this phone.
-            .filter { it.activityInfo.packageName != "com.android.mms" }
+            // Hide the OEM messaging/camera apps; the Basic Phones apps supersede them here.
+            .filter { it.activityInfo.packageName !in HIDDEN_OEM_PACKAGES }
 
-        // Any saved/starter reference to the OEM messaging app resolves to Basic Messaging,
-        // so the existing "Messages" slot shows and launches Basic Messaging instead.
-        val oemMmsKey = "com.android.mms/com.android.mms.ui.ConversationList"
-        val basicMsgKey = "com.basicphones.messaging/com.basicphones.messaging.ui.conversationlist.ConversationListActivity"
-        fun remapKey(k: String): String = if (k == oemMmsKey) basicMsgKey else k
+        // Any saved/starter reference to an OEM app resolves to its Basic Phones replacement,
+        // so the existing "Messages"/"Camera" slots show and launch the Basic app instead.
+        fun remapKey(k: String): String = OEM_TO_BASIC[k] ?: k
 
-        // Basic Messaging is the phone's Messages app: show it as "Messages" with the OEM
-        // Messages icon, but keep Basic Messaging as the launch target.
+        // Show the replacement as the familiar OEM label + icon, but launch the Basic app.
         fun buildAppItem(key: String, ri: android.content.pm.ResolveInfo, folderId: Int, hidden: Boolean): AppItem {
             val pkg = ri.activityInfo.packageName
             val act = ri.activityInfo.name
-            return if (key == basicMsgKey) {
-                AppItem("Messages", pkg, act, folderId, hidden, "com.android.mms", "com.android.mms.ui.ConversationList")
+            val disp = BASIC_DISPLAY[key]
+            return if (disp != null) {
+                val iconKey = disp.second.split("/", limit = 2)
+                AppItem(disp.first, pkg, act, folderId, hidden, iconKey[0], iconKey[1])
             } else {
                 AppItem(labelCache.getOrPut(key) { ri.loadLabel(pm) }, pkg, act, folderId, hidden)
             }
