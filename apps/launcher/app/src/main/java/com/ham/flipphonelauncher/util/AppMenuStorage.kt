@@ -178,6 +178,12 @@ object AppMenuStorage {
             // Hide the OEM messaging app; Basic Messaging supersedes it on this phone.
             .filter { it.activityInfo.packageName != "com.android.mms" }
 
+        // Any saved/starter reference to the OEM messaging app resolves to Basic Messaging,
+        // so the existing "Messages" slot shows and launches Basic Messaging instead.
+        val oemMmsKey = "com.android.mms/com.android.mms.ui.ConversationList"
+        val basicMsgKey = "com.basicphones.messaging/com.basicphones.messaging.ui.conversationlist.ConversationListActivity"
+        fun remapKey(k: String): String = if (k == oemMmsKey) basicMsgKey else k
+
         val folderData = loadLauncherData(context)
         val folderIds = if (folderData.isNotEmpty()) folderData.keys.sorted() else (1..9).toList()
 
@@ -213,14 +219,14 @@ object AppMenuStorage {
                     val arr = foldersJson.getJSONObject(key).getJSONArray("apps")
                     for (i in 0 until arr.length()) {
                         val appKey = arr.getString(i)
-                        put(appKey, folderId)
+                        put(remapKey(appKey), folderId)
                     }
                 }
             }
         } ?: emptyMap()
 
         // Build set of all saved app keys
-        val allSavedApps = folderData.values.flatMap { it.second.map { appItem -> appItem.packageName + "/" + appItem.activityName } }.toSet()
+        val allSavedApps = folderData.values.flatMap { it.second.map { appItem -> remapKey(appItem.packageName + "/" + appItem.activityName) } }.toSet()
         val lastFolderId = if (folderIds.size >= 8) folderIds[7] else folderIds.last()
 
         // Prepare a map of folderId to mutable app list
@@ -231,11 +237,11 @@ object AppMenuStorage {
             val (_, appItems) = pair
             appItems.map { appItem ->
                 async {
-                    val key = appItem.packageName + "/" + appItem.activityName
+                    val key = remapKey(appItem.packageName + "/" + appItem.activityName)
                     val resolveInfo = appInfoMap[key]
                     if (resolveInfo != null) {
                         val appLabel = labelCache.getOrPut(key) { resolveInfo.loadLabel(pm) }
-                        val appDetail = AppItem(appLabel, appItem.packageName, appItem.activityName, folderId, appItem.isHidden)
+                        val appDetail = AppItem(appLabel, resolveInfo.activityInfo.packageName, resolveInfo.activityInfo.name, folderId, appItem.isHidden)
                         Pair(folderId, appDetail)
                     } else null
                 }

@@ -20,7 +20,7 @@
     },
     "4": {
       "name": "Messages",
-      "apps": ["com.android.mms/com.android.mms.ui.ConversationList"]
+      "apps": ["com.basicphones.messaging/com.basicphones.messaging.ui.conversationlist.ConversationListActivity"]
     },
     "5": {
       "name": "Schedule",
