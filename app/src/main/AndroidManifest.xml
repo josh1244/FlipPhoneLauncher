@@ -40,6 +40,19 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <!-- Redirects the hardware messaging key from stock Mms to Basic Messaging (opt-in). -->
+        <service
+            android:name=".MessagingRedirectService"
+            android:exported="false"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/messaging_redirect_service" />
+        </service>
     </application>
 
 </manifest>

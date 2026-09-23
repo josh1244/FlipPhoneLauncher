@@ -6,4 +6,5 @@
     <string name="shortcut_mobile_data">Mobile Data</string>
     <string name="shortcut_airplane_mode">Airplane Mode</string>
     <string name="shortcut_location">Location</string>
+    <string name="messaging_redirect_desc">Redirects the hardware messaging key to Basic Messaging instead of the stock Messaging app.</string>
 </resources>
