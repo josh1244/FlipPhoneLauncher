@@ -17,8 +17,12 @@ Software for the Alcatel Go Flip 2 (model 4051S, Android 8.1 / API 27, keypad + 
   with the same soft-key mapping (top-left = Menu, top-right = Back). Decompiled/patched
   APK; full apktool source in `app/` with a `build.sh`; see its README.
 
+- **[apps/basic-weather/](apps/basic-weather/)** — the Sunbeam "Basic Weather" app, same
+  soft-key mapping (top-left = Menu/Settings, top-right = Back). Decompiled/patched APK;
+  full apktool source in `app/` with a `build.sh`; see its README.
+
 ## CI
 
 `.github/workflows/build.yml` builds everything on push/PR: the launcher (Gradle) and the
-Basic Messaging + Basic Camera side-load apps (apktool). `.github/workflows/release.yml`
-cuts signed launcher releases on `v*` tags.
+Basic Messaging + Basic Camera + Basic Weather side-load apps (apktool).
+`.github/workflows/release.yml` cuts signed launcher releases on `v*` tags.

@@ -78,6 +78,15 @@ jobs:
           chmod +x apps/basic-camera/build.sh
           apps/basic-camera/build.sh
 
+      - name: Build Basic Weather
+        env:
+          APKTOOL: ${{ runner.temp }}/apktool.jar
+          BT: ${{ env.ANDROID_HOME }}/build-tools/35.0.0
+          JAVA: java
+        run: |
+          chmod +x apps/basic-weather/build.sh
+          apps/basic-weather/build.sh
+
       - name: Upload messaging APKs
         uses: actions/upload-artifact@v4
         with:
@@ -90,4 +99,11 @@ jobs:
         with:
           name: basic-camera
           path: apps/basic-camera/BasicCamera.apk
+          if-no-files-found: error
+
+      - name: Upload weather APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: basic-weather
+          path: apps/basic-weather/BasicWeather.apk
           if-no-files-found: error
