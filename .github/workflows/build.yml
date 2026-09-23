@@ -42,10 +42,6 @@ jobs:
 
   basic-apps:
     runs-on: ubuntu-latest
-    env:
-      APKTOOL: ${{ runner.temp }}/apktool.jar
-      BT: ${{ env.ANDROID_HOME }}/build-tools/35.0.0
-      JAVA: java
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -65,11 +61,19 @@ jobs:
         run: curl -fsSL -o "$RUNNER_TEMP/apktool.jar" https://github.com/iBotPeaches/Apktool/releases/download/v2.11.1/apktool_2.11.1.jar
 
       - name: Build Basic Messaging (dark + light)
+        env:
+          APKTOOL: ${{ runner.temp }}/apktool.jar
+          BT: ${{ env.ANDROID_HOME }}/build-tools/35.0.0
+          JAVA: java
         run: |
           chmod +x apps/basic-messaging/build.sh
           apps/basic-messaging/build.sh both
 
       - name: Build Basic Camera
+        env:
+          APKTOOL: ${{ runner.temp }}/apktool.jar
+          BT: ${{ env.ANDROID_HOME }}/build-tools/35.0.0
+          JAVA: java
         run: |
           chmod +x apps/basic-camera/build.sh
           apps/basic-camera/build.sh
