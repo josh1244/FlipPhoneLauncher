@@ -43,12 +43,12 @@ class AppGridRecyclerAdapter(
         when (val item = items[position]) {
             is FolderItem -> {
                 val first = item.apps.firstOrNull()
-                if (first != null) AppIconLoader.bind(holder.icon, first.packageName, first.activityName, scope)
+                if (first != null) AppIconLoader.bind(holder.icon, first.iconPackage ?: first.packageName, first.iconActivity ?: first.activityName, scope)
                 else holder.icon.setImageDrawable(null)
                 holder.name.text = item.name
             }
             is AppItem -> {
-                AppIconLoader.bind(holder.icon, item.packageName, item.activityName, scope)
+                AppIconLoader.bind(holder.icon, item.iconPackage ?: item.packageName, item.iconActivity ?: item.activityName, scope)
                 holder.name.text = item.label
             }
         }

@@ -80,7 +80,7 @@ class AppListRecyclerAdapter(
             holder.header.visibility = View.GONE
             holder.header.text = ""
         }
-        AppIconLoader.bind(holder.icon, e.app.packageName, e.app.activityName, scope)
+        AppIconLoader.bind(holder.icon, e.app.iconPackage ?: e.app.packageName, e.app.iconActivity ?: e.app.activityName, scope)
         holder.name.text = when {
             e.folderHasMultiple -> "${e.folderIndex}.${e.appIndex} ${e.app.label}"
             e.isOnlyAppInFolder -> "${e.folderIndex}. ${e.app.label}"
