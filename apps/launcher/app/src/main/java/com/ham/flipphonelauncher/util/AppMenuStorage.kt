@@ -175,6 +175,8 @@ object AppMenuStorage {
         val mainIntent = android.content.Intent(android.content.Intent.ACTION_MAIN, null)
         mainIntent.addCategory(android.content.Intent.CATEGORY_LAUNCHER)
         val appInfos = pm.queryIntentActivities(mainIntent, 0)
+            // Hide the OEM messaging app; Basic Messaging supersedes it on this phone.
+            .filter { it.activityInfo.packageName != "com.android.mms" }
 
         val folderData = loadLauncherData(context)
         val folderIds = if (folderData.isNotEmpty()) folderData.keys.sorted() else (1..9).toList()
