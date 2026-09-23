@@ -15,6 +15,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.content.pm.PackageManager
+import android.provider.Settings
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.appcompat.app.AppCompatActivity
@@ -186,7 +187,30 @@ class HomeActivity : AppCompatActivity() {
             addDataScheme("package")
         }
         registerReceiver(packageChangeReceiver, pkgFilter)
+
+        ensureDefaultMessagingApp()
 	}
+
+    // On first run, make Basic Messaging the default SMS app (needs WRITE_SECURE_SETTINGS,
+    // granted via adb). One-shot so a later user choice isn't overridden.
+    private fun ensureDefaultMessagingApp() {
+        val prefs = getSharedPreferences("launcher_prefs", Context.MODE_PRIVATE)
+        if (prefs.getBoolean("default_sms_set", false)) return
+        val target = "com.basicphones.messaging"
+        val installed = try {
+            packageManager.getPackageInfo(target, 0); true
+        } catch (e: PackageManager.NameNotFoundException) { false }
+        if (!installed) return
+        try {
+            val current = Settings.Secure.getString(contentResolver, "sms_default_application")
+            if (current != target) {
+                Settings.Secure.putString(contentResolver, "sms_default_application", target)
+            }
+            prefs.edit().putBoolean("default_sms_set", true).apply()
+        } catch (e: Exception) {
+            // No WRITE_SECURE_SETTINGS yet, or the write was blocked; try again next launch.
+        }
+    }
 
     override fun onDestroy() {
         super.onDestroy()
