@@ -1,6 +1,0 @@
-# build outputs
-BasicWeather*.apk
-app/build/
-app/dist/
-*.apk
-*.idsig

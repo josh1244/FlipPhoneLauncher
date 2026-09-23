@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<TextView android:textAppearance="@style/MapboxSearchSdk.Text.BoldHeader" android:gravity="start|center" android:id="@id/history_item" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="@dimen/mapbox_search_sdk_primary_layout_offset" android:text="@string/mapbox_search_sdk_search_result_view_recent_searches_title" android:maxLines="1" android:textAlignment="viewStart" android:paddingHorizontal="@dimen/mapbox_search_sdk_primary_layout_offset"
-  xmlns:android="http://schemas.android.com/apk/res/android" />
