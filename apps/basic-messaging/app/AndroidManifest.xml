@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="34" android:compileSdkVersionCodename="14" android:installLocation="internalOnly" package="com.basicphones.messaging" platformBuildVersionCode="34" platformBuildVersionName="14">
+    <protected-broadcast android:name="android.intent.action.EMERGENCY_CALLBACK_MODE_CHANGED"/>
+    <protected-broadcast android:name="com.android.systemui.GWIN_READ_MMS_NOTIFICATION"/>
+    <uses-permission android:name="android.permission.BROADCAST_STICKY"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.WRITE_SMS"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.RECEIVE_MMS"/>
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.WRITE_CONTACTS"/>
+    <uses-permission android:name="android.permission.READ_PROFILE"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-feature android:name="android.hardware.camera" android:required="false"/>
+    <uses-feature android:name="android.hardware.camera.front" android:required="false"/>
+    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false"/>
+    <uses-feature android:name="android.hardware.microphone" android:required="false"/>
+    <uses-feature android:name="android.hardware.screen.portrait" android:required="false"/>
+    <uses-feature android:name="android.hardware.telephony" android:required="false"/>
+    <permission android:name="com.basicphones.messaging.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" android:protectionLevel="signature"/>
+    <uses-permission android:name="com.basicphones.messaging.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"/>
+    <application android:allowBackup="false" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:extractNativeLibs="false" android:icon="@drawable/ic_launcher" android:label="@string/app_name" android:largeHeap="true" android:name="com.basicphones.messaging.BugleApplication" android:supportsRtl="false" android:theme="@style/BugleTheme">
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:exported="true" android:name="com.basicphones.messaging.ui.conversationlist.ConversationListActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan|stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.APP_MESSAGING"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:name="com.basicphones.messaging.ui.nosms.NoSmsActivity" android:screenOrientation="portrait"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:name="com.basicphones.messaging.ui.search.SearchActivity" android:screenOrientation="portrait"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:name="com.basicphones.messaging.ui.PermissionCheckActivity" android:screenOrientation="portrait"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:documentLaunchMode="always" android:exported="true" android:name="com.basicphones.messaging.ui.conversation.LaunchConversationActivity" android:noHistory="true" android:screenOrientation="portrait" android:theme="@style/Invisible">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.SENDTO"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="sms"/>
+                <data android:scheme="smsto"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.SENDTO"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="mms"/>
+                <data android:scheme="mmsto"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.SENDTO"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="mailto"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:label="@string/archived_activity_title" android:name="com.basicphones.messaging.ui.conversationlist.ArchivedConversationListActivity" android:parentActivityName="com.basicphones.messaging.ui.conversationlist.ConversationListActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan|stateHidden">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".ui.conversationlist.ConversationListActivity"/>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:name="com.basicphones.messaging.ui.conversation.ConversationActivity" android:parentActivityName="com.basicphones.messaging.ui.conversationlist.ConversationListActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan|stateHidden">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".ui.conversationlist.ConversationListActivity"/>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:label="@string/blocked_contacts_title" android:name="com.basicphones.messaging.ui.BlockedParticipantsActivity" android:parentActivityName="com.basicphones.messaging.ui.conversationlist.ConversationListActivity" android:screenOrientation="portrait" android:theme="@style/BugleTheme">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".ui.conversationlist.ConversationListActivity"/>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:label="@string/photo_view_activity_title" android:name="com.basicphones.messaging.ui.photoviewer.BuglePhotoViewActivity" android:screenOrientation="portrait" android:theme="@style/BuglePhotoViewTheme"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:excludeFromRecents="true" android:launchMode="singleTask" android:name="com.basicphones.messaging.ui.alert.AlertActivity" android:noHistory="true" android:screenOrientation="user" android:theme="@style/Theme.AppCompat.Dialog"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:documentLaunchMode="always" android:excludeFromRecents="true" android:exported="true" android:name="com.basicphones.messaging.ui.conversationlist.ShareIntentActivity" android:screenOrientation="portrait" android:theme="@style/BugleTheme.DialogActivity">
+            <intent-filter android:label="@string/share_intent_label">
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="text/plain"/>
+                <data android:mimeType="text/x-vCard"/>
+                <data android:mimeType="text/x-vcard"/>
+                <data android:mimeType="text/calendar"/>
+                <data android:mimeType="image/*"/>
+                <data android:mimeType="audio/*"/>
+                <data android:mimeType="application/ogg"/>
+            </intent-filter>
+            <intent-filter android:label="@string/share_intent_label">
+                <action android:name="android.intent.action.SEND_MULTIPLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="image/*"/>
+            </intent-filter>
+        </activity>
+        <activity android:exported="true" android:label="@string/menu_license" android:name="com.basicphones.messaging.ui.LicenseActivity" android:theme="@android:style/Theme.Holo.Light.Dialog"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:label="@string/forward_message_activity_title" android:name="com.basicphones.messaging.ui.conversationlist.ForwardMessageActivity" android:screenOrientation="portrait" android:theme="@style/BugleTheme.DialogActivity"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:exported="false" android:name="com.basicphones.messaging.ui.RemoteInputEntrypointActivity" android:screenOrientation="portrait" android:theme="@style/Invisible"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:label="@string/vcard_detail_activity_title" android:name="com.basicphones.messaging.ui.vcard.VCardDetailActivity" android:screenOrientation="portrait" android:theme="@style/BugleTheme">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".ui.conversation.ConversationActivity"/>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:label="@string/icalendar_detail_activity_title" android:name="com.basicphones.messaging.ui.icalendar.ICalendarDetailActivity" android:screenOrientation="portrait" android:theme="@style/BugleTheme">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".ui.conversation.ConversationActivity"/>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:label="@string/attachment_chooser_activity_title" android:name="com.basicphones.messaging.ui.attachmentchooser.AttachmentChooserActivity" android:parentActivityName="com.basicphones.messaging.ui.conversation.ConversationActivity" android:screenOrientation="portrait" android:theme="@style/BugleTheme">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".ui.conversation.ConversationActivity"/>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:exported="false" android:name="com.basicphones.messaging.ui.debug.DebugMmsConfigActivity" android:screenOrientation="portrait" android:theme="@style/BugleTheme.DialogActivity"/>
+        <activity android:name="com.basicphones.messaging.ui.settings.SettingsActivity" android:screenOrientation="portrait" android:theme="@style/BugleTheme"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:name="com.basicphones.messaging.ui.quickreply.EditQuickRepliesActivity" android:screenOrientation="portrait" android:theme="@style/BugleTheme"/>
+        <provider android:authorities="com.basicphones.messaging.datamodel.MessagingContentProvider" android:exported="false" android:label="@string/app_name" android:name="com.basicphones.messaging.datamodel.MessagingContentProvider"/>
+        <provider android:authorities="com.basicphones.messaging.datamodel.MmsFileProvider" android:exported="false" android:grantUriPermissions="true" android:name="com.basicphones.messaging.datamodel.MmsFileProvider"/>
+        <provider android:authorities="com.basicphones.messaging.datamodel.MediaScratchFileProvider" android:exported="true" android:grantUriPermissions="true" android:name="com.basicphones.messaging.datamodel.MediaScratchFileProvider"/>
+        <provider android:authorities="com.basicphones.messaging.provider" android:exported="false" android:grantUriPermissions="true" android:name="androidx.core.content.FileProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/provider_paths"/>
+        </provider>
+        <receiver android:enabled="false" android:exported="true" android:name="com.basicphones.messaging.receiver.MmsWapPushReceiver" android:permission="android.permission.BROADCAST_WAP_PUSH">
+            <intent-filter android:priority="2147483647">
+                <action android:name="android.provider.Telephony.WAP_PUSH_RECEIVED"/>
+                <data android:mimeType="application/vnd.wap.mms-message"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:enabled="false" android:exported="true" android:name="com.basicphones.messaging.receiver.SmsReceiver" android:permission="android.permission.BROADCAST_SMS">
+            <intent-filter android:priority="2147483647">
+                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+            </intent-filter>
+            <intent-filter android:priority="2147483647">
+                <action android:name="android.provider.Telephony.MMS_DOWNLOADED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:enabled="false" android:exported="true" android:name="com.basicphones.messaging.receiver.AbortMmsWapPushReceiver" android:permission="android.permission.BROADCAST_WAP_PUSH">
+            <intent-filter android:priority="3">
+                <action android:name="android.provider.Telephony.WAP_PUSH_RECEIVED"/>
+                <data android:mimeType="application/vnd.wap.mms-message"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:enabled="false" android:exported="true" android:name="com.basicphones.messaging.receiver.AbortSmsReceiver" android:permission="android.permission.BROADCAST_SMS">
+            <intent-filter android:priority="3">
+                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="true" android:name="com.basicphones.messaging.receiver.MmsWapPushDeliverReceiver" android:permission="android.permission.BROADCAST_WAP_PUSH">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.WAP_PUSH_DELIVER"/>
+                <data android:mimeType="application/vnd.wap.mms-message"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="true" android:name="com.basicphones.messaging.receiver.SmsDeliverReceiver" android:permission="android.permission.BROADCAST_SMS">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_DELIVER"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="false" android:name="com.basicphones.messaging.receiver.SendStatusReceiver">
+            <intent-filter>
+                <action android:name="receiver.SendStatusReceiver.MESSAGE_SENT"/>
+                <data android:scheme="content"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="receiver.SendStatusReceiver.MESSAGE_DELIVERED"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="receiver.SendStatusReceiver.MMS_SENT"/>
+                <data android:scheme="content"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="receiver.SendStatusReceiver.MMS_DOWNLOADED"/>
+                <data android:scheme="content"/>
+            </intent-filter>
+        </receiver>
+        <service android:exported="true" android:name="com.basicphones.messaging.datamodel.NoConfirmationSmsSendService" android:permission="android.permission.SEND_RESPOND_VIA_MESSAGE">
+            <intent-filter>
+                <action android:name="android.intent.action.RESPOND_VIA_MESSAGE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="sms"/>
+                <data android:scheme="smsto"/>
+            </intent-filter>
+        </service>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:excludeFromRecents="true" android:label="@string/class_0_message_activity" android:launchMode="singleTask" android:name="com.basicphones.messaging.ui.ClassZeroActivity" android:screenOrientation="portrait" android:theme="@style/BugleTheme.DialogActivity"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:name="com.basicphones.messaging.ui.SmsStorageLowWarningActivity" android:theme="@style/Invisible"/>
+        <receiver android:exported="true" android:name="com.basicphones.messaging.receiver.StorageStatusReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.DEVICE_STORAGE_LOW"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.DEVICE_STORAGE_OK"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="true" android:name="com.basicphones.messaging.receiver.BootAndPackageReplacedReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="false" android:name="com.basicphones.messaging.receiver.NotificationReceiver"/>
+        <receiver android:exported="true" android:name="com.basicphones.messaging.datamodel.action.PendingActionReceiver">
+            <intent-filter>
+                <action android:name="com.basicphones.messaging.datamodel.PENDING_ACTION"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="true" android:name="com.basicphones.messaging.receiver.DefaultSmsSubscriptionChangeReceiver">
+            <intent-filter>
+                <action android:name="android.telephony.action.DEFAULT_SMS_SUBSCRIPTION_CHANGED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="true" android:name="com.basicphones.messaging.receiver.GwinReceiver">
+            <intent-filter>
+                <action android:name="com.android.systemui.GWIN_READ_MMS_NOTIFICATION"/>
+            </intent-filter>
+        </receiver>
+        <activity android:exported="true" android:label="@string/app_name" android:name="com.basicphones.messaging.ui.WidgetPickConversationActivity" android:theme="@style/BugleTheme">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
+            </intent-filter>
+        </activity>
+        <service android:name="android.support.v7.mms.MmsService"/>
+        <provider android:authorities="com.basicphones.messaging.backup.provider" android:exported="true" android:grantUriPermissions="true" android:name="com.basicphones.messaging.backup.provider.MessagingBackupProvider"/>
+        <service android:directBootAware="false" android:enabled="@bool/enable_system_alarm_service_default" android:exported="false" android:name="androidx.work.impl.background.systemalarm.SystemAlarmService"/>
+        <service android:directBootAware="false" android:enabled="@bool/enable_system_job_service_default" android:exported="true" android:name="androidx.work.impl.background.systemjob.SystemJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <service android:directBootAware="false" android:enabled="@bool/enable_system_foreground_service_default" android:exported="false" android:name="androidx.work.impl.foreground.SystemForegroundService"/>
+        <receiver android:directBootAware="false" android:enabled="true" android:exported="false" android:name="androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver"/>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy">
+            <intent-filter>
+                <action android:name="android.intent.action.BATTERY_OKAY"/>
+                <action android:name="android.intent.action.BATTERY_LOW"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy">
+            <intent-filter>
+                <action android:name="android.intent.action.DEVICE_STORAGE_LOW"/>
+                <action android:name="android.intent.action.DEVICE_STORAGE_OK"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.RescheduleReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.TIME_SET"/>
+                <action android:name="android.intent.action.TIMEZONE_CHANGED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="@bool/enable_system_alarm_service_default" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver">
+            <intent-filter>
+                <action android:name="androidx.work.impl.background.systemalarm.UpdateProxies"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="true" android:exported="true" android:name="androidx.work.impl.diagnostics.DiagnosticsReceiver" android:permission="android.permission.DUMP">
+            <intent-filter>
+                <action android:name="androidx.work.diagnostics.REQUEST_DIAGNOSTICS"/>
+            </intent-filter>
+        </receiver>
+        <uses-library android:name="androidx.window.extensions" android:required="false"/>
+        <uses-library android:name="androidx.window.sidecar" android:required="false"/>
+        <service android:directBootAware="true" android:exported="false" android:name="androidx.room.MultiInstanceInvalidationService"/>
+        <receiver android:directBootAware="false" android:enabled="true" android:exported="true" android:name="androidx.profileinstaller.ProfileInstallReceiver" android:permission="android.permission.DUMP">
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.SKIP_FILE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION"/>
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>

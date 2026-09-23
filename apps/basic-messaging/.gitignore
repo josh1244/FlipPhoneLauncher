@@ -1,0 +1,6 @@
+# build outputs
+BasicMessaging-*.apk
+app/build/
+app/dist/
+*.apk
+*.idsig

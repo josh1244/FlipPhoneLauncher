@@ -1,0 +1,138 @@
+.class public Landroid/support/v7/mms/pdu/AcknowledgeInd;
+.super Landroid/support/v7/mms/pdu/GenericPdu;
+.source "AcknowledgeInd.java"
+
+
+# direct methods
+.method public constructor <init>(I[B)V
+    .locals 1
+    .annotation system Ldalvik/annotation/MethodParameters;
+        accessFlags = {
+            0x0,
+            0x0
+        }
+        names = {
+            "mmsVersion",
+            "transactionId"
+        }
+    .end annotation
+
+    .annotation system Ldalvik/annotation/Throws;
+        value = {
+            Landroid/support/v7/mms/pdu/InvalidHeaderValueException;
+        }
+    .end annotation
+
+    .line 34
+    invoke-direct {p0}, Landroid/support/v7/mms/pdu/GenericPdu;-><init>()V
+
+    const/16 v0, 0x85
+
+    .line 36
+    invoke-virtual {p0, v0}, Landroid/support/v7/mms/pdu/AcknowledgeInd;->setMessageType(I)V
+
+    .line 37
+    invoke-virtual {p0, p1}, Landroid/support/v7/mms/pdu/AcknowledgeInd;->setMmsVersion(I)V
+
+    .line 38
+    invoke-virtual {p0, p2}, Landroid/support/v7/mms/pdu/AcknowledgeInd;->setTransactionId([B)V
+
+    return-void
+.end method
+
+.method constructor <init>(Landroid/support/v7/mms/pdu/PduHeaders;)V
+    .locals 0
+    .annotation system Ldalvik/annotation/MethodParameters;
+        accessFlags = {
+            0x0
+        }
+        names = {
+            "headers"
+        }
+    .end annotation
+
+    .line 47
+    invoke-direct {p0, p1}, Landroid/support/v7/mms/pdu/GenericPdu;-><init>(Landroid/support/v7/mms/pdu/PduHeaders;)V
+
+    return-void
+.end method
+
+
+# virtual methods
+.method public getReportAllowed()I
+    .locals 2
+
+    .line 56
+    iget-object v0, p0, Landroid/support/v7/mms/pdu/AcknowledgeInd;->mPduHeaders:Landroid/support/v7/mms/pdu/PduHeaders;
+
+    const/16 v1, 0x91
+
+    invoke-virtual {v0, v1}, Landroid/support/v7/mms/pdu/PduHeaders;->getOctet(I)I
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public getTransactionId()[B
+    .locals 2
+
+    .line 75
+    iget-object v0, p0, Landroid/support/v7/mms/pdu/AcknowledgeInd;->mPduHeaders:Landroid/support/v7/mms/pdu/PduHeaders;
+
+    const/16 v1, 0x98
+
+    invoke-virtual {v0, v1}, Landroid/support/v7/mms/pdu/PduHeaders;->getTextString(I)[B
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public setReportAllowed(I)V
+    .locals 2
+    .annotation system Ldalvik/annotation/MethodParameters;
+        accessFlags = {
+            0x0
+        }
+        names = {
+            "value"
+        }
+    .end annotation
+
+    .annotation system Ldalvik/annotation/Throws;
+        value = {
+            Landroid/support/v7/mms/pdu/InvalidHeaderValueException;
+        }
+    .end annotation
+
+    .line 66
+    iget-object v0, p0, Landroid/support/v7/mms/pdu/AcknowledgeInd;->mPduHeaders:Landroid/support/v7/mms/pdu/PduHeaders;
+
+    const/16 v1, 0x91
+
+    invoke-virtual {v0, p1, v1}, Landroid/support/v7/mms/pdu/PduHeaders;->setOctet(II)V
+
+    return-void
+.end method
+
+.method public setTransactionId([B)V
+    .locals 2
+    .annotation system Ldalvik/annotation/MethodParameters;
+        accessFlags = {
+            0x0
+        }
+        names = {
+            "value"
+        }
+    .end annotation
+
+    .line 85
+    iget-object v0, p0, Landroid/support/v7/mms/pdu/AcknowledgeInd;->mPduHeaders:Landroid/support/v7/mms/pdu/PduHeaders;
+
+    const/16 v1, 0x98
+
+    invoke-virtual {v0, p1, v1}, Landroid/support/v7/mms/pdu/PduHeaders;->setTextString([BI)V
+
+    return-void
+.end method

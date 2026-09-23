@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout android:id="@id/list_layout_parent" android:tag="layout/vcard_detail_fragment_0" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ExpandableListView android:id="@id/list" android:layout_width="fill_parent" android:layout_height="0.0dip" android:drawSelectorOnTop="false" app:layout_constraintBottom_toTopOf="@id/bottomToolbar" app:layout_constraintTop_toTopOf="parent" />
+    <include android:id="@id/bottomToolbar" layout="@layout/menu_bottom" />
+</androidx.constraintlayout.widget.ConstraintLayout>

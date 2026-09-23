@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView android:gravity="center_vertical" android:layout_gravity="center" android:id="@id/info" android:padding="@dimen/normal_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/incoming_attachments_blocked" android:drawablePadding="@dimen/small_padding" app:drawableStartCompat="@drawable/ic_baseline_block_24" />
+</merge>

@@ -49,11 +49,12 @@ jobs:
           RELEASE_KEY_ALIAS: ${{ secrets.RELEASE_KEY_ALIAS }}
           RELEASE_KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
         run: |
+          cd apps/launcher
           chmod +x ./gradlew
           ./gradlew assembleRelease --stacktrace
 
       - name: Name the APK
-        run: cp app/build/outputs/apk/release/app-release.apk "FlipPhoneLauncher-${GITHUB_REF_NAME}.apk"
+        run: cp apps/launcher/app/build/outputs/apk/release/app-release.apk "FlipPhoneLauncher-${GITHUB_REF_NAME}.apk"
 
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2

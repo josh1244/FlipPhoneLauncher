@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:background="@color/colorBackground" android:layout_width="fill_parent" android:layout_height="fill_parent" android:importantForAccessibility="no"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <FrameLayout android:id="@id/mediapicker_enabled" android:padding="@dimen/normal_padding" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <TextView android:gravity="center" android:layout_gravity="center|top" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="16.0dip" android:text="@string/contact_picker_hint_text" android:importantForAccessibility="no" style="@style/ContactPickerHintText" />
+        <ImageView android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_person_light_large" android:scaleType="center" android:contentDescription="@null" android:importantForAccessibility="no" app:tint="@color/colorPrimary" />
+    </FrameLayout>
+    <TextView android:gravity="center" android:id="@id/missing_permission_view" android:background="@android:color/white" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:text="@string/enable_permission_procedure" android:contentDescription="@string/enable_permission_procedure_description" />
+</FrameLayout>

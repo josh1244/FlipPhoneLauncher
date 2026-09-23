@@ -1,0 +1,3 @@
+.class public final synthetic Lcom/basicphones/messaging/datamodel/data/MediaPickerData$GalleryLoaderCallbacks-IA;
+.super Ljava/lang/Object;
+.source "D8$$SyntheticClass"

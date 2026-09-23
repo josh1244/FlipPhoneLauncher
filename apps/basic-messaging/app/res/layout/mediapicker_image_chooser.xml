@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.basicphones.messaging.ui.mediapicker.GalleryGridView android:gravity="center" android:id="@id/gallery_grid_view" android:background="@color/colorBackground" android:padding="6.0dip" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="fill_parent" android:horizontalSpacing="6.0dip" android:verticalSpacing="6.0dip" android:stretchMode="columnWidth" android:columnWidth="@dimen/gallery_image_cell_size" android:numColumns="auto_fit" />
+    <TextView android:gravity="center" android:id="@id/missing_permission_view" android:background="@android:color/white" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:text="@string/enable_permission_procedure" android:contentDescription="@string/enable_permission_procedure_description" />
+</FrameLayout>

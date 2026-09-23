@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.basicphones.messaging.ui.conversation.ConversationMessageView android:descendantFocusability="afterDescendants" android:layout_width="fill_parent" android:layout_height="wrap_content" style="@style/ConversationMessageViewStyle"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.basicphones.messaging.ui.conversation.ConversationMessageBubbleView android:layout_gravity="center_vertical" android:orientation="vertical" android:id="@id/message_content" android:padding="0.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <LinearLayout android:orientation="vertical" android:id="@id/container" android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <LinearLayout android:orientation="vertical" android:id="@id/message_attachments" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" app:layout_constraintTop_toTopOf="parent">
+                <com.basicphones.messaging.ui.MultiAttachmentLayout android:id="@id/multiple_attachments" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                <com.basicphones.messaging.ui.AsyncImageView android:layout_gravity="center_vertical" android:id="@id/message_image" android:padding="@dimen/normal_padding" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:scaleType="centerCrop" android:adjustViewBounds="true" android:maxWidth="@dimen/image_attachment_fallback_width" android:maxHeight="@dimen/image_attachment_fallback_width" android:contentDescription="@string/message_image_content_description" />
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical" android:id="@id/message_text_and_info" android:layout_width="wrap_content" android:layout_height="wrap_content" app:layout_constraintTop_toBottomOf="@id/message_attachments">
+                <LinearLayout android:orientation="vertical" android:id="@id/message_title_layout" android:padding="@dimen/small_padding" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:importantForAccessibility="noHideDescendants">
+                    <TextView android:id="@id/message_title" android:padding="@dimen/small_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" style="@style/ConversationMessageTitle" />
+                    <TextView android:id="@id/mms_info" android:padding="@dimen/small_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" style="@style/ConversationMessageInfo" />
+                </LinearLayout>
+                <LinearLayout android:orientation="horizontal" android:id="@id/subject_container" android:padding="@dimen/small_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:importantForAccessibility="noHideDescendants">
+                    <TextView android:id="@id/subject_label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/conversation_message_view_subject_text" style="@style/ConversationMessage" />
+                    <TextView android:id="@id/subject_text" android:layout_width="wrap_content" android:layout_height="wrap_content" style="@style/ConversationMessage" />
+                </LinearLayout>
+                <TextView android:id="@id/message_text" android:padding="@dimen/small_padding" android:paddingTop="0.0dip" android:paddingBottom="0.0dip" android:visibility="gone" android:scrollbars="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:importantForAccessibility="no" style="@style/ConversationMessage" />
+                <com.basicphones.messaging.ui.LineWrapLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/message_metadata" android:layout_width="wrap_content" android:layout_height="wrap_content" android:importantForAccessibility="noHideDescendants">
+                    <TextView android:id="@id/message_sender_name" android:padding="@dimen/small_padding" android:paddingTop="0.0dip" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="@dimen/small_padding" style="@style/ConversationMessageStatus" />
+                    <TextView android:id="@id/message_status" android:background="@drawable/background_selector" android:padding="@dimen/small_padding" android:paddingTop="0.0dip" android:paddingBottom="0.0dip" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" style="@style/ConversationMessageStatus" />
+                    <ImageView android:layout_gravity="center" android:id="@id/smsDeliveredBadge" android:padding="@dimen/small_padding" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_sms_delivery_ok" style="@style/SmsDeliverdBadge" />
+                </com.basicphones.messaging.ui.LineWrapLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </com.basicphones.messaging.ui.conversation.ConversationMessageBubbleView>
+    <View android:layout_gravity="start" android:id="@id/incomingIndicator" android:background="@android:color/holo_red_light" android:visibility="visible" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_marginTop="@dimen/small_padding" android:layout_marginBottom="@dimen/small_padding" />
+    <View android:layout_gravity="end" android:id="@id/outgoingIndicator" android:background="@android:color/holo_green_light" android:visibility="visible" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_marginTop="@dimen/small_padding" android:layout_marginBottom="@dimen/small_padding" />
+</com.basicphones.messaging.ui.conversation.ConversationMessageView>

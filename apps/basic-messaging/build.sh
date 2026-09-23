@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# Rebuild the Basic Messaging variants from the decompiled source in app/.
+#   ./build.sh dark    -> BasicMessaging-dark.apk
+#   ./build.sh light   -> BasicMessaging-light.apk  (app/ + light-overlay/)
+#   ./build.sh both    -> both (default)
+#
+# Toolchain (override via env): apktool 2.11+, Android build-tools, JDK 17.
+set -euo pipefail
+HERE="$(cd "$(dirname "$0")" && pwd)"
+APKTOOL="${APKTOOL:-$HOME/android-toolchain/apktool.jar}"
+BT="${BT:-$HOME/android-toolchain/sdk/build-tools/35.0.0}"
+JAVA="${JAVA:-$HOME/android-toolchain/jdk-17.0.20.1+1/bin/java}"
+KS="$HERE/bmkey.jks"        # throwaway self-signed key (store/key pass: android)
+export PATH="$(dirname "$JAVA"):$PATH"
+
+[ -f "$APKTOOL" ] || { echo "apktool not found at $APKTOOL (set APKTOOL=...)"; exit 1; }
+
+build_variant() {
+  local name="$1" tree="$2" work
+  work="$(mktemp -d)"
+  cp -r "$tree/." "$work/"
+  if [ "$name" = "light" ]; then cp -r "$HERE/light-overlay/." "$work/"; fi
+  "$JAVA" -jar "$APKTOOL" b -f -o "$work/out.apk" "$work"
+  "$BT/zipalign" -f -p 4 "$work/out.apk" "$work/aligned.apk"
+  "$BT/apksigner" sign --ks "$KS" --ks-pass pass:android --key-pass pass:android \
+    --out "$HERE/BasicMessaging-$name.apk" "$work/aligned.apk"
+  rm -rf "$work"
+  echo "built $HERE/BasicMessaging-$name.apk"
+}
+
+case "${1:-both}" in
+  dark)  build_variant dark  "$HERE/app" ;;
+  light) build_variant light "$HERE/app" ;;
+  both)  build_variant dark "$HERE/app"; build_variant light "$HERE/app" ;;
+  *) echo "usage: $0 [dark|light|both]"; exit 1 ;;
+esac
