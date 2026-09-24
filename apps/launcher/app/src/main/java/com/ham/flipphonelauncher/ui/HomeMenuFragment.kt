@@ -216,12 +216,23 @@ class HomeMenuFragment : Fragment(), KeyEventHandler {
                 return true
             }
             KeyEvent.KEYCODE_CALL -> {
-                // Open recent calls
+                // Open recent calls: Basic Dialer if installed, else the stock dialer's call log.
+                val basicDialer = "com.basicphones.dialer"
+                val hasBasic = try {
+                    requireContext().packageManager.getPackageInfo(basicDialer, 0); true
+                } catch (e: Exception) { false }
                 val intent = android.content.Intent().apply {
-                    setClassName("com.android.dialer", "com.android.dialer.app.calllog.CallLogActivity")
+                    if (hasBasic) {
+                        // VIEW + calls mimetype lands on the recents tab of Basic Dialer's MainActivity.
+                        action = android.content.Intent.ACTION_VIEW
+                        type = "vnd.android.cursor.dir/calls"
+                        setPackage(basicDialer)
+                    } else {
+                        setClassName("com.android.dialer", "com.android.dialer.app.calllog.CallLogActivity")
+                    }
                     addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK)
                 }
-                try { startActivity(intent) } catch (e: Exception) { android.util.Log.e("HomeMenuFragment", "CallLogActivity not found", e) }
+                try { startActivity(intent) } catch (e: Exception) { android.util.Log.e("HomeMenuFragment", "recents open failed", e) }
                 return true
             }
         }
