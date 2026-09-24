@@ -5,9 +5,9 @@ import android.content.Intent
 import android.os.SystemClock
 import android.view.accessibility.AccessibilityEvent
 
-// The hardware messaging/camera keys hard-launch the stock com.android.mms / com.android.camera2
-// (system_server, explicit component), so a keylayout remap would need root. This reacts to those
-// windows appearing and swaps in the Basic Phones equivalents instead.
+// The hardware messaging key hard-launches the stock com.android.mms (system_server, explicit
+// component), so a keylayout remap would need root. This reacts to that window appearing and swaps
+// in the Basic Phones messaging app. Camera is handled by the system default app, so it isn't here.
 class MessagingRedirectService : AccessibilityService() {
     private var lastRedirect = 0L
 
@@ -31,8 +31,7 @@ class MessagingRedirectService : AccessibilityService() {
     companion object {
         // stock package -> Basic Phones replacement package
         private val REDIRECTS = mapOf(
-            "com.android.mms" to "com.basicphones.messaging",
-            "com.android.camera2" to "com.basicphones.camera"
+            "com.android.mms" to "com.basicphones.messaging"
         )
     }
 }
