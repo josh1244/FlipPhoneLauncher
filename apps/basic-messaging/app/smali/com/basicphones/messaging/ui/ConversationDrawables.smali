@@ -456,7 +456,7 @@
 
     iget-object v0, p0, Lcom/basicphones/messaging/ui/ConversationDrawables;->mContext:Landroid/content/Context;
 
-    const v1, 0x7f080128
+    const v1, 0x7f080125
 
     .line 55
     invoke-static {v0, v1}, Landroidx/core/content/ContextCompat;->getDrawable(Landroid/content/Context;I)Landroid/graphics/drawable/Drawable;
@@ -467,7 +467,7 @@
 
     iget-object v0, p0, Lcom/basicphones/messaging/ui/ConversationDrawables;->mContext:Landroid/content/Context;
 
-    const v1, 0x7f080128
+    const v1, 0x7f080125
 
     .line 56
     invoke-static {v0, v1}, Landroidx/core/content/ContextCompat;->getDrawable(Landroid/content/Context;I)Landroid/graphics/drawable/Drawable;
@@ -489,7 +489,7 @@
 
     iget-object v0, p0, Lcom/basicphones/messaging/ui/ConversationDrawables;->mContext:Landroid/content/Context;
 
-    const v1, 0x7f08012a
+    const v1, 0x7f080126
 
     .line 58
     invoke-static {v0, v1}, Landroidx/core/content/ContextCompat;->getDrawable(Landroid/content/Context;I)Landroid/graphics/drawable/Drawable;
@@ -500,7 +500,7 @@
 
     iget-object v0, p0, Lcom/basicphones/messaging/ui/ConversationDrawables;->mContext:Landroid/content/Context;
 
-    const v1, 0x7f08012a
+    const v1, 0x7f080126
 
     .line 59
     invoke-static {v0, v1}, Landroidx/core/content/ContextCompat;->getDrawable(Landroid/content/Context;I)Landroid/graphics/drawable/Drawable;

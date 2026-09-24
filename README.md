@@ -17,9 +17,14 @@ Software for the Alcatel Go Flip 2 (model 4051S, Android 8.1 / API 27, keypad + 
   with the same soft-key mapping (top-left = Menu, top-right = Back). Decompiled/patched
   APK; full apktool source in `app/` with a `build.sh`; see its README.
 
-Note: the Basic Weather app was intentionally **not** modded — its premium and GPS/Mapbox
-services are validated server-side against the app's original signature, which re-signing
-(required for any patch) breaks. It's left untouched (original Sunbeam build).
+- **[apps/basic-weather/](apps/basic-weather/)** — the Sunbeam "Basic Weather" app, patched
+  with the same soft-key mapping, the bottom nav-bar gap removed, and a status-bar inset on
+  its screens. Decompiled/patched APK; full apktool source in `app/` with a `build.sh`; see
+  its README.
+
+Note: Basic Weather **premium** (Hourly, Radar) is not patched and is not signature-locked —
+Sunbeam validates it server-side by IMEI + phone number, so the re-signed build keeps premium
+as long as the phone is online with a location set. See `PORTING-LOG.md`.
 
 ## CI
 

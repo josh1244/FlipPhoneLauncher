@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:orientation="vertical" android:padding="@dimen/normal_padding" android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:padding="@dimen/normal_padding" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView android:textSize="@dimen/text_view_text_size" android:textColor="@color/colorWhite" android:id="@id/txtNarrative" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/initial_weather_data" android:layout_weight="1.0" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:padding="@dimen/normal_padding" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView android:textSize="@dimen/text_view_text_size" android:textColor="@color/colorWhite" android:ellipsize="end" android:id="@id/sunriseLabel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/sunrise" android:maxLines="1" />
+            <TextView android:textSize="@dimen/text_view_text_size" android:textColor="@color/colorWhite" android:gravity="end" android:id="@id/txtSunrise" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/initial_weather_data" android:maxLines="1" android:layout_weight="1.0" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:padding="@dimen/normal_padding" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView android:textSize="@dimen/text_view_text_size" android:textColor="@color/colorWhite" android:ellipsize="end" android:id="@id/sunsetLabel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/sunset" android:maxLines="1" />
+            <TextView android:textSize="@dimen/text_view_text_size" android:textColor="@color/colorWhite" android:gravity="end" android:id="@id/txtSunset" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/initial_weather_data" android:maxLines="1" android:layout_weight="1.0" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:padding="@dimen/normal_padding" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView android:textSize="@dimen/text_view_text_size" android:textColor="@color/colorWhite" android:ellipsize="end" android:id="@id/humidityLabel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/humidity" android:maxLines="1" />
+            <TextView android:textSize="@dimen/text_view_text_size" android:textColor="@color/colorWhite" android:gravity="end" android:id="@id/txtHumidity" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/initial_weather_data" android:maxLines="1" android:layout_weight="1.0" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:padding="@dimen/normal_padding" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView android:textSize="@dimen/text_view_text_size" android:textColor="@color/colorWhite" android:ellipsize="end" android:id="@id/feelsLikeLabel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/feels_like_temp" android:maxLines="1" />
+            <TextView android:textSize="@dimen/text_view_text_size" android:textColor="@color/colorWhite" android:gravity="end" android:id="@id/txtFeelsLike" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/initial_weather_data" android:maxLines="1" android:layout_weight="1.0" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:padding="@dimen/normal_padding" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView android:textSize="@dimen/text_view_text_size" android:textColor="@color/colorWhite" android:ellipsize="end" android:id="@id/uvIndexLabel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/uv_index" android:maxLines="1" />
+            <TextView android:textSize="@dimen/text_view_text_size" android:textColor="@color/colorWhite" android:gravity="end" android:id="@id/txtUvIndex" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/initial_weather_data" android:maxLines="1" android:layout_weight="1.0" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
