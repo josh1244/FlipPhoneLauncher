@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/filter_event_type_holder" android:background="@drawable/background_selector" android:padding="@dimen/normal_margin" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.simplemobiletools.commons.views.MyAppCompatCheckbox android:id="@id/filter_event_type_checkbox" android:clickable="false" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" android:layout_marginEnd="@dimen/medium_margin" />
+    <ImageView android:id="@id/filter_event_type_color" android:clickable="false" android:layout_width="@dimen/color_sample_size" android:layout_height="@dimen/color_sample_size" android:layout_marginEnd="@dimen/medium_margin" />
+</LinearLayout>

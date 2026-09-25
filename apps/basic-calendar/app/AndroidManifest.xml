@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="35" android:compileSdkVersionCodename="15" package="com.basicphones.calendar" platformBuildVersionCode="35" platformBuildVersionName="15">
+    <uses-feature android:name="android.hardware.faketouch" android:required="false"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.READ_CALENDAR"/>
+    <uses-permission android:name="android.permission.WRITE_CALENDAR"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <queries>
+        <package android:name="com.simplemobiletools.contacts.pro.debug"/>
+        <package android:name="com.simplemobiletools.contacts.pro"/>
+    </queries>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
+    <permission android:name="com.basicphones.calendar.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" android:protectionLevel="signature"/>
+    <uses-permission android:name="com.basicphones.calendar.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"/>
+    <application android:allowBackup="true" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:extractNativeLibs="false" android:icon="@mipmap/ic_launcher" android:label="@string/app_launcher_name" android:name="com.basicphones.calendar.App" android:roundIcon="@mipmap/ic_launcher" android:supportsRtl="false" android:theme="@style/AppTheme">
+        <activity android:launchMode="singleTask" android:name="com.basicphones.calendar.activities.SplashActivity" android:screenOrientation="portrait" android:theme="@style/SplashTheme"/>
+        <activity android:launchMode="singleTask" android:name="com.basicphones.calendar.activities.MainActivity" android:screenOrientation="portrait">
+            <meta-data android:name="android.app.default_searchable" android:resource="@xml/searchable"/>
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="content"/>
+                <data android:scheme="file"/>
+                <data android:mimeType="text/x-vcalendar"/>
+                <data android:mimeType="text/calendar"/>
+                <data android:mimeType="application/ics"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="time/epoch"/>
+                <data android:host="com.android.calendar"/>
+                <data android:scheme="content"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="vnd.android.cursor.item/event"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name="com.basicphones.calendar.activities.WidgetMonthlyConfigureActivity" android:screenOrientation="portrait" android:theme="@style/MyWidgetConfigTheme">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
+            </intent-filter>
+        </activity>
+        <activity android:name="com.basicphones.calendar.activities.WidgetListConfigureActivity" android:screenOrientation="portrait" android:theme="@style/MyWidgetConfigTheme">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
+            </intent-filter>
+        </activity>
+        <activity android:name="com.basicphones.calendar.activities.WidgetDateConfigureActivity" android:screenOrientation="portrait" android:theme="@style/MyWidgetConfigTheme">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
+            </intent-filter>
+        </activity>
+        <activity android:label="@string/about" android:name="com.simplemobiletools.commons.activities.AboutActivity" android:parentActivityName="com.basicphones.calendar.activities.MainActivity" android:screenOrientation="portrait"/>
+        <activity android:label="@string/customize_colors" android:name="com.simplemobiletools.commons.activities.CustomizationActivity" android:parentActivityName="com.basicphones.calendar.activities.SettingsActivity" android:screenOrientation="portrait"/>
+        <activity android:label="@string/third_party_licences" android:name="com.simplemobiletools.commons.activities.LicenseActivity" android:parentActivityName="com.simplemobiletools.commons.activities.AboutActivity" android:screenOrientation="portrait"/>
+        <activity android:label="@string/frequently_asked_questions" android:name="com.simplemobiletools.commons.activities.FAQActivity" android:parentActivityName="com.simplemobiletools.commons.activities.AboutActivity" android:screenOrientation="portrait"/>
+        <activity android:launchMode="singleTask" android:name="com.basicphones.calendar.activities.EventActivity" android:parentActivityName="com.basicphones.calendar.activities.MainActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.EDIT"/>
+                <action android:name="android.intent.action.INSERT"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="vnd.android.cursor.item/event"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.EDIT"/>
+                <action android:name="android.intent.action.INSERT"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="vnd.android.cursor.dir/event"/>
+            </intent-filter>
+        </activity>
+        <activity android:name="com.basicphones.calendar.activities.SelectTimeZoneActivity" android:parentActivityName="com.basicphones.calendar.activities.EventActivity" android:screenOrientation="portrait">
+            <meta-data android:name="android.app.default_searchable" android:resource="@xml/searchable"/>
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH"/>
+            </intent-filter>
+        </activity>
+        <activity android:label="@string/settings" android:name="com.basicphones.calendar.activities.SettingsActivity" android:parentActivityName="com.basicphones.calendar.activities.MainActivity" android:screenOrientation="portrait"/>
+        <activity android:label="@string/event_types" android:name="com.basicphones.calendar.activities.ManageEventTypesActivity" android:parentActivityName="com.basicphones.calendar.activities.SettingsActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.basicphones.calendar.activities.SnoozeReminderActivity" android:screenOrientation="portrait" android:theme="@style/Theme.Transparent"/>
+        <receiver android:exported="true" android:icon="@drawable/img_widget_monthly_preview" android:label="@string/widget_monthly" android:name="com.basicphones.calendar.helpers.MyWidgetMonthlyProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_monthly_info"/>
+        </receiver>
+        <receiver android:exported="true" android:icon="@drawable/img_widget_list_preview" android:label="@string/widget_list" android:name="com.basicphones.calendar.helpers.MyWidgetListProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_list_info"/>
+        </receiver>
+        <receiver android:exported="true" android:icon="@drawable/img_widget_date_preview" android:label="@string/widget_todays_date" android:name="com.basicphones.calendar.helpers.MyWidgetDateProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_date_info"/>
+        </receiver>
+        <service android:name="com.basicphones.calendar.services.WidgetService" android:permission="android.permission.BIND_REMOTEVIEWS"/>
+        <service android:name="com.basicphones.calendar.services.WidgetServiceEmpty" android:permission="android.permission.BIND_REMOTEVIEWS"/>
+        <service android:name="com.basicphones.calendar.services.SnoozeService"/>
+        <service android:exported="true" android:name="com.basicphones.calendar.jobs.CalDAVUpdateListener" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <receiver android:name="com.basicphones.calendar.receivers.NotificationReceiver"/>
+        <receiver android:name="com.basicphones.calendar.receivers.DismissNotificationReceiver"/>
+        <receiver android:name="com.basicphones.calendar.receivers.CalDAVSyncReceiver"/>
+        <receiver android:exported="true" android:name="com.basicphones.calendar.backup.BackupReceiver"/>
+        <receiver android:exported="true" android:name="com.basicphones.calendar.receivers.BootCompletedReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.QUICKBOOT_POWERON"/>
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
+            </intent-filter>
+        </receiver>
+        <provider android:authorities="com.basicphones.calendar.fileprovider" android:exported="false" android:grantUriPermissions="true" android:name="androidx.core.content.FileProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/provider_paths"/>
+        </provider>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:exported="true" android:name="com.basicphones.calendar.activities.IcsPickerActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:exported="true" android:name="com.basicphones.calendar.activities.RingtonePickerActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:exported="true" android:name="com.basicphones.calendar.activities.DirPickerActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:exported="true" android:name="com.basicphones.calendar.activities.RecordRingtoneActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <provider android:authorities="com.basicphones.calendar.provider" android:exported="true" android:grantUriPermissions="true" android:name="com.basicphones.calendar.provider.CalendarProvider"/>
+        <service android:directBootAware="false" android:enabled="@bool/enable_system_foreground_service_default" android:exported="false" android:foregroundServiceType="dataSync" android:name="androidx.work.impl.foreground.SystemForegroundService"/>
+        <service android:directBootAware="false" android:enabled="@bool/enable_system_alarm_service_default" android:exported="false" android:name="androidx.work.impl.background.systemalarm.SystemAlarmService"/>
+        <service android:directBootAware="false" android:enabled="@bool/enable_system_job_service_default" android:exported="true" android:name="androidx.work.impl.background.systemjob.SystemJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <receiver android:directBootAware="false" android:enabled="true" android:exported="false" android:name="androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver"/>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy">
+            <intent-filter>
+                <action android:name="android.intent.action.BATTERY_OKAY"/>
+                <action android:name="android.intent.action.BATTERY_LOW"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy">
+            <intent-filter>
+                <action android:name="android.intent.action.DEVICE_STORAGE_LOW"/>
+                <action android:name="android.intent.action.DEVICE_STORAGE_OK"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.RescheduleReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.TIME_SET"/>
+                <action android:name="android.intent.action.TIMEZONE_CHANGED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="@bool/enable_system_alarm_service_default" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver">
+            <intent-filter>
+                <action android:name="androidx.work.impl.background.systemalarm.UpdateProxies"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="true" android:exported="true" android:name="androidx.work.impl.diagnostics.DiagnosticsReceiver" android:permission="android.permission.DUMP">
+            <intent-filter>
+                <action android:name="androidx.work.diagnostics.REQUEST_DIAGNOSTICS"/>
+            </intent-filter>
+        </receiver>
+        <service android:directBootAware="true" android:exported="false" android:name="androidx.room.MultiInstanceInvalidationService"/>
+        <receiver android:directBootAware="false" android:enabled="true" android:exported="true" android:name="androidx.profileinstaller.ProfileInstallReceiver" android:permission="android.permission.DUMP">
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.SKIP_FILE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION"/>
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>

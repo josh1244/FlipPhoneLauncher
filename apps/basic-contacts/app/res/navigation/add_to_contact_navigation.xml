@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation android:id="@id/main_navigation" app:startDestination="@id/add_to_contact_fragment"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <fragment android:label="@string/title_add_to_contact" android:name="com.basicphones.contacts.ui.contacts.AddToContactFragment" android:id="@id/add_to_contact_fragment">
+        <action android:id="@id/action_add_to_contact_fragment_to_edit_contact_fragment" app:destination="@id/edit_contact_fragment" />
+    </fragment>
+    <fragment android:label="@string/title_edit_contact" android:name="com.basicphones.contacts.ui.contacts.EditContactFragment" android:id="@id/edit_contact_fragment">
+        <action android:id="@id/action_edit_contact_fragment_to_contact_details_fragment2" app:destination="@id/contact_details_fragment" app:popUpTo="@id/main_navigation" app:popUpToInclusive="true" />
+    </fragment>
+    <fragment android:label="@string/title_contact_details" android:name="com.basicphones.contacts.ui.contacts.ContactDetailsFragment" android:id="@id/contact_details_fragment" />
+</navigation>

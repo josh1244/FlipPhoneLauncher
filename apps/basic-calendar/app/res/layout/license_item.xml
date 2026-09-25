@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/license_layout" android:tag="layout/license_item_0" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.simplemobiletools.commons.views.MyTextView android:textColor="@color/colorPrimary" android:id="@id/license_title" android:paddingTop="@dimen/activity_margin" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    <com.simplemobiletools.commons.views.MyTextView android:id="@id/license_text" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+</LinearLayout>

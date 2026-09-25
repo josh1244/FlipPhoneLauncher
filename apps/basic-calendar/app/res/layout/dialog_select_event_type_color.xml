@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:id="@id/dialog_select_event_type_color_scrollview" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@id/dialog_select_event_type_other_holder" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <com.simplemobiletools.commons.views.MyTextView android:textSize="@dimen/normal_text_size" android:id="@id/dialog_select_event_type_other_value" android:background="@drawable/background_selector" android:paddingTop="@dimen/activity_margin" android:paddingBottom="@dimen/activity_margin" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/select_a_different_caldav_color" android:paddingStart="@dimen/big_margin" android:paddingEnd="@dimen/activity_margin" />
+        <ImageView android:id="@id/dialog_select_event_type_other_divider" android:background="@color/divider_grey" android:layout_width="fill_parent" android:layout_height="1.0px" android:layout_below="@id/dialog_select_event_type_other_value" android:importantForAccessibility="no" />
+        <RadioGroup android:id="@id/dialog_select_event_type_color_radio" android:paddingTop="@dimen/normal_margin" android:paddingBottom="@dimen/normal_margin" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_below="@id/dialog_select_event_type_other_divider" android:paddingStart="@dimen/activity_margin" android:paddingEnd="@dimen/activity_margin" />
+    </RelativeLayout>
+</ScrollView>

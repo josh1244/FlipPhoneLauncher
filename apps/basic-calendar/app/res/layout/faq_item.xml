@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/faq_layout" android:tag="layout/faq_item_0" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.simplemobiletools.commons.views.MyTextView android:textColor="@color/colorPrimary" android:id="@id/faq_title" android:paddingTop="@dimen/activity_margin" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    <com.simplemobiletools.commons.views.MyTextView android:autoLink="email|web" android:id="@id/faq_text" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+</LinearLayout>

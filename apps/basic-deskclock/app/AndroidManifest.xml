@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="34" android:compileSdkVersionCodename="14" package="com.basicphones.deskclock" platformBuildVersionCode="34" platformBuildVersionName="14">
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT"/>
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT"/>
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <permission android:name="com.basicphones.deskclock.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" android:protectionLevel="signature"/>
+    <uses-permission android:name="com.basicphones.deskclock.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"/>
+    <application android:allowBackup="false" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:extractNativeLibs="false" android:fullBackupContent="@xml/backup_scheme" android:fullBackupOnly="true" android:icon="@drawable/ic_launcher" android:label="@string/app_label" android:name="com.basicphones.deskclock.DeskClockApplication" android:requiredForAllUsers="true" android:supportsRtl="false" android:theme="@style/Theme.DeskClock">
+        <activity android:exported="true" android:launchMode="singleTask" android:name="com.basicphones.deskclock.DeskClock" android:showForAllUsers="true" android:turnScreenOn="true" android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:excludeFromRecents="true" android:name="com.basicphones.deskclock.ringtone.RingtonePickerActivity" android:taskAffinity="" android:theme="@style/Theme.DeskClock.RingtonePicker"/>
+        <activity android:excludeFromRecents="true" android:label="@string/cities_activity_title" android:name="com.basicphones.deskclock.worldclock.CitySelectionActivity" android:parentActivityName="com.basicphones.deskclock.DeskClock" android:taskAffinity="" android:theme="@style/Theme.DeskClock.CitySelection"/>
+        <activity android:excludeFromRecents="true" android:label="@string/settings" android:name="com.basicphones.deskclock.settings.SettingsActivity" android:parentActivityName="com.basicphones.deskclock.DeskClock" android:taskAffinity="" android:theme="@style/Theme.DeskClock.Settings"/>
+        <activity android:excludeFromRecents="true" android:launchMode="singleInstance" android:name="com.basicphones.deskclock.HandleShortcuts" android:taskAffinity="" android:theme="@android:style/Theme.NoDisplay"/>
+        <activity android:directBootAware="true" android:excludeFromRecents="true" android:exported="true" android:launchMode="singleInstance" android:name="com.basicphones.deskclock.HandleApiCalls" android:permission="com.android.alarm.permission.SET_ALARM" android:showWhenLocked="true" android:taskAffinity="" android:theme="@android:style/Theme.NoDisplay">
+            <intent-filter>
+                <action android:name="android.intent.action.DISMISS_ALARM"/>
+                <action android:name="android.intent.action.DISMISS_TIMER"/>
+                <action android:name="android.intent.action.SHOW_ALARMS"/>
+                <action android:name="android.intent.action.SHOW_TIMERS"/>
+                <action android:name="android.intent.action.SNOOZE_ALARM"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.VOICE"/>
+            </intent-filter>
+        </activity>
+        <activity-alias android:exported="true" android:name="com.basicphones.deskclock.HandleSetAlarmApiCalls" android:permission="com.android.alarm.permission.SET_ALARM" android:targetActivity="com.basicphones.deskclock.HandleApiCalls">
+            <intent-filter>
+                <action android:name="android.intent.action.SET_ALARM"/>
+                <action android:name="android.intent.action.SET_TIMER"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.VOICE"/>
+            </intent-filter>
+        </activity-alias>
+        <activity android:directBootAware="true" android:excludeFromRecents="true" android:name="com.basicphones.deskclock.alarms.AlarmActivity" android:resizeableActivity="false" android:showOnLockScreen="true" android:showWhenLocked="true" android:taskAffinity="" android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity android:label="@string/dismiss_alarm" android:name="com.basicphones.deskclock.AlarmSelectionActivity" android:theme="@android:style/Theme.Holo.Light.Dialog.NoActionBar"/>
+        <provider android:authorities="com.basicphones.deskclock" android:directBootAware="true" android:exported="true" android:name="com.basicphones.deskclock.provider.ClockProvider"/>
+        <receiver android:directBootAware="true" android:exported="true" android:name="com.basicphones.deskclock.AlarmInitReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.LOCALE_CHANGED"/>
+                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+                <action android:name="android.intent.action.TIME_SET"/>
+                <action android:name="android.intent.action.TIMEZONE_CHANGED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="true" android:exported="true" android:name="com.basicphones.deskclock.alarms.AlarmStateManager"/>
+        <service android:directBootAware="true" android:exported="true" android:name="com.basicphones.deskclock.alarms.AlarmService"/>
+        <activity android:configChanges="keyboard|keyboardHidden|navigation|screenSize" android:directBootAware="true" android:excludeFromRecents="true" android:launchMode="singleInstance" android:name="com.basicphones.deskclock.timer.ExpiredTimersActivity" android:resizeableActivity="false" android:showOnLockScreen="true" android:taskAffinity=""/>
+        <receiver android:exported="false" android:name="com.basicphones.deskclock.timer.TimerReceiver">
+            <intent-filter>
+                <action android:name="times_up"/>
+            </intent-filter>
+        </receiver>
+        <service android:description="@string/timer_service_desc" android:directBootAware="true" android:name="com.basicphones.deskclock.timer.TimerService"/>
+        <service android:description="@string/stopwatch_service_desc" android:directBootAware="true" android:name="com.basicphones.deskclock.stopwatch.StopwatchService"/>
+        <activity android:excludeFromRecents="true" android:name="com.basicphones.deskclock.ScreensaverActivity" android:resizeableActivity="false" android:taskAffinity=""/>
+        <activity android:excludeFromRecents="true" android:label="@string/screensaver_settings" android:name="com.basicphones.deskclock.settings.ScreensaverSettingsActivity" android:taskAffinity="" android:theme="@style/Theme.DeskClock.Settings"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:exported="true" android:name="com.basicphones.deskclock.ringtone.RecordRingtoneActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:exported="true" android:name="com.basicphones.deskclock.ringtone.FilePickerActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <service android:exported="true" android:label="@string/app_label" android:name="com.basicphones.deskclock.Screensaver" android:permission="android.permission.BIND_DREAM_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.dreams.DreamService"/>
+                <action android:name="android.app.action.NEXT_ALARM_CLOCK_CHANGED"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <meta-data android:name="android.service.dream" android:resource="@xml/screensaver_info"/>
+        </service>
+        <receiver android:exported="true" android:label="@string/analog_gadget" android:name="com.basicphones.alarmclock.AnalogAppWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+            </intent-filter>
+            <meta-data android:name="android.appwidget.oldName" android:value="com.android.deskclock.AnalogAppWidgetProvider"/>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/analog_appwidget"/>
+        </receiver>
+        <receiver android:exported="true" android:label="@string/digital_gadget" android:name="com.basicphones.alarmclock.DigitalAppWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <action android:name="android.app.action.NEXT_ALARM_CLOCK_CHANGED"/>
+                <action android:name="android.intent.action.DATE_CHANGED"/>
+                <action android:name="android.intent.action.LOCALE_CHANGED"/>
+                <action android:name="android.intent.action.SCREEN_ON"/>
+                <action android:name="android.intent.action.TIME_SET"/>
+                <action android:name="android.intent.action.TIMEZONE_CHANGED"/>
+                <action android:name="com.android.deskclock.ALARM_CHANGED"/>
+                <action android:name="com.android.deskclock.ON_DAY_CHANGE"/>
+                <action android:name="com.android.deskclock.WORLD_CITIES_CHANGED"/>
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/digital_appwidget"/>
+        </receiver>
+        <service android:name="com.basicphones.alarmclock.DigitalAppWidgetCityService" android:permission="android.permission.BIND_REMOTEVIEWS"/>
+        <provider android:authorities="com.basicphones.deskclock.fileprovider" android:exported="false" android:grantUriPermissions="true" android:name="androidx.core.content.FileProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/provider_paths"/>
+        </provider>
+        <uses-library android:name="androidx.window.extensions" android:required="false"/>
+        <uses-library android:name="androidx.window.sidecar" android:required="false"/>
+        <provider android:authorities="com.basicphones.deskclock.androidx-startup" android:exported="false" android:name="androidx.startup.InitializationProvider">
+            <meta-data android:name="androidx.emoji2.text.EmojiCompatInitializer" android:value="androidx.startup"/>
+            <meta-data android:name="androidx.lifecycle.ProcessLifecycleInitializer" android:value="androidx.startup"/>
+            <meta-data android:name="androidx.profileinstaller.ProfileInstallerInitializer" android:value="androidx.startup"/>
+        </provider>
+        <receiver android:directBootAware="false" android:enabled="true" android:exported="true" android:name="androidx.profileinstaller.ProfileInstallReceiver" android:permission="android.permission.DUMP">
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.SKIP_FILE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION"/>
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>

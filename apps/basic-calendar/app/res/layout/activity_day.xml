@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout android:id="@id/day_coordinator" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.basicphones.calendar.views.CustomViewPager android:id="@id/view_pager" android:descendantFocusability="afterDescendants" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="@dimen/activity_margin" />
+    <com.simplemobiletools.commons.views.MyFloatingActionButton android:layout_gravity="end|bottom|center" android:id="@id/day_fab" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="@dimen/activity_margin" android:src="@drawable/ic_plus_vector" app:backgroundTint="@color/colorPrimary" app:rippleColor="@color/pressed_item_foreground" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

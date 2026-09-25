@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation app:startDestination="@id/main_fragment"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <fragment android:name="com.basicphones.dialer.main.MainFragment" android:id="@id/main_fragment">
+        <action android:id="@id/action_main_fragment_to_dialer_fragment" app:destination="@id/dialer_fragment" />
+        <action android:id="@id/action_main_fragment_to_blocked_numbers_fragment" app:destination="@id/blocked_numbers_fragment" />
+        <action android:id="@id/action_main_fragment_to_edit_quick_replies_fragment" app:destination="@id/edit_quick_replies_fragment" />
+    </fragment>
+    <fragment android:label="@string/title_voicemail" android:name="com.basicphones.dialer.voicemail.VoicemailCallLogFragment" android:id="@id/voicemailCallLogFragment" />
+    <fragment android:name="com.basicphones.dialer.phone.dial.DialerFragment" android:id="@id/dialer_fragment" />
+    <fragment android:label="@string/title_blocked_numbers" android:name="com.basicphones.dialer.phone.blocked.BlockedNumbersFragment" android:id="@id/blocked_numbers_fragment">
+        <action android:id="@id/action_blocked_numbers_fragment_to_add_to_blocked_fragment" app:destination="@id/add_to_blocked_fragment" />
+    </fragment>
+    <fragment android:label="AddToBlockedFragment" android:name="com.basicphones.dialer.phone.blocked.AddToBlockedFragment" android:id="@id/add_to_blocked_fragment" />
+    <fragment android:label="EditQuickRepliesFragment" android:name="com.basicphones.dialer.phone.reply.EditQuickRepliesFragment" android:id="@id/edit_quick_replies_fragment" />
+    <fragment android:label="PhoneCallLogFragment" android:name="com.basicphones.dialer.phone.PhoneCallLogFragment" android:id="@id/phoneCallLogFragment" />
+</navigation>

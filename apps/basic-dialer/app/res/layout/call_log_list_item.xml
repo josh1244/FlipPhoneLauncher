@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/title_layout" android:background="@drawable/background_selector" android:padding="@dimen/normal_padding" android:layout_width="fill_parent" android:layout_height="wrap_content" app:layout_constraintEnd_toStartOf="parent" app:layout_constraintTop_toTopOf="parent">
+        <androidx.appcompat.widget.AppCompatImageView android:id="@id/icon" android:layout_width="@dimen/icon_size" android:layout_height="@dimen/icon_size" android:src="@drawable/ic_baseline_fiber_manual_record_12" android:scaleType="centerInside" />
+        <LinearLayout android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" android:layout_marginStart="@dimen/normal_padding">
+            <TextView android:textAppearance="@android:style/TextAppearance.Material.Medium" android:textColor="@android:color/white" android:id="@id/title" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+            <TextView android:textAppearance="@android:style/TextAppearance.Material.Body1" android:textColor="@android:color/secondary_text_dark" android:id="@id/date" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        </LinearLayout>
+        <androidx.appcompat.widget.AppCompatImageView android:id="@id/arrow" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_baseline_keyboard_arrow_right_24" />
+    </LinearLayout>
+    <com.basicphones.dialer.common.calllog.voicemail.VoicemailPlaybackLayout android:id="@id/voicemail_playback_layout" android:padding="@dimen/normal_padding" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/title_layout" />
+    <com.basicphones.dialer.common.calllog.CallLogItemDetailsLayout android:id="@id/call_log_item_details_layout" android:padding="@dimen/normal_padding" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/title_layout" />
+</androidx.constraintlayout.widget.ConstraintLayout>

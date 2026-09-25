@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/edit_repeating_event_holder" android:paddingTop="@dimen/big_margin" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="@dimen/big_margin" android:paddingEnd="@dimen/big_margin"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.simplemobiletools.commons.views.MyTextView android:id="@id/edit_repeating_event_title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/activity_margin" android:text="@string/event_is_repeatable" />
+    <RadioGroup android:id="@id/edit_repeating_event_radiogroup" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/activity_margin">
+        <com.simplemobiletools.commons.views.MyCompatRadioButton android:id="@id/edit_repeating_event_one_only" android:paddingTop="@dimen/activity_margin" android:paddingBottom="@dimen/activity_margin" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/update_one_only" />
+        <com.simplemobiletools.commons.views.MyCompatRadioButton android:id="@id/edit_repeating_event_this_and_future_occurences" android:paddingTop="@dimen/activity_margin" android:paddingBottom="@dimen/activity_margin" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/update_this_and_future_occurrences" />
+        <com.simplemobiletools.commons.views.MyCompatRadioButton android:id="@id/edit_repeating_event_all_occurrences" android:paddingTop="@dimen/activity_margin" android:paddingBottom="@dimen/activity_margin" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/update_all_occurrences" />
+    </RadioGroup>
+</LinearLayout>

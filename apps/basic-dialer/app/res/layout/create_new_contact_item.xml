@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.AppCompatTextView android:textAppearance="@android:style/TextAppearance.Material.Medium" android:textColor="@android:color/white" android:background="@drawable/background_selector" android:padding="@dimen/normal_padding" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/search_shortcut_create_new_contact" android:drawablePadding="@dimen/small_padding" android:drawableStart="@drawable/ic_baseline_person_add_24"
+  xmlns:android="http://schemas.android.com/apk/res/android" />

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge android:id="@id/content" android:background="@color/colorBackground" android:padding="8.0dip" android:focusable="true" android:focusableInTouchMode="true" android:nextFocusRight="@id/cancel" android:nextFocusDown="@id/cancel" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView android:textSize="16.0sp" android:textColor="@android:color/white" android:layout_gravity="center|top" android:id="@id/hint_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="16.0dip" android:text="@string/audio_picker_hint" />
+    <com.basicphones.recording.PausableChronometer android:textSize="16.0sp" android:textColor="@android:color/white" android:layout_gravity="center|top" android:id="@id/timer_text" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="16.0dip" />
+    <com.basicphones.recording.SoundLevels android:layout_gravity="center" android:id="@id/sound_levels" android:focusableInTouchMode="false" android:layout_width="260.0dip" android:layout_height="260.0dip" app:maxLevelRadius="130.0dip" app:minLevelRadius="55.0dip" app:primaryColor="#29ffffff" />
+    <FrameLayout android:layout_gravity="center" android:id="@id/record_button" android:padding="30.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:contentDescription="@string/audio_record_view_content_description">
+        <ImageView android:layout_gravity="center" android:id="@id/record_button_visual" android:background="@drawable/audio_record_control_button_background" android:layout_width="70.0dip" android:layout_height="70.0dip" android:layout_margin="30.0dip" android:src="@drawable/ic_mp_audio_mic" android:scaleType="center" android:contentDescription="@null" />
+    </FrameLayout>
+</merge>

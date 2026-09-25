@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="C1">አ=አቢጃን|Africa/Abidjan</string>
+    <string name="C10">ደ=ዳካር|Africa/Dakar</string>
+    <string name="C100">አ=አማን|Asia/Amman</string>
+    <string name="C101">አ=አናዲር|Asia/Anadyr</string>
+    <string name="C102">አ=አክታው|Asia/Aqtau</string>
+    <string name="C103">በ=ባግዳድ|Asia/Baghdad</string>
+    <string name="C104">በ=ባህሬን|Asia/Bahrain</string>
+    <string name="C105">በ=ባኩ|Asia/Baku</string>
+    <string name="C106">በ=ባንኮክ|Asia/Bangkok</string>
+    <string name="C107">በ=ቤይሩት|Asia/Beirut</string>
+    <string name="C108">ኬ=ኮልካታ|Asia/Calcutta</string>
+    <string name="C109">ደ=ደማስቆ|Asia/Damascus</string>
+    <string name="C11">ደ=ዳሬሰላም|Africa/Dar_es_Salaam</string>
+    <string name="C110">ደ=ዳካ|Asia/Dhaka</string>
+    <string name="C111">ደ=ዱባይ|Asia/Dubai</string>
+    <string name="C112">ገ=ጋዛ|Asia/Gaza</string>
+    <string name="C113">ሐ=ሔብሮን|Asia/Hebron</string>
+    <string name="C114">ሀ=ሆ ቺ ሚንህ|Asia/Ho_Chi_Minh</string>
+    <string name="C115">ሀ=ሆንግ ኮንግ:|Asia/Hong_Kong</string>
+    <string name="C117">ጀ=ጃካርታ|Asia/Jakarta</string>
+    <string name="C118">አ=እየሩሳሌም|Asia/Jerusalem</string>
+    <string name="C119">ከ=ካቡል|Asia/Kabul</string>
+    <string name="C12">ጀ=ጅቡቲ|Africa/Djibouti</string>
+    <string name="C120">ከ=ካራቺ|Asia/Karachi</string>
+    <string name="C121">ከ=ካትማንዱ|Asia/Kathmandu</string>
+    <string name="C122">ከ=ኩዋላ ላምፑር|Asia/Kuala_Lumpur</string>
+    <string name="C123">ከ=ኩዌት|Asia/Kuwait</string>
+    <string name="C124">መ=ማካው|Asia/Macau</string>
+    <string name="C125">መ=ማኒላ|Asia/Manila</string>
+    <string name="C126">መ=ሙስካት|Asia/Muscat</string>
+    <string name="C127">ፈ=ፍኖም ፔን|Asia/Phnom_Penh</string>
+    <string name="C128">‹=ፒዮንግያንግ:|Asia/Pyongyang</string>
+    <string name="C13">ፈ=ፍሪታውን|Africa/Freetown</string>
+    <string name="C130">ረ=ራንጉን|Asia/Rangoon</string>
+    <string name="C131">ረ=ሪያድ|Asia/Riyadh</string>
+    <string name="C133">ሰ=ሴዖል|Asia/Seoul</string>
+    <string name="C134">ሸ=ሻንጋይ:|Asia/Shanghai</string>
+    <string name="C135">ሰ=ሲንጋፖር|Asia/Singapore</string>
+    <string name="C136">ተ=ታይፔይ:|Asia/Taipei</string>
+    <string name="C137">ተ=ቴህራን|Asia/Tehran</string>
+    <string name="C138">ተ=ቴልቪቭ|Asia/Tel_Aviv</string>
+    <string name="C139">ተ=ቶኪዮ:|Asia/Tokyo</string>
+    <string name="C14">ገ=ጋቦሮኒ|Africa/Gaborone</string>
+    <string name="C140">አ=ኡላንባታር|Asia/Ulaanbaatar</string>
+    <string name="C141">በ=ቤርሙዳ|Atlantic/Bermuda</string>
+    <string name="C142">ከ=ካናሪ|Atlantic/Canary</string>
+    <string name="C143">ከ=ኬፕ ቨርዴ|Atlantic/Cape_Verde</string>
+    <string name="C144">ረ=ሬይክጃቪክ|Atlantic/Reykjavik</string>
+    <string name="C145">ሰ=ስታንሊ|Atlantic/Stanley</string>
+    <string name="C146">አ=ኤዴላይድ|Australia/Adelaide</string>
+    <string name="C147">በ=ብሪስቤን|Australia/Brisbane</string>
+    <string name="C148">ከ=ካንቤራ|Australia/Canberra</string>
+    <string name="C149">ደ=ዳርዊን|Australia/Darwin</string>
+    <string name="C15">ሀ=ሃራሬ|Africa/Harare</string>
+    <string name="C150">መ=ሜልቦርን|Australia/Melbourne</string>
+    <string name="C151">ነ=ኒው ሳውዝ ዌልስ|Australia/NSW</string>
+    <string name="C152">ፐ=ፐርት|Australia/Perth</string>
+    <string name="C153">ከ=ኲንስላንድ|Australia/Queensland</string>
+    <string name="C154">ሰ=ሲድኒ|Australia/Sydney</string>
+    <string name="C155">ቨ=ቪክቶሪያ|Australia/Victoria</string>
+    <string name="C156">ነ=ኒውፋውንድላንድ|Canada/Newfoundland</string>
+    <string name="C157">ሰ=ሳስካቼዋን|Canada/Saskatchewan</string>
+    <string name="C158">አ=ኢስተር አይላንድ|Chile/EasterIsland</string>
+    <string name="C159">አ=አምስተርዳም|Europe/Amsterdam</string>
+    <string name="C16">ጀ=ጆሃንስበርግ|Africa/Johannesburg</string>
+    <string name="C160">አ=አንዶራ|Europe/Andorra</string>
+    <string name="C161">አ=አቴንስ|Europe/Athens</string>
+    <string name="C162">በ=ቤልፋስት|Europe/Belfast</string>
+    <string name="C163">በ=ቤልግሬድ|Europe/Belgrade</string>
+    <string name="C164">በ=በርሊን|Europe/Berlin</string>
+    <string name="C165">በ=ብራቲስላቫ|Europe/Bratislava</string>
+    <string name="C166">በ=ብራስልስ|Europe/Brussels</string>
+    <string name="C167">በ=ቡካሬስት|Europe/Bucharest</string>
+    <string name="C168">በ=ቡዳፔስት|Europe/Budapest</string>
+    <string name="C169">ቸ=ቺሲናው|Europe/Chisinau</string>
+    <string name="C17">ከ=ካምፓላ|Africa/Kampala</string>
+    <string name="C170">ከ=ኮፐንሃገን|Europe/Copenhagen</string>
+    <string name="C171">ደ=ዱብሊን|Europe/Dublin</string>
+    <string name="C172">ጀ=ጂብራልታር|Europe/Gibraltar</string>
+    <string name="C173">ሀ=ሄልሲንኪ|Europe/Helsinki</string>
+    <string name="C174">አ=አይስል ኦፍ ማን|Europe/Isle_of_Man</string>
+    <string name="C175">አ=ኢስታንቡል|Europe/Istanbul</string>
+    <string name="C176">ከ=ኪዬቭ|Europe/Kiev</string>
+    <string name="C177">ለ=ሊዝበን|Europe/Lisbon</string>
+    <string name="C178">ለ=ለንደን|Europe/London</string>
+    <string name="C179">ለ=ሉክዘምበርግ|Europe/Luxembourg</string>
+    <string name="C18">ከ=ካርቱም|Africa/Khartoum</string>
+    <string name="C180">መ=ማድሪድ|Europe/Madrid</string>
+    <string name="C181">መ=ማልታ|Europe/Malta</string>
+    <string name="C182">መ=ሚንስክ|Europe/Minsk</string>
+    <string name="C183">መ=ሞናኮ|Europe/Monaco</string>
+    <string name="C184">መ=ሞስኮ|Europe/Moscow</string>
+    <string name="C185">አ=ኦስሎ|Europe/Oslo</string>
+    <string name="C186">ፐ=ፓሪስ|Europe/Paris</string>
+    <string name="C187">ፐ=ፕራግ|Europe/Prague</string>
+    <string name="C188">ረ=ሪጋ|Europe/Riga</string>
+    <string name="C189">ረ=ሮም|Europe/Rome</string>
+    <string name="C19">ከ=ኪጋሊ|Africa/Kigali</string>
+    <string name="C190">ሰ=ሳን ማሪኖ|Europe/San_Marino</string>
+    <string name="C191">ሰ=ሳራዬቮ|Europe/Sarajevo</string>
+    <string name="C192">ሰ=ሲምፈሮፓል|Europe/Simferopol</string>
+    <string name="C193">ሰ=ስኮፕዬ|Europe/Skopje</string>
+    <string name="C194">ሰ=ሶፊያ|Europe/Sofia</string>
+    <string name="C195">ሰ=ስቶክሆልም|Europe/Stockholm</string>
+    <string name="C196">ተ=ታሊን|Europe/Tallinn</string>
+    <string name="C197">ቨ=ቫቲካን|Europe/Vatican</string>
+    <string name="C198">ቨ=ቪዬና|Europe/Vienna</string>
+    <string name="C199">ቨ=ቪልኒየስ|Europe/Vilnius</string>
+    <string name="C2">አ=አክራ|Africa/Accra</string>
+    <string name="C20">ከ=ኪንሻሳ|Africa/Kinshasa</string>
+    <string name="C200">ወ=ዋርሳው|Europe/Warsaw</string>
+    <string name="C201">ዘ=ዛግሬብ|Europe/Zagreb</string>
+    <string name="C202">ዘ=ዙሪክ|Europe/Zurich</string>
+    <string name="C203">አ=አንታናናሪቮ|Indian/Antananarivo</string>
+    <string name="C204">መ=ማልድቪስ|Indian/Maldives</string>
+    <string name="C205">መ=ሞሪሺየስ|Indian/Mauritius</string>
+    <string name="C206">አ=ኦክላንድ|Pacific/Auckland</string>
+    <string name="C207">ፈ=ፊጂ|Pacific/Fiji</string>
+    <string name="C208">ገ=ጉዋም|Pacific/Guam</string>
+    <string name="C209">ሀ=ሆኖሉሉ|Pacific/Honolulu</string>
+    <string name="C21">ለ=ሌጎስ|Africa/Lagos</string>
+    <string name="C210">ከ=ኪሪቲማቲ|Pacific/Kiritimati</string>
+    <string name="C211">ነ=ኖሚያ|Pacific/Noumea</string>
+    <string name="C214">አ=አንቲጉዋ|America/Antigua</string>
+    <string name="C215">አ=ኦስቲን|America/Chicago</string>
+    <string name="C216">በ=ቦስተን|America/New_York</string>
+    <string name="C217">ከ=ካልጋሪ|America/Denver</string>
+    <string name="C218">ከ=ኮሎምበስ|America/New_York</string>
+    <string name="C219">ደ=ዳላስ|America/Chicago</string>
+    <string name="C22">መ=ማሴሩ|Africa/Maseru</string>
+    <string name="C220">ነ=ኖክስቪል|America/New_York</string>
+    <string name="C221">መ=ሜምፊስ|America/Chicago</string>
+    <string name="C222">መ=ማያሚ|America/New_York</string>
+    <string name="C223">መ=ሚኒያፖሊስ|America/Chicago</string>
+    <string name="C224">አ=ኦታዋ|America/New_York</string>
+    <string name="C225">ፈ=ፊላደልፊያ|America/New_York</string>
+    <string name="C226">ፐ=ፓርትላንድ|America/Los_Angeles</string>
+    <string name="C227">ሰ=ሳን ዲያጎ|America/Los_Angeles</string>
+    <string name="C228">ሰ=ሳን ፍራንሲስኮ|America/Los_Angeles</string>
+    <string name="C229">ሰ=ሶልት ሌክ ሲቲ|America/Denver</string>
+    <string name="C23">መ=ሞቃዲሾ|Africa/Mogadishu</string>
+    <string name="C230">ሰ=ሳን ጆዜ|America/Los_Angeles</string>
+    <string name="C231">ሰ=ሳን ሳልቫዶር|America/Guatemala</string>
+    <string name="C232">ሰ=ሲያትል|America/Los_Angeles</string>
+    <string name="C233">ሰ=ሴንት ሉዊስ|America/Chicago</string>
+    <string name="C234">ወ=ዋሽንግተን ዲሲ|America/New_York</string>
+    <string name="C235">ሀ=ሂውስተን|America/Chicago</string>
+    <string name="C236">ሰ=ሳን አንቶኒዮ|America/Chicago</string>
+    <string name="C237">ጀ=ጃክሰንቪል|America/New_York</string>
+    <string name="C238">በ=ባልቲሞር|America/New_York</string>
+    <string name="C239">ነ=ናሽቪል|America/Chicago</string>
+    <string name="C24">ነ=ናይሮቢ|Africa/Nairobi</string>
+    <string name="C240">መ=ሚልዋውኪ|America/Chicago</string>
+    <string name="C241">አ=ኦክሎሃማ ሲቲ|America/Chicago</string>
+    <string name="C242">ለ=ላስ ቬጋስ|America/Los_Angeles</string>
+    <string name="C243">አ=አልበከርኪ|America/Denver</string>
+    <string name="C244">ተ=ቱስከን|MST</string>
+    <string name="C245">ሰ=ሳክራሜንቶ|America/Los_Angeles</string>
+    <string name="C246">አ=አትላንታ|America/New_York</string>
+    <string name="C247">ከ=ክሊቭላንድ|America/New_York</string>
+    <string name="C248">ነ=ኒው ኦርሌንስ|America/Chicago</string>
+    <string name="C249">ተ=ታምፓ|America/New_York</string>
+    <string name="C25">ሰ=ሳኦ ቶሜ|Africa/Sao_Tome</string>
+    <string name="C250">ፐ=ፒትስበርግ|America/New_York</string>
+    <string name="C251">ሰ=ሲንስናቲ|America/New_York</string>
+    <string name="C252">መ=ማውንቴን ቪው|America/Los_Angeles</string>
+    <string name="C253">ረ=ሬኖ|America/Los_Angeles</string>
+    <string name="C254">በ=ብላክ ሮክ ሲቲ|America/Los_Angeles</string>
+    <string name="C255">ደ=ዶሃ|Asia/Riyadh</string>
+    <string name="C256">በ=ቤጂንግ:|Asia/Shanghai</string>
+    <string name="C257">መ=ሙምባይ|Asia/Kolkata</string>
+    <string name="C258">ደ=ዴልሂ|Asia/Kolkata</string>
+    <string name="C259">አ=ኦሳካ:|Asia/Tokyo</string>
+    <string name="C26">ተ=ቲምቡክቱ|Africa/Timbuktu</string>
+    <string name="C260">ለ=ላሆር|Asia/Karachi</string>
+    <string name="C261">ሰ=ሰነዓ|Asia/Riyadh</string>
+    <string name="C262">በ=ባርሴሎና|Europe/Madrid</string>
+    <string name="C263">መ=ሙኒክ|Europe/Berlin</string>
+    <string name="C264">መ=ሚላን|Europe/Rome</string>
+    <string name="C265">ፈ=ፍራንክፈርት|Europe/Berlin</string>
+    <string name="C266">ሀ=ሃኖይ|Asia/Bangkok</string>
+    <string name="C267">አ=አንካራ|Europe/Istanbul</string>
+    <string name="C268">በ=ባንጋሎሬ|Asia/Kolkata</string>
+    <string name="C269">በ=ብራዚሊያ|America/Sao_Paulo</string>
+    <string name="C27">ተ=ትሪፖሊ|Africa/Tripoli</string>
+    <string name="C270">ከ=ኬፕ ታውን|Africa/Johannesburg</string>
+    <string name="C271">አ=ኢስላማባድ|Asia/Karachi</string>
+    <string name="C272">ረ=ሪዮ ዴ ጀኔሮ|America/Sao_Paulo</string>
+    <string name="C273">አ=አን አርቦር|America/Detroit</string>
+    <string name="C274">በ=ቦልደር|America/Denver</string>
+    <string name="C275">ከ=ካምብሪጅ|America/New_York</string>
+    <string name="C276">ከ=ኪርክላንድ|America/Los_Angeles</string>
+    <string name="C277">መ=ማዲሰን|America/Chicago</string>
+    <string name="C278">ገ=ጓንግንዡ:|Asia/Shanghai</string>
+    <string name="C279">ሀ=ሃይደራባድ|Asia/Kolkata</string>
+    <string name="C28">ተ=ቱኒዝ|Africa/Tunis</string>
+    <string name="C280">ረ=ሬስተን|America/New_York</string>
+    <string name="C281">በ=ቤሎ ሆሪዞንቴ|America/Sao_Paulo</string>
+    <string name="C282">ሰ=ሳንቲያጎ|America/Santiago</string>
+    <string name="C283">መ=ሞኖሮቪያ|Africa/Monrovia</string>
+    <string name="C284">ከ=ኮሎምቦ|Asia/Colombo</string>
+    <string name="C285">ቸ=ቺዋዋ|America/Chihuahua</string>
+    <string name="C286">ሰ=ሳልቫዶር|America/Sao_Paulo</string>
+    <string name="C287">ገ=ጉርጋዎን|Asia/Kolkata</string>
+    <string name="C288">መ=ማንችስተር|Europe/London</string>
+    <string name="C29">አ=አንኮሬጅ|America/Anchorage</string>
+    <string name="C290">ሰ=ሴንት ፒተርስበርግ|Europe/Moscow</string>
+    <string name="C291">ከ=ክራኮው|Europe/Warsaw</string>
+    <string name="C292">ወ=ውሮክላው|Europe/Warsaw</string>
+    <string name="C293">ሀ=ሃምበርግ|Europe/Berlin</string>
+    <string name="C294">አ=ኡሉ|Europe/Bucharest</string>
+    <string name="C295">ሀ=ሃይፋ|Asia/Jerusalem</string>
+    <string name="C296">ሰ=ሳን ጁዋን|America/Puerto_Rico</string>
+    <string name="C297">ተ=ቴጉቺጋልፓ|America/Tegucigalpa</string>
+    <string name="C298">ፐ=ፓራማሪቦ|America/Paramaribo</string>
+    <string name="C299">ከ=ኲቶ|America/Panama</string>
+    <string name="C3">አ=አዲስ አበባ|Africa/Addis_Ababa</string>
+    <string name="C300">ለ=ልዩብልያና|Europe/Ljubljana</string>
+    <string name="C301">አ=አሽጋባት|Asia/Ashgabat</string>
+    <string name="C302">አ=አሥመራ|Africa/Asmara</string>
+    <string name="C303">ባ=ባንዳር ሴሪ ቤጋዋን|Asia/Brunei</string>
+    <string name="C304">ባ=ባንጉዊ|Africa/Bangui</string>
+    <string name="C305">ባ=ባንጁል|Africa/Banjul</string>
+    <string name="C306">ቢ=ቢሽኬክ|Asia/Bishkek</string>
+    <string name="C307">ቢ=ቢሳዎ|Africa/Bissau</string>
+    <string name="C308">ቡ=ቡጁምቡራ|Africa/Bujumbura</string>
+    <string name="C309">ዲ=ዲሊ|Asia/Dili</string>
+    <string name="C31">አ=አሩባ|America/Aruba</string>
+    <string name="C310">ዱ=ዱሻንቤ|Asia/Dushanbe</string>
+    <string name="C311">ፉ=ፉናፉቲ|Pacific/Funafuti</string>
+    <string name="C312">ሆ=ሆኒያራ|Pacific/Guadalcanal</string>
+    <string name="C313">ጁ=ጁባ|Africa/Juba</string>
+    <string name="C314">ኪ=ኪንግስታውን|America/St_Vincent</string>
+    <string name="C315">ሊ=ሊብረቪል|Africa/Libreville</string>
+    <string name="C316">ሎ=ሎሜ|Africa/Lome</string>
+    <string name="C317">ሉ=ሉዋንዳ|Africa/Luanda</string>
+    <string name="C318">ሉ=ሉሳካ|Africa/Lusaka</string>
+    <string name="C319">ማ=ማጁሮ|Pacific/Majuro</string>
+    <string name="C32">አ=አሱንሲዮን|America/Asuncion</string>
+    <string name="C320">ማ=ማላቡ|Africa/Malabo</string>
+    <string name="C321">ማ=ማፑቶ|Africa/Maputo</string>
+    <string name="C322">ም=ምባባኔ|Africa/Mbabane</string>
+    <string name="C323">ሞ=ሞሮኒ|Indian/Comoro</string>
+    <string name="C324">ን=ንጃሜና|Africa/Ndjamena</string>
+    <string name="C325">ን=ንገሩልሙድ|Pacific/Palau</string>
+    <string name="C326">ኒ=ኒያሜይ|Africa/Niamey</string>
+    <string name="C327">ኒ=ኒቆሲያ|Europe/Nicosia</string>
+    <string name="C328">ኖ=ኗክሻት|Africa/Nouakchott</string>
+    <string name="C329">ኑ=ኑኳሎፋ|Pacific/Tongatapu</string>
+    <string name="C33">በ=ባርቤዶስ|America/Barbados</string>
+    <string name="C330">ዋ=ዋጋዱጉ|Africa/Ouagadougou</string>
+    <string name="C331">ፓ=ፓሊኪር|Pacific/Noumea</string>
+    <string name="C332">ፊ=ፊሊፕስበርግ|America/Lower_Princes</string>
+    <string name="C333">ፖ=ፖድጎሪካ|Europe/Podgorica</string>
+    <string name="C334">ፖ=ፖርት ሞረስቢ|Pacific/Palau</string>
+    <string name="C335">ፖ=ፖርት ቪላ|Pacific/Efate</string>
+    <string name="C336">ፖ=ፖርቶ-ኖቮ|Africa/Porto-Novo</string>
+    <string name="C337">ፕ=ፕሪሽቲና|Europe/Belgrade</string>
+    <string name="C338">ሮ=ሮሶ|America/Dominica</string>
+    <string name="C339">ታ=ታሽኬንት|Asia/Tashkent</string>
+    <string name="C34">በ=ቤሊዝ|America/Belize</string>
+    <string name="C340">ት=ትብሊሲ|Asia/Tbilisi</string>
+    <string name="C341">ቲ=ቲምፉ|Asia/Thimphu</string>
+    <string name="C342">ቲ=ቲራና|Europe/Tirane</string>
+    <string name="C343">ቫ=ቫዱዝ|Europe/Vaduz</string>
+    <string name="C344">ቪ=ቪየንቴን|Asia/Vientiane</string>
+    <string name="C345">ዊ=ዊንድሆክ|Africa/Windhoek</string>
+    <string name="C346">ያ=ያውንዴ|Africa/Douala</string>
+    <string name="C347">ያ=ያረን ዲስትሪክት|Pacific/Nauru</string>
+    <string name="C348">የ=የረቫን|Asia/Yerevan</string>
+    <string name="C35">በ=ቦጎታ|America/Bogota</string>
+    <string name="C36">በ=ቦነስ አይረስ|America/Buenos_Aires</string>
+    <string name="C37">ከ=ካንኩን|America/Cancun</string>
+    <string name="C38">ከ=ካራካስ|America/Caracas</string>
+    <string name="C39">ከ=ኬይማን|America/Cayman</string>
+    <string name="C4">አ=አልጀርስ|Africa/Algiers</string>
+    <string name="C40">ቸ=ቺካጎ|America/Chicago</string>
+    <string name="C42">ከ=ኩራሳኦ|America/Curacao</string>
+    <string name="C43">ደ=ዳውሰን ክሪክ|America/Dawson_Creek</string>
+    <string name="C44">ደ=ዴንቨር|America/Denver</string>
+    <string name="C45">ደ=ዲትሮይት|America/Detroit</string>
+    <string name="C46">ደ=ዶሚኒካ|America/Dominica</string>
+    <string name="C47">አ=ኤድመንተን|America/Edmonton</string>
+    <string name="C48">አ=ኤል ሳልቫዶር|America/El_Salvador</string>
+    <string name="C49">ፈ=ፎርታሌዛ|America/Fortaleza</string>
+    <string name="C5">በ=ብላንታይር|Africa/Blantyre</string>
+    <string name="C50">ገ=ግራንድ ትራክ|America/Grand_Turk</string>
+    <string name="C51">ገ=ግሬናዳ|America/Grenada</string>
+    <string name="C52">ጓ=ጓታሜላ ከተማ|America/Guatemala</string>
+    <string name="C53">ገ=ጉያና|America/Guyana</string>
+    <string name="C54">ሀ=ሃሊፋክስ|America/Halifax</string>
+    <string name="C55">ሀ=ሀቫና|America/Havana</string>
+    <string name="C56">አ=ኢንዲያናፓሊስ|America/Indiana/Indianapolis</string>
+    <string name="C57">ነ=ኖክስ|America/Indiana/Knox</string>
+    <string name="C58">መ=ማሬንጎ|America/Indiana/Marengo</string>
+    <string name="C59">ፐ=ፒተርስበርግ|America/Indiana/Petersburg</string>
+    <string name="C6">በ=ብራዛቪል|Africa/Brazzaville</string>
+    <string name="C60">ተ=ቴል ሲቲ|America/Indiana/Tell_City</string>
+    <string name="C61">ቨ=ቬቫይ|America/Indiana/Vevay</string>
+    <string name="C62">ቨ=ቪንሰንስ|America/Indiana/Vincennes</string>
+    <string name="C63">ወ=ዊናማክ|America/Indiana/Winamac</string>
+    <string name="C64">ከ=ኪንግስቶን|America/Jamaica</string>
+    <string name="C65">ነ=ኒዌስትራ ሴኞራ ዴ ላ ፓዝ|America/La_Paz</string>
+    <string name="C66">ለ=ሊማ|America/Lima</string>
+    <string name="C67">ለ=ሎስ አንጀለስ|America/Los_Angeles</string>
+    <string name="C68">ለ=ሉዊስ ቪሌ|America/Louisville</string>
+    <string name="C69">መ=ማናጉዋ|America/Managua</string>
+    <string name="C7">ከ= ካይሮ|Africa/Cairo</string>
+    <string name="C70">መ=ማርቲኒክ|America/Martinique</string>
+    <string name="C71">መ=ሜንዶዛ|America/Mendoza</string>
+    <string name="C72">መ=ሜትላካትላ|America/Metlakatla</string>
+    <string name="C73">መ=ሜክሲኮ ሲቲ|America/Mexico_City</string>
+    <string name="C74">መ=ሞንቴሬይ|America/Monterrey</string>
+    <string name="C75">መ=ሞንቴቪዲዮ|America/Montevideo</string>
+    <string name="C76">መ=ሞንትሪያል|America/Montreal</string>
+    <string name="C77">ነ=ናሳው|America/Nassau</string>
+    <string name="C78">ነ= ኒው ዮርክ|America/New_York</string>
+    <string name="C79">በ=ቤውላህ|America/North_Dakota/Beulah</string>
+    <string name="C8">ከ=ካዛብላንካ|Africa/Casablanca</string>
+    <string name="C80">ሰ=ሴንተር|America/North_Dakota/Center</string>
+    <string name="C81">ነ=ኒው ሳሌም|America/North_Dakota/New_Salem</string>
+    <string name="C82">ፐ=ፓናማ|America/Panama</string>
+    <string name="C83">ፈ=ፊኒክስ|America/Phoenix</string>
+    <string name="C84">ፐ=ፓርት ኦፍ ስፔይን|America/Port_of_Spain</string>
+    <string name="C85">ፐ=ፓርት-ኦ-ፕሪንስ|America/Port-au-Prince</string>
+    <string name="C86">ፐ=ፑዌርቶ ሪኮ|America/Puerto_Rico</string>
+    <string name="C87">ሰ=ሳንቶ ዶሚንጎ|America/Santo_Domingo</string>
+    <string name="C88">ሰ=ሳዎ ፓሎ|America/Sao_Paulo</string>
+    <string name="C89">ሰ=ሴንት ጆንስ|America/St_Johns</string>
+    <string name="C9">ከ=ኮናክሪ|Africa/Conakry</string>
+    <string name="C90">ሰ=ሴይንት ኪትስ|America/St_Kitts</string>
+    <string name="C91">ሰ=ሴይንት ሉሲያ|America/St_Lucia</string>
+    <string name="C92">ሰ=ሴይንት ቶማስ|America/St_Thomas</string>
+    <string name="C93">ተ=ቲጇና|America/Tijuana</string>
+    <string name="C94">ተ=ቶሮንቶ|America/Toronto</string>
+    <string name="C95">ቨ=ቫንኮቨር|America/Vancouver</string>
+    <string name="C96">ወ=ዊኒፔግ|America/Winnipeg</string>
+    <string name="C97">ደ=ደቡብ ዋልታ:|Antarctica/South_Pole</string>
+    <string name="C98">ለ=ሎንግየርቢየን|Arctic/Longyearbyen</string>
+    <string name="C99">አ=አልማቲ|Asia/Almaty</string>
+    <string name="abc_action_bar_home_description">መነሻ ዳስስ</string>
+    <string name="abc_action_bar_up_description">ወደ ላይ ያስሱ</string>
+    <string name="abc_action_menu_overflow_description">ተጨማሪ አማራጮች</string>
+    <string name="abc_action_mode_done">ተከናውኗል</string>
+    <string name="abc_activity_chooser_view_see_all">ሁሉንም ይመልከቱ</string>
+    <string name="abc_activitychooserview_choose_application">አንድ መተግበሪያ ይምረጡ</string>
+    <string name="abc_capital_off">አጥፋ</string>
+    <string name="abc_capital_on">አብራ</string>
+    <string name="abc_menu_alt_shortcut_label">Alt+</string>
+    <string name="abc_menu_ctrl_shortcut_label">Ctrl+</string>
+    <string name="abc_menu_delete_shortcut_label">ሰርዝ</string>
+    <string name="abc_menu_enter_shortcut_label">enter</string>
+    <string name="abc_menu_function_shortcut_label">Function+</string>
+    <string name="abc_menu_meta_shortcut_label">Meta+</string>
+    <string name="abc_menu_shift_shortcut_label">Shift+</string>
+    <string name="abc_menu_space_shortcut_label">ክፍተት</string>
+    <string name="abc_menu_sym_shortcut_label">Sym+</string>
+    <string name="abc_prepend_shortcut_label">Menu+</string>
+    <string name="abc_search_hint">ይፈልጉ…</string>
+    <string name="abc_searchview_description_clear">መጠይቅ አጽዳ</string>
+    <string name="abc_searchview_description_query">የፍለጋ መጠይቅ</string>
+    <string name="abc_searchview_description_search">ፍለጋ</string>
+    <string name="abc_searchview_description_submit">መጠይቅ አስገባ</string>
+    <string name="abc_searchview_description_voice">የድምጽ ፍለጋ</string>
+    <string name="abc_shareactionprovider_share_with">አጋራ በ</string>
+    <string name="abc_shareactionprovider_share_with_application">ለ%s አጋራ</string>
+    <string name="abc_toolbar_collapse_description">ሰብስብ</string>
+    <string name="bottomsheet_action_collapse">የግርጌ ሉሁን ይሰብስቡ</string>
+    <string name="bottomsheet_action_expand">የግርጌ ሉሁን ይዘርጉ</string>
+    <string name="bottomsheet_action_expand_halfway">ግማሽ መንገድ ዘርጋ</string>
+    <string name="bottomsheet_drag_handle_clicked">መያዣ ይጎትቱ ሁለቴ መታ ተደርጓል</string>
+    <string name="bottomsheet_drag_handle_content_description">መያዣ ይጎትቱ</string>
+    <string name="call_notification_answer_action">መልስ</string>
+    <string name="call_notification_answer_video_action">ቪዲዮ</string>
+    <string name="call_notification_decline_action">አትቀበል</string>
+    <string name="call_notification_hang_up_action">ስልኩን ዝጋ</string>
+    <string name="call_notification_incoming_text">ገቢ ጥሪ</string>
+    <string name="call_notification_ongoing_text">እየተካሄደ ያለ ጥሪ</string>
+    <string name="call_notification_screening_text">ገቢ ጥሪ ማጣራት</string>
+    <string name="character_counter_content_description">ቁምፊዎች %1$d ከ%2$d ገብተዋል</string>
+    <string name="character_counter_overflowed_content_description">የቁምፊ ገደብ %1$d ከ%2$d አልፏል</string>
+    <string name="clear_text_end_icon_content_description">ጽሑፍን አጽዳ</string>
+    <string name="copy">ቅዳ</string>
+    <string name="error_a11y_label">ስህተት፦ ልክ ያልሆነ</string>
+    <string name="error_icon_content_description">ስህተት</string>
+    <string name="expand_button_title">የላቀ</string>
+    <string name="exposed_dropdown_menu_content_description">ተቆልቋይ ምናሌን አሳይ</string>
+    <string name="icon_content_description">የንግግር አዶ</string>
+    <string name="item_view_role_description">ትር</string>
+    <string name="material_clock_toggle_content_description">AM ወይም PM ይምረጡ</string>
+    <string name="material_hour_24h_suffix">%1$s ሰዓታት</string>
+    <string name="material_hour_selection">ሰዓትን ይምረጡ</string>
+    <string name="material_hour_suffix">%1$s ሰዓት</string>
+    <string name="material_minute_selection">ደቂቃዎችን ይምረጡ</string>
+    <string name="material_minute_suffix">%1$s ደቂቃዎች</string>
+    <string name="material_timepicker_am">ጥዋት</string>
+    <string name="material_timepicker_clock_mode_description">ለጊዜ ግቤቱ ወደ የሰዓት ሁነታ ቀይር።</string>
+    <string name="material_timepicker_hour">ሰዓት</string>
+    <string name="material_timepicker_minute">ደቂቃ</string>
+    <string name="material_timepicker_pm">ከሰዓት</string>
+    <string name="material_timepicker_select_time">ጊዜ ምረጥ</string>
+    <string name="material_timepicker_text_input_mode_description">ለጊዜ ግቤቱ ወደ የጽሑፍ ግቤት ሁነታ ቀይር።</string>
+    <string name="mtrl_badge_numberless_content_description">አዲስ ማሳወቂያ</string>
+    <string name="mtrl_checkbox_state_description_checked">ምልክት ተደርጎበታል</string>
+    <string name="mtrl_checkbox_state_description_indeterminate">በከፊል ምልክት ተደርጎበታል</string>
+    <string name="mtrl_checkbox_state_description_unchecked">ምልክት አልተደረገበትም</string>
+    <string name="mtrl_chip_close_icon_content_description">%1$sን አስወግድ</string>
+    <string name="mtrl_exceed_max_badge_number_content_description">ከ%1$d በላይ አዲስ ማሳወቂያዎች</string>
+    <string name="mtrl_picker_a11y_next_month">ወደ የሚቀጥለው ወር ቀይር</string>
+    <string name="mtrl_picker_a11y_prev_month">ወደ ቀዳሚው ወር ቀይር</string>
+    <string name="mtrl_picker_announce_current_range_selection">የመጀመሪያ ቀን ምርጫ፦ %1$s – የማብቂያ ቀን ምርጫ፦ %2$s</string>
+    <string name="mtrl_picker_announce_current_selection">የአሁኑ ምርጫ፦ %1$s</string>
+    <string name="mtrl_picker_announce_current_selection_none">ምንም</string>
+    <string name="mtrl_picker_cancel">ይቅር</string>
+    <string name="mtrl_picker_confirm">እሺ</string>
+    <string name="mtrl_picker_date_header_selected">%1$s</string>
+    <string name="mtrl_picker_date_header_title">ቀን ይምረጡ</string>
+    <string name="mtrl_picker_date_header_unselected">የተመረጠው ቀን</string>
+    <string name="mtrl_picker_day_of_week_column_header">%1$s</string>
+    <string name="mtrl_picker_end_date_description">የማብቂያ ቀን %1$s</string>
+    <string name="mtrl_picker_invalid_format">ልክ ያልሆነ ቅርጸት</string>
+    <string name="mtrl_picker_invalid_format_example">ምሳሌ፦ %1$s</string>
+    <string name="mtrl_picker_invalid_format_use">%1$s ን ይጠቀሙ</string>
+    <string name="mtrl_picker_invalid_range">ልክ ያልኾነ ክልል።</string>
+    <string name="mtrl_picker_navigate_to_current_year_description">ወደ የአሁኑ ዓመት %1$d አስስ</string>
+    <string name="mtrl_picker_navigate_to_year_description">ወደ ዓመት %1$d አሰስ</string>
+    <string name="mtrl_picker_out_of_range">ከክልል ውጭ፦ %1$s</string>
+    <string name="mtrl_picker_range_header_only_end_selected">መጀመሪያ ቀን – %1$s</string>
+    <string name="mtrl_picker_range_header_only_start_selected">%1$s – መጨረሻ ቀን</string>
+    <string name="mtrl_picker_range_header_selected">%1$s – %2$s</string>
+    <string name="mtrl_picker_range_header_title">ክልል ይምረጡ</string>
+    <string name="mtrl_picker_range_header_unselected">የመጀመሪያ ቀን – የመጨረሻ ቀን</string>
+    <string name="mtrl_picker_save">አስቀምጥ</string>
+    <string name="mtrl_picker_start_date_description">የመጀመሪያ ቀን %1$s</string>
+    <string name="mtrl_picker_text_input_date_hint">ቀን</string>
+    <string name="mtrl_picker_text_input_date_range_end_hint">የማብቂያ ቀን</string>
+    <string name="mtrl_picker_text_input_date_range_start_hint">መጀመሪያ ቀን</string>
+    <string name="mtrl_picker_text_input_day_abbr">ቀ</string>
+    <string name="mtrl_picker_text_input_month_abbr">ደ</string>
+    <string name="mtrl_picker_text_input_year_abbr">ዓ</string>
+    <string name="mtrl_picker_today_description">ዛሬ %1$s</string>
+    <string name="mtrl_picker_toggle_to_calendar_input_mode">ወደ የቀን መቁጠሪያ ግቤት ሁነታ ቀይር</string>
+    <string name="mtrl_picker_toggle_to_day_selection">ወደ የቀን መቁጠሪያ ዕይታ ለመቀየር መታ ያድርጉ</string>
+    <string name="mtrl_picker_toggle_to_text_input_mode">ወደ ጽሁፍ ግቤት ሁነታ ቀይር</string>
+    <string name="mtrl_picker_toggle_to_year_selection">ወደ የዓመት ዕይታ ለመቀየር መታ ያድርጉ</string>
+    <string name="mtrl_timepicker_cancel">ይቅር</string>
+    <string name="mtrl_timepicker_confirm">እሺ</string>
+    <string name="not_set">አልተዘጋጀም</string>
+    <string name="password_toggle_content_description">የይለፍ ቃል አሳይ</string>
+    <string name="preference_copied">«%1$s» ወደ የቅንጥብ ሰሌዳ ተቀድቷል።</string>
+    <string name="search_menu_title">ፍለጋ</string>
+    <string name="searchview_clear_text_content_description">ጽሁፍን አጽዳ</string>
+    <string name="searchview_navigation_content_description">ተመለስ</string>
+    <string name="side_sheet_accessibility_pane_title">የጎን ሉህ</string>
+    <string name="status_bar_notification_info_overflow">999+</string>
+    <string name="summary_collapsed_preference_list">%1$s፣ %2$s</string>
+    <string name="v7_preference_off">ጠፍቷል</string>
+    <string name="v7_preference_on">በርቷል</string>
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:tag="layout/fragment_call_log_contact_history_0" android:padding="@dimen/normal_padding" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" android:id="@id/contact_name" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    <TextView android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" android:id="@id/contact_number" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/normal_padding" />
+    <ListView android:id="@id/list" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0" />
+</LinearLayout>

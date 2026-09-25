@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout android:id="@id/main" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.appbar.AppBarLayout android:id="@id/appbar" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <LinearLayout android:orientation="vertical" android:id="@id/nextAlarmTimeView" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" app:layout_scrollFlags="scroll">
+            <TextView android:textSize="20.0sp" android:textColor="@color/white" android:gravity="center_horizontal" android:id="@id/timeTillNextAlarm" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Alarm in 7 hours 43 minutes" android:fontFamily="sans-serif-light" android:paddingStart="@dimen/normal_padding" android:paddingEnd="@dimen/normal_padding" />
+            <LinearLayout android:gravity="center" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:ellipsize="none" android:id="@id/nextAlarmIcon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/clock_emoji" android:maxLines="1" android:includeFontPadding="false" android:layout_marginStart="@dimen/alarm_icon_padding" android:layout_marginEnd="@dimen/alarm_icon_padding" style="@style/body" />
+                <TextView android:id="@id/nextAlarm" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textAllCaps="true" style="@style/body" />
+            </LinearLayout>
+        </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+    <com.basicphones.deskclock.AlarmRecyclerView android:id="@id/alarms_recycler_view" android:paddingBottom="@dimen/fab_height" android:fadingEdgeLength="0.0dip" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="fill_parent" android:splitMotionEvents="false" app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    <TextView android:textColor="@color/no_alarms" android:gravity="center_horizontal" android:layout_gravity="center" android:id="@id/alarms_empty_view" android:paddingTop="@dimen/normal_padding" android:paddingBottom="@dimen/fab_height" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/no_alarms" android:contentDescription="@string/no_alarms" app:layout_behavior="@string/appbar_scrolling_view_behavior" style="@style/no_alarms" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

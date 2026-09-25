@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout android:id="@id/constraintLayout" android:tag="layout/fragment_contacts_0" android:descendantFocusability="afterDescendants" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout android:id="@id/content" android:tag="binding_1" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <FrameLayout android:id="@id/filteredContactsFragment" android:layout_width="fill_parent" android:layout_height="0.0dip" app:layout_constraintBottom_toTopOf="@id/bottomToolbar" app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout android:id="@id/contactListContainer" android:layout_width="fill_parent" android:layout_height="0.0dip" app:layout_constraintBottom_toTopOf="@id/bottomToolbar" app:layout_constraintTop_toTopOf="parent">
+            <LinearLayout android:id="@id/check_all_layout" android:background="@drawable/background_selector" android:visibility="gone" android:layout_width="0.0dip" android:layout_height="wrap_content" android:paddingStart="@dimen/small_padding" android:paddingEnd="@dimen/small_padding" app:layout_constraintEnd_toStartOf="@id/indexList" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent">
+                <TextView android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" android:gravity="center_vertical" android:padding="@dimen/small_padding" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/check_uncheck_all" android:lines="1" android:layout_weight="1.0" />
+                <com.google.android.material.checkbox.MaterialCheckBox android:id="@id/check_all" android:layout_width="wrap_content" android:layout_height="wrap_content" style="@style/CustomCheckBox" />
+            </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView android:orientation="vertical" android:id="@id/contactsList" android:descendantFocusability="afterDescendants" android:layout_width="0.0dip" android:layout_height="0.0dip" app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toStartOf="@id/indexList" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/check_all_layout" />
+            <androidx.recyclerview.widget.RecyclerView android:orientation="vertical" android:id="@id/indexList" android:descendantFocusability="afterDescendants" android:layout_width="wrap_content" android:layout_height="0.0dip" app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@id/check_all_layout" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView android:gravity="center" android:id="@id/empty_list_hint" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/empty_contacts_hint" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
+        <include android:id="@id/bottomToolbar" layout="@layout/menu_bottom" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/loading" android:background="@color/colorBackground" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/please_wait" />
+        <ProgressBar android:layout_width="wrap_content" android:layout_height="wrap_content" android:indeterminate="true" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

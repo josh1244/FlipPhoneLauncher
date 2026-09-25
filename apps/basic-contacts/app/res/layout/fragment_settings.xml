@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout android:id="@id/constraintLayout" android:tag="layout/fragment_settings_0" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.core.widget.NestedScrollView android:layout_width="fill_parent" android:layout_height="0.0dip" app:layout_constraintBottom_toTopOf="@id/bottomToolbar" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/content" android:padding="@dimen/normal_padding" android:descendantFocusability="afterDescendants" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/contact_name_display" />
+            <RadioGroup android:orientation="horizontal" android:id="@id/sort_option" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <com.google.android.material.radiobutton.MaterialRadioButton android:id="@id/first_last" android:background="@drawable/background_selector" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="true" android:button="@drawable/radio_button_selector" android:text="@string/first_last" android:paddingStart="@dimen/small_padding" android:paddingEnd="@dimen/small_padding" android:layout_marginEnd="@dimen/normal_padding" />
+                <com.google.android.material.radiobutton.MaterialRadioButton android:id="@id/last_first" android:background="@drawable/background_selector" android:layout_width="wrap_content" android:layout_height="wrap_content" android:button="@drawable/radio_button_selector" android:text="@string/last_first" android:paddingStart="@dimen/small_padding" android:paddingEnd="@dimen/small_padding" />
+            </RadioGroup>
+            <View style="@style/Divider" />
+            <TextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/small_padding" android:text="@string/search_mode" />
+            <RadioGroup android:orientation="horizontal" android:id="@id/search_mode_option" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <com.google.android.material.radiobutton.MaterialRadioButton android:id="@id/text_search" android:background="@drawable/background_selector" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="true" android:button="@drawable/radio_button_selector" android:text="@string/text_search" android:paddingStart="@dimen/small_padding" android:paddingEnd="@dimen/small_padding" android:layout_marginEnd="@dimen/normal_padding" />
+                <com.google.android.material.radiobutton.MaterialRadioButton android:id="@id/quick_search" android:background="@drawable/background_selector" android:layout_width="wrap_content" android:layout_height="wrap_content" android:button="@drawable/radio_button_selector" android:text="@string/quick_search" android:paddingStart="@dimen/small_padding" android:paddingEnd="@dimen/small_padding" />
+            </RadioGroup>
+            <View style="@style/Divider" />
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:textColor="@android:color/white" android:gravity="center" android:id="@id/import_contacts" android:background="@drawable/background_selector" android:padding="@dimen/normal_padding" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/import_contacts" android:layout_weight="1.0" />
+                <TextView android:textColor="@android:color/white" android:gravity="center" android:id="@id/export_contacts" android:background="@drawable/background_selector" android:padding="@dimen/normal_padding" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/export_contacts" android:layout_weight="1.0" />
+            </LinearLayout>
+            <View style="@style/Divider" />
+            <TextView android:textColor="@android:color/white" android:gravity="center" android:id="@id/fix_contacts" android:background="@drawable/background_selector" android:padding="@dimen/normal_padding" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/fix_contacts" />
+            <View style="@style/Divider" />
+            <com.google.android.material.checkbox.MaterialCheckBox android:id="@id/use_large_fonts" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/use_large_fonts" android:layoutDirection="ltr" android:paddingStart="2.0dip" style="@style/CustomCheckBox" />
+            <View style="@style/Divider" />
+            <com.google.android.material.checkbox.MaterialCheckBox android:id="@id/whitelist_calls" android:background="@drawable/background_selector" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/whitelist_contacts_for_calls" android:layoutDirection="ltr" android:paddingStart="2.0dip" style="@style/CustomCheckBox" />
+            <View style="@style/Divider" />
+            <com.google.android.material.checkbox.MaterialCheckBox android:id="@id/whitelist_messages" android:background="@drawable/background_selector" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/whitelist_contacts_for_messages" android:layoutDirection="ltr" android:paddingStart="2.0dip" style="@style/CustomCheckBox" />
+            <View android:id="@id/whitelist_messages_divider" style="@style/Divider" />
+            <com.google.android.material.checkbox.MaterialCheckBox android:id="@id/contacts_backup" android:background="@drawable/background_selector" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/weekly_backup" android:layoutDirection="ltr" android:paddingStart="2.0dip" style="@style/CustomCheckBox" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+    <include android:id="@id/bottomToolbar" layout="@layout/menu_bottom" />
+    <TextView android:gravity="center" android:id="@id/loading_message" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" app:layout_constraintBottom_toTopOf="@id/bottomToolbar" app:layout_constraintTop_toTopOf="parent" />
+    <ProgressBar android:id="@id/progress_bar" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/normal_padding" android:max="100" android:layout_marginStart="@dimen/normal_padding" android:layout_marginEnd="@dimen/normal_padding" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/loading_message" style="@style/Widget.AppCompat.ProgressBar.Horizontal" />
+</androidx.constraintlayout.widget.ConstraintLayout>

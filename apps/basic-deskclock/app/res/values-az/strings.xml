@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="C1">A=Abidjan|Africa/Abidjan</string>
+    <string name="C10">D=Dakar|Africa/Dakar</string>
+    <string name="C100">A=Amman|Asia/Amman</string>
+    <string name="C101">A=Anadır|Asia/Anadyr</string>
+    <string name="C102">A=Aktau|Asia/Aqtau</string>
+    <string name="C103">B=Bağdad|Asia/Baghdad</string>
+    <string name="C104">B=Bəhreyn|Asia/Bahrain</string>
+    <string name="C105">B=Bakı|Asia/Baku</string>
+    <string name="C106">B=Banqkok|Asia/Bangkok</string>
+    <string name="C107">B=Beyrut|Asia/Beirut</string>
+    <string name="C108">K=Kolkata|Asia/Calcutta</string>
+    <string name="C109">D=Dəməşq|Asia/Damascus</string>
+    <string name="C11">D=Dar əs Salaam|Africa/Dar_es_Salaam</string>
+    <string name="C110">D=Dəkkə|Asia/Dhaka</string>
+    <string name="C111">D=Dubay|Asia/Dubai</string>
+    <string name="C112">Q=Qəzza|Asia/Gaza</string>
+    <string name="C113">H=Hebron|Asia/Hebron</string>
+    <string name="C114">H=Hoşimin|Asia/Ho_Chi_Minh</string>
+    <string name="C115">H=Honq Konq:|Asia/Hong_Kong</string>
+    <string name="C117">C=Cakarta|Asia/Jakarta</string>
+    <string name="C118">Q=Qüds|Asia/Jerusalem</string>
+    <string name="C119">K=Kabil|Asia/Kabul</string>
+    <string name="C12">C=Cibuti|Africa/Djibouti</string>
+    <string name="C120">K=Kərəçi|Asia/Karachi</string>
+    <string name="C121">K=Katmandu|Asia/Kathmandu</string>
+    <string name="C122">K=Kuala Lumpur|Asia/Kuala_Lumpur</string>
+    <string name="C123">K=Küveyt|Asia/Kuwait</string>
+    <string name="C124">M=Makao|Asia/Macau</string>
+    <string name="C125">M=Manila|Asia/Manila</string>
+    <string name="C126">M=Maskat|Asia/Muscat</string>
+    <string name="C127">P=Pnompen|Asia/Phnom_Penh</string>
+    <string name="C128">P=Pxenyan:|Asia/Pyongyang</string>
+    <string name="C13">F=Fritaun|Africa/Freetown</string>
+    <string name="C130">Y=Yanqon|Asia/Rangoon</string>
+    <string name="C131">Ə=Ər-Riyad|Asia/Riyadh</string>
+    <string name="C133">S=Seul|Asia/Seoul</string>
+    <string name="C134">Ş=Şanxay:|Asia/Shanghai</string>
+    <string name="C135">S=Sinqapur|Asia/Singapore</string>
+    <string name="C136">T=Taybey:|Asia/Taipei</string>
+    <string name="C137">T=Tehran|Asia/Tehran</string>
+    <string name="C138">T=Tel Əviv|Asia/Tel_Aviv</string>
+    <string name="C139">T=Tokio:|Asia/Tokyo</string>
+    <string name="C14">Q=Qaborone|Africa/Gaborone</string>
+    <string name="C140">U=Ulan-bator|Asia/Ulaanbaatar</string>
+    <string name="C141">B=Bermuda|Atlantic/Bermuda</string>
+    <string name="C142">K=Kanar|Atlantic/Canary</string>
+    <string name="C143">K=Kabo-Verde|Atlantic/Cape_Verde</string>
+    <string name="C144">R=Reykyavik|Atlantic/Reykjavik</string>
+    <string name="C145">S=Stenli|Atlantic/Stanley</string>
+    <string name="C146">A=Adelaida|Australia/Adelaide</string>
+    <string name="C147">B=Brisben|Australia/Brisbane</string>
+    <string name="C148">K=Kanberra|Australia/Canberra</string>
+    <string name="C149">D=Darvin|Australia/Darwin</string>
+    <string name="C15">H=Harare|Africa/Harare</string>
+    <string name="C150">M=Melburn|Australia/Melbourne</string>
+    <string name="C151">=Yeni Cənubi Uels|Australia/NSW</string>
+    <string name="C152">P=Pert|Australia/Perth</string>
+    <string name="C153">K=Kvinslend|Australia/Queensland</string>
+    <string name="C154">S=Sidney|Australia/Sydney</string>
+    <string name="C155">V=Viktoriya|Australia/Victoria</string>
+    <string name="C156">N=Nyufaundlend|Canada/Newfoundland</string>
+    <string name="C157">S=Saskaçevan|Canada/Saskatchewan</string>
+    <string name="C158">=Pasxa adası|Chile/EasterIsland</string>
+    <string name="C159">A=Amsterdam|Europe/Amsterdam</string>
+    <string name="C16">Y=Yohannesburq|Africa/Johannesburg</string>
+    <string name="C160">A=Andorra|Europe/Andorra</string>
+    <string name="C161">A=Afina|Europe/Athens</string>
+    <string name="C162">B=Belfast|Europe/Belfast</string>
+    <string name="C163">B=Belqrad|Europe/Belgrade</string>
+    <string name="C164">B=Berlin|Europe/Berlin</string>
+    <string name="C165">B=Bratislava|Europe/Bratislava</string>
+    <string name="C166">B=Brüssel|Europe/Brussels</string>
+    <string name="C167">B=Buxarest|Europe/Bucharest</string>
+    <string name="C168">B=Budapeşt|Europe/Budapest</string>
+    <string name="C169">K=Kişinyov|Europe/Chisinau</string>
+    <string name="C17">K=Kampala|Africa/Kampala</string>
+    <string name="C170">K=Kopenhagen|Europe/Copenhagen</string>
+    <string name="C171">D=Dublin|Europe/Dublin</string>
+    <string name="C172">C=Cəbəllütariq|Europe/Gibraltar</string>
+    <string name="C173">H=Helsinki|Europe/Helsinki</string>
+    <string name="C174">=Men adası|Europe/Isle_of_Man</string>
+    <string name="C175">İ=İstanbul|Europe/Istanbul</string>
+    <string name="C176">K=Kiyev|Europe/Kiev</string>
+    <string name="C177">L=Lissabon|Europe/Lisbon</string>
+    <string name="C178">L=London|Europe/London</string>
+    <string name="C179">L=Lüksemburq|Europe/Luxembourg</string>
+    <string name="C18">X=Xartum|Africa/Khartoum</string>
+    <string name="C180">M=Madrid|Europe/Madrid</string>
+    <string name="C181">M=Malta|Europe/Malta</string>
+    <string name="C182">M=Minsk|Europe/Minsk</string>
+    <string name="C183">M=Monako|Europe/Monaco</string>
+    <string name="C184">M=Moskva|Europe/Moscow</string>
+    <string name="C185">O=Oslo|Europe/Oslo</string>
+    <string name="C186">P=Paris|Europe/Paris</string>
+    <string name="C187">P=Praqa|Europe/Prague</string>
+    <string name="C188">R=Riqa|Europe/Riga</string>
+    <string name="C189">R=Roma|Europe/Rome</string>
+    <string name="C19">K=Kiqali|Africa/Kigali</string>
+    <string name="C190">S=San Marino|Europe/San_Marino</string>
+    <string name="C191">S=Sarayevo|Europe/Sarajevo</string>
+    <string name="C192">S=Simferopol|Europe/Simferopol</string>
+    <string name="C193">S=Skopye|Europe/Skopje</string>
+    <string name="C194">S=Sofiya|Europe/Sofia</string>
+    <string name="C195">S=Stokholm|Europe/Stockholm</string>
+    <string name="C196">T=Tallin|Europe/Tallinn</string>
+    <string name="C197">V=Vatikan|Europe/Vatican</string>
+    <string name="C198">V=Vyana|Europe/Vienna</string>
+    <string name="C199">V=Vilnüs|Europe/Vilnius</string>
+    <string name="C2">A=Akkra|Africa/Accra</string>
+    <string name="C20">K=Kinşasa|Africa/Kinshasa</string>
+    <string name="C200">V=Varşava|Europe/Warsaw</string>
+    <string name="C201">Z=Zaqreb|Europe/Zagreb</string>
+    <string name="C202">S=Sürix|Europe/Zurich</string>
+    <string name="C203">A=Antananarivu|Indian/Antananarivo</string>
+    <string name="C204">M=Maldiv|Indian/Maldives</string>
+    <string name="C205">M=Mavriki|Indian/Mauritius</string>
+    <string name="C206">O=Oklənd|Pacific/Auckland</string>
+    <string name="C207">F=Fici|Pacific/Fiji</string>
+    <string name="C208">Q=Quam|Pacific/Guam</string>
+    <string name="C209">H=Honolulu|Pacific/Honolulu</string>
+    <string name="C21">L=Laqos|Africa/Lagos</string>
+    <string name="C210">K=Kiritimati|Pacific/Kiritimati</string>
+    <string name="C211">N=Numea|Pacific/Noumea</string>
+    <string name="C214">A=Antiqua|America/Antigua</string>
+    <string name="C215">O=Ostin|America/Chicago</string>
+    <string name="C216">B=Boston|America/New_York</string>
+    <string name="C217">K=Kalqari|America/Denver</string>
+    <string name="C218">K=Kolumbus|America/New_York</string>
+    <string name="C219">D=Dallas|America/Chicago</string>
+    <string name="C22">M=Maseru|Africa/Maseru</string>
+    <string name="C220">K=Knoxville|America/New_York</string>
+    <string name="C221">M=Memfis|America/Chicago</string>
+    <string name="C222">M=Mayami|America/New_York</string>
+    <string name="C223">M=Minneapolis|America/Chicago</string>
+    <string name="C224">O=Ottava|America/New_York</string>
+    <string name="C225">F=Filadelfiya|America/New_York</string>
+    <string name="C226">P=Portland|America/Los_Angeles</string>
+    <string name="C227">S=San Dieqo|America/Los_Angeles</string>
+    <string name="C228">S=San-Fransisko|America/Los_Angeles</string>
+    <string name="C229">S=Solt Leyk Siti|America/Denver</string>
+    <string name="C23">M=Moqadişo|Africa/Mogadishu</string>
+    <string name="C230">S=San Joze|America/Los_Angeles</string>
+    <string name="C231">S=San Salvador|America/Guatemala</string>
+    <string name="C232">S=Sietl|America/Los_Angeles</string>
+    <string name="C233">S=Sent-Luis|America/Chicago</string>
+    <string name="C234">V=Vaşinqton D.C.|America/New_York</string>
+    <string name="C235">H=Hyuston|America/Chicago</string>
+    <string name="C236">S=San Antonio|America/Chicago</string>
+    <string name="C237">C=Ceksonvill|America/New_York</string>
+    <string name="C238">B=Baltimor|America/New_York</string>
+    <string name="C239">N=Neşvil|America/Chicago</string>
+    <string name="C24">N=Nayrobi|Africa/Nairobi</string>
+    <string name="C240">M=Miluoki|America/Chicago</string>
+    <string name="C241">O=Oklahoma Siti|America/Chicago</string>
+    <string name="C242">L=Las Veqas|America/Los_Angeles</string>
+    <string name="C243">A=Albukerke|America/Denver</string>
+    <string name="C244">T=Takson|MST</string>
+    <string name="C245">S=Sakramento|America/Los_Angeles</string>
+    <string name="C246">A=Atlanta|America/New_York</string>
+    <string name="C247">K=Klivlend|America/New_York</string>
+    <string name="C248">N=Nyu-Orlean|America/Chicago</string>
+    <string name="C249">T=Tampa|America/New_York</string>
+    <string name="C25">S=San-Tome|Africa/Sao_Tome</string>
+    <string name="C250">P=Pittsburq|America/New_York</string>
+    <string name="C251">S=Sinsinnati|America/New_York</string>
+    <string name="C252">M=Mountain View|America/Los_Angeles</string>
+    <string name="C253">R=Reno|America/Los_Angeles</string>
+    <string name="C254">B=Black Rock City|America/Los_Angeles</string>
+    <string name="C255">D=Doha|Asia/Riyadh</string>
+    <string name="C256">B=Beijing:|Asia/Shanghai</string>
+    <string name="C257">M=Mumbai|Asia/Kolkata</string>
+    <string name="C258">D=Delhi|Asia/Kolkata</string>
+    <string name="C259">O=Osaka:|Asia/Tokyo</string>
+    <string name="C26">T=Timbuktu|Africa/Timbuktu</string>
+    <string name="C260">L=Lahor|Asia/Karachi</string>
+    <string name="C261">"S=Sana'a|Asia/Riyadh"</string>
+    <string name="C262">B=Barselona|Europe/Madrid</string>
+    <string name="C263">M=Münhen|Europe/Berlin</string>
+    <string name="C264">M=Milan|Europe/Rome</string>
+    <string name="C265">F=Frankfurt|Europe/Berlin</string>
+    <string name="C266">H=Hanoy|Asia/Bangkok</string>
+    <string name="C267">A=Ankara|Europe/Istanbul</string>
+    <string name="C268">B=Banqalor|Asia/Kolkata</string>
+    <string name="C269">B=Brazília|America/Sao_Paulo</string>
+    <string name="C27">T=Tripoli|Africa/Tripoli</string>
+    <string name="C270">K=Keyptaun|Africa/Johannesburg</string>
+    <string name="C271">İ=İslamabad|Asia/Karachi</string>
+    <string name="C272">R=Rio de Janeyro|America/Sao_Paulo</string>
+    <string name="C273">A=Ann Arbor|America/Detroit</string>
+    <string name="C274">B=Boulder|America/Denver</string>
+    <string name="C275">K=Kembric|America/New_York</string>
+    <string name="C276">K=Kirkland|America/Los_Angeles</string>
+    <string name="C277">M=Madison|America/Chicago</string>
+    <string name="C278">Q=Quançjou:|Asia/Shanghai</string>
+    <string name="C279">H=Heydərabad|Asia/Kolkata</string>
+    <string name="C28">T=Tunis|Africa/Tunis</string>
+    <string name="C280">R=Reston|America/New_York</string>
+    <string name="C281">B=Belo Horizonte|America/Sao_Paulo</string>
+    <string name="C282">S=Santyaqo|America/Santiago</string>
+    <string name="C283">M=Monroviya|Africa/Monrovia</string>
+    <string name="C284">K=Kolombo|Asia/Colombo</string>
+    <string name="C285">Ç=Çiuaua|America/Chihuahua</string>
+    <string name="C286">S=Salvador|America/Sao_Paulo</string>
+    <string name="C287">Q=Qurqaon|Asia/Kolkata</string>
+    <string name="C288">M=Mançester|Europe/London</string>
+    <string name="C29">A=Ankoric|America/Anchorage</string>
+    <string name="C290">S=Sankt-Peterburq|Europe/Moscow</string>
+    <string name="C291">K=Krakov|Europe/Warsaw</string>
+    <string name="C292">V=Vrotslav|Europe/Warsaw</string>
+    <string name="C293">H=Hamburq|Europe/Berlin</string>
+    <string name="C294">O=Oulu|Europe/Bucharest</string>
+    <string name="C295">H=Hayfa|Asia/Jerusalem</string>
+    <string name="C296">S=San Xuan|America/Puerto_Rico</string>
+    <string name="C297">T=Tequsiqalpa|America/Tegucigalpa</string>
+    <string name="C298">P=Paramaribo|America/Paramaribo</string>
+    <string name="C299">K=Kito|America/Panama</string>
+    <string name="C3">Ə=Əddis-Əbəbə|Africa/Addis_Ababa</string>
+    <string name="C300">L=Lyublyana|Europe/Ljubljana</string>
+    <string name="C301">A=Aşqabad|Asia/Ashgabat</string>
+    <string name="C302">A=Əsməra|Africa/Asmara</string>
+    <string name="C303">B=Bandar Səri Bəgavan|Asia/Brunei</string>
+    <string name="C304">B=Bangi|Africa/Bangui</string>
+    <string name="C305">B=Banjul|Africa/Banjul</string>
+    <string name="C306">B=Bişkek|Asia/Bishkek</string>
+    <string name="C307">B=Bisau|Africa/Bissau</string>
+    <string name="C308">B=Bujumbura|Africa/Bujumbura</string>
+    <string name="C309">D=Dili|Asia/Dili</string>
+    <string name="C31">A=Aruba|America/Aruba</string>
+    <string name="C310">D=Düşənbə|Asia/Dushanbe</string>
+    <string name="C311">F=Funafuti|Pacific/Funafuti</string>
+    <string name="C312">H=Honiara|Pacific/Guadalcanal</string>
+    <string name="C313">C=Cuba|Africa/Juba</string>
+    <string name="C314">K=Kinqstaun|America/St_Vincent</string>
+    <string name="C315">L=Librevil|Africa/Libreville</string>
+    <string name="C316">L=Lome|Africa/Lome</string>
+    <string name="C317">L=Luanda|Africa/Luanda</string>
+    <string name="C318">L=Lusaka|Africa/Lusaka</string>
+    <string name="C319">M=Macuro|Pacific/Majuro</string>
+    <string name="C32">A=Asunson|America/Asuncion</string>
+    <string name="C320">M=Malabo|Africa/Malabo</string>
+    <string name="C321">M=Maputo|Africa/Maputo</string>
+    <string name="C322">M=Mbabane|Africa/Mbabane</string>
+    <string name="C323">M=Moroni|Indian/Comoro</string>
+    <string name="C324">N=Ncamena|Africa/Ndjamena</string>
+    <string name="C325">N=Nqerulmud|Pacific/Palau</string>
+    <string name="C326">N=Niamey|Africa/Niamey</string>
+    <string name="C327">N=Nikosiya|Europe/Nicosia</string>
+    <string name="C328">N=Nuakşot|Africa/Nouakchott</string>
+    <string name="C329">N=Nukualofa|Pacific/Tongatapu</string>
+    <string name="C33">B=Barbados|America/Barbados</string>
+    <string name="C330">U=Uaqaduqu|Africa/Ouagadougou</string>
+    <string name="C331">P=Palikir|Pacific/Noumea</string>
+    <string name="C332">F=Filipsburq|America/Lower_Princes</string>
+    <string name="C333">P=Podqoritsa|Europe/Podgorica</string>
+    <string name="C334">P=Port Morsbi|Pacific/Palau</string>
+    <string name="C335">P=Port Vila|Pacific/Efate</string>
+    <string name="C336">P=Porto-Novo|Africa/Porto-Novo</string>
+    <string name="C337">P=Priştine|Europe/Belgrade</string>
+    <string name="C338">R=Rozo|America/Dominica</string>
+    <string name="C339">D=Daşkənd|Asia/Tashkent</string>
+    <string name="C34">B=Beliz|America/Belize</string>
+    <string name="C340">T=Tbilisi|Asia/Tbilisi</string>
+    <string name="C341">T=Thimphu|Asia/Thimphu</string>
+    <string name="C342">T=Tirana|Europe/Tirane</string>
+    <string name="C343">V=Vaduts|Europe/Vaduz</string>
+    <string name="C344">V=Vyentyan|Asia/Vientiane</string>
+    <string name="C345">V=Vindhuk|Africa/Windhoek</string>
+    <string name="C346">Y=Yaunde|Africa/Douala</string>
+    <string name="C347">Y=Yaren|Pacific/Nauru</string>
+    <string name="C348">Y=Yerevan|Asia/Yerevan</string>
+    <string name="C35">B=Boqota|America/Bogota</string>
+    <string name="C36">B=Buenos-Ayres|America/Buenos_Aires</string>
+    <string name="C37">C=Cancun|America/Cancun</string>
+    <string name="C38">K=Karakas|America/Caracas</string>
+    <string name="C39">K=Kayman|America/Cayman</string>
+    <string name="C4">Ə=Əlcəzair|Africa/Algiers</string>
+    <string name="C40">Ç=Çikaqo|America/Chicago</string>
+    <string name="C42">C=Curaçao|America/Curacao</string>
+    <string name="C43">D=Dawson Creek|America/Dawson_Creek</string>
+    <string name="C44">D=Denver|America/Denver</string>
+    <string name="C45">D=Detroyt|America/Detroit</string>
+    <string name="C46">D=Dominika|America/Dominica</string>
+    <string name="C47">E=Edmonton|America/Edmonton</string>
+    <string name="C48">S=Salvador|America/El_Salvador</string>
+    <string name="C49">F=Fortaleza|America/Fortaleza</string>
+    <string name="C5">B=Blantire|Africa/Blantyre</string>
+    <string name="C50">Q=Qrand Türk|America/Grand_Turk</string>
+    <string name="C51">Q=Qrenada|America/Grenada</string>
+    <string name="C52">Q=Qvatemala Şəhəri|America/Guatemala</string>
+    <string name="C53">Q=Qayana|America/Guyana</string>
+    <string name="C54">H=Halifaks|America/Halifax</string>
+    <string name="C55">H=Havana|America/Havana</string>
+    <string name="C56">İ=İndianapolis|America/Indiana/Indianapolis</string>
+    <string name="C57">=Noks|America/Indiana/Knox</string>
+    <string name="C58">M=Marenqo|America/Indiana/Marengo</string>
+    <string name="C59">P=Peterburq|America/Indiana/Petersburg</string>
+    <string name="C6">B=Brazzavil|Africa/Brazzaville</string>
+    <string name="C60">T=Tell City|America/Indiana/Tell_City</string>
+    <string name="C61">V=Vevay|America/Indiana/Vevay</string>
+    <string name="C62">V=Vincennes|America/Indiana/Vincennes</string>
+    <string name="C63">V=Vinamak|America/Indiana/Winamac</string>
+    <string name="C64">K=Kinqston|America/Jamaica</string>
+    <string name="C65">N=Nuestra Señora de La Paz|America/La_Paz</string>
+    <string name="C66">L=Lima|America/Lima</string>
+    <string name="C67">L=Los Anceles|America/Los_Angeles</string>
+    <string name="C68">L=Luisvill|America/Louisville</string>
+    <string name="C69">M=Manaqua|America/Managua</string>
+    <string name="C7">Q=Qahirə|Africa/Cairo</string>
+    <string name="C70">M=Martinika|America/Martinique</string>
+    <string name="C71">M=Mendoza|America/Mendoza</string>
+    <string name="C72">M=Metlakatla|America/Metlakatla</string>
+    <string name="C73">M=Mexiko|America/Mexico_City</string>
+    <string name="C74">M=Monterrey|America/Monterrey</string>
+    <string name="C75">M=Montevideo|America/Montevideo</string>
+    <string name="C76">M=Monreal|America/Montreal</string>
+    <string name="C77">N=Nassau|America/Nassau</string>
+    <string name="C78">N=Nyu York|America/New_York</string>
+    <string name="C79">B=Beulah|America/North_Dakota/Beulah</string>
+    <string name="C8">K=Kasablanka|Africa/Casablanca</string>
+    <string name="C80">C=Center|America/North_Dakota/Center</string>
+    <string name="C81">N=Nyu Salem|America/North_Dakota/New_Salem</string>
+    <string name="C82">P=Panama|America/Panama</string>
+    <string name="C83">F=Finiks|America/Phoenix</string>
+    <string name="C84">P=Port of Speyn|America/Port_of_Spain</string>
+    <string name="C85">P=Port-o-Prins|America/Port-au-Prince</string>
+    <string name="C86">P=Puerto-Riko|America/Puerto_Rico</string>
+    <string name="C87">S=Santo Dominqo|America/Santo_Domingo</string>
+    <string name="C88">S=San-Paulu|America/Sao_Paulo</string>
+    <string name="C89">S=Sent-Cons|America/St_Johns</string>
+    <string name="C9">K=Konakri|Africa/Conakry</string>
+    <string name="C90">S=Sent-Kitts|America/St_Kitts</string>
+    <string name="C91">S=Sent-Lüsiya|America/St_Lucia</string>
+    <string name="C92">=Sent-Tomas|America/St_Thomas</string>
+    <string name="C93">T=Tixuana|America/Tijuana</string>
+    <string name="C94">T=Toronto|America/Toronto</string>
+    <string name="C95">V=Vankuver|America/Vancouver</string>
+    <string name="C96">V=Vinnipeq|America/Winnipeg</string>
+    <string name="C97">=Cənub Qütbü:|Antarctica/South_Pole</string>
+    <string name="C98">L=Lonqyerbyen|Arctic/Longyearbyen</string>
+    <string name="C99">A=Alma-ata|Asia/Almaty</string>
+    <string name="abc_action_bar_home_description">Əsas səhifəyə keçin</string>
+    <string name="abc_action_bar_up_description">Yuxarı keçin</string>
+    <string name="abc_action_menu_overflow_description">Digər seçimlər</string>
+    <string name="abc_action_mode_done">Hazırdır</string>
+    <string name="abc_activity_chooser_view_see_all">Hamısına baxın</string>
+    <string name="abc_activitychooserview_choose_application">Tətbiq seçin</string>
+    <string name="abc_capital_off">DEAKTİV</string>
+    <string name="abc_capital_on">AKTİV</string>
+    <string name="abc_menu_alt_shortcut_label">Alt+</string>
+    <string name="abc_menu_ctrl_shortcut_label">Ctrl+</string>
+    <string name="abc_menu_delete_shortcut_label">silin</string>
+    <string name="abc_menu_enter_shortcut_label">daxil olun</string>
+    <string name="abc_menu_function_shortcut_label">Funksiya+</string>
+    <string name="abc_menu_meta_shortcut_label">Meta+</string>
+    <string name="abc_menu_shift_shortcut_label">Shift+</string>
+    <string name="abc_menu_space_shortcut_label">space</string>
+    <string name="abc_menu_sym_shortcut_label">Sym+</string>
+    <string name="abc_prepend_shortcut_label">Menyu+</string>
+    <string name="abc_search_hint">Axtarış...</string>
+    <string name="abc_searchview_description_clear">Sorğunu silin</string>
+    <string name="abc_searchview_description_query">Axtarış sorğusu</string>
+    <string name="abc_searchview_description_search">Axtarın</string>
+    <string name="abc_searchview_description_submit">Sorğunu göndərin</string>
+    <string name="abc_searchview_description_voice">Səsli axtarış</string>
+    <string name="abc_shareactionprovider_share_with">Paylaşın</string>
+    <string name="abc_shareactionprovider_share_with_application">%s ilə paylaşın</string>
+    <string name="abc_toolbar_collapse_description">Yığcamlaşdırın</string>
+    <string name="bottomsheet_action_collapse">Aşağıdakı vərəqi yığcamlaşdırın</string>
+    <string name="bottomsheet_action_expand">Aşağıdakı vərəqi genişləndirin</string>
+    <string name="bottomsheet_action_expand_halfway">Tam genişləndirin</string>
+    <string name="bottomsheet_drag_handle_clicked">Dəstəyə iki dəfə toxunun</string>
+    <string name="bottomsheet_drag_handle_content_description">Dəstək</string>
+    <string name="call_notification_answer_action">Cavab verin</string>
+    <string name="call_notification_answer_video_action">Video</string>
+    <string name="call_notification_decline_action">İmtina edin</string>
+    <string name="call_notification_hang_up_action">Dəstəyi asın</string>
+    <string name="call_notification_incoming_text">Gələn zəng</string>
+    <string name="call_notification_ongoing_text">Davam edən zəng</string>
+    <string name="call_notification_screening_text">Gələn zəng göstərilir</string>
+    <string name="character_counter_content_description">%1$d/%2$d simvol daxil edilib</string>
+    <string name="character_counter_overflowed_content_description">Simvol limiti %1$d/%2$d dəyərini keçdi</string>
+    <string name="clear_text_end_icon_content_description">Mətni silin</string>
+    <string name="copy">Kopyalayın</string>
+    <string name="error_a11y_label">Xəta: yanlışdır</string>
+    <string name="error_icon_content_description">Xəta</string>
+    <string name="expand_button_title">Əlavə</string>
+    <string name="exposed_dropdown_menu_content_description">Açılan menyunu göstərin</string>
+    <string name="icon_content_description">Dialoq ikonası</string>
+    <string name="item_view_role_description">Tab</string>
+    <string name="material_clock_toggle_content_description">Gündüz və ya axşam seçin</string>
+    <string name="material_hour_24h_suffix">%1$s saat</string>
+    <string name="material_hour_selection">Saatı seçin</string>
+    <string name="material_hour_suffix">Saat %1$s</string>
+    <string name="material_minute_selection">Dəqiqə seçin</string>
+    <string name="material_minute_suffix">%1$s dəqiqə</string>
+    <string name="material_timepicker_am">AM</string>
+    <string name="material_timepicker_clock_mode_description">Zamanı daxil etmək üçün saat rejiminə keçin</string>
+    <string name="material_timepicker_hour">Saat</string>
+    <string name="material_timepicker_minute">Dəqiqə</string>
+    <string name="material_timepicker_pm">GƏ</string>
+    <string name="material_timepicker_select_time">Vaxt seçin</string>
+    <string name="material_timepicker_text_input_mode_description">Zamanı daxil etmək üçün mətnlə daxiletmə rejiminə keçin</string>
+    <string name="mtrl_badge_numberless_content_description">Yeni bildiriş</string>
+    <string name="mtrl_checkbox_state_description_checked">İşarələnib</string>
+    <string name="mtrl_checkbox_state_description_indeterminate">Qismən işarələnib</string>
+    <string name="mtrl_checkbox_state_description_unchecked">İşarələnməyib</string>
+    <string name="mtrl_chip_close_icon_content_description">%1$s silin</string>
+    <string name="mtrl_exceed_max_badge_number_content_description">Minimum %1$d yeni bildiriş</string>
+    <string name="mtrl_picker_a11y_next_month">Növbəti aya dəyişin</string>
+    <string name="mtrl_picker_a11y_prev_month">Əvvəlki aya dəyişin</string>
+    <string name="mtrl_picker_announce_current_range_selection">Başlama tarixi seçimi: %1$s – Bitmə tarixi seçimi: %2$s</string>
+    <string name="mtrl_picker_announce_current_selection">Cari seçim: %1$s</string>
+    <string name="mtrl_picker_announce_current_selection_none">yoxdur</string>
+    <string name="mtrl_picker_cancel">Ləğv edin</string>
+    <string name="mtrl_picker_confirm">OK</string>
+    <string name="mtrl_picker_date_header_selected">%1$s</string>
+    <string name="mtrl_picker_date_header_title">Tarix seçin</string>
+    <string name="mtrl_picker_date_header_unselected">Seçilmiş tarix</string>
+    <string name="mtrl_picker_day_of_week_column_header">%1$s</string>
+    <string name="mtrl_picker_end_date_description">Bitmə tarixi: %1$s</string>
+    <string name="mtrl_picker_invalid_format">Yanlış format.</string>
+    <string name="mtrl_picker_invalid_format_example">Nümunə: %1$s</string>
+    <string name="mtrl_picker_invalid_format_use">%1$s istifadə edin</string>
+    <string name="mtrl_picker_invalid_range">Yanlış diapazon.</string>
+    <string name="mtrl_picker_navigate_to_current_year_description">Cari ilə keçin: %1$d</string>
+    <string name="mtrl_picker_navigate_to_year_description">%1$d ilinə keçin</string>
+    <string name="mtrl_picker_out_of_range">Əhatə dairəsindən kənar: %1$s</string>
+    <string name="mtrl_picker_range_header_only_end_selected">Başlama tarixi – %1$s</string>
+    <string name="mtrl_picker_range_header_only_start_selected">%1$s – Bitmə tarixi</string>
+    <string name="mtrl_picker_range_header_selected">%1$s: %2$s</string>
+    <string name="mtrl_picker_range_header_title">Aralıq seçin</string>
+    <string name="mtrl_picker_range_header_unselected">Başlama tarixi - Bitmə tarixi</string>
+    <string name="mtrl_picker_save">Saxlayın</string>
+    <string name="mtrl_picker_start_date_description">Başlama tarixi: %1$s</string>
+    <string name="mtrl_picker_text_input_date_hint">Tarix</string>
+    <string name="mtrl_picker_text_input_date_range_end_hint">Bitmə tarixi</string>
+    <string name="mtrl_picker_text_input_date_range_start_hint">Başlama tarixi</string>
+    <string name="mtrl_picker_text_input_day_abbr">gün</string>
+    <string name="mtrl_picker_text_input_month_abbr">ay</string>
+    <string name="mtrl_picker_text_input_year_abbr">il</string>
+    <string name="mtrl_picker_today_description">Bugün: %1$s</string>
+    <string name="mtrl_picker_toggle_to_calendar_input_mode">Təqvim daxiletmə rejiminə keçin</string>
+    <string name="mtrl_picker_toggle_to_day_selection">Təqvim görünüşünə keçirmək üçün toxunun</string>
+    <string name="mtrl_picker_toggle_to_text_input_mode">Mətn daxiletmə rejiminə keçin</string>
+    <string name="mtrl_picker_toggle_to_year_selection">İl görünüşünə keçirmək üçün toxunun</string>
+    <string name="mtrl_timepicker_cancel">Ləğv edin</string>
+    <string name="mtrl_timepicker_confirm">OK</string>
+    <string name="not_set">Ayarlanmayıb</string>
+    <string name="password_toggle_content_description">Parolu göstərin</string>
+    <string name="preference_copied">\"%1$s\" buferə kopyalandı.</string>
+    <string name="search_menu_title">Axtarın</string>
+    <string name="searchview_clear_text_content_description">Mətni təmizləyin</string>
+    <string name="searchview_navigation_content_description">Geri</string>
+    <string name="side_sheet_accessibility_pane_title">Yan Vərəq</string>
+    <string name="status_bar_notification_info_overflow">999+</string>
+    <string name="summary_collapsed_preference_list">%1$s, %2$s</string>
+    <string name="v7_preference_off">DEAKTİV</string>
+    <string name="v7_preference_on">AKTİV</string>
+</resources>

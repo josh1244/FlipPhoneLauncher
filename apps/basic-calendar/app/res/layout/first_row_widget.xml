@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="horizontal" android:paddingTop="@dimen/small_margin" android:paddingBottom="@dimen/small_margin" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:id="@id/week_num" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="\#" android:layout_weight="1.0" style="@style/MetaView" />
+    <TextView android:id="@id/label_0" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="@string/monday_letter" android:layout_weight="1.0" style="@style/MetaView" />
+    <TextView android:id="@id/label_1" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="@string/tuesday_letter" android:layout_weight="1.0" style="@style/MetaView" />
+    <TextView android:id="@id/label_2" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="@string/wednesday_letter" android:layout_weight="1.0" style="@style/MetaView" />
+    <TextView android:id="@id/label_3" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="@string/thursday_letter" android:layout_weight="1.0" style="@style/MetaView" />
+    <TextView android:id="@id/label_4" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="@string/friday_letter" android:layout_weight="1.0" style="@style/MetaView" />
+    <TextView android:id="@id/label_5" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="@string/saturday_letter" android:layout_weight="1.0" style="@style/MetaView" />
+    <TextView android:id="@id/label_6" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="@string/sunday_letter" android:layout_weight="1.0" style="@style/MetaView" />
+</LinearLayout>

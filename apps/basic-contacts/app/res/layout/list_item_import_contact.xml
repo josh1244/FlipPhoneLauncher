@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:padding="@dimen/small_padding" android:descendantFocusability="afterDescendants" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:id="@id/contact_layout" android:background="@drawable/background_selector" android:focusable="false" android:focusableInTouchMode="false" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent">
+        <TextView android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" android:id="@id/name" android:layout_width="fill_parent" android:layout_height="wrap_content" android:maxLines="1" android:autoSizeTextType="uniform" />
+        <TextView android:textAppearance="@style/TextAppearance.MaterialComponents.Caption" android:id="@id/label" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/small_padding" android:text="@string/new_contact" android:maxLines="1" />
+    </LinearLayout>
+    <TextView android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" android:id="@id/action" android:background="@drawable/spinner_selector" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/merge" />
+</LinearLayout>

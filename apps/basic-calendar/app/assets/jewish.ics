@@ -1,0 +1,4544 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VEVENT
+SUMMARY:🍏🍯 Erev Rosh Hashana
+DTSTART;VALUE=DATE:20230915
+DTEND;VALUE=DATE:20230916
+UID:hebcal-20230915-69c47b58
+DESCRIPTION:The Jewish New Year. Also spelled Rosh Hashanah
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🍏🍯 Rosh Hashana 5784
+DTSTART;VALUE=DATE:20230916
+DTEND;VALUE=DATE:20230917
+UID:hebcal-20230916-3ebd9893
+DESCRIPTION:The Jewish New Year. Also spelled Rosh Hashanah\n\nTorah: Gene
+ sis 21:1-34\; Numbers 29:1-6\nHaftarah: I Samuel 1:1-2:10
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🍏🍯 Rosh Hashana II
+DTSTART;VALUE=DATE:20230917
+DTEND;VALUE=DATE:20230918
+UID:hebcal-20230917-e24e7167
+DESCRIPTION:The Jewish New Year. Also spelled Rosh Hashanah\n\nTorah: Gene
+ sis 22:1-24\; Numbers 29:1-6\nHaftarah: Jeremiah 31:1-19
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Tzom Gedaliah
+DTSTART;VALUE=DATE:20230918
+DTEND;VALUE=DATE:20230919
+UID:hebcal-20230918-398de2df
+DESCRIPTION:Fast of the Seventh Month. Commemorates the assassination of t
+ he Jewish governor of Judah\n\nTorah: Exodus 32:11-14\, 34:1-10
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat Shuva
+DTSTART;VALUE=DATE:20230923
+DTEND;VALUE=DATE:20230924
+UID:hebcal-20230923-e3c3a1e4
+DESCRIPTION:Shabbat of Returning. Shabbat that occurs during the Ten Days 
+ of Repentance between Rosh Hashanah and Yom Kippur\n\nHaftarah: Hosea 14:2
+ -10\; Micah 7:18-20\; Joel 2:15-27
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Erev Yom Kippur
+DTSTART;VALUE=DATE:20230924
+DTEND;VALUE=DATE:20230925
+UID:hebcal-20230924-821e8c6f
+DESCRIPTION:Day of Atonement. The holiest day of the year in Judaism\, tra
+ ditionally observed with a 25-hour period of fasting and intensive prayer
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Yom Kippur
+DTSTART;VALUE=DATE:20230925
+DTEND;VALUE=DATE:20230926
+UID:hebcal-20230925-3eebed91
+DESCRIPTION:Day of Atonement. The holiest day of the year in Judaism\, tra
+ ditionally observed with a 25-hour period of fasting and intensive prayer\
+ n\nTorah: Leviticus 16:1-34\; Numbers 29:7-11\nHaftarah: Isaiah 57:14-58:1
+ 4
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Erev Sukkot
+DTSTART;VALUE=DATE:20230929
+DTEND;VALUE=DATE:20230930
+UID:hebcal-20230929-2e047aaf
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Sukkot I
+DTSTART;VALUE=DATE:20230930
+DTEND;VALUE=DATE:20231001
+UID:hebcal-20230930-3b6b9611
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)\n\nTorah: Leviticus 22:26-23:44\; Numbers 2
+ 9:12-16\nHaftarah: Zechariah 14:1-21
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Sukkot II
+DTSTART;VALUE=DATE:20231001
+DTEND;VALUE=DATE:20231002
+UID:hebcal-20231001-dd814373
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)\n\nTorah: Leviticus 22:26-23:44\; Numbers 2
+ 9:12-16\nHaftarah: I Kings 8:2-21
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Sukkot III (CH''M)
+DTSTART;VALUE=DATE:20231002
+DTEND;VALUE=DATE:20231003
+UID:hebcal-20231002-5e93ab94
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)\n\nTorah: Numbers 29:17-25\, 29:17-22
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Sukkot IV (CH''M)
+DTSTART;VALUE=DATE:20231003
+DTEND;VALUE=DATE:20231004
+UID:hebcal-20231003-ffda39c9
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)\n\nTorah: Numbers 29:20-28\, 29:20-25
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Sukkot V (CH''M)
+DTSTART;VALUE=DATE:20231004
+DTEND;VALUE=DATE:20231005
+UID:hebcal-20231004-68c6e88e
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)\n\nTorah: Numbers 29:23-31\, 29:23-28
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Sukkot VI (CH''M)
+DTSTART;VALUE=DATE:20231005
+DTEND;VALUE=DATE:20231006
+UID:hebcal-20231005-698f117c
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)\n\nTorah: Numbers 29:26-34\, 29:26-31
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Sukkot VII (Hoshana Raba)
+DTSTART;VALUE=DATE:20231006
+DTEND;VALUE=DATE:20231007
+UID:hebcal-20231006-f5de0f6c
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)\n\nTorah: Numbers 29:26-34
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Shmini Atzeret
+DTSTART;VALUE=DATE:20231007
+DTEND;VALUE=DATE:20231008
+UID:hebcal-20231007-e6edcf39
+DESCRIPTION:Eighth Day of Assembly. Immediately following Sukkot\, it is o
+ bserved as a separate holiday in the Diaspora and is combined with Simchat
+  Torah in Israel\n\nTorah: Deuteronomy 14:22-16:17\; Numbers 29:35-30:1\nH
+ aftarah: I Kings 8:54-66
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Simchat Torah
+DTSTART;VALUE=DATE:20231008
+DTEND;VALUE=DATE:20231009
+UID:hebcal-20231008-952508c2
+DESCRIPTION:Day of Celebrating the Torah. Celebration marking the conclusi
+ on of the annual cycle of public Torah readings\, and the beginning of a n
+ ew cycle\n\nTorah: Deuteronomy 33:1-34:12\; Genesis 1:1-2:3\; Numbers 29:3
+ 5-30:1\nHaftarah: Joshua 1:1-18
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Cheshvan
+DTSTART;VALUE=DATE:20231014
+DTEND;VALUE=DATE:20231015
+UID:hebcal-20231014-864cf86a
+DESCRIPTION:Molad Cheshvan: Sat\, 33 minutes and 1 chalakim after 18:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Cheshvan
+DTSTART;VALUE=DATE:20231015
+DTEND;VALUE=DATE:20231016
+UID:hebcal-20231015-6fbbc895
+DESCRIPTION:Start of month of Cheshvan on the Hebrew calendar. חֶשְׁ
+ וָן (transliterated Cheshvan or Heshvan) is the 8th month of the Hebrew
+  year\, has 29 or 30 days\, and corresponds to October or November on the 
+ Gregorian calendar. רֹאשׁ חוֹדֶשׁ\, transliterated Rosh Chodes
+ h or Rosh Hodesh\, is a minor holiday that occurs at the beginning of ever
+ y month in the Hebrew calendar. It is marked by the birth of a new moon\n\
+ nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Cheshvan
+DTSTART;VALUE=DATE:20231016
+DTEND;VALUE=DATE:20231017
+UID:hebcal-20231016-6fbbc895
+DESCRIPTION:Start of month of Cheshvan on the Hebrew calendar. חֶשְׁ
+ וָן (transliterated Cheshvan or Heshvan) is the 8th month of the Hebrew
+  year\, has 29 or 30 days\, and corresponds to October or November on the 
+ Gregorian calendar. רֹאשׁ חוֹדֶשׁ\, transliterated Rosh Chodes
+ h or Rosh Hodesh\, is a minor holiday that occurs at the beginning of ever
+ y month in the Hebrew calendar. It is marked by the birth of a new moon\n\
+ nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Kislev
+DTSTART;VALUE=DATE:20231111
+DTEND;VALUE=DATE:20231112
+UID:hebcal-20231111-6ce4b2c3
+DESCRIPTION:Molad Kislev: Mon\, 17 minutes and 2 chalakim after 7:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Sigd
+DTSTART;VALUE=DATE:20231113
+DTEND;VALUE=DATE:20231114
+UID:hebcal-20231113-3079e054
+DESCRIPTION:Ethiopian Jewish holiday occurring 50 days after Yom Kippur
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Kislev
+DTSTART;VALUE=DATE:20231114
+DTEND;VALUE=DATE:20231115
+UID:hebcal-20231114-171af096
+DESCRIPTION:Start of month of Kislev on the Hebrew calendar. Kislev (כִ
+ ּסְלֵו) is the 9th month of the Hebrew year\, has 30 or 29 days\, an
+ d corresponds to November or December on the Gregorian calendar.  רֹאש
+ ׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a mino
+ r holiday that occurs at the beginning of every month in the Hebrew calend
+ ar. It is marked by the birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎1️⃣ Chanukah: 1 Candle
+DTSTART;VALUE=DATE:20231207
+DTEND;VALUE=DATE:20231208
+UID:hebcal-20231207-1c6fa26d
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎2️⃣ Chanukah: 2 Candles
+DTSTART;VALUE=DATE:20231208
+DTEND;VALUE=DATE:20231209
+UID:hebcal-20231208-bf71330e
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nTorah: Numbers 7:1-17
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎3️⃣ Chanukah: 3 Candles
+DTSTART;VALUE=DATE:20231209
+DTEND;VALUE=DATE:20231210
+UID:hebcal-20231209-3a5e82d5
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nHaftarah: Zechariah 2:14-4:7
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Tevet
+DTSTART;VALUE=DATE:20231209
+DTEND;VALUE=DATE:20231210
+UID:hebcal-20231209-e0441a9f
+DESCRIPTION:Molad Tevet: Tue\, 1 minutes and 3 chalakim after 20:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎4️⃣ Chanukah: 4 Candles
+DTSTART;VALUE=DATE:20231210
+DTEND;VALUE=DATE:20231211
+UID:hebcal-20231210-8341b82a
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nTorah: Numbers 7:24-35
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎5️⃣ Chanukah: 5 Candles
+DTSTART;VALUE=DATE:20231211
+DTEND;VALUE=DATE:20231212
+UID:hebcal-20231211-841127b9
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nTorah: Numbers 7:30-41
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎6️⃣ Chanukah: 6 Candles
+DTSTART;VALUE=DATE:20231212
+DTEND;VALUE=DATE:20231213
+UID:hebcal-20231212-9733c9a9
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nTorah: Numbers 7:36-47
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Chag HaBanot
+DTSTART;VALUE=DATE:20231213
+DTEND;VALUE=DATE:20231214
+UID:hebcal-20231213-0139c73e
+DESCRIPTION:North African Chanukah festival of daughters. Called Eid al-Ba
+ nat in Arabic\, the holiday was most preserved in Tunisia
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎7️⃣ Chanukah: 7 Candles
+DTSTART;VALUE=DATE:20231213
+DTEND;VALUE=DATE:20231214
+UID:hebcal-20231213-635c3774
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nTorah: Numbers 28:1-15\, 7:42-47
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Tevet
+DTSTART;VALUE=DATE:20231213
+DTEND;VALUE=DATE:20231214
+UID:hebcal-20231213-e83ced3d
+DESCRIPTION:Start of month of Tevet on the Hebrew calendar. Tevet (טֵב
+ ֵת) is the 10th month of the Hebrew year\, has 29 days\, and corresponds
+  to December or January on the Gregorian calendar.  רֹאשׁ חוֹדֶ
+ שׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a minor holiday tha
+ t occurs at the beginning of every month in the Hebrew calendar. It is mar
+ ked by the birth of a new moon\n\nTorah: Numbers 28:1-15\, 7:42-47
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎8️⃣ Chanukah: 8 Candles
+DTSTART;VALUE=DATE:20231214
+DTEND;VALUE=DATE:20231215
+UID:hebcal-20231214-d85c28dc
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nTorah: Numbers 7:48-59
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎 Chanukah: 8th Day
+DTSTART;VALUE=DATE:20231215
+DTEND;VALUE=DATE:20231216
+UID:hebcal-20231215-7c4cd5b6
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nTorah: Numbers 7:54-8:4
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Asara B'Tevet
+DTSTART;VALUE=DATE:20231222
+DTEND;VALUE=DATE:20231223
+UID:hebcal-20231222-16d2435e
+DESCRIPTION:Fast commemorating the siege of Jerusalem\n\nTorah: Exodus 32:
+ 11-14\, 34:1-10
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Sh'vat
+DTSTART;VALUE=DATE:20240106
+DTEND;VALUE=DATE:20240107
+UID:hebcal-20240106-f7388855
+DESCRIPTION:Molad Sh'vat: Thu\, 45 minutes and 4 chalakim after 8:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Sh'vat
+DTSTART;VALUE=DATE:20240111
+DTEND;VALUE=DATE:20240112
+UID:hebcal-20240111-b9dbcfbb
+DESCRIPTION:Start of month of Sh'vat on the Hebrew calendar. שְׁבָט 
+ (transliterated Sh'vat or Shevat) is the 11th month of the Hebrew year\, h
+ as 30 days\, and corresponds to January or February on the Gregorian calen
+ dar.  רֹאשׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hode
+ sh\, is a minor holiday that occurs at the beginning of every month in the
+  Hebrew calendar. It is marked by the birth of a new moon\n\nTorah: Number
+ s 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌳 Tu BiShvat
+DTSTART;VALUE=DATE:20240125
+DTEND;VALUE=DATE:20240126
+UID:hebcal-20240125-a7d91a90
+DESCRIPTION:New Year for Trees. Tu BiShvat is one of four “New Years” 
+ mentioned in the Mishnah
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat Shirah
+DTSTART;VALUE=DATE:20240127
+DTEND;VALUE=DATE:20240128
+UID:hebcal-20240127-40f5da47
+DESCRIPTION:Shabbat of Song. Shabbat that includes Parashat Beshalach
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Adar I
+DTSTART;VALUE=DATE:20240203
+DTEND;VALUE=DATE:20240204
+UID:hebcal-20240203-322ad185
+DESCRIPTION:Molad Adar I: Fri\, 29 minutes and 5 chalakim after 21:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Adar I
+DTSTART;VALUE=DATE:20240209
+DTEND;VALUE=DATE:20240210
+UID:hebcal-20240209-34df8174
+DESCRIPTION:Start of month of Adar I (on leap years) on the Hebrew calenda
+ r. Adar I (אַדָר א׳) is the 12th month of the Hebrew year\, occurs 
+ only on leap years\, has 30 days\, and corresponds to February or March on
+  the Gregorian calendar.  רֹאשׁ חוֹדֶשׁ\, transliterated Rosh 
+ Chodesh or Rosh Hodesh\, is a minor holiday that occurs at the beginning o
+ f every month in the Hebrew calendar. It is marked by the birth of a new m
+ oon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Adar I
+DTSTART;VALUE=DATE:20240210
+DTEND;VALUE=DATE:20240211
+UID:hebcal-20240210-34df8174
+DESCRIPTION:Start of month of Adar I (on leap years) on the Hebrew calenda
+ r. Adar I (אַדָר א׳) is the 12th month of the Hebrew year\, occurs 
+ only on leap years\, has 30 days\, and corresponds to February or March on
+  the Gregorian calendar.  רֹאשׁ חוֹדֶשׁ\, transliterated Rosh 
+ Chodesh or Rosh Hodesh\, is a minor holiday that occurs at the beginning o
+ f every month in the Hebrew calendar. It is marked by the birth of a new m
+ oon\n\nHaftarah: Isaiah 66:1-24
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🎭️ Purim Katan
+DTSTART;VALUE=DATE:20240223
+DTEND;VALUE=DATE:20240224
+UID:hebcal-20240223-a3a42e5d
+DESCRIPTION:Minor Purim celebration during Adar I on leap years
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🎭️ Shushan Purim Katan
+DTSTART;VALUE=DATE:20240224
+DTEND;VALUE=DATE:20240225
+UID:hebcal-20240224-23970e25
+DESCRIPTION:Minor Purim celebration during Adar I on leap years in Jerusal
+ em and walled cities
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat Shekalim
+DTSTART;VALUE=DATE:20240309
+DTEND;VALUE=DATE:20240310
+UID:hebcal-20240309-713517f2
+DESCRIPTION:Shabbat before Rosh Chodesh Adar. Read in preparation for Puri
+ m\n\nHaftarah: II Kings 12:1-17
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Adar II
+DTSTART;VALUE=DATE:20240309
+DTEND;VALUE=DATE:20240310
+UID:hebcal-20240309-d2de4f1c
+DESCRIPTION:Molad Adar II: Sun\, 13 minutes and 6 chalakim after 10:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Adar II
+DTSTART;VALUE=DATE:20240310
+DTEND;VALUE=DATE:20240311
+UID:hebcal-20240310-3d53023e
+DESCRIPTION:Start of month of Adar II (on leap years) on the Hebrew calend
+ ar. Adar II (אַדָר ב׳)\, sometimes "Adar Bet" or "Adar Sheni"\, is 
+ the 13th month of the Hebrew year\, has 29 days\, occurs only on leap year
+ s\, and corresponds to February or March on the Gregorian calendar.  רֹ
+ אשׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a 
+ minor holiday that occurs at the beginning of every month in the Hebrew ca
+ lendar. It is marked by the birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Adar II
+DTSTART;VALUE=DATE:20240311
+DTEND;VALUE=DATE:20240312
+UID:hebcal-20240311-3d53023e
+DESCRIPTION:Start of month of Adar II (on leap years) on the Hebrew calend
+ ar. Adar II (אַדָר ב׳)\, sometimes "Adar Bet" or "Adar Sheni"\, is 
+ the 13th month of the Hebrew year\, has 29 days\, occurs only on leap year
+ s\, and corresponds to February or March on the Gregorian calendar.  רֹ
+ אשׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a 
+ minor holiday that occurs at the beginning of every month in the Hebrew ca
+ lendar. It is marked by the birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Ta'anit Esther
+DTSTART;VALUE=DATE:20240321
+DTEND;VALUE=DATE:20240322
+UID:hebcal-20240321-65e47969
+DESCRIPTION:Fast of Esther\n\nTorah: Exodus 32:11-14\, 34:1-10
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat Zachor
+DTSTART;VALUE=DATE:20240323
+DTEND;VALUE=DATE:20240324
+UID:hebcal-20240323-b709beaa
+DESCRIPTION:Shabbat of Remembrance. Shabbat before Purim\n\nHaftarah: I Sa
+ muel 15:2-34
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🎭️📜 Erev Purim
+DTSTART;VALUE=DATE:20240323
+DTEND;VALUE=DATE:20240324
+UID:hebcal-20240323-4fdbaae2
+DESCRIPTION:Celebration of Jewish deliverance as told by Megilat Esther. I
+ t commemorates a time when the Jewish people living in Persia were saved f
+ rom extermination
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🎭️📜 Purim
+DTSTART;VALUE=DATE:20240324
+DTEND;VALUE=DATE:20240325
+UID:hebcal-20240324-b59993b2
+DESCRIPTION:Celebration of Jewish deliverance as told by Megilat Esther. I
+ t commemorates a time when the Jewish people living in Persia were saved f
+ rom extermination\n\nTorah: Exodus 17:8-16
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🎭️📜 Shushan Purim
+DTSTART;VALUE=DATE:20240325
+DTEND;VALUE=DATE:20240326
+UID:hebcal-20240325-12d3cbc7
+DESCRIPTION:Purim celebrated in Jerusalem and walled cities
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat Parah
+DTSTART;VALUE=DATE:20240330
+DTEND;VALUE=DATE:20240331
+UID:hebcal-20240330-1624bd32
+DESCRIPTION:Shabbat of the Red Heifer. Shabbat before Shabbat HaChodesh\, 
+ in preparation for Passover\n\nHaftarah: Ezekiel 36:16-38
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat HaChodesh
+DTSTART;VALUE=DATE:20240406
+DTEND;VALUE=DATE:20240407
+UID:hebcal-20240406-3e8a7379
+DESCRIPTION:Shabbat before Rosh Chodesh Nissan. Read in preparation for Pa
+ ssover\n\nHaftarah: Ezekiel 45:16-46:18
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Nisan
+DTSTART;VALUE=DATE:20240406
+DTEND;VALUE=DATE:20240407
+UID:hebcal-20240406-d006cb53
+DESCRIPTION:Molad Nisan: Mon\, 57 minutes and 7 chalakim after 22:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Nisan
+DTSTART;VALUE=DATE:20240409
+DTEND;VALUE=DATE:20240410
+UID:hebcal-20240409-26a17e2b
+DESCRIPTION:Start of month of Nisan on the Hebrew calendar. נִיסָן (
+ transliterated Nisan or Nissan) is the 1st month of the Hebrew year\, has 
+ 30 days\, and corresponds to March or April on the Gregorian calendar. ר
+ ֹאשׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is 
+ a minor holiday that occurs at the beginning of every month in the Hebrew 
+ calendar. It is marked by the birth of a new moon\n\nTorah: Numbers 28:1-1
+ 5
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🇮🇱 Yom HaAliyah
+DTSTART;VALUE=DATE:20240418
+DTEND;VALUE=DATE:20240419
+UID:hebcal-20240418-7ef10a7e
+DESCRIPTION:Recognizes Aliyah\, immigration to the Jewish State of Israel
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat HaGadol
+DTSTART;VALUE=DATE:20240420
+DTEND;VALUE=DATE:20240421
+UID:hebcal-20240420-2e333569
+DESCRIPTION:Shabbat before Pesach (The Great Shabbat)\n\nHaftarah: Malachi
+  3:4-24
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Ta'anit Bechorot
+DTSTART;VALUE=DATE:20240422
+DTEND;VALUE=DATE:20240423
+UID:hebcal-20240422-73101110
+DESCRIPTION:Fast of the First Born
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓🍷 Erev Pesach
+DTSTART;VALUE=DATE:20240422
+DTEND;VALUE=DATE:20240423
+UID:hebcal-20240422-b899d38a
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓🍷 Pesach I
+DTSTART;VALUE=DATE:20240423
+DTEND;VALUE=DATE:20240424
+UID:hebcal-20240423-f5de93e3
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Exodus 12:21-51\; Numbers 28:
+ 16-25\nHaftarah: Joshua 5:2-6:1
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓 Pesach II
+DTSTART;VALUE=DATE:20240424
+DTEND;VALUE=DATE:20240425
+UID:hebcal-20240424-8a7f3521
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Leviticus 22:26-23:44\; Numbe
+ rs 28:16-25\nHaftarah: II Kings 23:1-9\, 23:21-25
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓 Pesach III (CH''M)
+DTSTART;VALUE=DATE:20240425
+DTEND;VALUE=DATE:20240426
+UID:hebcal-20240425-c5af2e47
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Exodus 13:1-16\; Numbers 28:1
+ 9-25
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓 Pesach IV (CH''M)
+DTSTART;VALUE=DATE:20240426
+DTEND;VALUE=DATE:20240427
+UID:hebcal-20240426-22088d98
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Exodus 22:24-23:19\; Numbers 
+ 28:19-25
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓 Pesach V (CH''M)
+DTSTART;VALUE=DATE:20240427
+DTEND;VALUE=DATE:20240428
+UID:hebcal-20240427-ccdb6a58
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Exodus 33:12-34:26\; Numbers 
+ 28:19-25\nHaftarah: Ezekiel 37:1-14
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓 Pesach VI (CH''M)
+DTSTART;VALUE=DATE:20240428
+DTEND;VALUE=DATE:20240429
+UID:hebcal-20240428-a146401d
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Numbers 9:1-14\, 28:19-25
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓 Pesach VII
+DTSTART;VALUE=DATE:20240429
+DTEND;VALUE=DATE:20240430
+UID:hebcal-20240429-0133feb2
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Exodus 13:17-15:26\; Numbers 
+ 28:19-25\nHaftarah: II Samuel 22:1-51
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓 Pesach VIII
+DTSTART;VALUE=DATE:20240430
+DTEND;VALUE=DATE:20240501
+UID:hebcal-20240430-9b5e763c
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Deuteronomy 15:19-16:17\; Num
+ bers 28:19-25\nHaftarah: Isaiah 10:32-12:6
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Iyyar
+DTSTART;VALUE=DATE:20240504
+DTEND;VALUE=DATE:20240505
+UID:hebcal-20240504-6ddbc8f4
+DESCRIPTION:Molad Iyyar: Wed\, 41 minutes and 8 chalakim after 11:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Yom HaShoah
+DTSTART;VALUE=DATE:20240506
+DTEND;VALUE=DATE:20240507
+UID:hebcal-20240506-397e0803
+DESCRIPTION:Holocaust Memorial Day
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Iyyar
+DTSTART;VALUE=DATE:20240508
+DTEND;VALUE=DATE:20240509
+UID:hebcal-20240508-21689341
+DESCRIPTION:Start of month of Iyyar on the Hebrew calendar. אִיָיר (
+ transliterated Iyyar or Iyar) is the 2nd month of the Hebrew year\, has 29
+  days\, and corresponds to April or May on the Gregorian calendar.  רֹא
+ שׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a mi
+ nor holiday that occurs at the beginning of every month in the Hebrew cale
+ ndar. It is marked by the birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Iyyar
+DTSTART;VALUE=DATE:20240509
+DTEND;VALUE=DATE:20240510
+UID:hebcal-20240509-21689341
+DESCRIPTION:Start of month of Iyyar on the Hebrew calendar. אִיָיר (
+ transliterated Iyyar or Iyar) is the 2nd month of the Hebrew year\, has 29
+  days\, and corresponds to April or May on the Gregorian calendar.  רֹא
+ שׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a mi
+ nor holiday that occurs at the beginning of every month in the Hebrew cale
+ ndar. It is marked by the birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🇮🇱 Yom HaZikaron
+DTSTART;VALUE=DATE:20240513
+DTEND;VALUE=DATE:20240514
+UID:hebcal-20240513-d53cc31d
+DESCRIPTION:Israeli Memorial Day. Remembers those who died in the War of I
+ ndependence and other wars in Israel. The full name of the holiday is Yom 
+ HaZikaron LeHalalei Ma'arakhot Yisrael ul'Nifge'ei Pe'ulot HaEivah (Hebrew
+ : יוֹם הזִּכָּרוֹן לְחַלְלֵי מַעֲרָכוֹת 
+ יִשְׂרָאֵל וּלְנִפְגְעֵי פְּעֻלּוֹת הָ
+ אֵיבָה)\, Memorial Day for the Fallen Soldiers of the Wars of Israel
+  and Victims of Actions of Terrorism. Although Yom Hazikaron is normally o
+ bserved on the 4th of Iyyar\, it may be moved earlier or postponed if obse
+ rvance of the holiday (or Yom HaAtzma'ut\, which always follows it) would 
+ conflict with Shabbat
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🇮🇱 Yom HaAtzma'ut
+DTSTART;VALUE=DATE:20240514
+DTEND;VALUE=DATE:20240515
+UID:hebcal-20240514-dd24e12d
+DESCRIPTION:Israeli Independence Day. Commemorates the declaration of inde
+ pendence of Israel in 1948. Although Yom HaAtzma'ut is normally observed o
+ n the 5th of Iyyar\, it may be moved earlier or postponed if observance of
+  the holiday (or Yom HaZikaron\, which always precedes it) would conflict 
+ with Shabbat
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Pesach Sheni
+DTSTART;VALUE=DATE:20240522
+DTEND;VALUE=DATE:20240523
+UID:hebcal-20240522-f222d099
+DESCRIPTION:Second Passover\, one month after Passover
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🔥 Lag BaOmer
+DTSTART;VALUE=DATE:20240526
+DTEND;VALUE=DATE:20240527
+UID:hebcal-20240526-4223318c
+DESCRIPTION:33rd day of counting the Omer. The holiday is a temporary brea
+ k from the semi-mourning period the counting of the Omer. Practices includ
+ e lighting bonfires\, getting haircuts\, and Jewish weddings
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Sivan
+DTSTART;VALUE=DATE:20240601
+DTEND;VALUE=DATE:20240602
+UID:hebcal-20240601-ccad0557
+DESCRIPTION:Molad Sivan: Fri\, 25 minutes and 9 chalakim after 0:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🇮🇱 Yom Yerushalayim
+DTSTART;VALUE=DATE:20240605
+DTEND;VALUE=DATE:20240606
+UID:hebcal-20240605-bd3ce4b3
+DESCRIPTION:Jerusalem Day. Commemorates the re-unification of Jerusalem in
+  1967
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Sivan
+DTSTART;VALUE=DATE:20240607
+DTEND;VALUE=DATE:20240608
+UID:hebcal-20240607-ea657a21
+DESCRIPTION:Start of month of Sivan on the Hebrew calendar. Sivan (סִי
+ וָן) is the 3rd month of the Hebrew year\, has 30 days\, and correspond
+ s to May or June on the Gregorian calendar.  רֹאשׁ חוֹדֶשׁ\, t
+ ransliterated Rosh Chodesh or Rosh Hodesh\, is a minor holiday that occurs
+  at the beginning of every month in the Hebrew calendar. It is marked by t
+ he birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:⛰️🌸 Erev Shavuot
+DTSTART;VALUE=DATE:20240611
+DTEND;VALUE=DATE:20240612
+UID:hebcal-20240611-516b1178
+DESCRIPTION:Festival of Weeks. Commemorates the giving of the Torah at Mou
+ nt Sinai
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:⛰️🌸 Shavuot I
+DTSTART;VALUE=DATE:20240612
+DTEND;VALUE=DATE:20240613
+UID:hebcal-20240612-547670dd
+DESCRIPTION:Festival of Weeks. Commemorates the giving of the Torah at Mou
+ nt Sinai\n\nTorah: Exodus 19:1-20:23\; Numbers 28:26-31\nHaftarah: Ezekiel
+  1:1-28\, 3:12
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:⛰️🌸 Shavuot II
+DTSTART;VALUE=DATE:20240613
+DTEND;VALUE=DATE:20240614
+UID:hebcal-20240613-69691cf1
+DESCRIPTION:Festival of Weeks. Commemorates the giving of the Torah at Mou
+ nt Sinai\n\nTorah: Deuteronomy 15:19-16:17\; Numbers 28:26-31\nHaftarah: H
+ abakkuk 3:1-19
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Tamuz
+DTSTART;VALUE=DATE:20240629
+DTEND;VALUE=DATE:20240630
+UID:hebcal-20240629-cdc33b62
+DESCRIPTION:Molad Tamuz: Sat\, 9 minutes and 10 chalakim after 13:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Tamuz
+DTSTART;VALUE=DATE:20240706
+DTEND;VALUE=DATE:20240707
+UID:hebcal-20240706-e57e8b15
+DESCRIPTION:Start of month of Tamuz on the Hebrew calendar. תַּמּוּ
+ ז (transliterated Tamuz or Tammuz) is the 4th month of the Hebrew year\, 
+ has 29 days\, and corresponds to June or July on the Gregorian calendar.  
+ רֹאשׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, i
+ s a minor holiday that occurs at the beginning of every month in the Hebre
+ w calendar. It is marked by the birth of a new moon\n\nHaftarah: Isaiah 66
+ :1-24
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Tamuz
+DTSTART;VALUE=DATE:20240707
+DTEND;VALUE=DATE:20240708
+UID:hebcal-20240707-e57e8b15
+DESCRIPTION:Start of month of Tamuz on the Hebrew calendar. תַּמּוּ
+ ז (transliterated Tamuz or Tammuz) is the 4th month of the Hebrew year\, 
+ has 29 days\, and corresponds to June or July on the Gregorian calendar.  
+ רֹאשׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, i
+ s a minor holiday that occurs at the beginning of every month in the Hebre
+ w calendar. It is marked by the birth of a new moon\n\nTorah: Numbers 28:1
+ -15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Tzom Tammuz
+DTSTART;VALUE=DATE:20240723
+DTEND;VALUE=DATE:20240724
+UID:hebcal-20240723-227143a8
+DESCRIPTION:Fast commemorating breaching of the walls of Jerusalem before 
+ the destruction of the Second Temple\n\nTorah: Exodus 32:11-14\, 34:1-10
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Av
+DTSTART;VALUE=DATE:20240803
+DTEND;VALUE=DATE:20240804
+UID:hebcal-20240803-cd524889
+DESCRIPTION:Molad Av: Mon\, 53 minutes and 11 chalakim after 1:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Av
+DTSTART;VALUE=DATE:20240805
+DTEND;VALUE=DATE:20240806
+UID:hebcal-20240805-b20a292a
+DESCRIPTION:Start of month of Av on the Hebrew calendar. Av (אָב) is th
+ e 5th month of the Hebrew year\, has 30 days\, and corresponds to July or 
+ August on the Gregorian calendar.  רֹאשׁ חוֹדֶשׁ\, translitera
+ ted Rosh Chodesh or Rosh Hodesh\, is a minor holiday that occurs at the be
+ ginning of every month in the Hebrew calendar. It is marked by the birth o
+ f a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat Chazon
+DTSTART;VALUE=DATE:20240810
+DTEND;VALUE=DATE:20240811
+UID:hebcal-20240810-40fb55a8
+DESCRIPTION:Shabbat of Prophecy/Shabbat of Vision. Shabbat before Tish'a B
+ 'Av
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Erev Tish'a B'Av
+DTSTART;VALUE=DATE:20240812
+DTEND;VALUE=DATE:20240813
+UID:hebcal-20240812-16aac1cb
+DESCRIPTION:The Ninth of Av. Fast commemorating the destruction of the two
+  Temples
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Tish'a B'Av
+DTSTART;VALUE=DATE:20240813
+DTEND;VALUE=DATE:20240814
+UID:hebcal-20240813-1fe8650c
+DESCRIPTION:The Ninth of Av. Fast commemorating the destruction of the two
+  Temples\n\nTorah: Deuteronomy 4:25-40\nHaftarah: Jeremiah 8:13-9:23
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat Nachamu
+DTSTART;VALUE=DATE:20240817
+DTEND;VALUE=DATE:20240818
+UID:hebcal-20240817-57d358fc
+DESCRIPTION:Shabbat after Tish'a B'Av (Shabbat of Consolation). The first 
+ of seven Shabbatot leading up to Rosh Hashanah. Named after the Haftarah (
+ from Isaiah 40) which begins with the verse נַחֲמוּ נַחֲמוּ\
+ , עַמִּי ("Comfort\, oh comfort my people")
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:❤️ Tu B'Av
+DTSTART;VALUE=DATE:20240819
+DTEND;VALUE=DATE:20240820
+UID:hebcal-20240819-ccea991a
+DESCRIPTION:Minor Jewish holiday of love. Observed on the 15th day of the 
+ Hebrew month of Av
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Elul
+DTSTART;VALUE=DATE:20240831
+DTEND;VALUE=DATE:20240901
+UID:hebcal-20240831-61fb928c
+DESCRIPTION:Molad Elul: Tue\, 37 minutes and 12 chalakim after 14:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Elul
+DTSTART;VALUE=DATE:20240903
+DTEND;VALUE=DATE:20240904
+UID:hebcal-20240903-4a2abce2
+DESCRIPTION:Start of month of Elul on the Hebrew calendar. Elul (אֱלו
+ ּל) is the 6th month of the Hebrew year\, has 29 days\, and corresponds 
+ to August or September on the Gregorian calendar.  רֹאשׁ חוֹדֶש
+ ׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a minor holiday that 
+ occurs at the beginning of every month in the Hebrew calendar. It is marke
+ d by the birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🐑 Rosh Hashana LaBehemot
+DTSTART;VALUE=DATE:20240904
+DTEND;VALUE=DATE:20240905
+UID:hebcal-20240904-0a58fcce
+DESCRIPTION:New Year for Tithing Animals
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Elul
+DTSTART;VALUE=DATE:20240904
+DTEND;VALUE=DATE:20240905
+UID:hebcal-20240904-4a2abce2
+DESCRIPTION:Start of month of Elul on the Hebrew calendar. Elul (אֱלו
+ ּל) is the 6th month of the Hebrew year\, has 29 days\, and corresponds 
+ to August or September on the Gregorian calendar.  רֹאשׁ חוֹדֶש
+ ׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a minor holiday that 
+ occurs at the beginning of every month in the Hebrew calendar. It is marke
+ d by the birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Leil Selichot
+DTSTART;VALUE=DATE:20240928
+DTEND;VALUE=DATE:20240929
+UID:hebcal-20240928-121db6a8
+DESCRIPTION:Prayers for forgiveness in preparation for the High Holidays
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🍏🍯 Erev Rosh Hashana
+DTSTART;VALUE=DATE:20241002
+DTEND;VALUE=DATE:20241003
+UID:hebcal-20241002-69c47b58
+DESCRIPTION:The Jewish New Year. Also spelled Rosh Hashanah
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🍏🍯 Rosh Hashana 5785
+DTSTART;VALUE=DATE:20241003
+DTEND;VALUE=DATE:20241004
+UID:hebcal-20241003-d8d47273
+DESCRIPTION:The Jewish New Year. Also spelled Rosh Hashanah\n\nTorah: Gene
+ sis 21:1-34\; Numbers 29:1-6\nHaftarah: I Samuel 1:1-2:10
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🍏🍯 Rosh Hashana II
+DTSTART;VALUE=DATE:20241004
+DTEND;VALUE=DATE:20241005
+UID:hebcal-20241004-e24e7167
+DESCRIPTION:The Jewish New Year. Also spelled Rosh Hashanah\n\nTorah: Gene
+ sis 22:1-24\; Numbers 29:1-6\nHaftarah: Jeremiah 31:1-19
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat Shuva
+DTSTART;VALUE=DATE:20241005
+DTEND;VALUE=DATE:20241006
+UID:hebcal-20241005-e3c3a1e4
+DESCRIPTION:Shabbat of Returning. Shabbat that occurs during the Ten Days 
+ of Repentance between Rosh Hashanah and Yom Kippur\n\nHaftarah: Hosea 14:2
+ -10\; Micah 7:18-20\; Joel 2:15-27
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Tzom Gedaliah
+DTSTART;VALUE=DATE:20241006
+DTEND;VALUE=DATE:20241007
+UID:hebcal-20241006-398de2df
+DESCRIPTION:Fast of the Seventh Month. Commemorates the assassination of t
+ he Jewish governor of Judah\n\nTorah: Exodus 32:11-14\, 34:1-10
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Erev Yom Kippur
+DTSTART;VALUE=DATE:20241011
+DTEND;VALUE=DATE:20241012
+UID:hebcal-20241011-821e8c6f
+DESCRIPTION:Day of Atonement. The holiest day of the year in Judaism\, tra
+ ditionally observed with a 25-hour period of fasting and intensive prayer
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Yom Kippur
+DTSTART;VALUE=DATE:20241012
+DTEND;VALUE=DATE:20241013
+UID:hebcal-20241012-3eebed91
+DESCRIPTION:Day of Atonement. The holiest day of the year in Judaism\, tra
+ ditionally observed with a 25-hour period of fasting and intensive prayer\
+ n\nTorah: Leviticus 16:1-34\; Numbers 29:7-11\nHaftarah: Isaiah 57:14-58:1
+ 4
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Erev Sukkot
+DTSTART;VALUE=DATE:20241016
+DTEND;VALUE=DATE:20241017
+UID:hebcal-20241016-2e047aaf
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Sukkot I
+DTSTART;VALUE=DATE:20241017
+DTEND;VALUE=DATE:20241018
+UID:hebcal-20241017-3b6b9611
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)\n\nTorah: Leviticus 22:26-23:44\; Numbers 2
+ 9:12-16\nHaftarah: Zechariah 14:1-21
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Sukkot II
+DTSTART;VALUE=DATE:20241018
+DTEND;VALUE=DATE:20241019
+UID:hebcal-20241018-dd814373
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)\n\nTorah: Leviticus 22:26-23:44\; Numbers 2
+ 9:12-16\nHaftarah: I Kings 8:2-21
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Sukkot III (CH''M)
+DTSTART;VALUE=DATE:20241019
+DTEND;VALUE=DATE:20241020
+UID:hebcal-20241019-5e93ab94
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)\n\nTorah: Exodus 33:12-34:26\; Numbers 29:1
+ 7-22\nHaftarah: Ezekiel 38:18-39:16
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Sukkot IV (CH''M)
+DTSTART;VALUE=DATE:20241020
+DTEND;VALUE=DATE:20241021
+UID:hebcal-20241020-ffda39c9
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)\n\nTorah: Numbers 29:20-28\, 29:20-25
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Sukkot V (CH''M)
+DTSTART;VALUE=DATE:20241021
+DTEND;VALUE=DATE:20241022
+UID:hebcal-20241021-68c6e88e
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)\n\nTorah: Numbers 29:23-31\, 29:23-28
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Sukkot VI (CH''M)
+DTSTART;VALUE=DATE:20241022
+DTEND;VALUE=DATE:20241023
+UID:hebcal-20241022-698f117c
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)\n\nTorah: Numbers 29:26-34\, 29:26-31
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Sukkot VII (Hoshana Raba)
+DTSTART;VALUE=DATE:20241023
+DTEND;VALUE=DATE:20241024
+UID:hebcal-20241023-f5de0f6c
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)\n\nTorah: Numbers 29:26-34
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Shmini Atzeret
+DTSTART;VALUE=DATE:20241024
+DTEND;VALUE=DATE:20241025
+UID:hebcal-20241024-e6edcf39
+DESCRIPTION:Eighth Day of Assembly. Immediately following Sukkot\, it is o
+ bserved as a separate holiday in the Diaspora and is combined with Simchat
+  Torah in Israel\n\nTorah: Deuteronomy 14:22-16:17\; Numbers 29:35-30:1\nH
+ aftarah: I Kings 8:54-66
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Simchat Torah
+DTSTART;VALUE=DATE:20241025
+DTEND;VALUE=DATE:20241026
+UID:hebcal-20241025-952508c2
+DESCRIPTION:Day of Celebrating the Torah. Celebration marking the conclusi
+ on of the annual cycle of public Torah readings\, and the beginning of a n
+ ew cycle\n\nTorah: Deuteronomy 33:1-34:12\; Genesis 1:1-2:3\; Numbers 29:3
+ 5-30:1\nHaftarah: Joshua 1:1-18
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Cheshvan
+DTSTART;VALUE=DATE:20241026
+DTEND;VALUE=DATE:20241027
+UID:hebcal-20241026-864cf86a
+DESCRIPTION:Molad Cheshvan: Fri\, 5 minutes and 14 chalakim after 16:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Cheshvan
+DTSTART;VALUE=DATE:20241101
+DTEND;VALUE=DATE:20241102
+UID:hebcal-20241101-6fbbc895
+DESCRIPTION:Start of month of Cheshvan on the Hebrew calendar. חֶשְׁ
+ וָן (transliterated Cheshvan or Heshvan) is the 8th month of the Hebrew
+  year\, has 29 or 30 days\, and corresponds to October or November on the 
+ Gregorian calendar. רֹאשׁ חוֹדֶשׁ\, transliterated Rosh Chodes
+ h or Rosh Hodesh\, is a minor holiday that occurs at the beginning of ever
+ y month in the Hebrew calendar. It is marked by the birth of a new moon\n\
+ nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Cheshvan
+DTSTART;VALUE=DATE:20241102
+DTEND;VALUE=DATE:20241103
+UID:hebcal-20241102-6fbbc895
+DESCRIPTION:Start of month of Cheshvan on the Hebrew calendar. חֶשְׁ
+ וָן (transliterated Cheshvan or Heshvan) is the 8th month of the Hebrew
+  year\, has 29 or 30 days\, and corresponds to October or November on the 
+ Gregorian calendar. רֹאשׁ חוֹדֶשׁ\, transliterated Rosh Chodes
+ h or Rosh Hodesh\, is a minor holiday that occurs at the beginning of ever
+ y month in the Hebrew calendar. It is marked by the birth of a new moon\n\
+ nHaftarah: Isaiah 66:1-24
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Sigd
+DTSTART;VALUE=DATE:20241130
+DTEND;VALUE=DATE:20241201
+UID:hebcal-20241130-3079e054
+DESCRIPTION:Ethiopian Jewish holiday occurring 50 days after Yom Kippur
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Kislev
+DTSTART;VALUE=DATE:20241130
+DTEND;VALUE=DATE:20241201
+UID:hebcal-20241130-6ce4b2c3
+DESCRIPTION:Molad Kislev: Sun\, 49 minutes and 15 chalakim after 4:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Kislev
+DTSTART;VALUE=DATE:20241201
+DTEND;VALUE=DATE:20241202
+UID:hebcal-20241201-171af096
+DESCRIPTION:Start of month of Kislev on the Hebrew calendar. Kislev (כִ
+ ּסְלֵו) is the 9th month of the Hebrew year\, has 30 or 29 days\, an
+ d corresponds to November or December on the Gregorian calendar.  רֹאש
+ ׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a mino
+ r holiday that occurs at the beginning of every month in the Hebrew calend
+ ar. It is marked by the birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Kislev
+DTSTART;VALUE=DATE:20241202
+DTEND;VALUE=DATE:20241203
+UID:hebcal-20241202-171af096
+DESCRIPTION:Start of month of Kislev on the Hebrew calendar. Kislev (כִ
+ ּסְלֵו) is the 9th month of the Hebrew year\, has 30 or 29 days\, an
+ d corresponds to November or December on the Gregorian calendar.  רֹאש
+ ׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a mino
+ r holiday that occurs at the beginning of every month in the Hebrew calend
+ ar. It is marked by the birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎1️⃣ Chanukah: 1 Candle
+DTSTART;VALUE=DATE:20241225
+DTEND;VALUE=DATE:20241226
+UID:hebcal-20241225-1c6fa26d
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎2️⃣ Chanukah: 2 Candles
+DTSTART;VALUE=DATE:20241226
+DTEND;VALUE=DATE:20241227
+UID:hebcal-20241226-bf71330e
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nTorah: Numbers 7:1-17
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎3️⃣ Chanukah: 3 Candles
+DTSTART;VALUE=DATE:20241227
+DTEND;VALUE=DATE:20241228
+UID:hebcal-20241227-3a5e82d5
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nTorah: Numbers 7:18-29
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎4️⃣ Chanukah: 4 Candles
+DTSTART;VALUE=DATE:20241228
+DTEND;VALUE=DATE:20241229
+UID:hebcal-20241228-8341b82a
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nHaftarah: Zechariah 2:14-4:7
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Tevet
+DTSTART;VALUE=DATE:20241228
+DTEND;VALUE=DATE:20241229
+UID:hebcal-20241228-e0441a9f
+DESCRIPTION:Molad Tevet: Mon\, 33 minutes and 16 chalakim after 17:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎5️⃣ Chanukah: 5 Candles
+DTSTART;VALUE=DATE:20241229
+DTEND;VALUE=DATE:20241230
+UID:hebcal-20241229-841127b9
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nTorah: Numbers 7:30-41
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎6️⃣ Chanukah: 6 Candles
+DTSTART;VALUE=DATE:20241230
+DTEND;VALUE=DATE:20241231
+UID:hebcal-20241230-9733c9a9
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nTorah: Numbers 7:36-47
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Chag HaBanot
+DTSTART;VALUE=DATE:20241231
+DTEND;VALUE=DATE:20250101
+UID:hebcal-20241231-0139c73e
+DESCRIPTION:North African Chanukah festival of daughters. Called Eid al-Ba
+ nat in Arabic\, the holiday was most preserved in Tunisia
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎7️⃣ Chanukah: 7 Candles
+DTSTART;VALUE=DATE:20241231
+DTEND;VALUE=DATE:20250101
+UID:hebcal-20241231-635c3774
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nTorah: Numbers 28:1-15\, 7:42-47
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Tevet
+DTSTART;VALUE=DATE:20241231
+DTEND;VALUE=DATE:20250101
+UID:hebcal-20241231-e83ced3d
+DESCRIPTION:Start of month of Tevet on the Hebrew calendar. Tevet (טֵב
+ ֵת) is the 10th month of the Hebrew year\, has 29 days\, and corresponds
+  to December or January on the Gregorian calendar.  רֹאשׁ חוֹדֶ
+ שׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a minor holiday tha
+ t occurs at the beginning of every month in the Hebrew calendar. It is mar
+ ked by the birth of a new moon\n\nTorah: Numbers 28:1-15\, 7:42-47
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎8️⃣ Chanukah: 8 Candles
+DTSTART;VALUE=DATE:20250101
+DTEND;VALUE=DATE:20250102
+UID:hebcal-20250101-d85c28dc
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nTorah: Numbers 28:1-15\, 7:48-53
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Tevet
+DTSTART;VALUE=DATE:20250101
+DTEND;VALUE=DATE:20250102
+UID:hebcal-20250101-e83ced3d
+DESCRIPTION:Start of month of Tevet on the Hebrew calendar. Tevet (טֵב
+ ֵת) is the 10th month of the Hebrew year\, has 29 days\, and corresponds
+  to December or January on the Gregorian calendar.  רֹאשׁ חוֹדֶ
+ שׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a minor holiday tha
+ t occurs at the beginning of every month in the Hebrew calendar. It is mar
+ ked by the birth of a new moon\n\nTorah: Numbers 28:1-15\, 7:48-53
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎 Chanukah: 8th Day
+DTSTART;VALUE=DATE:20250102
+DTEND;VALUE=DATE:20250103
+UID:hebcal-20250102-7c4cd5b6
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nTorah: Numbers 7:54-8:4
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Asara B'Tevet
+DTSTART;VALUE=DATE:20250110
+DTEND;VALUE=DATE:20250111
+UID:hebcal-20250110-16d2435e
+DESCRIPTION:Fast commemorating the siege of Jerusalem\n\nTorah: Exodus 32:
+ 11-14\, 34:1-10
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Sh'vat
+DTSTART;VALUE=DATE:20250125
+DTEND;VALUE=DATE:20250126
+UID:hebcal-20250125-f7388855
+DESCRIPTION:Molad Sh'vat: Wed\, 17 minutes and 17 chalakim after 6:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Sh'vat
+DTSTART;VALUE=DATE:20250130
+DTEND;VALUE=DATE:20250131
+UID:hebcal-20250130-b9dbcfbb
+DESCRIPTION:Start of month of Sh'vat on the Hebrew calendar. שְׁבָט 
+ (transliterated Sh'vat or Shevat) is the 11th month of the Hebrew year\, h
+ as 30 days\, and corresponds to January or February on the Gregorian calen
+ dar.  רֹאשׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hode
+ sh\, is a minor holiday that occurs at the beginning of every month in the
+  Hebrew calendar. It is marked by the birth of a new moon\n\nTorah: Number
+ s 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat Shirah
+DTSTART;VALUE=DATE:20250208
+DTEND;VALUE=DATE:20250209
+UID:hebcal-20250208-40f5da47
+DESCRIPTION:Shabbat of Song. Shabbat that includes Parashat Beshalach
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌳 Tu BiShvat
+DTSTART;VALUE=DATE:20250213
+DTEND;VALUE=DATE:20250214
+UID:hebcal-20250213-a7d91a90
+DESCRIPTION:New Year for Trees. Tu BiShvat is one of four “New Years” 
+ mentioned in the Mishnah
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Adar
+DTSTART;VALUE=DATE:20250222
+DTEND;VALUE=DATE:20250223
+UID:hebcal-20250222-0042bb6e
+DESCRIPTION:Molad Adar: Thu\, 2 minutes and 0 chalakim after 19:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Adar
+DTSTART;VALUE=DATE:20250228
+DTEND;VALUE=DATE:20250301
+UID:hebcal-20250228-28e8a555
+DESCRIPTION:Start of month of Adar on the Hebrew calendar. Adar (אַדָ
+ ר) is the 12th month of the Hebrew year\, has 29 days\, and corresponds t
+ o February or March on the Gregorian calendar.  רֹאשׁ חוֹדֶשׁ\
+ , transliterated Rosh Chodesh or Rosh Hodesh\, is a minor holiday that occ
+ urs at the beginning of every month in the Hebrew calendar. It is marked b
+ y the birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat Shekalim
+DTSTART;VALUE=DATE:20250301
+DTEND;VALUE=DATE:20250302
+UID:hebcal-20250301-713517f2
+DESCRIPTION:Shabbat before Rosh Chodesh Adar. Read in preparation for Puri
+ m\n\nHaftarah: II Kings 12:1-17
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Adar
+DTSTART;VALUE=DATE:20250301
+DTEND;VALUE=DATE:20250302
+UID:hebcal-20250301-28e8a555
+DESCRIPTION:Start of month of Adar on the Hebrew calendar. Adar (אַדָ
+ ר) is the 12th month of the Hebrew year\, has 29 days\, and corresponds t
+ o February or March on the Gregorian calendar.  רֹאשׁ חוֹדֶשׁ\
+ , transliterated Rosh Chodesh or Rosh Hodesh\, is a minor holiday that occ
+ urs at the beginning of every month in the Hebrew calendar. It is marked b
+ y the birth of a new moon\n\nHaftarah: Isaiah 66:1-24
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat Zachor
+DTSTART;VALUE=DATE:20250308
+DTEND;VALUE=DATE:20250309
+UID:hebcal-20250308-b709beaa
+DESCRIPTION:Shabbat of Remembrance. Shabbat before Purim\n\nHaftarah: I Sa
+ muel 15:2-34
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Ta'anit Esther
+DTSTART;VALUE=DATE:20250313
+DTEND;VALUE=DATE:20250314
+UID:hebcal-20250313-65e47969
+DESCRIPTION:Fast of Esther\n\nTorah: Exodus 32:11-14\, 34:1-10
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🎭️📜 Erev Purim
+DTSTART;VALUE=DATE:20250313
+DTEND;VALUE=DATE:20250314
+UID:hebcal-20250313-4fdbaae2
+DESCRIPTION:Celebration of Jewish deliverance as told by Megilat Esther. I
+ t commemorates a time when the Jewish people living in Persia were saved f
+ rom extermination
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🎭️📜 Purim
+DTSTART;VALUE=DATE:20250314
+DTEND;VALUE=DATE:20250315
+UID:hebcal-20250314-b59993b2
+DESCRIPTION:Celebration of Jewish deliverance as told by Megilat Esther. I
+ t commemorates a time when the Jewish people living in Persia were saved f
+ rom extermination\n\nTorah: Exodus 17:8-16
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🎭️📜 Shushan Purim
+DTSTART;VALUE=DATE:20250315
+DTEND;VALUE=DATE:20250316
+UID:hebcal-20250315-12d3cbc7
+DESCRIPTION:Purim celebrated in Jerusalem and walled cities
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Purim Meshulash
+DTSTART;VALUE=DATE:20250316
+DTEND;VALUE=DATE:20250317
+UID:hebcal-20250316-a7b4b529
+DESCRIPTION:Triple Purim\, spanning 3 days in Jerusalem and walled cities.
+  It occurs when the 15th of Adar coincides with Shabbat
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat Parah
+DTSTART;VALUE=DATE:20250322
+DTEND;VALUE=DATE:20250323
+UID:hebcal-20250322-1624bd32
+DESCRIPTION:Shabbat of the Red Heifer. Shabbat before Shabbat HaChodesh\, 
+ in preparation for Passover\n\nHaftarah: Ezekiel 36:16-38
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat HaChodesh
+DTSTART;VALUE=DATE:20250329
+DTEND;VALUE=DATE:20250330
+UID:hebcal-20250329-3e8a7379
+DESCRIPTION:Shabbat before Rosh Chodesh Nissan. Read in preparation for Pa
+ ssover\n\nHaftarah: Ezekiel 45:16-46:18
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Nisan
+DTSTART;VALUE=DATE:20250329
+DTEND;VALUE=DATE:20250330
+UID:hebcal-20250329-d006cb53
+DESCRIPTION:Molad Nisan: Sat\, 46 minutes and 1 chalakim after 7:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Nisan
+DTSTART;VALUE=DATE:20250330
+DTEND;VALUE=DATE:20250331
+UID:hebcal-20250330-26a17e2b
+DESCRIPTION:Start of month of Nisan on the Hebrew calendar. נִיסָן (
+ transliterated Nisan or Nissan) is the 1st month of the Hebrew year\, has 
+ 30 days\, and corresponds to March or April on the Gregorian calendar. ר
+ ֹאשׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is 
+ a minor holiday that occurs at the beginning of every month in the Hebrew 
+ calendar. It is marked by the birth of a new moon\n\nTorah: Numbers 28:1-1
+ 5
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🇮🇱 Yom HaAliyah
+DTSTART;VALUE=DATE:20250408
+DTEND;VALUE=DATE:20250409
+UID:hebcal-20250408-7ef10a7e
+DESCRIPTION:Recognizes Aliyah\, immigration to the Jewish State of Israel
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Ta'anit Bechorot
+DTSTART;VALUE=DATE:20250410
+DTEND;VALUE=DATE:20250411
+UID:hebcal-20250410-73101110
+DESCRIPTION:Fast of the First Born
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat HaGadol
+DTSTART;VALUE=DATE:20250412
+DTEND;VALUE=DATE:20250413
+UID:hebcal-20250412-2e333569
+DESCRIPTION:Shabbat before Pesach (The Great Shabbat)\n\nHaftarah: Malachi
+  3:4-24
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓🍷 Erev Pesach
+DTSTART;VALUE=DATE:20250412
+DTEND;VALUE=DATE:20250413
+UID:hebcal-20250412-b899d38a
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓🍷 Pesach I
+DTSTART;VALUE=DATE:20250413
+DTEND;VALUE=DATE:20250414
+UID:hebcal-20250413-f5de93e3
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Exodus 12:21-51\; Numbers 28:
+ 16-25\nHaftarah: Joshua 5:2-6:1
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓 Pesach II
+DTSTART;VALUE=DATE:20250414
+DTEND;VALUE=DATE:20250415
+UID:hebcal-20250414-8a7f3521
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Leviticus 22:26-23:44\; Numbe
+ rs 28:16-25\nHaftarah: II Kings 23:1-9\, 23:21-25
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓 Pesach III (CH''M)
+DTSTART;VALUE=DATE:20250415
+DTEND;VALUE=DATE:20250416
+UID:hebcal-20250415-c5af2e47
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Exodus 13:1-16\; Numbers 28:1
+ 9-25
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓 Pesach IV (CH''M)
+DTSTART;VALUE=DATE:20250416
+DTEND;VALUE=DATE:20250417
+UID:hebcal-20250416-22088d98
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Exodus 22:24-23:19\; Numbers 
+ 28:19-25
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓 Pesach V (CH''M)
+DTSTART;VALUE=DATE:20250417
+DTEND;VALUE=DATE:20250418
+UID:hebcal-20250417-ccdb6a58
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Exodus 34:1-26\; Numbers 28:1
+ 9-25
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓 Pesach VI (CH''M)
+DTSTART;VALUE=DATE:20250418
+DTEND;VALUE=DATE:20250419
+UID:hebcal-20250418-a146401d
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Numbers 9:1-14\, 28:19-25
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓 Pesach VII
+DTSTART;VALUE=DATE:20250419
+DTEND;VALUE=DATE:20250420
+UID:hebcal-20250419-0133feb2
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Exodus 13:17-15:26\; Numbers 
+ 28:19-25\nHaftarah: II Samuel 22:1-51
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓 Pesach VIII
+DTSTART;VALUE=DATE:20250420
+DTEND;VALUE=DATE:20250421
+UID:hebcal-20250420-9b5e763c
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Deuteronomy 15:19-16:17\; Num
+ bers 28:19-25\nHaftarah: Isaiah 10:32-12:6
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Yom HaShoah
+DTSTART;VALUE=DATE:20250424
+DTEND;VALUE=DATE:20250425
+UID:hebcal-20250424-397e0803
+DESCRIPTION:Holocaust Memorial Day
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Iyyar
+DTSTART;VALUE=DATE:20250426
+DTEND;VALUE=DATE:20250427
+UID:hebcal-20250426-6ddbc8f4
+DESCRIPTION:Molad Iyyar: Sun\, 30 minutes and 2 chalakim after 20:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Iyyar
+DTSTART;VALUE=DATE:20250428
+DTEND;VALUE=DATE:20250429
+UID:hebcal-20250428-21689341
+DESCRIPTION:Start of month of Iyyar on the Hebrew calendar. אִיָיר (
+ transliterated Iyyar or Iyar) is the 2nd month of the Hebrew year\, has 29
+  days\, and corresponds to April or May on the Gregorian calendar.  רֹא
+ שׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a mi
+ nor holiday that occurs at the beginning of every month in the Hebrew cale
+ ndar. It is marked by the birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Iyyar
+DTSTART;VALUE=DATE:20250429
+DTEND;VALUE=DATE:20250430
+UID:hebcal-20250429-21689341
+DESCRIPTION:Start of month of Iyyar on the Hebrew calendar. אִיָיר (
+ transliterated Iyyar or Iyar) is the 2nd month of the Hebrew year\, has 29
+  days\, and corresponds to April or May on the Gregorian calendar.  רֹא
+ שׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a mi
+ nor holiday that occurs at the beginning of every month in the Hebrew cale
+ ndar. It is marked by the birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🇮🇱 Yom HaZikaron
+DTSTART;VALUE=DATE:20250430
+DTEND;VALUE=DATE:20250501
+UID:hebcal-20250430-d53cc31d
+DESCRIPTION:Israeli Memorial Day. Remembers those who died in the War of I
+ ndependence and other wars in Israel. The full name of the holiday is Yom 
+ HaZikaron LeHalalei Ma'arakhot Yisrael ul'Nifge'ei Pe'ulot HaEivah (Hebrew
+ : יוֹם הזִּכָּרוֹן לְחַלְלֵי מַעֲרָכוֹת 
+ יִשְׂרָאֵל וּלְנִפְגְעֵי פְּעֻלּוֹת הָ
+ אֵיבָה)\, Memorial Day for the Fallen Soldiers of the Wars of Israel
+  and Victims of Actions of Terrorism. Although Yom Hazikaron is normally o
+ bserved on the 4th of Iyyar\, it may be moved earlier or postponed if obse
+ rvance of the holiday (or Yom HaAtzma'ut\, which always follows it) would 
+ conflict with Shabbat
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🇮🇱 Yom HaAtzma'ut
+DTSTART;VALUE=DATE:20250501
+DTEND;VALUE=DATE:20250502
+UID:hebcal-20250501-dd24e12d
+DESCRIPTION:Israeli Independence Day. Commemorates the declaration of inde
+ pendence of Israel in 1948. Although Yom HaAtzma'ut is normally observed o
+ n the 5th of Iyyar\, it may be moved earlier or postponed if observance of
+  the holiday (or Yom HaZikaron\, which always precedes it) would conflict 
+ with Shabbat
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Pesach Sheni
+DTSTART;VALUE=DATE:20250512
+DTEND;VALUE=DATE:20250513
+UID:hebcal-20250512-f222d099
+DESCRIPTION:Second Passover\, one month after Passover
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🔥 Lag BaOmer
+DTSTART;VALUE=DATE:20250516
+DTEND;VALUE=DATE:20250517
+UID:hebcal-20250516-4223318c
+DESCRIPTION:33rd day of counting the Omer. The holiday is a temporary brea
+ k from the semi-mourning period the counting of the Omer. Practices includ
+ e lighting bonfires\, getting haircuts\, and Jewish weddings
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Sivan
+DTSTART;VALUE=DATE:20250524
+DTEND;VALUE=DATE:20250525
+UID:hebcal-20250524-ccad0557
+DESCRIPTION:Molad Sivan: Tue\, 14 minutes and 3 chalakim after 9:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🇮🇱 Yom Yerushalayim
+DTSTART;VALUE=DATE:20250526
+DTEND;VALUE=DATE:20250527
+UID:hebcal-20250526-bd3ce4b3
+DESCRIPTION:Jerusalem Day. Commemorates the re-unification of Jerusalem in
+  1967
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Sivan
+DTSTART;VALUE=DATE:20250528
+DTEND;VALUE=DATE:20250529
+UID:hebcal-20250528-ea657a21
+DESCRIPTION:Start of month of Sivan on the Hebrew calendar. Sivan (סִי
+ וָן) is the 3rd month of the Hebrew year\, has 30 days\, and correspond
+ s to May or June on the Gregorian calendar.  רֹאשׁ חוֹדֶשׁ\, t
+ ransliterated Rosh Chodesh or Rosh Hodesh\, is a minor holiday that occurs
+  at the beginning of every month in the Hebrew calendar. It is marked by t
+ he birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:⛰️🌸 Erev Shavuot
+DTSTART;VALUE=DATE:20250601
+DTEND;VALUE=DATE:20250602
+UID:hebcal-20250601-516b1178
+DESCRIPTION:Festival of Weeks. Commemorates the giving of the Torah at Mou
+ nt Sinai
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:⛰️🌸 Shavuot I
+DTSTART;VALUE=DATE:20250602
+DTEND;VALUE=DATE:20250603
+UID:hebcal-20250602-547670dd
+DESCRIPTION:Festival of Weeks. Commemorates the giving of the Torah at Mou
+ nt Sinai\n\nTorah: Exodus 19:1-20:23\; Numbers 28:26-31\nHaftarah: Ezekiel
+  1:1-28\, 3:12
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:⛰️🌸 Shavuot II
+DTSTART;VALUE=DATE:20250603
+DTEND;VALUE=DATE:20250604
+UID:hebcal-20250603-69691cf1
+DESCRIPTION:Festival of Weeks. Commemorates the giving of the Torah at Mou
+ nt Sinai\n\nTorah: Deuteronomy 15:19-16:17\; Numbers 28:26-31\nHaftarah: H
+ abakkuk 3:1-19
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Tamuz
+DTSTART;VALUE=DATE:20250621
+DTEND;VALUE=DATE:20250622
+UID:hebcal-20250621-cdc33b62
+DESCRIPTION:Molad Tamuz: Wed\, 58 minutes and 4 chalakim after 21:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Tamuz
+DTSTART;VALUE=DATE:20250626
+DTEND;VALUE=DATE:20250627
+UID:hebcal-20250626-e57e8b15
+DESCRIPTION:Start of month of Tamuz on the Hebrew calendar. תַּמּוּ
+ ז (transliterated Tamuz or Tammuz) is the 4th month of the Hebrew year\, 
+ has 29 days\, and corresponds to June or July on the Gregorian calendar.  
+ רֹאשׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, i
+ s a minor holiday that occurs at the beginning of every month in the Hebre
+ w calendar. It is marked by the birth of a new moon\n\nTorah: Numbers 28:1
+ -15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Tamuz
+DTSTART;VALUE=DATE:20250627
+DTEND;VALUE=DATE:20250628
+UID:hebcal-20250627-e57e8b15
+DESCRIPTION:Start of month of Tamuz on the Hebrew calendar. תַּמּוּ
+ ז (transliterated Tamuz or Tammuz) is the 4th month of the Hebrew year\, 
+ has 29 days\, and corresponds to June or July on the Gregorian calendar.  
+ רֹאשׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, i
+ s a minor holiday that occurs at the beginning of every month in the Hebre
+ w calendar. It is marked by the birth of a new moon\n\nTorah: Numbers 28:1
+ -15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Tzom Tammuz
+DTSTART;VALUE=DATE:20250713
+DTEND;VALUE=DATE:20250714
+UID:hebcal-20250713-227143a8
+DESCRIPTION:Fast commemorating breaching of the walls of Jerusalem before 
+ the destruction of the Second Temple\n\nTorah: Exodus 32:11-14\, 34:1-10
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Av
+DTSTART;VALUE=DATE:20250719
+DTEND;VALUE=DATE:20250720
+UID:hebcal-20250719-cd524889
+DESCRIPTION:Molad Av: Fri\, 42 minutes and 5 chalakim after 10:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Av
+DTSTART;VALUE=DATE:20250726
+DTEND;VALUE=DATE:20250727
+UID:hebcal-20250726-b20a292a
+DESCRIPTION:Start of month of Av on the Hebrew calendar. Av (אָב) is th
+ e 5th month of the Hebrew year\, has 30 days\, and corresponds to July or 
+ August on the Gregorian calendar.  רֹאשׁ חוֹדֶשׁ\, translitera
+ ted Rosh Chodesh or Rosh Hodesh\, is a minor holiday that occurs at the be
+ ginning of every month in the Hebrew calendar. It is marked by the birth o
+ f a new moon\n\nHaftarah: Isaiah 66:1-24
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat Chazon
+DTSTART;VALUE=DATE:20250802
+DTEND;VALUE=DATE:20250803
+UID:hebcal-20250802-40fb55a8
+DESCRIPTION:Shabbat of Prophecy/Shabbat of Vision. Shabbat before Tish'a B
+ 'Av
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Erev Tish'a B'Av
+DTSTART;VALUE=DATE:20250802
+DTEND;VALUE=DATE:20250803
+UID:hebcal-20250802-16aac1cb
+DESCRIPTION:The Ninth of Av. Fast commemorating the destruction of the two
+  Temples
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Tish'a B'Av
+DTSTART;VALUE=DATE:20250803
+DTEND;VALUE=DATE:20250804
+UID:hebcal-20250803-1fe8650c
+DESCRIPTION:The Ninth of Av. Fast commemorating the destruction of the two
+  Temples\n\nTorah: Deuteronomy 4:25-40\nHaftarah: Jeremiah 8:13-9:23
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:❤️ Tu B'Av
+DTSTART;VALUE=DATE:20250809
+DTEND;VALUE=DATE:20250810
+UID:hebcal-20250809-ccea991a
+DESCRIPTION:Minor Jewish holiday of love. Observed on the 15th day of the 
+ Hebrew month of Av
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat Nachamu
+DTSTART;VALUE=DATE:20250809
+DTEND;VALUE=DATE:20250810
+UID:hebcal-20250809-57d358fc
+DESCRIPTION:Shabbat after Tish'a B'Av (Shabbat of Consolation). The first 
+ of seven Shabbatot leading up to Rosh Hashanah. Named after the Haftarah (
+ from Isaiah 40) which begins with the verse נַחֲמוּ נַחֲמוּ\
+ , עַמִּי ("Comfort\, oh comfort my people")
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Elul
+DTSTART;VALUE=DATE:20250823
+DTEND;VALUE=DATE:20250824
+UID:hebcal-20250823-61fb928c
+DESCRIPTION:Molad Elul: Sat\, 26 minutes and 6 chalakim after 23:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Elul
+DTSTART;VALUE=DATE:20250824
+DTEND;VALUE=DATE:20250825
+UID:hebcal-20250824-4a2abce2
+DESCRIPTION:Start of month of Elul on the Hebrew calendar. Elul (אֱלו
+ ּל) is the 6th month of the Hebrew year\, has 29 days\, and corresponds 
+ to August or September on the Gregorian calendar.  רֹאשׁ חוֹדֶש
+ ׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a minor holiday that 
+ occurs at the beginning of every month in the Hebrew calendar. It is marke
+ d by the birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🐑 Rosh Hashana LaBehemot
+DTSTART;VALUE=DATE:20250825
+DTEND;VALUE=DATE:20250826
+UID:hebcal-20250825-0a58fcce
+DESCRIPTION:New Year for Tithing Animals
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Elul
+DTSTART;VALUE=DATE:20250825
+DTEND;VALUE=DATE:20250826
+UID:hebcal-20250825-4a2abce2
+DESCRIPTION:Start of month of Elul on the Hebrew calendar. Elul (אֱלו
+ ּל) is the 6th month of the Hebrew year\, has 29 days\, and corresponds 
+ to August or September on the Gregorian calendar.  רֹאשׁ חוֹדֶש
+ ׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a minor holiday that 
+ occurs at the beginning of every month in the Hebrew calendar. It is marke
+ d by the birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Leil Selichot
+DTSTART;VALUE=DATE:20250913
+DTEND;VALUE=DATE:20250914
+UID:hebcal-20250913-121db6a8
+DESCRIPTION:Prayers for forgiveness in preparation for the High Holidays
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🍏🍯 Erev Rosh Hashana
+DTSTART;VALUE=DATE:20250922
+DTEND;VALUE=DATE:20250923
+UID:hebcal-20250922-69c47b58
+DESCRIPTION:The Jewish New Year. Also spelled Rosh Hashanah
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🍏🍯 Rosh Hashana 5786
+DTSTART;VALUE=DATE:20250923
+DTEND;VALUE=DATE:20250924
+UID:hebcal-20250923-a96ab147
+DESCRIPTION:The Jewish New Year. Also spelled Rosh Hashanah\n\nTorah: Gene
+ sis 21:1-34\; Numbers 29:1-6\nHaftarah: I Samuel 1:1-2:10
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🍏🍯 Rosh Hashana II
+DTSTART;VALUE=DATE:20250924
+DTEND;VALUE=DATE:20250925
+UID:hebcal-20250924-e24e7167
+DESCRIPTION:The Jewish New Year. Also spelled Rosh Hashanah\n\nTorah: Gene
+ sis 22:1-24\; Numbers 29:1-6\nHaftarah: Jeremiah 31:1-19
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Tzom Gedaliah
+DTSTART;VALUE=DATE:20250925
+DTEND;VALUE=DATE:20250926
+UID:hebcal-20250925-398de2df
+DESCRIPTION:Fast of the Seventh Month. Commemorates the assassination of t
+ he Jewish governor of Judah\n\nTorah: Exodus 32:11-14\, 34:1-10
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat Shuva
+DTSTART;VALUE=DATE:20250927
+DTEND;VALUE=DATE:20250928
+UID:hebcal-20250927-e3c3a1e4
+DESCRIPTION:Shabbat of Returning. Shabbat that occurs during the Ten Days 
+ of Repentance between Rosh Hashanah and Yom Kippur\n\nHaftarah: Hosea 14:2
+ -10\; Micah 7:18-20\; Joel 2:15-27
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Erev Yom Kippur
+DTSTART;VALUE=DATE:20251001
+DTEND;VALUE=DATE:20251002
+UID:hebcal-20251001-821e8c6f
+DESCRIPTION:Day of Atonement. The holiest day of the year in Judaism\, tra
+ ditionally observed with a 25-hour period of fasting and intensive prayer
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Yom Kippur
+DTSTART;VALUE=DATE:20251002
+DTEND;VALUE=DATE:20251003
+UID:hebcal-20251002-3eebed91
+DESCRIPTION:Day of Atonement. The holiest day of the year in Judaism\, tra
+ ditionally observed with a 25-hour period of fasting and intensive prayer\
+ n\nTorah: Leviticus 16:1-34\; Numbers 29:7-11\nHaftarah: Isaiah 57:14-58:1
+ 4
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Erev Sukkot
+DTSTART;VALUE=DATE:20251006
+DTEND;VALUE=DATE:20251007
+UID:hebcal-20251006-2e047aaf
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Sukkot I
+DTSTART;VALUE=DATE:20251007
+DTEND;VALUE=DATE:20251008
+UID:hebcal-20251007-3b6b9611
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)\n\nTorah: Leviticus 22:26-23:44\; Numbers 2
+ 9:12-16\nHaftarah: Zechariah 14:1-21
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Sukkot II
+DTSTART;VALUE=DATE:20251008
+DTEND;VALUE=DATE:20251009
+UID:hebcal-20251008-dd814373
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)\n\nTorah: Leviticus 22:26-23:44\; Numbers 2
+ 9:12-16\nHaftarah: I Kings 8:2-21
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Sukkot III (CH''M)
+DTSTART;VALUE=DATE:20251009
+DTEND;VALUE=DATE:20251010
+UID:hebcal-20251009-5e93ab94
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)\n\nTorah: Numbers 29:17-25\, 29:17-22
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Sukkot IV (CH''M)
+DTSTART;VALUE=DATE:20251010
+DTEND;VALUE=DATE:20251011
+UID:hebcal-20251010-ffda39c9
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)\n\nTorah: Numbers 29:20-28\, 29:20-25
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Sukkot V (CH''M)
+DTSTART;VALUE=DATE:20251011
+DTEND;VALUE=DATE:20251012
+UID:hebcal-20251011-68c6e88e
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)\n\nTorah: Exodus 33:12-34:26\; Numbers 29:2
+ 3-28\nHaftarah: Ezekiel 38:18-39:16
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Sukkot VI (CH''M)
+DTSTART;VALUE=DATE:20251012
+DTEND;VALUE=DATE:20251013
+UID:hebcal-20251012-698f117c
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)\n\nTorah: Numbers 29:26-34\, 29:26-31
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Sukkot VII (Hoshana Raba)
+DTSTART;VALUE=DATE:20251013
+DTEND;VALUE=DATE:20251014
+UID:hebcal-20251013-f5de0f6c
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)\n\nTorah: Numbers 29:26-34
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Shmini Atzeret
+DTSTART;VALUE=DATE:20251014
+DTEND;VALUE=DATE:20251015
+UID:hebcal-20251014-e6edcf39
+DESCRIPTION:Eighth Day of Assembly. Immediately following Sukkot\, it is o
+ bserved as a separate holiday in the Diaspora and is combined with Simchat
+  Torah in Israel\n\nTorah: Deuteronomy 14:22-16:17\; Numbers 29:35-30:1\nH
+ aftarah: I Kings 8:54-66
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Simchat Torah
+DTSTART;VALUE=DATE:20251015
+DTEND;VALUE=DATE:20251016
+UID:hebcal-20251015-952508c2
+DESCRIPTION:Day of Celebrating the Torah. Celebration marking the conclusi
+ on of the annual cycle of public Torah readings\, and the beginning of a n
+ ew cycle\n\nTorah: Deuteronomy 33:1-34:12\; Genesis 1:1-2:3\; Numbers 29:3
+ 5-30:1\nHaftarah: Joshua 1:1-18
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Cheshvan
+DTSTART;VALUE=DATE:20251018
+DTEND;VALUE=DATE:20251019
+UID:hebcal-20251018-864cf86a
+DESCRIPTION:Molad Cheshvan: Wed\, 54 minutes and 8 chalakim after 0:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Cheshvan
+DTSTART;VALUE=DATE:20251022
+DTEND;VALUE=DATE:20251023
+UID:hebcal-20251022-6fbbc895
+DESCRIPTION:Start of month of Cheshvan on the Hebrew calendar. חֶשְׁ
+ וָן (transliterated Cheshvan or Heshvan) is the 8th month of the Hebrew
+  year\, has 29 or 30 days\, and corresponds to October or November on the 
+ Gregorian calendar. רֹאשׁ חוֹדֶשׁ\, transliterated Rosh Chodes
+ h or Rosh Hodesh\, is a minor holiday that occurs at the beginning of ever
+ y month in the Hebrew calendar. It is marked by the birth of a new moon\n\
+ nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Cheshvan
+DTSTART;VALUE=DATE:20251023
+DTEND;VALUE=DATE:20251024
+UID:hebcal-20251023-6fbbc895
+DESCRIPTION:Start of month of Cheshvan on the Hebrew calendar. חֶשְׁ
+ וָן (transliterated Cheshvan or Heshvan) is the 8th month of the Hebrew
+  year\, has 29 or 30 days\, and corresponds to October or November on the 
+ Gregorian calendar. רֹאשׁ חוֹדֶשׁ\, transliterated Rosh Chodes
+ h or Rosh Hodesh\, is a minor holiday that occurs at the beginning of ever
+ y month in the Hebrew calendar. It is marked by the birth of a new moon\n\
+ nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Kislev
+DTSTART;VALUE=DATE:20251115
+DTEND;VALUE=DATE:20251116
+UID:hebcal-20251115-6ce4b2c3
+DESCRIPTION:Molad Kislev: Thu\, 38 minutes and 9 chalakim after 13:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Sigd
+DTSTART;VALUE=DATE:20251120
+DTEND;VALUE=DATE:20251121
+UID:hebcal-20251120-3079e054
+DESCRIPTION:Ethiopian Jewish holiday occurring 50 days after Yom Kippur
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Kislev
+DTSTART;VALUE=DATE:20251121
+DTEND;VALUE=DATE:20251122
+UID:hebcal-20251121-171af096
+DESCRIPTION:Start of month of Kislev on the Hebrew calendar. Kislev (כִ
+ ּסְלֵו) is the 9th month of the Hebrew year\, has 30 or 29 days\, an
+ d corresponds to November or December on the Gregorian calendar.  רֹאש
+ ׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a mino
+ r holiday that occurs at the beginning of every month in the Hebrew calend
+ ar. It is marked by the birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Tevet
+DTSTART;VALUE=DATE:20251213
+DTEND;VALUE=DATE:20251214
+UID:hebcal-20251213-e0441a9f
+DESCRIPTION:Molad Tevet: Sat\, 22 minutes and 10 chalakim after 2:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎1️⃣ Chanukah: 1 Candle
+DTSTART;VALUE=DATE:20251214
+DTEND;VALUE=DATE:20251215
+UID:hebcal-20251214-1c6fa26d
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎2️⃣ Chanukah: 2 Candles
+DTSTART;VALUE=DATE:20251215
+DTEND;VALUE=DATE:20251216
+UID:hebcal-20251215-bf71330e
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nTorah: Numbers 7:1-17
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎3️⃣ Chanukah: 3 Candles
+DTSTART;VALUE=DATE:20251216
+DTEND;VALUE=DATE:20251217
+UID:hebcal-20251216-3a5e82d5
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nTorah: Numbers 7:18-29
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎4️⃣ Chanukah: 4 Candles
+DTSTART;VALUE=DATE:20251217
+DTEND;VALUE=DATE:20251218
+UID:hebcal-20251217-8341b82a
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nTorah: Numbers 7:24-35
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎5️⃣ Chanukah: 5 Candles
+DTSTART;VALUE=DATE:20251218
+DTEND;VALUE=DATE:20251219
+UID:hebcal-20251218-841127b9
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nTorah: Numbers 7:30-41
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎6️⃣ Chanukah: 6 Candles
+DTSTART;VALUE=DATE:20251219
+DTEND;VALUE=DATE:20251220
+UID:hebcal-20251219-9733c9a9
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nTorah: Numbers 7:36-47
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Chag HaBanot
+DTSTART;VALUE=DATE:20251220
+DTEND;VALUE=DATE:20251221
+UID:hebcal-20251220-0139c73e
+DESCRIPTION:North African Chanukah festival of daughters. Called Eid al-Ba
+ nat in Arabic\, the holiday was most preserved in Tunisia
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎7️⃣ Chanukah: 7 Candles
+DTSTART;VALUE=DATE:20251220
+DTEND;VALUE=DATE:20251221
+UID:hebcal-20251220-635c3774
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nHaftarah: Zechariah 2:14-4:7
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Tevet
+DTSTART;VALUE=DATE:20251220
+DTEND;VALUE=DATE:20251221
+UID:hebcal-20251220-e83ced3d
+DESCRIPTION:Start of month of Tevet on the Hebrew calendar. Tevet (טֵב
+ ֵת) is the 10th month of the Hebrew year\, has 29 days\, and corresponds
+  to December or January on the Gregorian calendar.  רֹאשׁ חוֹדֶ
+ שׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a minor holiday tha
+ t occurs at the beginning of every month in the Hebrew calendar. It is mar
+ ked by the birth of a new moon\n\nHaftarah: Zechariah 2:14-4:7
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎8️⃣ Chanukah: 8 Candles
+DTSTART;VALUE=DATE:20251221
+DTEND;VALUE=DATE:20251222
+UID:hebcal-20251221-d85c28dc
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nTorah: Numbers 28:1-15\, 7:48-53
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Tevet
+DTSTART;VALUE=DATE:20251221
+DTEND;VALUE=DATE:20251222
+UID:hebcal-20251221-e83ced3d
+DESCRIPTION:Start of month of Tevet on the Hebrew calendar. Tevet (טֵב
+ ֵת) is the 10th month of the Hebrew year\, has 29 days\, and corresponds
+  to December or January on the Gregorian calendar.  רֹאשׁ חוֹדֶ
+ שׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a minor holiday tha
+ t occurs at the beginning of every month in the Hebrew calendar. It is mar
+ ked by the birth of a new moon\n\nTorah: Numbers 28:1-15\, 7:48-53
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎 Chanukah: 8th Day
+DTSTART;VALUE=DATE:20251222
+DTEND;VALUE=DATE:20251223
+UID:hebcal-20251222-7c4cd5b6
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nTorah: Numbers 7:54-8:4
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Asara B'Tevet
+DTSTART;VALUE=DATE:20251230
+DTEND;VALUE=DATE:20251231
+UID:hebcal-20251230-16d2435e
+DESCRIPTION:Fast commemorating the siege of Jerusalem\n\nTorah: Exodus 32:
+ 11-14\, 34:1-10
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Sh'vat
+DTSTART;VALUE=DATE:20260117
+DTEND;VALUE=DATE:20260118
+UID:hebcal-20260117-f7388855
+DESCRIPTION:Molad Sh'vat: Sun\, 6 minutes and 11 chalakim after 15:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Sh'vat
+DTSTART;VALUE=DATE:20260119
+DTEND;VALUE=DATE:20260120
+UID:hebcal-20260119-b9dbcfbb
+DESCRIPTION:Start of month of Sh'vat on the Hebrew calendar. שְׁבָט 
+ (transliterated Sh'vat or Shevat) is the 11th month of the Hebrew year\, h
+ as 30 days\, and corresponds to January or February on the Gregorian calen
+ dar.  רֹאשׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hode
+ sh\, is a minor holiday that occurs at the beginning of every month in the
+  Hebrew calendar. It is marked by the birth of a new moon\n\nTorah: Number
+ s 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat Shirah
+DTSTART;VALUE=DATE:20260131
+DTEND;VALUE=DATE:20260201
+UID:hebcal-20260131-40f5da47
+DESCRIPTION:Shabbat of Song. Shabbat that includes Parashat Beshalach
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌳 Tu BiShvat
+DTSTART;VALUE=DATE:20260202
+DTEND;VALUE=DATE:20260203
+UID:hebcal-20260202-a7d91a90
+DESCRIPTION:New Year for Trees. Tu BiShvat is one of four “New Years” 
+ mentioned in the Mishnah
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat Shekalim
+DTSTART;VALUE=DATE:20260214
+DTEND;VALUE=DATE:20260215
+UID:hebcal-20260214-713517f2
+DESCRIPTION:Shabbat before Rosh Chodesh Adar. Read in preparation for Puri
+ m\n\nHaftarah: II Kings 12:1-17
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Adar
+DTSTART;VALUE=DATE:20260214
+DTEND;VALUE=DATE:20260215
+UID:hebcal-20260214-0042bb6e
+DESCRIPTION:Molad Adar: Tue\, 50 minutes and 12 chalakim after 3:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Adar
+DTSTART;VALUE=DATE:20260217
+DTEND;VALUE=DATE:20260218
+UID:hebcal-20260217-28e8a555
+DESCRIPTION:Start of month of Adar on the Hebrew calendar. Adar (אַדָ
+ ר) is the 12th month of the Hebrew year\, has 29 days\, and corresponds t
+ o February or March on the Gregorian calendar.  רֹאשׁ חוֹדֶשׁ\
+ , transliterated Rosh Chodesh or Rosh Hodesh\, is a minor holiday that occ
+ urs at the beginning of every month in the Hebrew calendar. It is marked b
+ y the birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Adar
+DTSTART;VALUE=DATE:20260218
+DTEND;VALUE=DATE:20260219
+UID:hebcal-20260218-28e8a555
+DESCRIPTION:Start of month of Adar on the Hebrew calendar. Adar (אַדָ
+ ר) is the 12th month of the Hebrew year\, has 29 days\, and corresponds t
+ o February or March on the Gregorian calendar.  רֹאשׁ חוֹדֶשׁ\
+ , transliterated Rosh Chodesh or Rosh Hodesh\, is a minor holiday that occ
+ urs at the beginning of every month in the Hebrew calendar. It is marked b
+ y the birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat Zachor
+DTSTART;VALUE=DATE:20260228
+DTEND;VALUE=DATE:20260301
+UID:hebcal-20260228-b709beaa
+DESCRIPTION:Shabbat of Remembrance. Shabbat before Purim\n\nHaftarah: I Sa
+ muel 15:2-34
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Ta'anit Esther
+DTSTART;VALUE=DATE:20260302
+DTEND;VALUE=DATE:20260303
+UID:hebcal-20260302-65e47969
+DESCRIPTION:Fast of Esther\n\nTorah: Exodus 32:11-14\, 34:1-10
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🎭️📜 Erev Purim
+DTSTART;VALUE=DATE:20260302
+DTEND;VALUE=DATE:20260303
+UID:hebcal-20260302-4fdbaae2
+DESCRIPTION:Celebration of Jewish deliverance as told by Megilat Esther. I
+ t commemorates a time when the Jewish people living in Persia were saved f
+ rom extermination
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🎭️📜 Purim
+DTSTART;VALUE=DATE:20260303
+DTEND;VALUE=DATE:20260304
+UID:hebcal-20260303-b59993b2
+DESCRIPTION:Celebration of Jewish deliverance as told by Megilat Esther. I
+ t commemorates a time when the Jewish people living in Persia were saved f
+ rom extermination\n\nTorah: Exodus 17:8-16
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🎭️📜 Shushan Purim
+DTSTART;VALUE=DATE:20260304
+DTEND;VALUE=DATE:20260305
+UID:hebcal-20260304-12d3cbc7
+DESCRIPTION:Purim celebrated in Jerusalem and walled cities
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat Parah
+DTSTART;VALUE=DATE:20260307
+DTEND;VALUE=DATE:20260308
+UID:hebcal-20260307-1624bd32
+DESCRIPTION:Shabbat of the Red Heifer. Shabbat before Shabbat HaChodesh\, 
+ in preparation for Passover\n\nHaftarah: Ezekiel 36:16-38
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat HaChodesh
+DTSTART;VALUE=DATE:20260314
+DTEND;VALUE=DATE:20260315
+UID:hebcal-20260314-3e8a7379
+DESCRIPTION:Shabbat before Rosh Chodesh Nissan. Read in preparation for Pa
+ ssover\n\nHaftarah: Ezekiel 45:16-46:18
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Nisan
+DTSTART;VALUE=DATE:20260314
+DTEND;VALUE=DATE:20260315
+UID:hebcal-20260314-d006cb53
+DESCRIPTION:Molad Nisan: Wed\, 34 minutes and 13 chalakim after 16:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Nisan
+DTSTART;VALUE=DATE:20260319
+DTEND;VALUE=DATE:20260320
+UID:hebcal-20260319-26a17e2b
+DESCRIPTION:Start of month of Nisan on the Hebrew calendar. נִיסָן (
+ transliterated Nisan or Nissan) is the 1st month of the Hebrew year\, has 
+ 30 days\, and corresponds to March or April on the Gregorian calendar. ר
+ ֹאשׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is 
+ a minor holiday that occurs at the beginning of every month in the Hebrew 
+ calendar. It is marked by the birth of a new moon\n\nTorah: Numbers 28:1-1
+ 5
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat HaGadol
+DTSTART;VALUE=DATE:20260328
+DTEND;VALUE=DATE:20260329
+UID:hebcal-20260328-2e333569
+DESCRIPTION:Shabbat before Pesach (The Great Shabbat)\n\nHaftarah: Malachi
+  3:4-24
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🇮🇱 Yom HaAliyah
+DTSTART;VALUE=DATE:20260328
+DTEND;VALUE=DATE:20260329
+UID:hebcal-20260328-7ef10a7e
+DESCRIPTION:Recognizes Aliyah\, immigration to the Jewish State of Israel
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Ta'anit Bechorot
+DTSTART;VALUE=DATE:20260401
+DTEND;VALUE=DATE:20260402
+UID:hebcal-20260401-73101110
+DESCRIPTION:Fast of the First Born
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓🍷 Erev Pesach
+DTSTART;VALUE=DATE:20260401
+DTEND;VALUE=DATE:20260402
+UID:hebcal-20260401-b899d38a
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓🍷 Pesach I
+DTSTART;VALUE=DATE:20260402
+DTEND;VALUE=DATE:20260403
+UID:hebcal-20260402-f5de93e3
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Exodus 12:21-51\; Numbers 28:
+ 16-25\nHaftarah: Joshua 5:2-6:1
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓 Pesach II
+DTSTART;VALUE=DATE:20260403
+DTEND;VALUE=DATE:20260404
+UID:hebcal-20260403-8a7f3521
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Leviticus 22:26-23:44\; Numbe
+ rs 28:16-25\nHaftarah: II Kings 23:1-9\, 23:21-25
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓 Pesach III (CH''M)
+DTSTART;VALUE=DATE:20260404
+DTEND;VALUE=DATE:20260405
+UID:hebcal-20260404-c5af2e47
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Exodus 33:12-34:26\; Numbers 
+ 28:19-25\nHaftarah: Ezekiel 37:1-14
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓 Pesach IV (CH''M)
+DTSTART;VALUE=DATE:20260405
+DTEND;VALUE=DATE:20260406
+UID:hebcal-20260405-22088d98
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Exodus 13:1-16\; Numbers 28:1
+ 9-25
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓 Pesach V (CH''M)
+DTSTART;VALUE=DATE:20260406
+DTEND;VALUE=DATE:20260407
+UID:hebcal-20260406-ccdb6a58
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Exodus 22:24-23:19\; Numbers 
+ 28:19-25
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓 Pesach VI (CH''M)
+DTSTART;VALUE=DATE:20260407
+DTEND;VALUE=DATE:20260408
+UID:hebcal-20260407-a146401d
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Numbers 9:1-14\, 28:19-25
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓 Pesach VII
+DTSTART;VALUE=DATE:20260408
+DTEND;VALUE=DATE:20260409
+UID:hebcal-20260408-0133feb2
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Exodus 13:17-15:26\; Numbers 
+ 28:19-25\nHaftarah: II Samuel 22:1-51
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓 Pesach VIII
+DTSTART;VALUE=DATE:20260409
+DTEND;VALUE=DATE:20260410
+UID:hebcal-20260409-9b5e763c
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Deuteronomy 15:19-16:17\; Num
+ bers 28:19-25\nHaftarah: Isaiah 10:32-12:6
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Iyyar
+DTSTART;VALUE=DATE:20260411
+DTEND;VALUE=DATE:20260412
+UID:hebcal-20260411-6ddbc8f4
+DESCRIPTION:Molad Iyyar: Fri\, 18 minutes and 14 chalakim after 5:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Yom HaShoah
+DTSTART;VALUE=DATE:20260414
+DTEND;VALUE=DATE:20260415
+UID:hebcal-20260414-397e0803
+DESCRIPTION:Holocaust Memorial Day
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Iyyar
+DTSTART;VALUE=DATE:20260417
+DTEND;VALUE=DATE:20260418
+UID:hebcal-20260417-21689341
+DESCRIPTION:Start of month of Iyyar on the Hebrew calendar. אִיָיר (
+ transliterated Iyyar or Iyar) is the 2nd month of the Hebrew year\, has 29
+  days\, and corresponds to April or May on the Gregorian calendar.  רֹא
+ שׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a mi
+ nor holiday that occurs at the beginning of every month in the Hebrew cale
+ ndar. It is marked by the birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Iyyar
+DTSTART;VALUE=DATE:20260418
+DTEND;VALUE=DATE:20260419
+UID:hebcal-20260418-21689341
+DESCRIPTION:Start of month of Iyyar on the Hebrew calendar. אִיָיר (
+ transliterated Iyyar or Iyar) is the 2nd month of the Hebrew year\, has 29
+  days\, and corresponds to April or May on the Gregorian calendar.  רֹא
+ שׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a mi
+ nor holiday that occurs at the beginning of every month in the Hebrew cale
+ ndar. It is marked by the birth of a new moon\n\nHaftarah: Isaiah 66:1-24
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🇮🇱 Yom HaZikaron
+DTSTART;VALUE=DATE:20260421
+DTEND;VALUE=DATE:20260422
+UID:hebcal-20260421-d53cc31d
+DESCRIPTION:Israeli Memorial Day. Remembers those who died in the War of I
+ ndependence and other wars in Israel. The full name of the holiday is Yom 
+ HaZikaron LeHalalei Ma'arakhot Yisrael ul'Nifge'ei Pe'ulot HaEivah (Hebrew
+ : יוֹם הזִּכָּרוֹן לְחַלְלֵי מַעֲרָכוֹת 
+ יִשְׂרָאֵל וּלְנִפְגְעֵי פְּעֻלּוֹת הָ
+ אֵיבָה)\, Memorial Day for the Fallen Soldiers of the Wars of Israel
+  and Victims of Actions of Terrorism. Although Yom Hazikaron is normally o
+ bserved on the 4th of Iyyar\, it may be moved earlier or postponed if obse
+ rvance of the holiday (or Yom HaAtzma'ut\, which always follows it) would 
+ conflict with Shabbat
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🇮🇱 Yom HaAtzma'ut
+DTSTART;VALUE=DATE:20260422
+DTEND;VALUE=DATE:20260423
+UID:hebcal-20260422-dd24e12d
+DESCRIPTION:Israeli Independence Day. Commemorates the declaration of inde
+ pendence of Israel in 1948. Although Yom HaAtzma'ut is normally observed o
+ n the 5th of Iyyar\, it may be moved earlier or postponed if observance of
+  the holiday (or Yom HaZikaron\, which always precedes it) would conflict 
+ with Shabbat
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Pesach Sheni
+DTSTART;VALUE=DATE:20260501
+DTEND;VALUE=DATE:20260502
+UID:hebcal-20260501-f222d099
+DESCRIPTION:Second Passover\, one month after Passover
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🔥 Lag BaOmer
+DTSTART;VALUE=DATE:20260505
+DTEND;VALUE=DATE:20260506
+UID:hebcal-20260505-4223318c
+DESCRIPTION:33rd day of counting the Omer. The holiday is a temporary brea
+ k from the semi-mourning period the counting of the Omer. Practices includ
+ e lighting bonfires\, getting haircuts\, and Jewish weddings
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🇮🇱 Yom Yerushalayim
+DTSTART;VALUE=DATE:20260515
+DTEND;VALUE=DATE:20260516
+UID:hebcal-20260515-bd3ce4b3
+DESCRIPTION:Jerusalem Day. Commemorates the re-unification of Jerusalem in
+  1967
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Sivan
+DTSTART;VALUE=DATE:20260516
+DTEND;VALUE=DATE:20260517
+UID:hebcal-20260516-ccad0557
+DESCRIPTION:Molad Sivan: Sat\, 2 minutes and 15 chalakim after 18:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Sivan
+DTSTART;VALUE=DATE:20260517
+DTEND;VALUE=DATE:20260518
+UID:hebcal-20260517-ea657a21
+DESCRIPTION:Start of month of Sivan on the Hebrew calendar. Sivan (סִי
+ וָן) is the 3rd month of the Hebrew year\, has 30 days\, and correspond
+ s to May or June on the Gregorian calendar.  רֹאשׁ חוֹדֶשׁ\, t
+ ransliterated Rosh Chodesh or Rosh Hodesh\, is a minor holiday that occurs
+  at the beginning of every month in the Hebrew calendar. It is marked by t
+ he birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:⛰️🌸 Erev Shavuot
+DTSTART;VALUE=DATE:20260521
+DTEND;VALUE=DATE:20260522
+UID:hebcal-20260521-516b1178
+DESCRIPTION:Festival of Weeks. Commemorates the giving of the Torah at Mou
+ nt Sinai
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:⛰️🌸 Shavuot I
+DTSTART;VALUE=DATE:20260522
+DTEND;VALUE=DATE:20260523
+UID:hebcal-20260522-547670dd
+DESCRIPTION:Festival of Weeks. Commemorates the giving of the Torah at Mou
+ nt Sinai\n\nTorah: Exodus 19:1-20:23\; Numbers 28:26-31\nHaftarah: Ezekiel
+  1:1-28\, 3:12
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:⛰️🌸 Shavuot II
+DTSTART;VALUE=DATE:20260523
+DTEND;VALUE=DATE:20260524
+UID:hebcal-20260523-69691cf1
+DESCRIPTION:Festival of Weeks. Commemorates the giving of the Torah at Mou
+ nt Sinai\n\nTorah: Deuteronomy 14:22-16:17\; Numbers 28:26-31\nHaftarah: H
+ abakkuk 3:1-19
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Tamuz
+DTSTART;VALUE=DATE:20260613
+DTEND;VALUE=DATE:20260614
+UID:hebcal-20260613-cdc33b62
+DESCRIPTION:Molad Tamuz: Mon\, 46 minutes and 16 chalakim after 6:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Tamuz
+DTSTART;VALUE=DATE:20260615
+DTEND;VALUE=DATE:20260616
+UID:hebcal-20260615-e57e8b15
+DESCRIPTION:Start of month of Tamuz on the Hebrew calendar. תַּמּוּ
+ ז (transliterated Tamuz or Tammuz) is the 4th month of the Hebrew year\, 
+ has 29 days\, and corresponds to June or July on the Gregorian calendar.  
+ רֹאשׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, i
+ s a minor holiday that occurs at the beginning of every month in the Hebre
+ w calendar. It is marked by the birth of a new moon\n\nTorah: Numbers 28:1
+ -15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Tamuz
+DTSTART;VALUE=DATE:20260616
+DTEND;VALUE=DATE:20260617
+UID:hebcal-20260616-e57e8b15
+DESCRIPTION:Start of month of Tamuz on the Hebrew calendar. תַּמּוּ
+ ז (transliterated Tamuz or Tammuz) is the 4th month of the Hebrew year\, 
+ has 29 days\, and corresponds to June or July on the Gregorian calendar.  
+ רֹאשׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, i
+ s a minor holiday that occurs at the beginning of every month in the Hebre
+ w calendar. It is marked by the birth of a new moon\n\nTorah: Numbers 28:1
+ -15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Tzom Tammuz
+DTSTART;VALUE=DATE:20260702
+DTEND;VALUE=DATE:20260703
+UID:hebcal-20260702-227143a8
+DESCRIPTION:Fast commemorating breaching of the walls of Jerusalem before 
+ the destruction of the Second Temple\n\nTorah: Exodus 32:11-14\, 34:1-10
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Av
+DTSTART;VALUE=DATE:20260711
+DTEND;VALUE=DATE:20260712
+UID:hebcal-20260711-cd524889
+DESCRIPTION:Molad Av: Tue\, 30 minutes and 17 chalakim after 19:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Av
+DTSTART;VALUE=DATE:20260715
+DTEND;VALUE=DATE:20260716
+UID:hebcal-20260715-b20a292a
+DESCRIPTION:Start of month of Av on the Hebrew calendar. Av (אָב) is th
+ e 5th month of the Hebrew year\, has 30 days\, and corresponds to July or 
+ August on the Gregorian calendar.  רֹאשׁ חוֹדֶשׁ\, translitera
+ ted Rosh Chodesh or Rosh Hodesh\, is a minor holiday that occurs at the be
+ ginning of every month in the Hebrew calendar. It is marked by the birth o
+ f a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat Chazon
+DTSTART;VALUE=DATE:20260718
+DTEND;VALUE=DATE:20260719
+UID:hebcal-20260718-40fb55a8
+DESCRIPTION:Shabbat of Prophecy/Shabbat of Vision. Shabbat before Tish'a B
+ 'Av
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Erev Tish'a B'Av
+DTSTART;VALUE=DATE:20260722
+DTEND;VALUE=DATE:20260723
+UID:hebcal-20260722-16aac1cb
+DESCRIPTION:The Ninth of Av. Fast commemorating the destruction of the two
+  Temples
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Tish'a B'Av
+DTSTART;VALUE=DATE:20260723
+DTEND;VALUE=DATE:20260724
+UID:hebcal-20260723-1fe8650c
+DESCRIPTION:The Ninth of Av. Fast commemorating the destruction of the two
+  Temples\n\nTorah: Deuteronomy 4:25-40\nHaftarah: Jeremiah 8:13-9:23
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat Nachamu
+DTSTART;VALUE=DATE:20260725
+DTEND;VALUE=DATE:20260726
+UID:hebcal-20260725-57d358fc
+DESCRIPTION:Shabbat after Tish'a B'Av (Shabbat of Consolation). The first 
+ of seven Shabbatot leading up to Rosh Hashanah. Named after the Haftarah (
+ from Isaiah 40) which begins with the verse נַחֲמוּ נַחֲמוּ\
+ , עַמִּי ("Comfort\, oh comfort my people")
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:❤️ Tu B'Av
+DTSTART;VALUE=DATE:20260729
+DTEND;VALUE=DATE:20260730
+UID:hebcal-20260729-ccea991a
+DESCRIPTION:Minor Jewish holiday of love. Observed on the 15th day of the 
+ Hebrew month of Av
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Elul
+DTSTART;VALUE=DATE:20260808
+DTEND;VALUE=DATE:20260809
+UID:hebcal-20260808-61fb928c
+DESCRIPTION:Molad Elul: Thu\, 15 minutes and 0 chalakim after 8:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Elul
+DTSTART;VALUE=DATE:20260813
+DTEND;VALUE=DATE:20260814
+UID:hebcal-20260813-4a2abce2
+DESCRIPTION:Start of month of Elul on the Hebrew calendar. Elul (אֱלו
+ ּל) is the 6th month of the Hebrew year\, has 29 days\, and corresponds 
+ to August or September on the Gregorian calendar.  רֹאשׁ חוֹדֶש
+ ׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a minor holiday that 
+ occurs at the beginning of every month in the Hebrew calendar. It is marke
+ d by the birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🐑 Rosh Hashana LaBehemot
+DTSTART;VALUE=DATE:20260814
+DTEND;VALUE=DATE:20260815
+UID:hebcal-20260814-0a58fcce
+DESCRIPTION:New Year for Tithing Animals
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Elul
+DTSTART;VALUE=DATE:20260814
+DTEND;VALUE=DATE:20260815
+UID:hebcal-20260814-4a2abce2
+DESCRIPTION:Start of month of Elul on the Hebrew calendar. Elul (אֱלו
+ ּל) is the 6th month of the Hebrew year\, has 29 days\, and corresponds 
+ to August or September on the Gregorian calendar.  רֹאשׁ חוֹדֶש
+ ׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a minor holiday that 
+ occurs at the beginning of every month in the Hebrew calendar. It is marke
+ d by the birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Leil Selichot
+DTSTART;VALUE=DATE:20260905
+DTEND;VALUE=DATE:20260906
+UID:hebcal-20260905-121db6a8
+DESCRIPTION:Prayers for forgiveness in preparation for the High Holidays
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🍏🍯 Erev Rosh Hashana
+DTSTART;VALUE=DATE:20260911
+DTEND;VALUE=DATE:20260912
+UID:hebcal-20260911-69c47b58
+DESCRIPTION:The Jewish New Year. Also spelled Rosh Hashanah
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🍏🍯 Rosh Hashana 5787
+DTSTART;VALUE=DATE:20260912
+DTEND;VALUE=DATE:20260913
+UID:hebcal-20260912-105e5259
+DESCRIPTION:The Jewish New Year. Also spelled Rosh Hashanah\n\nTorah: Gene
+ sis 21:1-34\; Numbers 29:1-6\nHaftarah: I Samuel 1:1-2:10
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🍏🍯 Rosh Hashana II
+DTSTART;VALUE=DATE:20260913
+DTEND;VALUE=DATE:20260914
+UID:hebcal-20260913-e24e7167
+DESCRIPTION:The Jewish New Year. Also spelled Rosh Hashanah\n\nTorah: Gene
+ sis 22:1-24\; Numbers 29:1-6\nHaftarah: Jeremiah 31:1-19
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Tzom Gedaliah
+DTSTART;VALUE=DATE:20260914
+DTEND;VALUE=DATE:20260915
+UID:hebcal-20260914-398de2df
+DESCRIPTION:Fast of the Seventh Month. Commemorates the assassination of t
+ he Jewish governor of Judah\n\nTorah: Exodus 32:11-14\, 34:1-10
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat Shuva
+DTSTART;VALUE=DATE:20260919
+DTEND;VALUE=DATE:20260920
+UID:hebcal-20260919-e3c3a1e4
+DESCRIPTION:Shabbat of Returning. Shabbat that occurs during the Ten Days 
+ of Repentance between Rosh Hashanah and Yom Kippur\n\nHaftarah: Hosea 14:2
+ -10\; Micah 7:18-20\; Joel 2:15-27
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Erev Yom Kippur
+DTSTART;VALUE=DATE:20260920
+DTEND;VALUE=DATE:20260921
+UID:hebcal-20260920-821e8c6f
+DESCRIPTION:Day of Atonement. The holiest day of the year in Judaism\, tra
+ ditionally observed with a 25-hour period of fasting and intensive prayer
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Yom Kippur
+DTSTART;VALUE=DATE:20260921
+DTEND;VALUE=DATE:20260922
+UID:hebcal-20260921-3eebed91
+DESCRIPTION:Day of Atonement. The holiest day of the year in Judaism\, tra
+ ditionally observed with a 25-hour period of fasting and intensive prayer\
+ n\nTorah: Leviticus 16:1-34\; Numbers 29:7-11\nHaftarah: Isaiah 57:14-58:1
+ 4
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Erev Sukkot
+DTSTART;VALUE=DATE:20260925
+DTEND;VALUE=DATE:20260926
+UID:hebcal-20260925-2e047aaf
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Sukkot I
+DTSTART;VALUE=DATE:20260926
+DTEND;VALUE=DATE:20260927
+UID:hebcal-20260926-3b6b9611
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)\n\nTorah: Leviticus 22:26-23:44\; Numbers 2
+ 9:12-16\nHaftarah: Zechariah 14:1-21
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Sukkot II
+DTSTART;VALUE=DATE:20260927
+DTEND;VALUE=DATE:20260928
+UID:hebcal-20260927-dd814373
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)\n\nTorah: Leviticus 22:26-23:44\; Numbers 2
+ 9:12-16\nHaftarah: I Kings 8:2-21
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Sukkot III (CH''M)
+DTSTART;VALUE=DATE:20260928
+DTEND;VALUE=DATE:20260929
+UID:hebcal-20260928-5e93ab94
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)\n\nTorah: Numbers 29:17-25\, 29:17-22
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Sukkot IV (CH''M)
+DTSTART;VALUE=DATE:20260929
+DTEND;VALUE=DATE:20260930
+UID:hebcal-20260929-ffda39c9
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)\n\nTorah: Numbers 29:20-28\, 29:20-25
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Sukkot V (CH''M)
+DTSTART;VALUE=DATE:20260930
+DTEND;VALUE=DATE:20261001
+UID:hebcal-20260930-68c6e88e
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)\n\nTorah: Numbers 29:23-31\, 29:23-28
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Sukkot VI (CH''M)
+DTSTART;VALUE=DATE:20261001
+DTEND;VALUE=DATE:20261002
+UID:hebcal-20261001-698f117c
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)\n\nTorah: Numbers 29:26-34\, 29:26-31
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Sukkot VII (Hoshana Raba)
+DTSTART;VALUE=DATE:20261002
+DTEND;VALUE=DATE:20261003
+UID:hebcal-20261002-f5de0f6c
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)\n\nTorah: Numbers 29:26-34
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Shmini Atzeret
+DTSTART;VALUE=DATE:20261003
+DTEND;VALUE=DATE:20261004
+UID:hebcal-20261003-e6edcf39
+DESCRIPTION:Eighth Day of Assembly. Immediately following Sukkot\, it is o
+ bserved as a separate holiday in the Diaspora and is combined with Simchat
+  Torah in Israel\n\nTorah: Deuteronomy 14:22-16:17\; Numbers 29:35-30:1\nH
+ aftarah: I Kings 8:54-66
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Simchat Torah
+DTSTART;VALUE=DATE:20261004
+DTEND;VALUE=DATE:20261005
+UID:hebcal-20261004-952508c2
+DESCRIPTION:Day of Celebrating the Torah. Celebration marking the conclusi
+ on of the annual cycle of public Torah readings\, and the beginning of a n
+ ew cycle\n\nTorah: Deuteronomy 33:1-34:12\; Genesis 1:1-2:3\; Numbers 29:3
+ 5-30:1\nHaftarah: Joshua 1:1-18
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Cheshvan
+DTSTART;VALUE=DATE:20261010
+DTEND;VALUE=DATE:20261011
+UID:hebcal-20261010-864cf86a
+DESCRIPTION:Molad Cheshvan: Sun\, 43 minutes and 2 chalakim after 9:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Cheshvan
+DTSTART;VALUE=DATE:20261011
+DTEND;VALUE=DATE:20261012
+UID:hebcal-20261011-6fbbc895
+DESCRIPTION:Start of month of Cheshvan on the Hebrew calendar. חֶשְׁ
+ וָן (transliterated Cheshvan or Heshvan) is the 8th month of the Hebrew
+  year\, has 29 or 30 days\, and corresponds to October or November on the 
+ Gregorian calendar. רֹאשׁ חוֹדֶשׁ\, transliterated Rosh Chodes
+ h or Rosh Hodesh\, is a minor holiday that occurs at the beginning of ever
+ y month in the Hebrew calendar. It is marked by the birth of a new moon\n\
+ nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Cheshvan
+DTSTART;VALUE=DATE:20261012
+DTEND;VALUE=DATE:20261013
+UID:hebcal-20261012-6fbbc895
+DESCRIPTION:Start of month of Cheshvan on the Hebrew calendar. חֶשְׁ
+ וָן (transliterated Cheshvan or Heshvan) is the 8th month of the Hebrew
+  year\, has 29 or 30 days\, and corresponds to October or November on the 
+ Gregorian calendar. רֹאשׁ חוֹדֶשׁ\, transliterated Rosh Chodes
+ h or Rosh Hodesh\, is a minor holiday that occurs at the beginning of ever
+ y month in the Hebrew calendar. It is marked by the birth of a new moon\n\
+ nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Kislev
+DTSTART;VALUE=DATE:20261107
+DTEND;VALUE=DATE:20261108
+UID:hebcal-20261107-6ce4b2c3
+DESCRIPTION:Molad Kislev: Mon\, 27 minutes and 3 chalakim after 22:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Sigd
+DTSTART;VALUE=DATE:20261109
+DTEND;VALUE=DATE:20261110
+UID:hebcal-20261109-3079e054
+DESCRIPTION:Ethiopian Jewish holiday occurring 50 days after Yom Kippur
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Kislev
+DTSTART;VALUE=DATE:20261110
+DTEND;VALUE=DATE:20261111
+UID:hebcal-20261110-171af096
+DESCRIPTION:Start of month of Kislev on the Hebrew calendar. Kislev (כִ
+ ּסְלֵו) is the 9th month of the Hebrew year\, has 30 or 29 days\, an
+ d corresponds to November or December on the Gregorian calendar.  רֹאש
+ ׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a mino
+ r holiday that occurs at the beginning of every month in the Hebrew calend
+ ar. It is marked by the birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Kislev
+DTSTART;VALUE=DATE:20261111
+DTEND;VALUE=DATE:20261112
+UID:hebcal-20261111-171af096
+DESCRIPTION:Start of month of Kislev on the Hebrew calendar. Kislev (כִ
+ ּסְלֵו) is the 9th month of the Hebrew year\, has 30 or 29 days\, an
+ d corresponds to November or December on the Gregorian calendar.  רֹאש
+ ׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a mino
+ r holiday that occurs at the beginning of every month in the Hebrew calend
+ ar. It is marked by the birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎1️⃣ Chanukah: 1 Candle
+DTSTART;VALUE=DATE:20261204
+DTEND;VALUE=DATE:20261205
+UID:hebcal-20261204-1c6fa26d
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎2️⃣ Chanukah: 2 Candles
+DTSTART;VALUE=DATE:20261205
+DTEND;VALUE=DATE:20261206
+UID:hebcal-20261205-bf71330e
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nHaftarah: Zechariah 2:14-4:7
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Tevet
+DTSTART;VALUE=DATE:20261205
+DTEND;VALUE=DATE:20261206
+UID:hebcal-20261205-e0441a9f
+DESCRIPTION:Molad Tevet: Wed\, 11 minutes and 4 chalakim after 11:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎3️⃣ Chanukah: 3 Candles
+DTSTART;VALUE=DATE:20261206
+DTEND;VALUE=DATE:20261207
+UID:hebcal-20261206-3a5e82d5
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nTorah: Numbers 7:18-29
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎4️⃣ Chanukah: 4 Candles
+DTSTART;VALUE=DATE:20261207
+DTEND;VALUE=DATE:20261208
+UID:hebcal-20261207-8341b82a
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nTorah: Numbers 7:24-35
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎5️⃣ Chanukah: 5 Candles
+DTSTART;VALUE=DATE:20261208
+DTEND;VALUE=DATE:20261209
+UID:hebcal-20261208-841127b9
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nTorah: Numbers 7:30-41
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎6️⃣ Chanukah: 6 Candles
+DTSTART;VALUE=DATE:20261209
+DTEND;VALUE=DATE:20261210
+UID:hebcal-20261209-9733c9a9
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nTorah: Numbers 7:36-47
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Chag HaBanot
+DTSTART;VALUE=DATE:20261210
+DTEND;VALUE=DATE:20261211
+UID:hebcal-20261210-0139c73e
+DESCRIPTION:North African Chanukah festival of daughters. Called Eid al-Ba
+ nat in Arabic\, the holiday was most preserved in Tunisia
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎7️⃣ Chanukah: 7 Candles
+DTSTART;VALUE=DATE:20261210
+DTEND;VALUE=DATE:20261211
+UID:hebcal-20261210-635c3774
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nTorah: Numbers 28:1-15\, 7:42-47
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Tevet
+DTSTART;VALUE=DATE:20261210
+DTEND;VALUE=DATE:20261211
+UID:hebcal-20261210-e83ced3d
+DESCRIPTION:Start of month of Tevet on the Hebrew calendar. Tevet (טֵב
+ ֵת) is the 10th month of the Hebrew year\, has 29 days\, and corresponds
+  to December or January on the Gregorian calendar.  רֹאשׁ חוֹדֶ
+ שׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a minor holiday tha
+ t occurs at the beginning of every month in the Hebrew calendar. It is mar
+ ked by the birth of a new moon\n\nTorah: Numbers 28:1-15\, 7:42-47
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎8️⃣ Chanukah: 8 Candles
+DTSTART;VALUE=DATE:20261211
+DTEND;VALUE=DATE:20261212
+UID:hebcal-20261211-d85c28dc
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nTorah: Numbers 28:1-15\, 7:48-53
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Tevet
+DTSTART;VALUE=DATE:20261211
+DTEND;VALUE=DATE:20261212
+UID:hebcal-20261211-e83ced3d
+DESCRIPTION:Start of month of Tevet on the Hebrew calendar. Tevet (טֵב
+ ֵת) is the 10th month of the Hebrew year\, has 29 days\, and corresponds
+  to December or January on the Gregorian calendar.  רֹאשׁ חוֹדֶ
+ שׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a minor holiday tha
+ t occurs at the beginning of every month in the Hebrew calendar. It is mar
+ ked by the birth of a new moon\n\nTorah: Numbers 28:1-15\, 7:48-53
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎 Chanukah: 8th Day
+DTSTART;VALUE=DATE:20261212
+DTEND;VALUE=DATE:20261213
+UID:hebcal-20261212-7c4cd5b6
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nHaftarah: I Kings 7:40-50
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Asara B'Tevet
+DTSTART;VALUE=DATE:20261220
+DTEND;VALUE=DATE:20261221
+UID:hebcal-20261220-16d2435e
+DESCRIPTION:Fast commemorating the siege of Jerusalem\n\nTorah: Exodus 32:
+ 11-14\, 34:1-10
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Sh'vat
+DTSTART;VALUE=DATE:20270102
+DTEND;VALUE=DATE:20270103
+UID:hebcal-20270102-f7388855
+DESCRIPTION:Molad Sh'vat: Thu\, 55 minutes and 5 chalakim after 23:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Sh'vat
+DTSTART;VALUE=DATE:20270109
+DTEND;VALUE=DATE:20270110
+UID:hebcal-20270109-b9dbcfbb
+DESCRIPTION:Start of month of Sh'vat on the Hebrew calendar. שְׁבָט 
+ (transliterated Sh'vat or Shevat) is the 11th month of the Hebrew year\, h
+ as 30 days\, and corresponds to January or February on the Gregorian calen
+ dar.  רֹאשׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hode
+ sh\, is a minor holiday that occurs at the beginning of every month in the
+  Hebrew calendar. It is marked by the birth of a new moon\n\nHaftarah: Isa
+ iah 66:1-24
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌳 Tu BiShvat
+DTSTART;VALUE=DATE:20270123
+DTEND;VALUE=DATE:20270124
+UID:hebcal-20270123-a7d91a90
+DESCRIPTION:New Year for Trees. Tu BiShvat is one of four “New Years” 
+ mentioned in the Mishnah
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat Shirah
+DTSTART;VALUE=DATE:20270123
+DTEND;VALUE=DATE:20270124
+UID:hebcal-20270123-40f5da47
+DESCRIPTION:Shabbat of Song. Shabbat that includes Parashat Beshalach
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Adar I
+DTSTART;VALUE=DATE:20270206
+DTEND;VALUE=DATE:20270207
+UID:hebcal-20270206-322ad185
+DESCRIPTION:Molad Adar I: Sat\, 39 minutes and 6 chalakim after 12:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Adar I
+DTSTART;VALUE=DATE:20270207
+DTEND;VALUE=DATE:20270208
+UID:hebcal-20270207-34df8174
+DESCRIPTION:Start of month of Adar I (on leap years) on the Hebrew calenda
+ r. Adar I (אַדָר א׳) is the 12th month of the Hebrew year\, occurs 
+ only on leap years\, has 30 days\, and corresponds to February or March on
+  the Gregorian calendar.  רֹאשׁ חוֹדֶשׁ\, transliterated Rosh 
+ Chodesh or Rosh Hodesh\, is a minor holiday that occurs at the beginning o
+ f every month in the Hebrew calendar. It is marked by the birth of a new m
+ oon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Adar I
+DTSTART;VALUE=DATE:20270208
+DTEND;VALUE=DATE:20270209
+UID:hebcal-20270208-34df8174
+DESCRIPTION:Start of month of Adar I (on leap years) on the Hebrew calenda
+ r. Adar I (אַדָר א׳) is the 12th month of the Hebrew year\, occurs 
+ only on leap years\, has 30 days\, and corresponds to February or March on
+  the Gregorian calendar.  רֹאשׁ חוֹדֶשׁ\, transliterated Rosh 
+ Chodesh or Rosh Hodesh\, is a minor holiday that occurs at the beginning o
+ f every month in the Hebrew calendar. It is marked by the birth of a new m
+ oon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🎭️ Purim Katan
+DTSTART;VALUE=DATE:20270221
+DTEND;VALUE=DATE:20270222
+UID:hebcal-20270221-a3a42e5d
+DESCRIPTION:Minor Purim celebration during Adar I on leap years
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🎭️ Shushan Purim Katan
+DTSTART;VALUE=DATE:20270222
+DTEND;VALUE=DATE:20270223
+UID:hebcal-20270222-23970e25
+DESCRIPTION:Minor Purim celebration during Adar I on leap years in Jerusal
+ em and walled cities
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat Shekalim
+DTSTART;VALUE=DATE:20270306
+DTEND;VALUE=DATE:20270307
+UID:hebcal-20270306-713517f2
+DESCRIPTION:Shabbat before Rosh Chodesh Adar. Read in preparation for Puri
+ m\n\nHaftarah: II Kings 12:1-17
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Adar II
+DTSTART;VALUE=DATE:20270306
+DTEND;VALUE=DATE:20270307
+UID:hebcal-20270306-d2de4f1c
+DESCRIPTION:Molad Adar II: Mon\, 23 minutes and 7 chalakim after 1:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Adar II
+DTSTART;VALUE=DATE:20270309
+DTEND;VALUE=DATE:20270310
+UID:hebcal-20270309-3d53023e
+DESCRIPTION:Start of month of Adar II (on leap years) on the Hebrew calend
+ ar. Adar II (אַדָר ב׳)\, sometimes "Adar Bet" or "Adar Sheni"\, is 
+ the 13th month of the Hebrew year\, has 29 days\, occurs only on leap year
+ s\, and corresponds to February or March on the Gregorian calendar.  רֹ
+ אשׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a 
+ minor holiday that occurs at the beginning of every month in the Hebrew ca
+ lendar. It is marked by the birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Adar II
+DTSTART;VALUE=DATE:20270310
+DTEND;VALUE=DATE:20270311
+UID:hebcal-20270310-3d53023e
+DESCRIPTION:Start of month of Adar II (on leap years) on the Hebrew calend
+ ar. Adar II (אַדָר ב׳)\, sometimes "Adar Bet" or "Adar Sheni"\, is 
+ the 13th month of the Hebrew year\, has 29 days\, occurs only on leap year
+ s\, and corresponds to February or March on the Gregorian calendar.  רֹ
+ אשׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a 
+ minor holiday that occurs at the beginning of every month in the Hebrew ca
+ lendar. It is marked by the birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat Zachor
+DTSTART;VALUE=DATE:20270320
+DTEND;VALUE=DATE:20270321
+UID:hebcal-20270320-b709beaa
+DESCRIPTION:Shabbat of Remembrance. Shabbat before Purim\n\nHaftarah: I Sa
+ muel 15:2-34
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Ta'anit Esther
+DTSTART;VALUE=DATE:20270322
+DTEND;VALUE=DATE:20270323
+UID:hebcal-20270322-65e47969
+DESCRIPTION:Fast of Esther\n\nTorah: Exodus 32:11-14\, 34:1-10
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🎭️📜 Erev Purim
+DTSTART;VALUE=DATE:20270322
+DTEND;VALUE=DATE:20270323
+UID:hebcal-20270322-4fdbaae2
+DESCRIPTION:Celebration of Jewish deliverance as told by Megilat Esther. I
+ t commemorates a time when the Jewish people living in Persia were saved f
+ rom extermination
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🎭️📜 Purim
+DTSTART;VALUE=DATE:20270323
+DTEND;VALUE=DATE:20270324
+UID:hebcal-20270323-b59993b2
+DESCRIPTION:Celebration of Jewish deliverance as told by Megilat Esther. I
+ t commemorates a time when the Jewish people living in Persia were saved f
+ rom extermination\n\nTorah: Exodus 17:8-16
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🎭️📜 Shushan Purim
+DTSTART;VALUE=DATE:20270324
+DTEND;VALUE=DATE:20270325
+UID:hebcal-20270324-12d3cbc7
+DESCRIPTION:Purim celebrated in Jerusalem and walled cities
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat Parah
+DTSTART;VALUE=DATE:20270327
+DTEND;VALUE=DATE:20270328
+UID:hebcal-20270327-1624bd32
+DESCRIPTION:Shabbat of the Red Heifer. Shabbat before Shabbat HaChodesh\, 
+ in preparation for Passover\n\nHaftarah: Ezekiel 36:16-38
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat HaChodesh
+DTSTART;VALUE=DATE:20270403
+DTEND;VALUE=DATE:20270404
+UID:hebcal-20270403-3e8a7379
+DESCRIPTION:Shabbat before Rosh Chodesh Nissan. Read in preparation for Pa
+ ssover\n\nHaftarah: Ezekiel 45:16-46:18
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Nisan
+DTSTART;VALUE=DATE:20270403
+DTEND;VALUE=DATE:20270404
+UID:hebcal-20270403-d006cb53
+DESCRIPTION:Molad Nisan: Tue\, 7 minutes and 8 chalakim after 14:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Nisan
+DTSTART;VALUE=DATE:20270408
+DTEND;VALUE=DATE:20270409
+UID:hebcal-20270408-26a17e2b
+DESCRIPTION:Start of month of Nisan on the Hebrew calendar. נִיסָן (
+ transliterated Nisan or Nissan) is the 1st month of the Hebrew year\, has 
+ 30 days\, and corresponds to March or April on the Gregorian calendar. ר
+ ֹאשׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is 
+ a minor holiday that occurs at the beginning of every month in the Hebrew 
+ calendar. It is marked by the birth of a new moon\n\nTorah: Numbers 28:1-1
+ 5
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat HaGadol
+DTSTART;VALUE=DATE:20270417
+DTEND;VALUE=DATE:20270418
+UID:hebcal-20270417-2e333569
+DESCRIPTION:Shabbat before Pesach (The Great Shabbat)\n\nHaftarah: Malachi
+  3:4-24
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🇮🇱 Yom HaAliyah
+DTSTART;VALUE=DATE:20270417
+DTEND;VALUE=DATE:20270418
+UID:hebcal-20270417-7ef10a7e
+DESCRIPTION:Recognizes Aliyah\, immigration to the Jewish State of Israel
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Ta'anit Bechorot
+DTSTART;VALUE=DATE:20270421
+DTEND;VALUE=DATE:20270422
+UID:hebcal-20270421-73101110
+DESCRIPTION:Fast of the First Born
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓🍷 Erev Pesach
+DTSTART;VALUE=DATE:20270421
+DTEND;VALUE=DATE:20270422
+UID:hebcal-20270421-b899d38a
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓🍷 Pesach I
+DTSTART;VALUE=DATE:20270422
+DTEND;VALUE=DATE:20270423
+UID:hebcal-20270422-f5de93e3
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Exodus 12:21-51\; Numbers 28:
+ 16-25\nHaftarah: Joshua 5:2-6:1
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓 Pesach II
+DTSTART;VALUE=DATE:20270423
+DTEND;VALUE=DATE:20270424
+UID:hebcal-20270423-8a7f3521
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Leviticus 22:26-23:44\; Numbe
+ rs 28:16-25\nHaftarah: II Kings 23:1-9\, 23:21-25
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓 Pesach III (CH''M)
+DTSTART;VALUE=DATE:20270424
+DTEND;VALUE=DATE:20270425
+UID:hebcal-20270424-c5af2e47
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Exodus 33:12-34:26\; Numbers 
+ 28:19-25\nHaftarah: Ezekiel 37:1-14
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓 Pesach IV (CH''M)
+DTSTART;VALUE=DATE:20270425
+DTEND;VALUE=DATE:20270426
+UID:hebcal-20270425-22088d98
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Exodus 13:1-16\; Numbers 28:1
+ 9-25
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓 Pesach V (CH''M)
+DTSTART;VALUE=DATE:20270426
+DTEND;VALUE=DATE:20270427
+UID:hebcal-20270426-ccdb6a58
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Exodus 22:24-23:19\; Numbers 
+ 28:19-25
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓 Pesach VI (CH''M)
+DTSTART;VALUE=DATE:20270427
+DTEND;VALUE=DATE:20270428
+UID:hebcal-20270427-a146401d
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Numbers 9:1-14\, 28:19-25
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓 Pesach VII
+DTSTART;VALUE=DATE:20270428
+DTEND;VALUE=DATE:20270429
+UID:hebcal-20270428-0133feb2
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Exodus 13:17-15:26\; Numbers 
+ 28:19-25\nHaftarah: II Samuel 22:1-51
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓 Pesach VIII
+DTSTART;VALUE=DATE:20270429
+DTEND;VALUE=DATE:20270430
+UID:hebcal-20270429-9b5e763c
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Deuteronomy 15:19-16:17\; Num
+ bers 28:19-25\nHaftarah: Isaiah 10:32-12:6
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Iyyar
+DTSTART;VALUE=DATE:20270501
+DTEND;VALUE=DATE:20270502
+UID:hebcal-20270501-6ddbc8f4
+DESCRIPTION:Molad Iyyar: Thu\, 51 minutes and 9 chalakim after 2:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Yom HaShoah
+DTSTART;VALUE=DATE:20270504
+DTEND;VALUE=DATE:20270505
+UID:hebcal-20270504-397e0803
+DESCRIPTION:Holocaust Memorial Day
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Iyyar
+DTSTART;VALUE=DATE:20270507
+DTEND;VALUE=DATE:20270508
+UID:hebcal-20270507-21689341
+DESCRIPTION:Start of month of Iyyar on the Hebrew calendar. אִיָיר (
+ transliterated Iyyar or Iyar) is the 2nd month of the Hebrew year\, has 29
+  days\, and corresponds to April or May on the Gregorian calendar.  רֹא
+ שׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a mi
+ nor holiday that occurs at the beginning of every month in the Hebrew cale
+ ndar. It is marked by the birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Iyyar
+DTSTART;VALUE=DATE:20270508
+DTEND;VALUE=DATE:20270509
+UID:hebcal-20270508-21689341
+DESCRIPTION:Start of month of Iyyar on the Hebrew calendar. אִיָיר (
+ transliterated Iyyar or Iyar) is the 2nd month of the Hebrew year\, has 29
+  days\, and corresponds to April or May on the Gregorian calendar.  רֹא
+ שׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a mi
+ nor holiday that occurs at the beginning of every month in the Hebrew cale
+ ndar. It is marked by the birth of a new moon\n\nHaftarah: Isaiah 66:1-24
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🇮🇱 Yom HaZikaron
+DTSTART;VALUE=DATE:20270511
+DTEND;VALUE=DATE:20270512
+UID:hebcal-20270511-d53cc31d
+DESCRIPTION:Israeli Memorial Day. Remembers those who died in the War of I
+ ndependence and other wars in Israel. The full name of the holiday is Yom 
+ HaZikaron LeHalalei Ma'arakhot Yisrael ul'Nifge'ei Pe'ulot HaEivah (Hebrew
+ : יוֹם הזִּכָּרוֹן לְחַלְלֵי מַעֲרָכוֹת 
+ יִשְׂרָאֵל וּלְנִפְגְעֵי פְּעֻלּוֹת הָ
+ אֵיבָה)\, Memorial Day for the Fallen Soldiers of the Wars of Israel
+  and Victims of Actions of Terrorism. Although Yom Hazikaron is normally o
+ bserved on the 4th of Iyyar\, it may be moved earlier or postponed if obse
+ rvance of the holiday (or Yom HaAtzma'ut\, which always follows it) would 
+ conflict with Shabbat
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🇮🇱 Yom HaAtzma'ut
+DTSTART;VALUE=DATE:20270512
+DTEND;VALUE=DATE:20270513
+UID:hebcal-20270512-dd24e12d
+DESCRIPTION:Israeli Independence Day. Commemorates the declaration of inde
+ pendence of Israel in 1948. Although Yom HaAtzma'ut is normally observed o
+ n the 5th of Iyyar\, it may be moved earlier or postponed if observance of
+  the holiday (or Yom HaZikaron\, which always precedes it) would conflict 
+ with Shabbat
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Pesach Sheni
+DTSTART;VALUE=DATE:20270521
+DTEND;VALUE=DATE:20270522
+UID:hebcal-20270521-f222d099
+DESCRIPTION:Second Passover\, one month after Passover
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🔥 Lag BaOmer
+DTSTART;VALUE=DATE:20270525
+DTEND;VALUE=DATE:20270526
+UID:hebcal-20270525-4223318c
+DESCRIPTION:33rd day of counting the Omer. The holiday is a temporary brea
+ k from the semi-mourning period the counting of the Omer. Practices includ
+ e lighting bonfires\, getting haircuts\, and Jewish weddings
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🇮🇱 Yom Yerushalayim
+DTSTART;VALUE=DATE:20270604
+DTEND;VALUE=DATE:20270605
+UID:hebcal-20270604-bd3ce4b3
+DESCRIPTION:Jerusalem Day. Commemorates the re-unification of Jerusalem in
+  1967
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Sivan
+DTSTART;VALUE=DATE:20270605
+DTEND;VALUE=DATE:20270606
+UID:hebcal-20270605-ccad0557
+DESCRIPTION:Molad Sivan: Fri\, 35 minutes and 10 chalakim after 15:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Sivan
+DTSTART;VALUE=DATE:20270606
+DTEND;VALUE=DATE:20270607
+UID:hebcal-20270606-ea657a21
+DESCRIPTION:Start of month of Sivan on the Hebrew calendar. Sivan (סִי
+ וָן) is the 3rd month of the Hebrew year\, has 30 days\, and correspond
+ s to May or June on the Gregorian calendar.  רֹאשׁ חוֹדֶשׁ\, t
+ ransliterated Rosh Chodesh or Rosh Hodesh\, is a minor holiday that occurs
+  at the beginning of every month in the Hebrew calendar. It is marked by t
+ he birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:⛰️🌸 Erev Shavuot
+DTSTART;VALUE=DATE:20270610
+DTEND;VALUE=DATE:20270611
+UID:hebcal-20270610-516b1178
+DESCRIPTION:Festival of Weeks. Commemorates the giving of the Torah at Mou
+ nt Sinai
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:⛰️🌸 Shavuot I
+DTSTART;VALUE=DATE:20270611
+DTEND;VALUE=DATE:20270612
+UID:hebcal-20270611-547670dd
+DESCRIPTION:Festival of Weeks. Commemorates the giving of the Torah at Mou
+ nt Sinai\n\nTorah: Exodus 19:1-20:23\; Numbers 28:26-31\nHaftarah: Ezekiel
+  1:1-28\, 3:12
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:⛰️🌸 Shavuot II
+DTSTART;VALUE=DATE:20270612
+DTEND;VALUE=DATE:20270613
+UID:hebcal-20270612-69691cf1
+DESCRIPTION:Festival of Weeks. Commemorates the giving of the Torah at Mou
+ nt Sinai\n\nTorah: Deuteronomy 14:22-16:17\; Numbers 28:26-31\nHaftarah: H
+ abakkuk 3:1-19
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Tamuz
+DTSTART;VALUE=DATE:20270703
+DTEND;VALUE=DATE:20270704
+UID:hebcal-20270703-cdc33b62
+DESCRIPTION:Molad Tamuz: Sun\, 19 minutes and 11 chalakim after 4:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Tamuz
+DTSTART;VALUE=DATE:20270705
+DTEND;VALUE=DATE:20270706
+UID:hebcal-20270705-e57e8b15
+DESCRIPTION:Start of month of Tamuz on the Hebrew calendar. תַּמּוּ
+ ז (transliterated Tamuz or Tammuz) is the 4th month of the Hebrew year\, 
+ has 29 days\, and corresponds to June or July on the Gregorian calendar.  
+ רֹאשׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, i
+ s a minor holiday that occurs at the beginning of every month in the Hebre
+ w calendar. It is marked by the birth of a new moon\n\nTorah: Numbers 28:1
+ -15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Tamuz
+DTSTART;VALUE=DATE:20270706
+DTEND;VALUE=DATE:20270707
+UID:hebcal-20270706-e57e8b15
+DESCRIPTION:Start of month of Tamuz on the Hebrew calendar. תַּמּוּ
+ ז (transliterated Tamuz or Tammuz) is the 4th month of the Hebrew year\, 
+ has 29 days\, and corresponds to June or July on the Gregorian calendar.  
+ רֹאשׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, i
+ s a minor holiday that occurs at the beginning of every month in the Hebre
+ w calendar. It is marked by the birth of a new moon\n\nTorah: Numbers 28:1
+ -15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Tzom Tammuz
+DTSTART;VALUE=DATE:20270722
+DTEND;VALUE=DATE:20270723
+UID:hebcal-20270722-227143a8
+DESCRIPTION:Fast commemorating breaching of the walls of Jerusalem before 
+ the destruction of the Second Temple\n\nTorah: Exodus 32:11-14\, 34:1-10
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Av
+DTSTART;VALUE=DATE:20270731
+DTEND;VALUE=DATE:20270801
+UID:hebcal-20270731-cd524889
+DESCRIPTION:Molad Av: Mon\, 3 minutes and 12 chalakim after 17:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Av
+DTSTART;VALUE=DATE:20270804
+DTEND;VALUE=DATE:20270805
+UID:hebcal-20270804-b20a292a
+DESCRIPTION:Start of month of Av on the Hebrew calendar. Av (אָב) is th
+ e 5th month of the Hebrew year\, has 30 days\, and corresponds to July or 
+ August on the Gregorian calendar.  רֹאשׁ חוֹדֶשׁ\, translitera
+ ted Rosh Chodesh or Rosh Hodesh\, is a minor holiday that occurs at the be
+ ginning of every month in the Hebrew calendar. It is marked by the birth o
+ f a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat Chazon
+DTSTART;VALUE=DATE:20270807
+DTEND;VALUE=DATE:20270808
+UID:hebcal-20270807-40fb55a8
+DESCRIPTION:Shabbat of Prophecy/Shabbat of Vision. Shabbat before Tish'a B
+ 'Av
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Erev Tish'a B'Av
+DTSTART;VALUE=DATE:20270811
+DTEND;VALUE=DATE:20270812
+UID:hebcal-20270811-16aac1cb
+DESCRIPTION:The Ninth of Av. Fast commemorating the destruction of the two
+  Temples
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Tish'a B'Av
+DTSTART;VALUE=DATE:20270812
+DTEND;VALUE=DATE:20270813
+UID:hebcal-20270812-1fe8650c
+DESCRIPTION:The Ninth of Av. Fast commemorating the destruction of the two
+  Temples\n\nTorah: Deuteronomy 4:25-40\nHaftarah: Jeremiah 8:13-9:23
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat Nachamu
+DTSTART;VALUE=DATE:20270814
+DTEND;VALUE=DATE:20270815
+UID:hebcal-20270814-57d358fc
+DESCRIPTION:Shabbat after Tish'a B'Av (Shabbat of Consolation). The first 
+ of seven Shabbatot leading up to Rosh Hashanah. Named after the Haftarah (
+ from Isaiah 40) which begins with the verse נַחֲמוּ נַחֲמוּ\
+ , עַמִּי ("Comfort\, oh comfort my people")
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:❤️ Tu B'Av
+DTSTART;VALUE=DATE:20270818
+DTEND;VALUE=DATE:20270819
+UID:hebcal-20270818-ccea991a
+DESCRIPTION:Minor Jewish holiday of love. Observed on the 15th day of the 
+ Hebrew month of Av
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Elul
+DTSTART;VALUE=DATE:20270828
+DTEND;VALUE=DATE:20270829
+UID:hebcal-20270828-61fb928c
+DESCRIPTION:Molad Elul: Wed\, 47 minutes and 13 chalakim after 5:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Elul
+DTSTART;VALUE=DATE:20270902
+DTEND;VALUE=DATE:20270903
+UID:hebcal-20270902-4a2abce2
+DESCRIPTION:Start of month of Elul on the Hebrew calendar. Elul (אֱלו
+ ּל) is the 6th month of the Hebrew year\, has 29 days\, and corresponds 
+ to August or September on the Gregorian calendar.  רֹאשׁ חוֹדֶש
+ ׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a minor holiday that 
+ occurs at the beginning of every month in the Hebrew calendar. It is marke
+ d by the birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🐑 Rosh Hashana LaBehemot
+DTSTART;VALUE=DATE:20270903
+DTEND;VALUE=DATE:20270904
+UID:hebcal-20270903-0a58fcce
+DESCRIPTION:New Year for Tithing Animals
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Elul
+DTSTART;VALUE=DATE:20270903
+DTEND;VALUE=DATE:20270904
+UID:hebcal-20270903-4a2abce2
+DESCRIPTION:Start of month of Elul on the Hebrew calendar. Elul (אֱלו
+ ּל) is the 6th month of the Hebrew year\, has 29 days\, and corresponds 
+ to August or September on the Gregorian calendar.  רֹאשׁ חוֹדֶש
+ ׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a minor holiday that 
+ occurs at the beginning of every month in the Hebrew calendar. It is marke
+ d by the birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Leil Selichot
+DTSTART;VALUE=DATE:20270925
+DTEND;VALUE=DATE:20270926
+UID:hebcal-20270925-121db6a8
+DESCRIPTION:Prayers for forgiveness in preparation for the High Holidays
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🍏🍯 Erev Rosh Hashana
+DTSTART;VALUE=DATE:20271001
+DTEND;VALUE=DATE:20271002
+UID:hebcal-20271001-69c47b58
+DESCRIPTION:The Jewish New Year. Also spelled Rosh Hashanah
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🍏🍯 Rosh Hashana 5788
+DTSTART;VALUE=DATE:20271002
+DTEND;VALUE=DATE:20271003
+UID:hebcal-20271002-a107f314
+DESCRIPTION:The Jewish New Year. Also spelled Rosh Hashanah\n\nTorah: Gene
+ sis 21:1-34\; Numbers 29:1-6\nHaftarah: I Samuel 1:1-2:10
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🍏🍯 Rosh Hashana II
+DTSTART;VALUE=DATE:20271003
+DTEND;VALUE=DATE:20271004
+UID:hebcal-20271003-e24e7167
+DESCRIPTION:The Jewish New Year. Also spelled Rosh Hashanah\n\nTorah: Gene
+ sis 22:1-24\; Numbers 29:1-6\nHaftarah: Jeremiah 31:1-19
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Tzom Gedaliah
+DTSTART;VALUE=DATE:20271004
+DTEND;VALUE=DATE:20271005
+UID:hebcal-20271004-398de2df
+DESCRIPTION:Fast of the Seventh Month. Commemorates the assassination of t
+ he Jewish governor of Judah\n\nTorah: Exodus 32:11-14\, 34:1-10
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat Shuva
+DTSTART;VALUE=DATE:20271009
+DTEND;VALUE=DATE:20271010
+UID:hebcal-20271009-e3c3a1e4
+DESCRIPTION:Shabbat of Returning. Shabbat that occurs during the Ten Days 
+ of Repentance between Rosh Hashanah and Yom Kippur\n\nHaftarah: Hosea 14:2
+ -10\; Micah 7:18-20\; Joel 2:15-27
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Erev Yom Kippur
+DTSTART;VALUE=DATE:20271010
+DTEND;VALUE=DATE:20271011
+UID:hebcal-20271010-821e8c6f
+DESCRIPTION:Day of Atonement. The holiest day of the year in Judaism\, tra
+ ditionally observed with a 25-hour period of fasting and intensive prayer
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Yom Kippur
+DTSTART;VALUE=DATE:20271011
+DTEND;VALUE=DATE:20271012
+UID:hebcal-20271011-3eebed91
+DESCRIPTION:Day of Atonement. The holiest day of the year in Judaism\, tra
+ ditionally observed with a 25-hour period of fasting and intensive prayer\
+ n\nTorah: Leviticus 16:1-34\; Numbers 29:7-11\nHaftarah: Isaiah 57:14-58:1
+ 4
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Erev Sukkot
+DTSTART;VALUE=DATE:20271015
+DTEND;VALUE=DATE:20271016
+UID:hebcal-20271015-2e047aaf
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Sukkot I
+DTSTART;VALUE=DATE:20271016
+DTEND;VALUE=DATE:20271017
+UID:hebcal-20271016-3b6b9611
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)\n\nTorah: Leviticus 22:26-23:44\; Numbers 2
+ 9:12-16\nHaftarah: Zechariah 14:1-21
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Sukkot II
+DTSTART;VALUE=DATE:20271017
+DTEND;VALUE=DATE:20271018
+UID:hebcal-20271017-dd814373
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)\n\nTorah: Leviticus 22:26-23:44\; Numbers 2
+ 9:12-16\nHaftarah: I Kings 8:2-21
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Sukkot III (CH''M)
+DTSTART;VALUE=DATE:20271018
+DTEND;VALUE=DATE:20271019
+UID:hebcal-20271018-5e93ab94
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)\n\nTorah: Numbers 29:17-25\, 29:17-22
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Sukkot IV (CH''M)
+DTSTART;VALUE=DATE:20271019
+DTEND;VALUE=DATE:20271020
+UID:hebcal-20271019-ffda39c9
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)\n\nTorah: Numbers 29:20-28\, 29:20-25
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Sukkot V (CH''M)
+DTSTART;VALUE=DATE:20271020
+DTEND;VALUE=DATE:20271021
+UID:hebcal-20271020-68c6e88e
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)\n\nTorah: Numbers 29:23-31\, 29:23-28
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Sukkot VI (CH''M)
+DTSTART;VALUE=DATE:20271021
+DTEND;VALUE=DATE:20271022
+UID:hebcal-20271021-698f117c
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)\n\nTorah: Numbers 29:26-34\, 29:26-31
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌿🍋 Sukkot VII (Hoshana Raba)
+DTSTART;VALUE=DATE:20271022
+DTEND;VALUE=DATE:20271023
+UID:hebcal-20271022-f5de0f6c
+DESCRIPTION:Feast of Booths. Also called the Feast of Tabernacles\, the se
+ ven-day holiday is one of the Three Pilgrimage Festivals (Hebrew: שלוש
+  רגלים\, shalosh regalim)\n\nTorah: Numbers 29:26-34
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Shmini Atzeret
+DTSTART;VALUE=DATE:20271023
+DTEND;VALUE=DATE:20271024
+UID:hebcal-20271023-e6edcf39
+DESCRIPTION:Eighth Day of Assembly. Immediately following Sukkot\, it is o
+ bserved as a separate holiday in the Diaspora and is combined with Simchat
+  Torah in Israel\n\nTorah: Deuteronomy 14:22-16:17\; Numbers 29:35-30:1\nH
+ aftarah: I Kings 8:54-66
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Simchat Torah
+DTSTART;VALUE=DATE:20271024
+DTEND;VALUE=DATE:20271025
+UID:hebcal-20271024-952508c2
+DESCRIPTION:Day of Celebrating the Torah. Celebration marking the conclusi
+ on of the annual cycle of public Torah readings\, and the beginning of a n
+ ew cycle\n\nTorah: Deuteronomy 33:1-34:12\; Genesis 1:1-2:3\; Numbers 29:3
+ 5-30:1\nHaftarah: Joshua 1:1-18
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Cheshvan
+DTSTART;VALUE=DATE:20271030
+DTEND;VALUE=DATE:20271031
+UID:hebcal-20271030-864cf86a
+DESCRIPTION:Molad Cheshvan: Sat\, 15 minutes and 15 chalakim after 7:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Cheshvan
+DTSTART;VALUE=DATE:20271031
+DTEND;VALUE=DATE:20271101
+UID:hebcal-20271031-6fbbc895
+DESCRIPTION:Start of month of Cheshvan on the Hebrew calendar. חֶשְׁ
+ וָן (transliterated Cheshvan or Heshvan) is the 8th month of the Hebrew
+  year\, has 29 or 30 days\, and corresponds to October or November on the 
+ Gregorian calendar. רֹאשׁ חוֹדֶשׁ\, transliterated Rosh Chodes
+ h or Rosh Hodesh\, is a minor holiday that occurs at the beginning of ever
+ y month in the Hebrew calendar. It is marked by the birth of a new moon\n\
+ nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Cheshvan
+DTSTART;VALUE=DATE:20271101
+DTEND;VALUE=DATE:20271102
+UID:hebcal-20271101-6fbbc895
+DESCRIPTION:Start of month of Cheshvan on the Hebrew calendar. חֶשְׁ
+ וָן (transliterated Cheshvan or Heshvan) is the 8th month of the Hebrew
+  year\, has 29 or 30 days\, and corresponds to October or November on the 
+ Gregorian calendar. רֹאשׁ חוֹדֶשׁ\, transliterated Rosh Chodes
+ h or Rosh Hodesh\, is a minor holiday that occurs at the beginning of ever
+ y month in the Hebrew calendar. It is marked by the birth of a new moon\n\
+ nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Kislev
+DTSTART;VALUE=DATE:20271127
+DTEND;VALUE=DATE:20271128
+UID:hebcal-20271127-6ce4b2c3
+DESCRIPTION:Molad Kislev: Sun\, 59 minutes and 16 chalakim after 19:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Sigd
+DTSTART;VALUE=DATE:20271129
+DTEND;VALUE=DATE:20271130
+UID:hebcal-20271129-3079e054
+DESCRIPTION:Ethiopian Jewish holiday occurring 50 days after Yom Kippur
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Kislev
+DTSTART;VALUE=DATE:20271130
+DTEND;VALUE=DATE:20271201
+UID:hebcal-20271130-171af096
+DESCRIPTION:Start of month of Kislev on the Hebrew calendar. Kislev (כִ
+ ּסְלֵו) is the 9th month of the Hebrew year\, has 30 or 29 days\, an
+ d corresponds to November or December on the Gregorian calendar.  רֹאש
+ ׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a mino
+ r holiday that occurs at the beginning of every month in the Hebrew calend
+ ar. It is marked by the birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Kislev
+DTSTART;VALUE=DATE:20271201
+DTEND;VALUE=DATE:20271202
+UID:hebcal-20271201-171af096
+DESCRIPTION:Start of month of Kislev on the Hebrew calendar. Kislev (כִ
+ ּסְלֵו) is the 9th month of the Hebrew year\, has 30 or 29 days\, an
+ d corresponds to November or December on the Gregorian calendar.  רֹאש
+ ׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a mino
+ r holiday that occurs at the beginning of every month in the Hebrew calend
+ ar. It is marked by the birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎1️⃣ Chanukah: 1 Candle
+DTSTART;VALUE=DATE:20271224
+DTEND;VALUE=DATE:20271225
+UID:hebcal-20271224-1c6fa26d
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎2️⃣ Chanukah: 2 Candles
+DTSTART;VALUE=DATE:20271225
+DTEND;VALUE=DATE:20271226
+UID:hebcal-20271225-bf71330e
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nHaftarah: Zechariah 2:14-4:7
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Tevet
+DTSTART;VALUE=DATE:20271225
+DTEND;VALUE=DATE:20271226
+UID:hebcal-20271225-e0441a9f
+DESCRIPTION:Molad Tevet: Tue\, 43 minutes and 17 chalakim after 8:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎3️⃣ Chanukah: 3 Candles
+DTSTART;VALUE=DATE:20271226
+DTEND;VALUE=DATE:20271227
+UID:hebcal-20271226-3a5e82d5
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nTorah: Numbers 7:18-29
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎4️⃣ Chanukah: 4 Candles
+DTSTART;VALUE=DATE:20271227
+DTEND;VALUE=DATE:20271228
+UID:hebcal-20271227-8341b82a
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nTorah: Numbers 7:24-35
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎5️⃣ Chanukah: 5 Candles
+DTSTART;VALUE=DATE:20271228
+DTEND;VALUE=DATE:20271229
+UID:hebcal-20271228-841127b9
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nTorah: Numbers 7:30-41
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎6️⃣ Chanukah: 6 Candles
+DTSTART;VALUE=DATE:20271229
+DTEND;VALUE=DATE:20271230
+UID:hebcal-20271229-9733c9a9
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nTorah: Numbers 7:36-47
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Chag HaBanot
+DTSTART;VALUE=DATE:20271230
+DTEND;VALUE=DATE:20271231
+UID:hebcal-20271230-0139c73e
+DESCRIPTION:North African Chanukah festival of daughters. Called Eid al-Ba
+ nat in Arabic\, the holiday was most preserved in Tunisia
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎7️⃣ Chanukah: 7 Candles
+DTSTART;VALUE=DATE:20271230
+DTEND;VALUE=DATE:20271231
+UID:hebcal-20271230-635c3774
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nTorah: Numbers 28:1-15\, 7:42-47
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Tevet
+DTSTART;VALUE=DATE:20271230
+DTEND;VALUE=DATE:20271231
+UID:hebcal-20271230-e83ced3d
+DESCRIPTION:Start of month of Tevet on the Hebrew calendar. Tevet (טֵב
+ ֵת) is the 10th month of the Hebrew year\, has 29 days\, and corresponds
+  to December or January on the Gregorian calendar.  רֹאשׁ חוֹדֶ
+ שׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a minor holiday tha
+ t occurs at the beginning of every month in the Hebrew calendar. It is mar
+ ked by the birth of a new moon\n\nTorah: Numbers 28:1-15\, 7:42-47
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎8️⃣ Chanukah: 8 Candles
+DTSTART;VALUE=DATE:20271231
+DTEND;VALUE=DATE:20280101
+UID:hebcal-20271231-d85c28dc
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nTorah: Numbers 28:1-15\, 7:48-53
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Tevet
+DTSTART;VALUE=DATE:20271231
+DTEND;VALUE=DATE:20280101
+UID:hebcal-20271231-e83ced3d
+DESCRIPTION:Start of month of Tevet on the Hebrew calendar. Tevet (טֵב
+ ֵת) is the 10th month of the Hebrew year\, has 29 days\, and corresponds
+  to December or January on the Gregorian calendar.  רֹאשׁ חוֹדֶ
+ שׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a minor holiday tha
+ t occurs at the beginning of every month in the Hebrew calendar. It is mar
+ ked by the birth of a new moon\n\nTorah: Numbers 28:1-15\, 7:48-53
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕎 Chanukah: 8th Day
+DTSTART;VALUE=DATE:20280101
+DTEND;VALUE=DATE:20280102
+UID:hebcal-20280101-7c4cd5b6
+DESCRIPTION:Hanukkah\, the Jewish festival of rededication. Also known as 
+ the Festival of Lights\, the eight-day festival is observed by lighting th
+ e candles of a hanukkiah (menorah)\n\nHaftarah: I Kings 7:40-50
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Asara B'Tevet
+DTSTART;VALUE=DATE:20280109
+DTEND;VALUE=DATE:20280110
+UID:hebcal-20280109-16d2435e
+DESCRIPTION:Fast commemorating the siege of Jerusalem\n\nTorah: Exodus 32:
+ 11-14\, 34:1-10
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Sh'vat
+DTSTART;VALUE=DATE:20280122
+DTEND;VALUE=DATE:20280123
+UID:hebcal-20280122-f7388855
+DESCRIPTION:Molad Sh'vat: Wed\, 28 minutes and 0 chalakim after 21:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Sh'vat
+DTSTART;VALUE=DATE:20280129
+DTEND;VALUE=DATE:20280130
+UID:hebcal-20280129-b9dbcfbb
+DESCRIPTION:Start of month of Sh'vat on the Hebrew calendar. שְׁבָט 
+ (transliterated Sh'vat or Shevat) is the 11th month of the Hebrew year\, h
+ as 30 days\, and corresponds to January or February on the Gregorian calen
+ dar.  רֹאשׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hode
+ sh\, is a minor holiday that occurs at the beginning of every month in the
+  Hebrew calendar. It is marked by the birth of a new moon\n\nHaftarah: Isa
+ iah 66:1-24
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌳 Tu BiShvat
+DTSTART;VALUE=DATE:20280212
+DTEND;VALUE=DATE:20280213
+UID:hebcal-20280212-a7d91a90
+DESCRIPTION:New Year for Trees. Tu BiShvat is one of four “New Years” 
+ mentioned in the Mishnah
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat Shirah
+DTSTART;VALUE=DATE:20280212
+DTEND;VALUE=DATE:20280213
+UID:hebcal-20280212-40f5da47
+DESCRIPTION:Shabbat of Song. Shabbat that includes Parashat Beshalach
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat Shekalim
+DTSTART;VALUE=DATE:20280226
+DTEND;VALUE=DATE:20280227
+UID:hebcal-20280226-713517f2
+DESCRIPTION:Shabbat before Rosh Chodesh Adar. Read in preparation for Puri
+ m\n\nHaftarah: II Kings 12:1-17
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Adar
+DTSTART;VALUE=DATE:20280226
+DTEND;VALUE=DATE:20280227
+UID:hebcal-20280226-0042bb6e
+DESCRIPTION:Molad Adar: Fri\, 12 minutes and 1 chalakim after 10:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Adar
+DTSTART;VALUE=DATE:20280227
+DTEND;VALUE=DATE:20280228
+UID:hebcal-20280227-28e8a555
+DESCRIPTION:Start of month of Adar on the Hebrew calendar. Adar (אַדָ
+ ר) is the 12th month of the Hebrew year\, has 29 days\, and corresponds t
+ o February or March on the Gregorian calendar.  רֹאשׁ חוֹדֶשׁ\
+ , transliterated Rosh Chodesh or Rosh Hodesh\, is a minor holiday that occ
+ urs at the beginning of every month in the Hebrew calendar. It is marked b
+ y the birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Adar
+DTSTART;VALUE=DATE:20280228
+DTEND;VALUE=DATE:20280229
+UID:hebcal-20280228-28e8a555
+DESCRIPTION:Start of month of Adar on the Hebrew calendar. Adar (אַדָ
+ ר) is the 12th month of the Hebrew year\, has 29 days\, and corresponds t
+ o February or March on the Gregorian calendar.  רֹאשׁ חוֹדֶשׁ\
+ , transliterated Rosh Chodesh or Rosh Hodesh\, is a minor holiday that occ
+ urs at the beginning of every month in the Hebrew calendar. It is marked b
+ y the birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Ta'anit Esther
+DTSTART;VALUE=DATE:20280309
+DTEND;VALUE=DATE:20280310
+UID:hebcal-20280309-65e47969
+DESCRIPTION:Fast of Esther\n\nTorah: Exodus 32:11-14\, 34:1-10
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat Zachor
+DTSTART;VALUE=DATE:20280311
+DTEND;VALUE=DATE:20280312
+UID:hebcal-20280311-b709beaa
+DESCRIPTION:Shabbat of Remembrance. Shabbat before Purim\n\nHaftarah: I Sa
+ muel 15:2-34
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🎭️📜 Erev Purim
+DTSTART;VALUE=DATE:20280311
+DTEND;VALUE=DATE:20280312
+UID:hebcal-20280311-4fdbaae2
+DESCRIPTION:Celebration of Jewish deliverance as told by Megilat Esther. I
+ t commemorates a time when the Jewish people living in Persia were saved f
+ rom extermination
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🎭️📜 Purim
+DTSTART;VALUE=DATE:20280312
+DTEND;VALUE=DATE:20280313
+UID:hebcal-20280312-b59993b2
+DESCRIPTION:Celebration of Jewish deliverance as told by Megilat Esther. I
+ t commemorates a time when the Jewish people living in Persia were saved f
+ rom extermination\n\nTorah: Exodus 17:8-16
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🎭️📜 Shushan Purim
+DTSTART;VALUE=DATE:20280313
+DTEND;VALUE=DATE:20280314
+UID:hebcal-20280313-12d3cbc7
+DESCRIPTION:Purim celebrated in Jerusalem and walled cities
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat Parah
+DTSTART;VALUE=DATE:20280318
+DTEND;VALUE=DATE:20280319
+UID:hebcal-20280318-1624bd32
+DESCRIPTION:Shabbat of the Red Heifer. Shabbat before Shabbat HaChodesh\, 
+ in preparation for Passover\n\nHaftarah: Ezekiel 36:16-38
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat HaChodesh
+DTSTART;VALUE=DATE:20280325
+DTEND;VALUE=DATE:20280326
+UID:hebcal-20280325-3e8a7379
+DESCRIPTION:Shabbat before Rosh Chodesh Nissan. Read in preparation for Pa
+ ssover\n\nHaftarah: Ezekiel 45:16-46:18
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Nisan
+DTSTART;VALUE=DATE:20280325
+DTEND;VALUE=DATE:20280326
+UID:hebcal-20280325-d006cb53
+DESCRIPTION:Molad Nisan: Sat\, 56 minutes and 2 chalakim after 22:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Nisan
+DTSTART;VALUE=DATE:20280328
+DTEND;VALUE=DATE:20280329
+UID:hebcal-20280328-26a17e2b
+DESCRIPTION:Start of month of Nisan on the Hebrew calendar. נִיסָן (
+ transliterated Nisan or Nissan) is the 1st month of the Hebrew year\, has 
+ 30 days\, and corresponds to March or April on the Gregorian calendar. ר
+ ֹאשׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is 
+ a minor holiday that occurs at the beginning of every month in the Hebrew 
+ calendar. It is marked by the birth of a new moon\n\nTorah: Numbers 28:1-1
+ 5
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🇮🇱 Yom HaAliyah
+DTSTART;VALUE=DATE:20280406
+DTEND;VALUE=DATE:20280407
+UID:hebcal-20280406-7ef10a7e
+DESCRIPTION:Recognizes Aliyah\, immigration to the Jewish State of Israel
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat HaGadol
+DTSTART;VALUE=DATE:20280408
+DTEND;VALUE=DATE:20280409
+UID:hebcal-20280408-2e333569
+DESCRIPTION:Shabbat before Pesach (The Great Shabbat)\n\nHaftarah: Malachi
+  3:4-24
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Ta'anit Bechorot
+DTSTART;VALUE=DATE:20280410
+DTEND;VALUE=DATE:20280411
+UID:hebcal-20280410-73101110
+DESCRIPTION:Fast of the First Born
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓🍷 Erev Pesach
+DTSTART;VALUE=DATE:20280410
+DTEND;VALUE=DATE:20280411
+UID:hebcal-20280410-b899d38a
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓🍷 Pesach I
+DTSTART;VALUE=DATE:20280411
+DTEND;VALUE=DATE:20280412
+UID:hebcal-20280411-f5de93e3
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Exodus 12:21-51\; Numbers 28:
+ 16-25\nHaftarah: Joshua 5:2-6:1
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓 Pesach II
+DTSTART;VALUE=DATE:20280412
+DTEND;VALUE=DATE:20280413
+UID:hebcal-20280412-8a7f3521
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Leviticus 22:26-23:44\; Numbe
+ rs 28:16-25\nHaftarah: II Kings 23:1-9\, 23:21-25
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓 Pesach III (CH''M)
+DTSTART;VALUE=DATE:20280413
+DTEND;VALUE=DATE:20280414
+UID:hebcal-20280413-c5af2e47
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Exodus 13:1-16\; Numbers 28:1
+ 9-25
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓 Pesach IV (CH''M)
+DTSTART;VALUE=DATE:20280414
+DTEND;VALUE=DATE:20280415
+UID:hebcal-20280414-22088d98
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Exodus 22:24-23:19\; Numbers 
+ 28:19-25
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓 Pesach V (CH''M)
+DTSTART;VALUE=DATE:20280415
+DTEND;VALUE=DATE:20280416
+UID:hebcal-20280415-ccdb6a58
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Exodus 33:12-34:26\; Numbers 
+ 28:19-25\nHaftarah: Ezekiel 37:1-14
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓 Pesach VI (CH''M)
+DTSTART;VALUE=DATE:20280416
+DTEND;VALUE=DATE:20280417
+UID:hebcal-20280416-a146401d
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Numbers 9:1-14\, 28:19-25
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓 Pesach VII
+DTSTART;VALUE=DATE:20280417
+DTEND;VALUE=DATE:20280418
+UID:hebcal-20280417-0133feb2
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Exodus 13:17-15:26\; Numbers 
+ 28:19-25\nHaftarah: II Samuel 22:1-51
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🫓 Pesach VIII
+DTSTART;VALUE=DATE:20280418
+DTEND;VALUE=DATE:20280419
+UID:hebcal-20280418-9b5e763c
+DESCRIPTION:Passover\, the Feast of Unleavened Bread. Also called Chag HaM
+ atzot (the Festival of Matzah)\, it commemorates the Exodus and freedom of
+  the Israelites from ancient Egypt\n\nTorah: Deuteronomy 15:19-16:17\; Num
+ bers 28:19-25\nHaftarah: Isaiah 10:32-12:6
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Iyyar
+DTSTART;VALUE=DATE:20280422
+DTEND;VALUE=DATE:20280423
+UID:hebcal-20280422-6ddbc8f4
+DESCRIPTION:Molad Iyyar: Mon\, 40 minutes and 3 chalakim after 11:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Yom HaShoah
+DTSTART;VALUE=DATE:20280424
+DTEND;VALUE=DATE:20280425
+UID:hebcal-20280424-397e0803
+DESCRIPTION:Holocaust Memorial Day
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Iyyar
+DTSTART;VALUE=DATE:20280426
+DTEND;VALUE=DATE:20280427
+UID:hebcal-20280426-21689341
+DESCRIPTION:Start of month of Iyyar on the Hebrew calendar. אִיָיר (
+ transliterated Iyyar or Iyar) is the 2nd month of the Hebrew year\, has 29
+  days\, and corresponds to April or May on the Gregorian calendar.  רֹא
+ שׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a mi
+ nor holiday that occurs at the beginning of every month in the Hebrew cale
+ ndar. It is marked by the birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Iyyar
+DTSTART;VALUE=DATE:20280427
+DTEND;VALUE=DATE:20280428
+UID:hebcal-20280427-21689341
+DESCRIPTION:Start of month of Iyyar on the Hebrew calendar. אִיָיר (
+ transliterated Iyyar or Iyar) is the 2nd month of the Hebrew year\, has 29
+  days\, and corresponds to April or May on the Gregorian calendar.  רֹא
+ שׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a mi
+ nor holiday that occurs at the beginning of every month in the Hebrew cale
+ ndar. It is marked by the birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🇮🇱 Yom HaZikaron
+DTSTART;VALUE=DATE:20280501
+DTEND;VALUE=DATE:20280502
+UID:hebcal-20280501-d53cc31d
+DESCRIPTION:Israeli Memorial Day. Remembers those who died in the War of I
+ ndependence and other wars in Israel. The full name of the holiday is Yom 
+ HaZikaron LeHalalei Ma'arakhot Yisrael ul'Nifge'ei Pe'ulot HaEivah (Hebrew
+ : יוֹם הזִּכָּרוֹן לְחַלְלֵי מַעֲרָכוֹת 
+ יִשְׂרָאֵל וּלְנִפְגְעֵי פְּעֻלּוֹת הָ
+ אֵיבָה)\, Memorial Day for the Fallen Soldiers of the Wars of Israel
+  and Victims of Actions of Terrorism. Although Yom Hazikaron is normally o
+ bserved on the 4th of Iyyar\, it may be moved earlier or postponed if obse
+ rvance of the holiday (or Yom HaAtzma'ut\, which always follows it) would 
+ conflict with Shabbat
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🇮🇱 Yom HaAtzma'ut
+DTSTART;VALUE=DATE:20280502
+DTEND;VALUE=DATE:20280503
+UID:hebcal-20280502-dd24e12d
+DESCRIPTION:Israeli Independence Day. Commemorates the declaration of inde
+ pendence of Israel in 1948. Although Yom HaAtzma'ut is normally observed o
+ n the 5th of Iyyar\, it may be moved earlier or postponed if observance of
+  the holiday (or Yom HaZikaron\, which always precedes it) would conflict 
+ with Shabbat
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Pesach Sheni
+DTSTART;VALUE=DATE:20280510
+DTEND;VALUE=DATE:20280511
+UID:hebcal-20280510-f222d099
+DESCRIPTION:Second Passover\, one month after Passover
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🔥 Lag BaOmer
+DTSTART;VALUE=DATE:20280514
+DTEND;VALUE=DATE:20280515
+UID:hebcal-20280514-4223318c
+DESCRIPTION:33rd day of counting the Omer. The holiday is a temporary brea
+ k from the semi-mourning period the counting of the Omer. Practices includ
+ e lighting bonfires\, getting haircuts\, and Jewish weddings
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Sivan
+DTSTART;VALUE=DATE:20280520
+DTEND;VALUE=DATE:20280521
+UID:hebcal-20280520-ccad0557
+DESCRIPTION:Molad Sivan: Wed\, 24 minutes and 4 chalakim after 0:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🇮🇱 Yom Yerushalayim
+DTSTART;VALUE=DATE:20280524
+DTEND;VALUE=DATE:20280525
+UID:hebcal-20280524-bd3ce4b3
+DESCRIPTION:Jerusalem Day. Commemorates the re-unification of Jerusalem in
+  1967
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Sivan
+DTSTART;VALUE=DATE:20280526
+DTEND;VALUE=DATE:20280527
+UID:hebcal-20280526-ea657a21
+DESCRIPTION:Start of month of Sivan on the Hebrew calendar. Sivan (סִי
+ וָן) is the 3rd month of the Hebrew year\, has 30 days\, and correspond
+ s to May or June on the Gregorian calendar.  רֹאשׁ חוֹדֶשׁ\, t
+ ransliterated Rosh Chodesh or Rosh Hodesh\, is a minor holiday that occurs
+  at the beginning of every month in the Hebrew calendar. It is marked by t
+ he birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:⛰️🌸 Erev Shavuot
+DTSTART;VALUE=DATE:20280530
+DTEND;VALUE=DATE:20280531
+UID:hebcal-20280530-516b1178
+DESCRIPTION:Festival of Weeks. Commemorates the giving of the Torah at Mou
+ nt Sinai
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:⛰️🌸 Shavuot I
+DTSTART;VALUE=DATE:20280531
+DTEND;VALUE=DATE:20280601
+UID:hebcal-20280531-547670dd
+DESCRIPTION:Festival of Weeks. Commemorates the giving of the Torah at Mou
+ nt Sinai\n\nTorah: Exodus 19:1-20:23\; Numbers 28:26-31\nHaftarah: Ezekiel
+  1:1-28\, 3:12
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:⛰️🌸 Shavuot II
+DTSTART;VALUE=DATE:20280601
+DTEND;VALUE=DATE:20280602
+UID:hebcal-20280601-69691cf1
+DESCRIPTION:Festival of Weeks. Commemorates the giving of the Torah at Mou
+ nt Sinai\n\nTorah: Deuteronomy 15:19-16:17\; Numbers 28:26-31\nHaftarah: H
+ abakkuk 3:1-19
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Tamuz
+DTSTART;VALUE=DATE:20280617
+DTEND;VALUE=DATE:20280618
+UID:hebcal-20280617-cdc33b62
+DESCRIPTION:Molad Tamuz: Thu\, 8 minutes and 5 chalakim after 13:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Tamuz
+DTSTART;VALUE=DATE:20280624
+DTEND;VALUE=DATE:20280625
+UID:hebcal-20280624-e57e8b15
+DESCRIPTION:Start of month of Tamuz on the Hebrew calendar. תַּמּוּ
+ ז (transliterated Tamuz or Tammuz) is the 4th month of the Hebrew year\, 
+ has 29 days\, and corresponds to June or July on the Gregorian calendar.  
+ רֹאשׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, i
+ s a minor holiday that occurs at the beginning of every month in the Hebre
+ w calendar. It is marked by the birth of a new moon\n\nHaftarah: Isaiah 66
+ :1-24
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Tamuz
+DTSTART;VALUE=DATE:20280625
+DTEND;VALUE=DATE:20280626
+UID:hebcal-20280625-e57e8b15
+DESCRIPTION:Start of month of Tamuz on the Hebrew calendar. תַּמּוּ
+ ז (transliterated Tamuz or Tammuz) is the 4th month of the Hebrew year\, 
+ has 29 days\, and corresponds to June or July on the Gregorian calendar.  
+ רֹאשׁ חוֹדֶשׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, i
+ s a minor holiday that occurs at the beginning of every month in the Hebre
+ w calendar. It is marked by the birth of a new moon\n\nTorah: Numbers 28:1
+ -15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Tzom Tammuz
+DTSTART;VALUE=DATE:20280711
+DTEND;VALUE=DATE:20280712
+UID:hebcal-20280711-227143a8
+DESCRIPTION:Fast commemorating breaching of the walls of Jerusalem before 
+ the destruction of the Second Temple\n\nTorah: Exodus 32:11-14\, 34:1-10
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Av
+DTSTART;VALUE=DATE:20280722
+DTEND;VALUE=DATE:20280723
+UID:hebcal-20280722-cd524889
+DESCRIPTION:Molad Av: Sat\, 52 minutes and 6 chalakim after 1:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Av
+DTSTART;VALUE=DATE:20280724
+DTEND;VALUE=DATE:20280725
+UID:hebcal-20280724-b20a292a
+DESCRIPTION:Start of month of Av on the Hebrew calendar. Av (אָב) is th
+ e 5th month of the Hebrew year\, has 30 days\, and corresponds to July or 
+ August on the Gregorian calendar.  רֹאשׁ חוֹדֶשׁ\, translitera
+ ted Rosh Chodesh or Rosh Hodesh\, is a minor holiday that occurs at the be
+ ginning of every month in the Hebrew calendar. It is marked by the birth o
+ f a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat Chazon
+DTSTART;VALUE=DATE:20280729
+DTEND;VALUE=DATE:20280730
+UID:hebcal-20280729-40fb55a8
+DESCRIPTION:Shabbat of Prophecy/Shabbat of Vision. Shabbat before Tish'a B
+ 'Av
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Erev Tish'a B'Av
+DTSTART;VALUE=DATE:20280731
+DTEND;VALUE=DATE:20280801
+UID:hebcal-20280731-16aac1cb
+DESCRIPTION:The Ninth of Av. Fast commemorating the destruction of the two
+  Temples
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:✡️ Tish'a B'Av
+DTSTART;VALUE=DATE:20280801
+DTEND;VALUE=DATE:20280802
+UID:hebcal-20280801-1fe8650c
+DESCRIPTION:The Ninth of Av. Fast commemorating the destruction of the two
+  Temples\n\nTorah: Deuteronomy 4:25-40\nHaftarah: Jeremiah 8:13-9:23
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Shabbat Nachamu
+DTSTART;VALUE=DATE:20280805
+DTEND;VALUE=DATE:20280806
+UID:hebcal-20280805-57d358fc
+DESCRIPTION:Shabbat after Tish'a B'Av (Shabbat of Consolation). The first 
+ of seven Shabbatot leading up to Rosh Hashanah. Named after the Haftarah (
+ from Isaiah 40) which begins with the verse נַחֲמוּ נַחֲמוּ\
+ , עַמִּי ("Comfort\, oh comfort my people")
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:❤️ Tu B'Av
+DTSTART;VALUE=DATE:20280807
+DTEND;VALUE=DATE:20280808
+UID:hebcal-20280807-ccea991a
+DESCRIPTION:Minor Jewish holiday of love. Observed on the 15th day of the 
+ Hebrew month of Av
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shabbat Mevarchim Chodesh Elul
+DTSTART;VALUE=DATE:20280819
+DTEND;VALUE=DATE:20280820
+UID:hebcal-20280819-61fb928c
+DESCRIPTION:Molad Elul: Sun\, 36 minutes and 7 chalakim after 14:00
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Elul
+DTSTART;VALUE=DATE:20280822
+DTEND;VALUE=DATE:20280823
+UID:hebcal-20280822-4a2abce2
+DESCRIPTION:Start of month of Elul on the Hebrew calendar. Elul (אֱלו
+ ּל) is the 6th month of the Hebrew year\, has 29 days\, and corresponds 
+ to August or September on the Gregorian calendar.  רֹאשׁ חוֹדֶש
+ ׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a minor holiday that 
+ occurs at the beginning of every month in the Hebrew calendar. It is marke
+ d by the birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🐑 Rosh Hashana LaBehemot
+DTSTART;VALUE=DATE:20280823
+DTEND;VALUE=DATE:20280824
+UID:hebcal-20280823-0a58fcce
+DESCRIPTION:New Year for Tithing Animals
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🌒 Rosh Chodesh Elul
+DTSTART;VALUE=DATE:20280823
+DTEND;VALUE=DATE:20280824
+UID:hebcal-20280823-4a2abce2
+DESCRIPTION:Start of month of Elul on the Hebrew calendar. Elul (אֱלו
+ ּל) is the 6th month of the Hebrew year\, has 29 days\, and corresponds 
+ to August or September on the Gregorian calendar.  רֹאשׁ חוֹדֶש
+ ׁ\, transliterated Rosh Chodesh or Rosh Hodesh\, is a minor holiday that 
+ occurs at the beginning of every month in the Hebrew calendar. It is marke
+ d by the birth of a new moon\n\nTorah: Numbers 28:1-15
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🕍 Leil Selichot
+DTSTART;VALUE=DATE:20280916
+DTEND;VALUE=DATE:20280917
+UID:hebcal-20280916-121db6a8
+DESCRIPTION:Prayers for forgiveness in preparation for the High Holidays
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🍏🍯 Erev Rosh Hashana
+DTSTART;VALUE=DATE:20280920
+DTEND;VALUE=DATE:20280921
+UID:hebcal-20280920-69c47b58
+DESCRIPTION:The Jewish New Year. Also spelled Rosh Hashanah
+END:VEVENT
+END:VCALENDAR

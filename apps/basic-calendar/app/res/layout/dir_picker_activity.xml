@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:tag="layout/dir_picker_activity_0" android:background="@color/colorBackground" android:fitsSystemWindows="true" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" android:id="@id/title" android:padding="@dimen/normal_padding" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/select_dir_to_export" />
+    <TextView android:textAppearance="@style/TextAppearance.MaterialComponents.Caption" android:ellipsize="end" android:id="@id/current_path" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/small_padding" android:singleLine="true" android:paddingStart="@dimen/small_padding" android:paddingEnd="@dimen/small_padding" />
+    <androidx.recyclerview.widget.RecyclerView android:orientation="vertical" android:id="@id/filesList" android:descendantFocusability="afterDescendants" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0" />
+    <LinearLayout android:gravity="end" android:orientation="horizontal" android:id="@id/buttons" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <Button android:id="@id/cancel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/cancel" style="@style/Alert.Button.Neutral" />
+        <Button android:id="@id/select" android:focusableInTouchMode="false" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/select" style="@style/Alert.Button.Positive" />
+    </LinearLayout>
+</LinearLayout>

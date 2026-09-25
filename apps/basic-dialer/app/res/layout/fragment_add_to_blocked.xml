@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout android:tag="layout/fragment_add_to_blocked_0" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.fragment.app.FragmentContainerView android:id="@id/phone_list_fragment" android:layout_width="fill_parent" android:layout_height="0.0dip" app:layout_constraintBottom_toTopOf="@id/input_number" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
+    <com.basicphones.dialerhelper.phone.NoImeEditText android:textAppearance="@android:style/TextAppearance.Material.Display1" android:id="@id/input_number" android:background="?editTextBackground" android:padding="@dimen/normal_padding" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/normal_padding" app:layout_constraintBottom_toTopOf="@id/bottomToolbar" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" />
+    <include android:id="@id/bottomToolbar" layout="@layout/menu_bottom" />
+</androidx.constraintlayout.widget.ConstraintLayout>

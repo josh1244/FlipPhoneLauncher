@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:id="@id/license_scrollview" android:tag="layout/activity_license_0" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:id="@id/licenses_holder" android:padding="@dimen/activity_margin" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <com.simplemobiletools.commons.views.MyTextView android:id="@id/license_notice" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/notice" />
+    </LinearLayout>
+</ScrollView>

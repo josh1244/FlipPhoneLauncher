@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout android:id="@id/event_item_frame" android:tag="layout/event_list_item_simple_0" android:background="@drawable/background_selector" android:focusable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="@dimen/normal_padding" android:paddingEnd="@dimen/normal_padding"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView android:id="@id/event_item_color_bar" android:background="@drawable/event_list_color_bar" android:layout_width="@dimen/event_color_bar_width" android:layout_height="fill_parent" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout android:orientation="vertical" android:paddingTop="@dimen/normal_padding" android:paddingBottom="@dimen/normal_padding" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginStart="@dimen/normal_padding" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toEndOf="@id/event_item_color_bar" app:layout_constraintTop_toTopOf="parent">
+        <TextView android:textSize="@dimen/day_text_size" android:ellipsize="end" android:id="@id/event_item_title" android:layout_width="wrap_content" android:layout_height="0.0dip" android:maxLines="1" android:layout_weight="1.0" />
+        <TextView android:textSize="@dimen/smaller_text_size" android:id="@id/event_item_time" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

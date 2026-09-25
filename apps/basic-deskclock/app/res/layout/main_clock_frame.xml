@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_horizontal" android:background="@drawable/background_selector" android:focusable="true" android:focusableInTouchMode="true" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <Space android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="@integer/gutter_width_percent" />
+    <LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="@integer/guttered_content_width_percent">
+        <com.basicphones.deskclock.AnalogClock android:id="@id/analog_clock" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/analog_clock_margin" android:layout_marginTop="@dimen/circle_margin_top" android:layout_marginRight="@dimen/analog_clock_margin" android:layout_marginStart="@dimen/analog_clock_margin" android:layout_marginEnd="@dimen/analog_clock_margin" />
+        <com.basicphones.deskclock.widget.AutoSizingTextClock android:textSize="@dimen/main_clock_digital_font_size" android:ellipsize="none" android:id="@id/digital_clock" android:paddingTop="@dimen/main_clock_digital_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" android:includeFontPadding="false" style="@style/display_time" />
+        <TextView android:gravity="center" android:layout_gravity="center" android:id="@id/date" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textAllCaps="true" style="@style/body" />
+        <View android:id="@id/hairline" android:background="@color/hairline" android:layout_width="fill_parent" android:layout_height="@dimen/hairline_height" android:layout_marginTop="24.0dip" />
+    </LinearLayout>
+    <Space android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="@integer/gutter_width_percent" />
+</LinearLayout>

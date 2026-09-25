@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.basicphones.deskclock.timer.TimerItem android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.percentlayout.widget.PercentFrameLayout android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0">
+        <com.basicphones.deskclock.TimerCircleFrameLayout android:layout_gravity="center" android:layout_width="0.0dip" android:layout_height="0.0dip" app:layout_aspectRatio="100.0%" app:layout_heightPercent="@fraction/timer_circle_height_percent" app:layout_widthPercent="@fraction/timer_circle_width_percent">
+            <com.basicphones.deskclock.CircleButtonsLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+                <com.basicphones.deskclock.timer.TimerCircleView android:id="@id/timer_time" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+                <LinearLayout android:gravity="center" android:layout_width="fill_parent" android:layout_height="fill_parent" android:paddingStart="20.0dip" android:paddingEnd="20.0dip">
+                    <com.basicphones.deskclock.widget.AutoSizingTextView android:textSize="70.0sp" android:gravity="center" android:layout_gravity="center" android:id="@id/timer_time_text" android:background="@drawable/background_selector" android:layout_width="fill_parent" android:layout_height="wrap_content" android:includeFontPadding="false" style="@style/display_time" />
+                </LinearLayout>
+                <TextView android:ellipsize="end" android:gravity="center" android:layout_gravity="center|top" android:id="@id/timer_label" android:background="@drawable/background_selector" android:padding="@dimen/small_padding" android:clickable="false" android:layout_width="wrap_content" android:layout_height="wrap_content" android:hint="@string/label" android:maxLines="1" />
+                <TextView android:gravity="center" android:layout_gravity="bottom|center" android:id="@id/reset_add" android:background="@drawable/background_selector" android:padding="@dimen/small_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:contentDescription="@string/timer_plus_one" />
+            </com.basicphones.deskclock.CircleButtonsLayout>
+        </com.basicphones.deskclock.TimerCircleFrameLayout>
+    </androidx.percentlayout.widget.PercentFrameLayout>
+    <Space android:layout_width="fill_parent" android:layout_height="@dimen/fab_height" />
+</com.basicphones.deskclock.timer.TimerItem>

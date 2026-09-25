@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.simplemobiletools.commons.views.MyAppCompatCheckbox android:id="@id/my_checkbox" android:background="@drawable/background_selector" android:paddingTop="@dimen/normal_padding" android:paddingBottom="@dimen/normal_padding" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android" />

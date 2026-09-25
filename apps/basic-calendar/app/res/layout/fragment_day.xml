@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout android:id="@id/day_holder" android:tag="layout/fragment_day_0" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.simplemobiletools.commons.views.MyRecyclerView android:id="@id/day_events" android:focusable="false" android:focusableInTouchMode="false" android:layoutAnimation="@anim/layout_animation" android:descendantFocusability="afterDescendants" android:layout_width="fill_parent" android:layout_height="0.0dip" app:layoutManager="com.simplemobiletools.commons.views.MyLinearLayoutManager" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toBottomOf="@id/top_navigation" />
+    <include layout="@layout/top_navigation" />
+</androidx.constraintlayout.widget.ConstraintLayout>

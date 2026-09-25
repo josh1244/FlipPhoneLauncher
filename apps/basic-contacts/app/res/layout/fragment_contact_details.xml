@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout android:id="@id/constraintLayout" android:tag="layout/fragment_contact_details_0" android:descendantFocusability="afterDescendants" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" android:textColor="@color/colorHint" android:gravity="center_vertical" android:id="@id/ringtone" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="@dimen/small_padding" android:drawablePadding="@dimen/small_padding" app:drawableStartCompat="@drawable/ic_baseline_music_note_24" app:drawableTint="@color/colorHint" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
+    <androidx.recyclerview.widget.RecyclerView android:orientation="vertical" android:id="@id/detailsList" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_margin="@dimen/small_padding" app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" app:layout_constraintBottom_toTopOf="@id/bottomToolbar" app:layout_constraintTop_toBottomOf="@id/ringtone" />
+    <include android:id="@id/bottomToolbar" layout="@layout/menu_bottom" />
+</androidx.constraintlayout.widget.ConstraintLayout>

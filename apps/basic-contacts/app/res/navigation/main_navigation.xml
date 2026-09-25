@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation android:id="@id/main_navigation" app:startDestination="@id/main_fragment"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <fragment android:label="MainFragment" android:name="com.basicphones.contacts.ui.main.MainFragment" android:id="@id/main_fragment">
+        <action android:id="@id/action_main_fragment_to_edit_contact_fragment" app:destination="@id/edit_contact_fragment" />
+        <action android:id="@id/action_main_fragment_to_contact_details_fragment" app:destination="@id/contact_details_fragment" />
+        <action android:id="@id/action_main_fragment_to_groupdetails_fragment" app:destination="@id/groupdetails_fragment" />
+        <action android:id="@id/action_main_fragment_to_settings_fragment" app:destination="@id/settings_fragment" />
+        <action android:id="@id/action_main_fragment_to_delete_contacts_fragment" app:destination="@id/delete_contacts_fragment" />
+        <action android:id="@id/action_main_fragment_to_share_contacts_fragment" app:destination="@id/share_contacts_fragment" />
+        <action android:id="@id/action_main_fragment_to_dialer_fragment" app:destination="@id/dialer_fragment" />
+        <action android:id="@id/action_main_fragment_to_speed_dial_list_fragment" app:destination="@id/speed_dial_list_fragment" />
+    </fragment>
+    <fragment android:label="@string/title_edit_contact" android:name="com.basicphones.contacts.ui.contacts.EditContactFragment" android:id="@id/edit_contact_fragment" />
+    <fragment android:label="@string/title_contacts" android:name="com.basicphones.contacts.ui.contacts.ContactsFragment" android:id="@id/contacts_fragment" />
+    <fragment android:label="@string/title_contact_details" android:name="com.basicphones.contacts.ui.contacts.ContactDetailsFragment" android:id="@id/contact_details_fragment">
+        <action android:id="@id/action_contact_details_fragment_to_edit_contact_fragment" app:destination="@id/edit_contact_fragment" />
+    </fragment>
+    <fragment android:label="@string/title_groups" android:name="com.basicphones.contacts.ui.groups.GroupsFragment" android:id="@id/groups_fragment" />
+    <fragment android:label="@string/title_group_details" android:name="com.basicphones.contacts.ui.groups.GroupDetailsFragment" android:id="@id/groupdetails_fragment">
+        <action android:id="@id/action_groupdetails_fragment_to_edit_group_fragment" app:destination="@id/edit_group_fragment" />
+        <action android:id="@id/action_groupdetails_fragment_to_contact_details_fragment" app:destination="@id/contact_details_fragment" />
+    </fragment>
+    <fragment android:label="@string/menu_add_remove_contacts" android:name="com.basicphones.contacts.ui.groups.EditGroupFragment" android:id="@id/edit_group_fragment">
+        <action android:id="@id/action_edit_group_fragment_to_contact_details_fragment" app:destination="@id/contact_details_fragment" />
+    </fragment>
+    <fragment android:label="SettingsFragment" android:name="com.basicphones.contacts.ui.settings.SettingsFragment" android:id="@id/settings_fragment" />
+    <fragment android:label="DeleteContactsFragment" android:name="com.basicphones.contacts.ui.contacts.DeleteContactsFragment" android:id="@id/delete_contacts_fragment" />
+    <fragment android:label="ShareContactsFragment" android:name="com.basicphones.contacts.ui.contacts.ShareContactsFragment" android:id="@id/share_contacts_fragment" />
+    <fragment android:label="DialerFragment" android:name="com.basicphones.contacts.ui.dial.SearchFragment" android:id="@id/dialer_fragment" />
+    <fragment android:label="ContactPickFragment" android:name="com.basicphones.contacts.ui.contacts.ContactPickFragment" android:id="@id/contact_pick_fragment" />
+    <fragment android:label="SpeedDialListFragment" android:name="com.basicphones.contacts.ui.speeddial.SpeedDialListFragment" android:id="@id/speed_dial_list_fragment">
+        <action android:id="@id/action_speed_dial_list_fragment_to_contact_details_fragment" app:destination="@id/contact_details_fragment" />
+    </fragment>
+</navigation>

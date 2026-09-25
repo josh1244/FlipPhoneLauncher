@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="C1">=Абиджан|Africa/Abidjan</string>
+    <string name="C10">Д=Дакар|Africa/Dakar</string>
+    <string name="C100">=Амман|Asia/Amman</string>
+    <string name="C101">=Анадырь|Asia/Anadyr</string>
+    <string name="C102">=Ақтау|Asia/Aqtau</string>
+    <string name="C103">Б=Бағдат|Asia/Baghdad</string>
+    <string name="C104">Б=Бахрейн|Asia/Bahrain</string>
+    <string name="C105">Б=Баку|Asia/Baku</string>
+    <string name="C106">Б=Бангкок|Asia/Bangkok</string>
+    <string name="C107">Б=Бейрут|Asia/Beirut</string>
+    <string name="C108">=Колката|Asia/Calcutta</string>
+    <string name="C109">Д=Дамаск|Asia/Damascus</string>
+    <string name="C11">Д=Дар-эс-Салам|Africa/Dar_es_Salaam</string>
+    <string name="C110">Д=Дакка|Asia/Dhaka</string>
+    <string name="C111">Д=Дубай|Asia/Dubai</string>
+    <string name="C112">Г=Газа|Asia/Gaza</string>
+    <string name="C113">Х=Хеброн|Asia/Hebron</string>
+    <string name="C114">Х=Хошимин|Asia/Ho_Chi_Minh</string>
+    <string name="C115">Г=Гонконг:|Asia/Hong_Kong</string>
+    <string name="C117">Д=Джакарта|Asia/Jakarta</string>
+    <string name="C118">И=Иерусалим|Asia/Jerusalem</string>
+    <string name="C119">К=Кабул|Asia/Kabul</string>
+    <string name="C12">Д=Джибути|Africa/Djibouti</string>
+    <string name="C120">К=Карачи|Asia/Karachi</string>
+    <string name="C121">К=Катманду|Asia/Kathmandu</string>
+    <string name="C122">К=Куала-Лумпур|Asia/Kuala_Lumpur</string>
+    <string name="C123">К=Кувейт|Asia/Kuwait</string>
+    <string name="C124">М=Макао|Asia/Macau</string>
+    <string name="C125">М=Манила|Asia/Manila</string>
+    <string name="C126">М=Мускат|Asia/Muscat</string>
+    <string name="C127">П=Пномпень|Asia/Phnom_Penh</string>
+    <string name="C128">П=Пхеньян:|Asia/Pyongyang</string>
+    <string name="C13">Ф=Фритаун|Africa/Freetown</string>
+    <string name="C130">Р=Рангун|Asia/Rangoon</string>
+    <string name="C131">Э=Эр-Рияд|Asia/Riyadh</string>
+    <string name="C133">С=Сеул|Asia/Seoul</string>
+    <string name="C134">Ш=Шанхай:|Asia/Shanghai</string>
+    <string name="C135">С=Сингапур|Asia/Singapore</string>
+    <string name="C136">Т=Тайбэй:|Asia/Taipei</string>
+    <string name="C137">Т=Тегеран|Asia/Tehran</string>
+    <string name="C138">Т=Тель-Авив|Asia/Tel_Aviv</string>
+    <string name="C139">Т=Токио:|Asia/Tokyo</string>
+    <string name="C14">Г=Габороне|Africa/Gaborone</string>
+    <string name="C140">У=Улан-Батор|Asia/Ulaanbaatar</string>
+    <string name="C141">Б=Бермуда|Atlantic/Bermuda</string>
+    <string name="C142">К=Канар|Atlantic/Canary</string>
+    <string name="C143">К=Кабо-Верде|Atlantic/Cape_Verde</string>
+    <string name="C144">Р=Рейкьявик|Atlantic/Reykjavik</string>
+    <string name="C145">С=Стенли|Atlantic/Stanley</string>
+    <string name="C146">=Аделаида|Australia/Adelaide</string>
+    <string name="C147">Б=Брисбен|Australia/Brisbane</string>
+    <string name="C148">К=Канберра|Australia/Canberra</string>
+    <string name="C149">Д=Дарвин|Australia/Darwin</string>
+    <string name="C15">Х=Хараре|Africa/Harare</string>
+    <string name="C150">М=Мельбурн|Australia/Melbourne</string>
+    <string name="C151">Ж=Жаңа Оңтүстік Уэльс|Australia/NSW</string>
+    <string name="C152">П=Перт|Australia/Perth</string>
+    <string name="C153">К=Квинсленд|Australia/Queensland</string>
+    <string name="C154">С=Сидней|Australia/Sydney</string>
+    <string name="C155">В=Виктория|Australia/Victoria</string>
+    <string name="C156">Н=Ньюфаундленд|Canada/Newfoundland</string>
+    <string name="C157">С=Саскачеван|Canada/Saskatchewan</string>
+    <string name="C158">П=Пасха аралы|Chile/EasterIsland</string>
+    <string name="C159">=Амстердам|Europe/Amsterdam</string>
+    <string name="C16">Й=Йоханнесбург|Africa/Johannesburg</string>
+    <string name="C160">=Андорра|Europe/Andorra</string>
+    <string name="C161">=Афин|Europe/Athens</string>
+    <string name="C162">Б=Белфаст|Europe/Belfast</string>
+    <string name="C163">Б=Белград|Europe/Belgrade</string>
+    <string name="C164">Б=Берлин|Europe/Berlin</string>
+    <string name="C165">Б=Братислава|Europe/Bratislava</string>
+    <string name="C166">Б=Брюссель|Europe/Brussels</string>
+    <string name="C167">Б=Бухарест|Europe/Bucharest</string>
+    <string name="C168">Б=Будапешт|Europe/Budapest</string>
+    <string name="C169">К=Кишинев|Europe/Chisinau</string>
+    <string name="C17">К=Кампала|Africa/Kampala</string>
+    <string name="C170">К=Копенгаген|Europe/Copenhagen</string>
+    <string name="C171">Д=Дублин|Europe/Dublin</string>
+    <string name="C172">Г=Гибралтар|Europe/Gibraltar</string>
+    <string name="C173">Х=Хельсинки|Europe/Helsinki</string>
+    <string name="C174">М=Мэн аралы|Europe/Isle_of_Man</string>
+    <string name="C175">Ы=Ыстамбұл|Europe/Istanbul</string>
+    <string name="C176">К=Киев|Europe/Kiev</string>
+    <string name="C177">Л=Лиссабон|Europe/Lisbon</string>
+    <string name="C178">Л=Лондон|Europe/London</string>
+    <string name="C179">Л=Люксембург|Europe/Luxembourg</string>
+    <string name="C18">Х=Хартум|Africa/Khartoum</string>
+    <string name="C180">М=Мадрид|Europe/Madrid</string>
+    <string name="C181">М=Мальта|Europe/Malta</string>
+    <string name="C182">М=Минск|Europe/Minsk</string>
+    <string name="C183">М=Монако|Europe/Monaco</string>
+    <string name="C184">М=Мәскеу|Europe/Moscow</string>
+    <string name="C185">О=Осло|Europe/Oslo</string>
+    <string name="C186">П=Париж|Europe/Paris</string>
+    <string name="C187">П=Прага|Europe/Prague</string>
+    <string name="C188">Р=Рига|Europe/Riga</string>
+    <string name="C189">Р=Рим|Europe/Rome</string>
+    <string name="C19">К=Кигали|Africa/Kigali</string>
+    <string name="C190">С=Сан-Марино|Europe/San_Marino</string>
+    <string name="C191">С=Сараево|Europe/Sarajevo</string>
+    <string name="C192">С=Симферополь|Europe/Simferopol</string>
+    <string name="C193">С=Скопье|Europe/Skopje</string>
+    <string name="C194">С=София|Europe/Sofia</string>
+    <string name="C195">С=Стокгольм|Europe/Stockholm</string>
+    <string name="C196">Т=Таллинн|Europe/Tallinn</string>
+    <string name="C197">В=Ватикан|Europe/Vatican</string>
+    <string name="C198">В=Вена|Europe/Vienna</string>
+    <string name="C199">В=Вильнюс|Europe/Vilnius</string>
+    <string name="C2">=Аккра|Africa/Accra</string>
+    <string name="C20">К=Киншаса|Africa/Kinshasa</string>
+    <string name="C200">В=Варшава|Europe/Warsaw</string>
+    <string name="C201">З=Загреб|Europe/Zagreb</string>
+    <string name="C202">Ц=Цюрих|Europe/Zurich</string>
+    <string name="C203">=Антананариву|Indian/Antananarivo</string>
+    <string name="C204">М=Мальдив аралдары|Indian/Maldives</string>
+    <string name="C205">М=Маврикий|Indian/Mauritius</string>
+    <string name="C206">О=Окленд|Pacific/Auckland</string>
+    <string name="C207">Ф=Фиджи|Pacific/Fiji</string>
+    <string name="C208">Г=Гуам|Pacific/Guam</string>
+    <string name="C209">Г=Гонолулу|Pacific/Honolulu</string>
+    <string name="C21">Л=Лагос|Africa/Lagos</string>
+    <string name="C210">К=Киритимати|Pacific/Kiritimati</string>
+    <string name="C211">Н=Нумеа|Pacific/Noumea</string>
+    <string name="C214">=Антигуа|America/Antigua</string>
+    <string name="C215">О=Остин|America/Chicago</string>
+    <string name="C216">Б=Бостон|America/New_York</string>
+    <string name="C217">К=Калгари|America/Denver</string>
+    <string name="C218">К=Колумбус|America/New_York</string>
+    <string name="C219">Д=Даллас|America/Chicago</string>
+    <string name="C22">М=Масеру|Africa/Maseru</string>
+    <string name="C220">Н=Ноксвилль|America/New_York</string>
+    <string name="C221">М=Мемфис|America/Chicago</string>
+    <string name="C222">М=Майами|America/New_York</string>
+    <string name="C223">М=Миннеаполис|America/Chicago</string>
+    <string name="C224">О=Оттава|America/New_York</string>
+    <string name="C225">Ф=Филадельфия|America/New_York</string>
+    <string name="C226">П=Портленд|America/Los_Angeles</string>
+    <string name="C227">С=Сан-Диего|America/Los_Angeles</string>
+    <string name="C228">С=Сан-Франциско|America/Los_Angeles</string>
+    <string name="C229">С=Солт-Лейк-Сити|America/Denver</string>
+    <string name="C23">М=Могадишо|Africa/Mogadishu</string>
+    <string name="C230">С=Сан-Хосе|America/Los_Angeles</string>
+    <string name="C231">С=Сан-Сальвадор|America/Guatemala</string>
+    <string name="C232">С=Сиэтл|America/Los_Angeles</string>
+    <string name="C233">С=Сент-Луис|America/Chicago</string>
+    <string name="C234">В=Вашингтон, Колумбия округы|America/New_York</string>
+    <string name="C235">Х=Хьюстон|America/Chicago</string>
+    <string name="C236">С=Сан-Антонио|America/Chicago</string>
+    <string name="C237">Д=Джэксонвилл|America/New_York</string>
+    <string name="C238">Б=Балтимор|America/New_York</string>
+    <string name="C239">Н=Нэшвилл|America/Chicago</string>
+    <string name="C24">Н=Найроби|Africa/Nairobi</string>
+    <string name="C240">М=Милуоки|America/Chicago</string>
+    <string name="C241">О=Оклахома-Сити|America/Chicago</string>
+    <string name="C242">Л=Лас-Вегас|America/Los_Angeles</string>
+    <string name="C243">=Альбукерке|America/Denver</string>
+    <string name="C244">Т=Тусон|MST</string>
+    <string name="C245">С=Сакраменто|America/Los_Angeles</string>
+    <string name="C246">=Атланта|America/New_York</string>
+    <string name="C247">К=Кливленд|America/New_York</string>
+    <string name="C248">Н=Нью-Орлеан|America/Chicago</string>
+    <string name="C249">Т=Тампа|America/New_York</string>
+    <string name="C25">С=Сан-Томе|Africa/Sao_Tome</string>
+    <string name="C250">П=Питтсбург|America/New_York</string>
+    <string name="C251">Ц=Цинциннати|America/New_York</string>
+    <string name="C252">М=Маунтин-Вью|America/Los_Angeles</string>
+    <string name="C253">Р=Рено|America/Los_Angeles</string>
+    <string name="C254">Б=Блэк-Рок-Сити|America/Los_Angeles</string>
+    <string name="C255">Д=Доха|Asia/Riyadh</string>
+    <string name="C256">Б=Бейжің:|Asia/Shanghai</string>
+    <string name="C257">М=Мумбаи|Asia/Kolkata</string>
+    <string name="C258">Д=Дели|Asia/Kolkata</string>
+    <string name="C259">О=Осака:|Asia/Tokyo</string>
+    <string name="C26">Т=Тимбукту|Africa/Timbuktu</string>
+    <string name="C260">Л=Лахор|Asia/Karachi</string>
+    <string name="C261">С=Сана|Asia/Riyadh</string>
+    <string name="C262">Б=Барселона|Europe/Madrid</string>
+    <string name="C263">М=Мюнхен|Europe/Berlin</string>
+    <string name="C264">М=Милан|Europe/Rome</string>
+    <string name="C265">Ф=Франкфурт|Europe/Berlin</string>
+    <string name="C266">Х=Ханой|Asia/Bangkok</string>
+    <string name="C267">=Анкара|Europe/Istanbul</string>
+    <string name="C268">Б=Бангалор|Asia/Kolkata</string>
+    <string name="C269">Б=Бразилия|America/Sao_Paulo</string>
+    <string name="C27">Т=Триполи|Africa/Tripoli</string>
+    <string name="C270">К=Кейптаун|Africa/Johannesburg</string>
+    <string name="C271">И=Исламабад|Asia/Karachi</string>
+    <string name="C272">Р=Рио-де-Жанейро|America/Sao_Paulo</string>
+    <string name="C273">Э=Энн-Арбор|America/Detroit</string>
+    <string name="C274">Б=Боулдер|America/Denver</string>
+    <string name="C275">К=Кембридж|America/New_York</string>
+    <string name="C276">К=Киркленд|America/Los_Angeles</string>
+    <string name="C277">М=Мэдисон|America/Chicago</string>
+    <string name="C278">Г=Гуанчжоу:|Asia/Shanghai</string>
+    <string name="C279">Х=Хайдарабад|Asia/Kolkata</string>
+    <string name="C28">Т=Тунис|Africa/Tunis</string>
+    <string name="C280">Р=Рестон|America/New_York</string>
+    <string name="C281">Б=Белу-Оризонти|America/Sao_Paulo</string>
+    <string name="C282">С=Сантьяго|America/Santiago</string>
+    <string name="C283">М=Монровия|Africa/Monrovia</string>
+    <string name="C284">К=Коломбо|Asia/Colombo</string>
+    <string name="C285">Ч=Чихуахуа|America/Chihuahua</string>
+    <string name="C286">С=Сальвадор|America/Sao_Paulo</string>
+    <string name="C287">Г=Гургаон|Asia/Kolkata</string>
+    <string name="C288">М=Манчестер|Europe/London</string>
+    <string name="C29">=Анкоридж|America/Anchorage</string>
+    <string name="C290">С=Санкт-Петербург|Europe/Moscow</string>
+    <string name="C291">К=Краков|Europe/Warsaw</string>
+    <string name="C292">В=Вроцлав|Europe/Warsaw</string>
+    <string name="C293">Г=Гамбург|Europe/Berlin</string>
+    <string name="C294">О=Оулу|Europe/Bucharest</string>
+    <string name="C295">Х=Хайфа|Asia/Jerusalem</string>
+    <string name="C296">С=Сан-Хуан|America/Puerto_Rico</string>
+    <string name="C297">Т=Тегусигальпа|America/Tegucigalpa</string>
+    <string name="C298">П=Парамарибо|America/Paramaribo</string>
+    <string name="C299">К=Кито|America/Panama</string>
+    <string name="C3">=Аддис-Абеба|Africa/Addis_Ababa</string>
+    <string name="C300">Л=Любляна|Europe/Ljubljana</string>
+    <string name="C301">А=Ашхабад|Asia/Ashgabat</string>
+    <string name="C302">А=Асмара|Africa/Asmara</string>
+    <string name="C303">Б=Бандар-Сери-Бегаван|Asia/Brunei</string>
+    <string name="C304">Б=Бангуй|Africa/Bangui</string>
+    <string name="C305">Б=Банжул|Africa/Banjul</string>
+    <string name="C306">Б=Бішкек|Asia/Bishkek</string>
+    <string name="C307">Б=Бисау|Africa/Bissau</string>
+    <string name="C308">Б=Бужумбура|Africa/Bujumbura</string>
+    <string name="C309">Д=Дили|Asia/Dili</string>
+    <string name="C31">=Аруба|America/Aruba</string>
+    <string name="C310">Д=Душанбе|Asia/Dushanbe</string>
+    <string name="C311">Ф=Фунафути|Pacific/Funafuti</string>
+    <string name="C312">Х=Хониара|Pacific/Guadalcanal</string>
+    <string name="C313">Д=Джуба|Africa/Juba</string>
+    <string name="C314">К=Кингстаун|America/St_Vincent</string>
+    <string name="C315">Л=Либревиль|Africa/Libreville</string>
+    <string name="C316">Л=Ломе|Africa/Lome</string>
+    <string name="C317">Л=Луанда|Africa/Luanda</string>
+    <string name="C318">Л=Лусака|Africa/Lusaka</string>
+    <string name="C319">М=Маджуро|Pacific/Majuro</string>
+    <string name="C32">=Асунсьон|America/Asuncion</string>
+    <string name="C320">М=Малабо|Africa/Malabo</string>
+    <string name="C321">М=Мапуто|Africa/Maputo</string>
+    <string name="C322">М=Мбабане|Africa/Mbabane</string>
+    <string name="C323">М=Морони|Indian/Comoro</string>
+    <string name="C324">Н=Нджамена|Africa/Ndjamena</string>
+    <string name="C325">Н=Нгерулмуд|Pacific/Palau</string>
+    <string name="C326">Н=Ниамей|Africa/Niamey</string>
+    <string name="C327">Н=Никосия|Europe/Nicosia</string>
+    <string name="C328">Н=Нуакшот|Africa/Nouakchott</string>
+    <string name="C329">Н=Нукуалофа|Pacific/Tongatapu</string>
+    <string name="C33">Б=Барбадос|America/Barbados</string>
+    <string name="C330">У=Уагадугу|Africa/Ouagadougou</string>
+    <string name="C331">П=Паликир|Pacific/Noumea</string>
+    <string name="C332">Ф=Филипсбург|America/Lower_Princes</string>
+    <string name="C333">П=Подгорица|Europe/Podgorica</string>
+    <string name="C334">П=Порт-Морсби|Pacific/Palau</string>
+    <string name="C335">П=Порт-Вила|Pacific/Efate</string>
+    <string name="C336">П=Порто-Ново|Africa/Porto-Novo</string>
+    <string name="C337">П=Приштина|Europe/Belgrade</string>
+    <string name="C338">Р=Розо|America/Dominica</string>
+    <string name="C339">Т=Ташкент|Asia/Tashkent</string>
+    <string name="C34">Б=Белиз|America/Belize</string>
+    <string name="C340">Т=Тбилиси|Asia/Tbilisi</string>
+    <string name="C341">Т=Тхимпху|Asia/Thimphu</string>
+    <string name="C342">Т=Тирана|Europe/Tirane</string>
+    <string name="C343">В=Вадуц|Europe/Vaduz</string>
+    <string name="C344">В=Вьентьян|Asia/Vientiane</string>
+    <string name="C345">В=Виндхук|Africa/Windhoek</string>
+    <string name="C346">Я=Яунде|Africa/Douala</string>
+    <string name="C347">Я=Ярен округы|Pacific/Nauru</string>
+    <string name="C348">Е=Ереван|Asia/Yerevan</string>
+    <string name="C35">Б=Богота|America/Bogota</string>
+    <string name="C36">Б=Буэнос-Айрес|America/Buenos_Aires</string>
+    <string name="C37">К=Канкун|America/Cancun</string>
+    <string name="C38">К=Каракас|America/Caracas</string>
+    <string name="C39">К=Кайман|America/Cayman</string>
+    <string name="C4">=Алжир|Africa/Algiers</string>
+    <string name="C40">Ч=Чикаго|America/Chicago</string>
+    <string name="C42">К=Кюрасао|America/Curacao</string>
+    <string name="C43">Д=Доусон мүйісі|America/Dawson_Creek</string>
+    <string name="C44">Д=Денвер|America/Denver</string>
+    <string name="C45">Д=Детройт|America/Detroit</string>
+    <string name="C46">Д=Доминика|America/Dominica</string>
+    <string name="C47">Э=Эдмонтон|America/Edmonton</string>
+    <string name="C48">=Эль-Сальвадор|America/El_Salvador</string>
+    <string name="C49">Ф=Форталеза|America/Fortaleza</string>
+    <string name="C5">Б=Блантайр|Africa/Blantyre</string>
+    <string name="C50">Г=Гранд-Тёрк|America/Grand_Turk</string>
+    <string name="C51">Г=Гренада|America/Grenada</string>
+    <string name="C52">Г=Гватемала қаласы|America/Guatemala</string>
+    <string name="C53">Г=Гайана|America/Guyana</string>
+    <string name="C54">Г=Галифакс|America/Halifax</string>
+    <string name="C55">Г=Гавана|America/Havana</string>
+    <string name="C56">И=Индианаполис|America/Indiana/Indianapolis</string>
+    <string name="C57">Н=Нокс|America/Indiana/Knox</string>
+    <string name="C58">М=Маренго|America/Indiana/Marengo</string>
+    <string name="C59">П=Питерсберг|America/Indiana/Petersburg</string>
+    <string name="C6">Б=Браззавиль|Africa/Brazzaville</string>
+    <string name="C60">Т=Телл-Сити|America/Indiana/Tell_City</string>
+    <string name="C61">В=Вивей|America/Indiana/Vevay</string>
+    <string name="C62">В=Венсен|America/Indiana/Vincennes</string>
+    <string name="C63">В=Винамак|America/Indiana/Winamac</string>
+    <string name="C64">К=Кингстон|America/Jamaica</string>
+    <string name="C65">Н=Нуэ́стра-Сеньо́ра-де-ла-Пас|America/La_Paz</string>
+    <string name="C66">Л=Лима|America/Lima</string>
+    <string name="C67">Л=Лос-Анджелес|America/Los_Angeles</string>
+    <string name="C68">Л=Луисвилл|America/Louisville</string>
+    <string name="C69">М=Манагуа|America/Managua</string>
+    <string name="C7">К=Каир|Africa/Cairo</string>
+    <string name="C70">М=Мартиника|America/Martinique</string>
+    <string name="C71">М=Мендоса|America/Mendoza</string>
+    <string name="C72">М=Метлейкатла|America/Metlakatla</string>
+    <string name="C73">М=Мехико|America/Mexico_City</string>
+    <string name="C74">М=Монтеррей|America/Monterrey</string>
+    <string name="C75">М=Монтевидео|America/Montevideo</string>
+    <string name="C76">М=Монреаль|America/Montreal</string>
+    <string name="C77">Н=Нассау|America/Nassau</string>
+    <string name="C78">Н=Нью-Йорк|America/New_York</string>
+    <string name="C79">Б=Беула|America/North_Dakota/Beulah</string>
+    <string name="C8">К=Касабланка|Africa/Casablanca</string>
+    <string name="C80">С=Сентер|America/North_Dakota/Center</string>
+    <string name="C81">Н=Нью-Сейлем|America/North_Dakota/New_Salem</string>
+    <string name="C82">П=Панама|America/Panama</string>
+    <string name="C83">Ф=Финикс|America/Phoenix</string>
+    <string name="C84">П=Порт-оф-Спейн|America/Port_of_Spain</string>
+    <string name="C85">П=Порт-о-Пренс|America/Port-au-Prince</string>
+    <string name="C86">П=Пуэрто-Рико|America/Puerto_Rico</string>
+    <string name="C87">С=Санто-Доминго|America/Santo_Domingo</string>
+    <string name="C88">С=Сан-Паулу|America/Sao_Paulo</string>
+    <string name="C89">С=Сент-Джонс|America/St_Johns</string>
+    <string name="C9">К=Конакри|Africa/Conakry</string>
+    <string name="C90">С=Сент-Китс|America/St_Kitts</string>
+    <string name="C91">С=Сент-Люсия|America/St_Lucia</string>
+    <string name="C92">С=Сент-Томас|America/St_Thomas</string>
+    <string name="C93">Т=Тихуана|America/Tijuana</string>
+    <string name="C94">Т=Торонто|America/Toronto</string>
+    <string name="C95">В=Ванкувер|America/Vancouver</string>
+    <string name="C96">В=Виннипег|America/Winnipeg</string>
+    <string name="C97">О=Оңтүстік Полюс:|Antarctica/South_Pole</string>
+    <string name="C98">Л=Лонгйир|Arctic/Longyearbyen</string>
+    <string name="C99">=Алматы|Asia/Almaty</string>
+    <string name="abc_action_bar_home_description">Негізгі бетке өту</string>
+    <string name="abc_action_bar_up_description">Жоғары қарай өту</string>
+    <string name="abc_action_menu_overflow_description">Басқа опциялар</string>
+    <string name="abc_action_mode_done">Дайын</string>
+    <string name="abc_activity_chooser_view_see_all">Барлығын көру</string>
+    <string name="abc_activitychooserview_choose_application">Қолданбаны таңдау</string>
+    <string name="abc_capital_off">ӨШІРУ</string>
+    <string name="abc_capital_on">ҚОСУ</string>
+    <string name="abc_menu_alt_shortcut_label">Alt+</string>
+    <string name="abc_menu_ctrl_shortcut_label">Ctrl+</string>
+    <string name="abc_menu_delete_shortcut_label">delete</string>
+    <string name="abc_menu_enter_shortcut_label">enter</string>
+    <string name="abc_menu_function_shortcut_label">Function+</string>
+    <string name="abc_menu_meta_shortcut_label">Meta+</string>
+    <string name="abc_menu_shift_shortcut_label">Shift+</string>
+    <string name="abc_menu_space_shortcut_label">бос орын</string>
+    <string name="abc_menu_sym_shortcut_label">Sym+</string>
+    <string name="abc_prepend_shortcut_label">Menu+</string>
+    <string name="abc_search_hint">Іздеу…</string>
+    <string name="abc_searchview_description_clear">Сұрауды өшіру</string>
+    <string name="abc_searchview_description_query">Іздеу сұрауы</string>
+    <string name="abc_searchview_description_search">Іздеу</string>
+    <string name="abc_searchview_description_submit">Сұрауды жіберу</string>
+    <string name="abc_searchview_description_voice">Дауыспен іздеу</string>
+    <string name="abc_shareactionprovider_share_with">Бөлісу</string>
+    <string name="abc_shareactionprovider_share_with_application">%s қолданбасымен бөлісу</string>
+    <string name="abc_toolbar_collapse_description">Жию</string>
+    <string name="bottomsheet_action_collapse">Төменгі парақшаны жию</string>
+    <string name="bottomsheet_action_expand">Төменгі парақшаны жаю</string>
+    <string name="bottomsheet_action_expand_halfway">Жартылай кеңейту</string>
+    <string name="bottomsheet_drag_handle_clicked">Сүйрейтін тетік екі рет түртілді.</string>
+    <string name="bottomsheet_drag_handle_content_description">Сүйрейтін тетік</string>
+    <string name="call_notification_answer_action">Жауап</string>
+    <string name="call_notification_answer_video_action">Бейне</string>
+    <string name="call_notification_decline_action">Қабылдамау</string>
+    <string name="call_notification_hang_up_action">Тұтқаны қою</string>
+    <string name="call_notification_incoming_text">Кіріс қоңырау</string>
+    <string name="call_notification_ongoing_text">Қоңырау</string>
+    <string name="call_notification_screening_text">Келген қоңырауды сүзу</string>
+    <string name="character_counter_content_description">%1$d/%2$d таңба енгізілді</string>
+    <string name="character_counter_overflowed_content_description">Таңба саны шегінен асты: %1$d/%2$d</string>
+    <string name="clear_text_end_icon_content_description">Мәтінді өшіру</string>
+    <string name="copy">Көшіру</string>
+    <string name="error_a11y_label">Қате: жарамсыз</string>
+    <string name="error_icon_content_description">Қате</string>
+    <string name="expand_button_title">Қосымша</string>
+    <string name="exposed_dropdown_menu_content_description">Ашылмалы мәзірді көрсету</string>
+    <string name="icon_content_description">Диалог белгішесі</string>
+    <string name="item_view_role_description">Қойынды</string>
+    <string name="material_clock_toggle_content_description">\"AM\" немесе \"PM\" форматын таңдау</string>
+    <string name="material_hour_24h_suffix">Сағат: %1$s</string>
+    <string name="material_hour_selection">Сағатты таңдау</string>
+    <string name="material_hour_suffix">Сағат: %1$s</string>
+    <string name="material_minute_selection">Минут таңдау</string>
+    <string name="material_minute_suffix">%1$s минут</string>
+    <string name="material_timepicker_am">AM</string>
+    <string name="material_timepicker_clock_mode_description">Уақытты енгізу үшін сағат режиміне өтіңіз.</string>
+    <string name="material_timepicker_hour">Сағат</string>
+    <string name="material_timepicker_minute">Mинут</string>
+    <string name="material_timepicker_pm">PM</string>
+    <string name="material_timepicker_select_time">Уақытты таңдау</string>
+    <string name="material_timepicker_text_input_mode_description">Уақытты енгізу үшін мәтін енгізу режиміне өтіңіз.</string>
+    <string name="mtrl_badge_numberless_content_description">Жаңа хабарландыру</string>
+    <string name="mtrl_checkbox_state_description_checked">Құсбелгі қойылды.</string>
+    <string name="mtrl_checkbox_state_description_indeterminate">Құсбелгі жартылай қойылды.</string>
+    <string name="mtrl_checkbox_state_description_unchecked">Құсбелгі қойылмады.</string>
+    <string name="mtrl_chip_close_icon_content_description">%1$s контентін өшіру</string>
+    <string name="mtrl_exceed_max_badge_number_content_description">%1$d санынан көп жаңа хабарландыру</string>
+    <string name="mtrl_picker_a11y_next_month">Келесі айға өту</string>
+    <string name="mtrl_picker_a11y_prev_month">Алдыңғы айға өту</string>
+    <string name="mtrl_picker_announce_current_range_selection">Таңдалған басталу уақыты: %1$s – Таңдалған аяқталу уақыты: %2$s</string>
+    <string name="mtrl_picker_announce_current_selection">Ағымдағы таңдау: %1$s</string>
+    <string name="mtrl_picker_announce_current_selection_none">ешқандай</string>
+    <string name="mtrl_picker_cancel">Бас тарту</string>
+    <string name="mtrl_picker_confirm">Жарайды</string>
+    <string name="mtrl_picker_date_header_selected">%1$s</string>
+    <string name="mtrl_picker_date_header_title">Күнді таңдау</string>
+    <string name="mtrl_picker_date_header_unselected">Таңдалған күн</string>
+    <string name="mtrl_picker_day_of_week_column_header">%1$s</string>
+    <string name="mtrl_picker_end_date_description">Аяқталу күні: %1$s</string>
+    <string name="mtrl_picker_invalid_format">Формат жарамсыз.</string>
+    <string name="mtrl_picker_invalid_format_example">Мысал: %1$s.</string>
+    <string name="mtrl_picker_invalid_format_use">Жарамды формат: %1$s.</string>
+    <string name="mtrl_picker_invalid_range">Ауқым жарамсыз.</string>
+    <string name="mtrl_picker_navigate_to_current_year_description">Қазіргі жылға өту %1$d</string>
+    <string name="mtrl_picker_navigate_to_year_description">%1$d жылына жылжу</string>
+    <string name="mtrl_picker_out_of_range">Ауқымнан тыc: %1$s</string>
+    <string name="mtrl_picker_range_header_only_end_selected">Басталу күні – %1$s</string>
+    <string name="mtrl_picker_range_header_only_start_selected">%1$s – аяқталу күні</string>
+    <string name="mtrl_picker_range_header_selected">%1$s – %2$s</string>
+    <string name="mtrl_picker_range_header_title">Аралықты таңдау</string>
+    <string name="mtrl_picker_range_header_unselected">Басталу күні – аяқталу күні</string>
+    <string name="mtrl_picker_save">Сақтау</string>
+    <string name="mtrl_picker_start_date_description">Басталу күні: %1$s</string>
+    <string name="mtrl_picker_text_input_date_hint">Күні</string>
+    <string name="mtrl_picker_text_input_date_range_end_hint">Аяқталу күні</string>
+    <string name="mtrl_picker_text_input_date_range_start_hint">Басталу күні</string>
+    <string name="mtrl_picker_text_input_day_abbr">к</string>
+    <string name="mtrl_picker_text_input_month_abbr">а</string>
+    <string name="mtrl_picker_text_input_year_abbr">ж</string>
+    <string name="mtrl_picker_today_description">Бүгін %1$s</string>
+    <string name="mtrl_picker_toggle_to_calendar_input_mode">Күнтізбенің енгізу режиміне ауысу</string>
+    <string name="mtrl_picker_toggle_to_day_selection">Күнтізбе бойынша көрсету үшін түртіңіз.</string>
+    <string name="mtrl_picker_toggle_to_text_input_mode">Мәтін енгізу режиміне ауысу</string>
+    <string name="mtrl_picker_toggle_to_year_selection">Жыл бойынша көрсету үшін түртіңіз.</string>
+    <string name="mtrl_timepicker_cancel">Бас тарту</string>
+    <string name="mtrl_timepicker_confirm">Жарайды</string>
+    <string name="not_set">Орнатылмаған</string>
+    <string name="password_toggle_content_description">Құпия сөзді көрсету</string>
+    <string name="preference_copied">\"%1$s\" қорытындысы буферге көшірілді</string>
+    <string name="search_menu_title">Іздеу</string>
+    <string name="searchview_clear_text_content_description">Мәтінді өшіру</string>
+    <string name="searchview_navigation_content_description">Артқа</string>
+    <string name="side_sheet_accessibility_pane_title">Бүйірлік парақ</string>
+    <string name="status_bar_notification_info_overflow">999+</string>
+    <string name="summary_collapsed_preference_list">%1$s, %2$s</string>
+    <string name="v7_preference_off">ӨШІРУЛІ</string>
+    <string name="v7_preference_on">ҚОСУЛЫ</string>
+</resources>

@@ -1,0 +1,169 @@
+.class public Lezvcard/property/CalendarUri;
+.super Lezvcard/property/UriProperty;
+.source "CalendarUri.java"
+
+# interfaces
+.implements Lezvcard/property/HasAltId;
+
+
+# annotations
+.annotation runtime Lezvcard/SupportedVersions;
+    value = {
+        .enum Lezvcard/VCardVersion;->V4_0:Lezvcard/VCardVersion;
+    }
+.end annotation
+
+
+# direct methods
+.method public constructor <init>(Lezvcard/property/CalendarUri;)V
+    .locals 0
+
+    .line 78
+    invoke-direct {p0, p1}, Lezvcard/property/UriProperty;-><init>(Lezvcard/property/UriProperty;)V
+
+    return-void
+.end method
+
+.method public constructor <init>(Ljava/lang/String;)V
+    .locals 0
+
+    .line 70
+    invoke-direct {p0, p1}, Lezvcard/property/UriProperty;-><init>(Ljava/lang/String;)V
+
+    return-void
+.end method
+
+
+# virtual methods
+.method public copy()Lezvcard/property/CalendarUri;
+    .locals 1
+
+    .line 154
+    new-instance v0, Lezvcard/property/CalendarUri;
+
+    invoke-direct {v0, p0}, Lezvcard/property/CalendarUri;-><init>(Lezvcard/property/CalendarUri;)V
+
+    return-object v0
+.end method
+
+.method public bridge synthetic copy()Lezvcard/property/VCardProperty;
+    .locals 1
+
+    .line 63
+    invoke-virtual {p0}, Lezvcard/property/CalendarUri;->copy()Lezvcard/property/CalendarUri;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public getAltId()Ljava/lang/String;
+    .locals 1
+
+    .line 120
+    iget-object v0, p0, Lezvcard/property/CalendarUri;->parameters:Lezvcard/parameter/VCardParameters;
+
+    invoke-virtual {v0}, Lezvcard/parameter/VCardParameters;->getAltId()Ljava/lang/String;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public getMediaType()Ljava/lang/String;
+    .locals 1
+
+    .line 89
+    iget-object v0, p0, Lezvcard/property/CalendarUri;->parameters:Lezvcard/parameter/VCardParameters;
+
+    invoke-virtual {v0}, Lezvcard/parameter/VCardParameters;->getMediaType()Ljava/lang/String;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public getPids()Ljava/util/List;
+    .locals 1
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "()",
+            "Ljava/util/List<",
+            "Lezvcard/parameter/Pid;",
+            ">;"
+        }
+    .end annotation
+
+    .line 105
+    invoke-super {p0}, Lezvcard/property/UriProperty;->getPids()Ljava/util/List;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public getPref()Ljava/lang/Integer;
+    .locals 1
+
+    .line 110
+    invoke-super {p0}, Lezvcard/property/UriProperty;->getPref()Ljava/lang/Integer;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public getType()Ljava/lang/String;
+    .locals 1
+
+    .line 137
+    iget-object v0, p0, Lezvcard/property/CalendarUri;->parameters:Lezvcard/parameter/VCardParameters;
+
+    invoke-virtual {v0}, Lezvcard/parameter/VCardParameters;->getType()Ljava/lang/String;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public setAltId(Ljava/lang/String;)V
+    .locals 1
+
+    .line 125
+    iget-object v0, p0, Lezvcard/property/CalendarUri;->parameters:Lezvcard/parameter/VCardParameters;
+
+    invoke-virtual {v0, p1}, Lezvcard/parameter/VCardParameters;->setAltId(Ljava/lang/String;)V
+
+    return-void
+.end method
+
+.method public setMediaType(Ljava/lang/String;)V
+    .locals 1
+
+    .line 100
+    iget-object v0, p0, Lezvcard/property/CalendarUri;->parameters:Lezvcard/parameter/VCardParameters;
+
+    invoke-virtual {v0, p1}, Lezvcard/parameter/VCardParameters;->setMediaType(Ljava/lang/String;)V
+
+    return-void
+.end method
+
+.method public setPref(Ljava/lang/Integer;)V
+    .locals 0
+
+    .line 115
+    invoke-super {p0, p1}, Lezvcard/property/UriProperty;->setPref(Ljava/lang/Integer;)V
+
+    return-void
+.end method
+
+.method public setType(Ljava/lang/String;)V
+    .locals 1
+
+    .line 149
+    iget-object v0, p0, Lezvcard/property/CalendarUri;->parameters:Lezvcard/parameter/VCardParameters;
+
+    invoke-virtual {v0, p1}, Lezvcard/parameter/VCardParameters;->setType(Ljava/lang/String;)V
+
+    return-void
+.end method

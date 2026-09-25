@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.basicphones.basicmenu.CustomMenuLayout android:id="@id/menuLayout" android:background="@android:color/white" android:padding="@dimen/normal_padding" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:id="@id/layout" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <TextView android:textAppearance="@style/TextAppearance.AppCompat.Title" android:textSize="19.0sp" android:textColor="@android:color/black" android:gravity="start" android:id="@id/title" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="1" app:layout_constraintBottom_toTopOf="@id/recyclerView" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
+        <androidx.recyclerview.widget.RecyclerView android:id="@id/recyclerView" android:layout_width="wrap_content" android:layout_height="0.0dip" android:layout_weight="1.0" app:layout_constrainedWidth="true" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.0" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/title" />
+    </LinearLayout>
+</com.basicphones.basicmenu.CustomMenuLayout>

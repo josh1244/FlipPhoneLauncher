@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation app:startDestination="@id/in_call_fragment"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <fragment android:name="com.basicphones.dialer.phone.incall.InCallFragment" android:id="@id/in_call_fragment">
+        <action android:id="@id/action_in_call_fragment_to_conference_fragment" app:destination="@id/conference_fragment" />
+        <action android:id="@id/action_in_call_fragment_to_dialer_fragment" app:destination="@id/dialer_fragment" />
+    </fragment>
+    <fragment android:label="@string/title_manage_conference_call" android:name="com.basicphones.dialer.phone.incall.conference.ConferenceInCallFragment" android:id="@id/conference_fragment" />
+    <fragment android:label="DialerFragment" android:name="com.basicphones.dialer.phone.dial.DialerFragment" android:id="@id/dialer_fragment" />
+</navigation>

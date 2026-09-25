@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/quick_filter_event_type_holder" android:layout_width="fill_parent" android:layout_height="@dimen/quick_filter_height" android:minWidth="@dimen/quick_filter_min_width"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView android:ellipsize="end" android:gravity="center" android:id="@id/quick_filter_event_type" android:background="@drawable/background_selector" android:layout_width="fill_parent" android:layout_height="0.0dip" android:checked="false" android:text="" android:maxLines="2" android:layout_weight="1.0" android:textAllCaps="false" android:paddingStart="@dimen/small_margin" android:paddingEnd="@dimen/small_margin" android:autoSizeTextType="uniform" />
+    <View android:id="@id/quick_filter_event_type_color" android:background="@color/colorPrimary" android:clickable="false" android:layout_width="fill_parent" android:layout_height="@dimen/quick_filter_inactive_line_size" />
+</LinearLayout>

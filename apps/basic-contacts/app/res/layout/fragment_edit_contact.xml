@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout android:id="@id/constraintLayout" android:tag="layout/fragment_edit_contact_0" android:descendantFocusability="afterDescendants" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ScrollView android:layout_width="fill_parent" android:layout_height="0.0dip" app:layout_constraintBottom_toTopOf="@id/bottomToolbar" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout android:orientation="vertical" android:padding="@dimen/small_padding" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <com.basicphones.contacts.ui.custom.ContactDataInput android:id="@id/first_name" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/small_padding" android:layout_marginBottom="@dimen/small_padding" android:hint="@string/first_name" android:focusedByDefault="true" app:dataType="firstName" app:iconSrc="@drawable/ic_person_black_24dp" app:unique="true" />
+            <com.basicphones.contacts.ui.custom.ContactDataInput android:id="@id/last_name" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/small_padding" android:layout_marginBottom="@dimen/small_padding" android:hint="@string/last_name" app:dataType="lastName" app:unique="true" />
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <com.basicphones.contacts.ui.custom.ContactDataInput android:id="@id/name_prefix" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/small_padding" android:layout_marginBottom="@dimen/small_padding" android:hint="@string/name_prefix" app:dataType="namePrefix" app:unique="true" />
+                <com.basicphones.contacts.ui.custom.ContactDataInput android:id="@id/middle_name" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/small_padding" android:layout_marginBottom="@dimen/small_padding" android:hint="@string/middle_name" app:dataType="middleName" app:unique="true" />
+                <com.basicphones.contacts.ui.custom.ContactDataInput android:id="@id/name_suffix" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/small_padding" android:layout_marginBottom="@dimen/small_padding" android:hint="@string/name_suffix" app:dataType="nameSuffix" app:unique="true" />
+            </LinearLayout>
+            <com.google.android.material.checkbox.MaterialCheckBox android:id="@id/favorite_checkbox" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/small_padding" android:layout_marginBottom="@dimen/small_padding" android:text="@string/add_to_favorites" android:layout_marginStart="@dimen/icon_size" style="@style/FavoriteCheckBox" />
+            <com.google.android.material.checkbox.MaterialCheckBox android:id="@id/block_contact_checkbox" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/small_padding" android:layout_marginBottom="@dimen/small_padding" android:text="@string/menu_block_contact" android:layout_marginStart="@dimen/icon_size" style="@style/BlockCheckBox" />
+            <View style="@style/Divider" />
+            <com.basicphones.contacts.ui.custom.ContactDataInput android:id="@id/note" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/small_padding" android:layout_marginBottom="@dimen/small_padding" android:hint="@string/note" app:dataType="note" app:iconSrc="@drawable/ic_note_black_24dp" app:unique="true" />
+            <View style="@style/Divider" />
+            <com.basicphones.contacts.ui.custom.ContactDataInput android:id="@id/company" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/small_padding" android:layout_marginBottom="@dimen/small_padding" android:hint="@string/company" app:dataType="note" app:iconSrc="@drawable/ic_baseline_business_center_24" app:unique="true" />
+            <View style="@style/Divider" />
+            <LinearLayout android:orientation="vertical" android:id="@id/phones" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <com.basicphones.contacts.ui.custom.ContactDataInput android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/small_padding" android:layout_marginBottom="@dimen/small_padding" android:hint="@string/phone" app:dataType="phone" app:iconSrc="@drawable/ic_phone_black_24dp" app:unique="false" />
+            </LinearLayout>
+            <View style="@style/Divider" />
+            <LinearLayout android:orientation="vertical" android:id="@id/emails" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <com.basicphones.contacts.ui.custom.ContactDataInput android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/small_padding" android:layout_marginBottom="@dimen/small_padding" android:hint="@string/email" app:dataType="email" app:iconSrc="@drawable/ic_email_black_24dp" app:unique="false" />
+            </LinearLayout>
+            <View style="@style/Divider" />
+            <LinearLayout android:orientation="vertical" android:id="@id/addresses" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <com.basicphones.contacts.ui.custom.ContactDataInput android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/small_padding" android:layout_marginBottom="@dimen/small_padding" android:hint="@string/address" app:dataType="address" app:iconSrc="@drawable/ic_edit_location_black_24dp" app:unique="false" />
+            </LinearLayout>
+            <View style="@style/Divider" />
+            <LinearLayout android:orientation="vertical" android:id="@id/events" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <com.basicphones.contacts.ui.custom.ContactDataInput android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/small_padding" android:layout_marginBottom="@dimen/small_padding" android:hint="@string/date" app:dataType="event" app:iconSrc="@drawable/ic_event_black_24dp" app:unique="false" />
+            </LinearLayout>
+            <View style="@style/Divider" />
+            <LinearLayout android:orientation="horizontal" android:id="@id/groups_layout" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatImageView android:layout_gravity="center_vertical" android:layout_width="@dimen/icon_size" android:layout_height="@dimen/icon_size" android:src="@drawable/ic_group_black_24dp" android:tint="@color/colorHint" app:layout_constraintBottom_toBottomOf="@id/value_layout" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="@id/value_layout" />
+                <TextView android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" android:textColor="@color/colorHint" android:id="@id/groups" android:background="@drawable/spinner_selector" android:visibility="visible" android:layout_width="0.0dip" android:layout_height="wrap_content" android:hint="@string/add_to_groups" android:editable="false" android:layout_weight="1.0" android:layout_marginStart="@dimen/small_padding" android:layout_marginEnd="@dimen/small_padding" />
+                <View android:visibility="invisible" android:layout_width="@dimen/icon_size" android:layout_height="@dimen/icon_size" />
+            </LinearLayout>
+            <View style="@style/Divider" />
+            <LinearLayout android:orientation="horizontal" android:id="@id/ringtone_layout" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatImageView android:layout_gravity="center_vertical" android:layout_width="@dimen/icon_size" android:layout_height="@dimen/icon_size" android:src="@drawable/ic_baseline_music_note_24" android:tint="@color/colorHint" app:layout_constraintBottom_toBottomOf="@id/value_layout" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="@id/value_layout" />
+                <TextView android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" android:textColor="@color/colorHint" android:id="@id/ringtone" android:background="@drawable/spinner_selector" android:visibility="visible" android:layout_width="0.0dip" android:layout_height="wrap_content" android:hint="@string/select_ringtone" android:editable="false" android:layout_weight="1.0" android:layout_marginStart="@dimen/small_padding" android:layout_marginEnd="@dimen/small_padding" />
+                <View android:visibility="invisible" android:layout_width="@dimen/icon_size" android:layout_height="@dimen/icon_size" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    <include android:id="@id/bottomToolbar" layout="@layout/menu_bottom" />
+</androidx.constraintlayout.widget.ConstraintLayout>

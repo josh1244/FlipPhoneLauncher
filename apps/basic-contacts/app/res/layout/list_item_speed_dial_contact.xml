@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="@drawable/background_selector" android:focusable="true" android:focusableInTouchMode="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="@dimen/small_padding" android:paddingEnd="@dimen/small_padding"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <View android:id="@id/separator" android:background="@android:color/white" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+    <TextView android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" android:gravity="center_vertical" android:id="@id/name" android:padding="@dimen/small_padding" android:layout_width="fill_parent" android:layout_height="wrap_content" android:lines="1" />
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" android:textStyle="bold" android:layout_gravity="center" android:id="@id/speed_dial" android:padding="@dimen/small_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:lines="1" android:drawablePadding="@dimen/small_padding" app:drawableStartCompat="@drawable/ic_baseline_dialpad_16" />
+        <TextView android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" android:gravity="center_vertical" android:id="@id/phone_number" android:padding="@dimen/small_padding" android:layout_width="0.0dip" android:layout_height="wrap_content" android:lines="1" android:layout_weight="1.0" />
+    </LinearLayout>
+</LinearLayout>
