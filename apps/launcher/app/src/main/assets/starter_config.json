@@ -9,13 +9,13 @@
     "2": {
       "name": "Phone",
       "apps": [
-        "com.android.dialer/com.android.dialer.app.calllog.CallLogActivity"
+        "com.basicphones.dialer/com.basicphones.dialer.MainActivity"
       ]
     },
     "3": {
       "name": "Contacts",
       "apps": [
-        "com.android.contacts/com.android.contacts.activities.PeopleActivity"
+        "com.basicphones.contacts/com.basicphones.contacts.ui.MainActivity"
       ]
     },
     "4": {

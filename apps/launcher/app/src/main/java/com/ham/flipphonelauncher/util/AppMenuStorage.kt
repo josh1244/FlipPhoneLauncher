@@ -16,20 +16,28 @@ import kotlinx.coroutines.withContext
 
 object AppMenuStorage {
     // OEM apps replaced by their Basic Phones equivalents on this phone.
-    private val HIDDEN_OEM_PACKAGES = setOf("com.android.mms", "com.android.camera2")
+    private val HIDDEN_OEM_PACKAGES = setOf("com.android.mms", "com.android.camera2", "com.android.dialer", "com.android.contacts")
     // OEM launcher key -> Basic replacement launcher key (references get remapped on load).
     private val OEM_TO_BASIC = mapOf(
         "com.android.mms/com.android.mms.ui.ConversationList"
             to "com.basicphones.messaging/com.basicphones.messaging.ui.conversationlist.ConversationListActivity",
         "com.android.camera2/com.android.camera.CameraLauncher"
-            to "com.basicphones.camera/com.basicphones.camera.ui.MainActivity"
+            to "com.basicphones.camera/com.basicphones.camera.ui.MainActivity",
+        "com.android.dialer/com.android.dialer.app.calllog.CallLogActivity"
+            to "com.basicphones.dialer/com.basicphones.dialer.MainActivity",
+        "com.android.contacts/com.android.contacts.activities.PeopleActivity"
+            to "com.basicphones.contacts/com.basicphones.contacts.ui.MainActivity"
     )
     // Basic replacement key -> (display label, OEM icon key): show the familiar label/icon, launch Basic.
     private val BASIC_DISPLAY = mapOf(
         "com.basicphones.messaging/com.basicphones.messaging.ui.conversationlist.ConversationListActivity"
             to Pair("Messages", "com.android.mms/com.android.mms.ui.ConversationList"),
         "com.basicphones.camera/com.basicphones.camera.ui.MainActivity"
-            to Pair("Camera", "com.android.camera2/com.android.camera.CameraLauncher")
+            to Pair("Camera", "com.android.camera2/com.android.camera.CameraLauncher"),
+        "com.basicphones.dialer/com.basicphones.dialer.MainActivity"
+            to Pair("Phone", "com.android.dialer/com.android.dialer.app.calllog.CallLogActivity"),
+        "com.basicphones.contacts/com.basicphones.contacts.ui.MainActivity"
+            to Pair("Contacts", "com.android.contacts/com.android.contacts.activities.PeopleActivity")
     )
 
     // Holds the full list of folders in memory (including hidden apps, so saves stay complete).
