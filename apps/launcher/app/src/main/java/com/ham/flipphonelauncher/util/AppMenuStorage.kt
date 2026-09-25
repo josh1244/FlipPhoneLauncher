@@ -16,7 +16,7 @@ import kotlinx.coroutines.withContext
 
 object AppMenuStorage {
     // OEM apps replaced by their Basic Phones equivalents on this phone.
-    private val HIDDEN_OEM_PACKAGES = setOf("com.android.mms", "com.android.camera2", "com.android.dialer", "com.android.contacts")
+    private val HIDDEN_OEM_PACKAGES = setOf("com.android.mms", "com.android.camera2", "com.android.dialer", "com.android.contacts", "com.android.calendar", "com.android.deskclock")
     // OEM launcher key -> Basic replacement launcher key (references get remapped on load).
     private val OEM_TO_BASIC = mapOf(
         "com.android.mms/com.android.mms.ui.ConversationList"
@@ -26,7 +26,11 @@ object AppMenuStorage {
         "com.android.dialer/com.android.dialer.app.calllog.CallLogActivity"
             to "com.basicphones.dialer/com.basicphones.dialer.MainActivity",
         "com.android.contacts/com.android.contacts.activities.PeopleActivity"
-            to "com.basicphones.contacts/com.basicphones.contacts.ui.MainActivity"
+            to "com.basicphones.contacts/com.basicphones.contacts.ui.MainActivity",
+        "com.android.calendar/com.android.calendar.AllInOneActivity"
+            to "com.basicphones.calendar/com.basicphones.calendar.activities.MainActivity",
+        "com.android.deskclock/com.android.deskclock.DeskClock"
+            to "com.basicphones.deskclock/com.basicphones.deskclock.DeskClock"
     )
     // Basic replacement key -> (display label, OEM icon key): show the familiar label/icon, launch Basic.
     private val BASIC_DISPLAY = mapOf(
@@ -37,7 +41,11 @@ object AppMenuStorage {
         "com.basicphones.dialer/com.basicphones.dialer.MainActivity"
             to Pair("Phone", "com.android.dialer/com.android.dialer.app.calllog.CallLogActivity"),
         "com.basicphones.contacts/com.basicphones.contacts.ui.MainActivity"
-            to Pair("Contacts", "com.android.contacts/com.android.contacts.activities.PeopleActivity")
+            to Pair("Contacts", "com.android.contacts/com.android.contacts.activities.PeopleActivity"),
+        "com.basicphones.calendar/com.basicphones.calendar.activities.MainActivity"
+            to Pair("Calendar", "com.android.calendar/com.android.calendar.AllInOneActivity"),
+        "com.basicphones.deskclock/com.basicphones.deskclock.DeskClock"
+            to Pair("Clock", "com.android.deskclock/com.android.deskclock.DeskClock")
     )
 
     // Holds the full list of folders in memory (including hidden apps, so saves stay complete).

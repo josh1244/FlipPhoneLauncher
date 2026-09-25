@@ -25,8 +25,8 @@
     "5": {
       "name": "Schedule",
       "apps": [
-        "com.android.calendar/com.android.calendar.AllInOneActivity",
-        "com.android.deskclock/com.android.deskclock.DeskClock"
+        "com.basicphones.calendar/com.basicphones.calendar.activities.MainActivity",
+        "com.basicphones.deskclock/com.basicphones.deskclock.DeskClock"
       ]
     },
     "6": {
