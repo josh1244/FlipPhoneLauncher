@@ -40,11 +40,11 @@ still pending. Current test phone: **13599bb3 (phone 1)** unless noted.
 
 ## Known issues / deferred
 
-- **Calendar bottom black bar.** Basic Calendar is a Simple-Mobile-Tools codebase; its
-  AppCompat `FitWindowsLinearLayout` decor insets content by the nav-bar height in framework
-  code, so the theme/layout `windowTranslucentNavigation` fix (which worked for Clock/Dialer/
-  Contacts) doesn't remove it. Removing it needs smali surgery on the window-insets listener —
-  deferred as high-effort/high-risk. Menu key + top are fine; only the ~30px bottom gap remains.
+- **Calendar bottom black bar — FIXED.** Basic Calendar (Simple-Mobile-Tools) needed three
+  coordinated changes: `windowTranslucentNavigation` on the runtime theme `AppTheme.Base`, NOP the
+  `setNavigationBarColor` call that was clearing that flag, and a top-only status-bar pad on
+  `android.R.id.content` in `BaseSimpleActivity.onCreate` (since translucent-nav also pushes the
+  top edge-to-edge and `fitsSystemWindows` can't inset one side). See `apps/basic-calendar/README.md`.
 
 ## Patched Basic apps (pending repo integration)
 

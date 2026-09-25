@@ -177,6 +177,7 @@
         <item name="colorPrimaryDark">@color/md_amber_900_dark</item>
     </style>
     <style name="AppTheme.Base" parent="@style/Theme.MaterialComponents.NoActionBar">
+        <item name="android:windowTranslucentNavigation">true</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:itemBackground">@drawable/background_selector</item>
         <item name="android:popupMenuStyle">@style/PopupMenu</item>

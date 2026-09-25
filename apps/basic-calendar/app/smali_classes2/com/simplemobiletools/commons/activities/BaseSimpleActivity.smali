@@ -4146,6 +4146,39 @@
     :cond_0
     invoke-super {p0, p1}, Landroidx/appcompat/app/AppCompatActivity;->onCreate(Landroid/os/Bundle;)V
 
+    invoke-static {}, Landroid/content/res/Resources;->getSystem()Landroid/content/res/Resources;
+
+    move-result-object v0
+
+    const-string v1, "status_bar_height"
+
+    const-string v2, "dimen"
+
+    const-string v3, "android"
+
+    invoke-virtual {v0, v1, v2, v3}, Landroid/content/res/Resources;->getIdentifier(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I
+
+    move-result v1
+
+    if-lez v1, :cond_bp_inset
+
+    invoke-virtual {v0, v1}, Landroid/content/res/Resources;->getDimensionPixelSize(I)I
+
+    move-result v1
+
+    const v2, 0x1020002
+
+    invoke-virtual {p0, v2}, Lcom/simplemobiletools/commons/activities/BaseSimpleActivity;->findViewById(I)Landroid/view/View;
+
+    move-result-object v2
+
+    if-eqz v2, :cond_bp_inset
+
+    const/4 v3, 0x0
+
+    invoke-virtual {v2, v3, v1, v3, v3}, Landroid/view/View;->setPadding(IIII)V
+
+    :cond_bp_inset
     return-void
 .end method
 
@@ -4838,7 +4871,7 @@
 
     move-result-object v0
 
-    invoke-virtual {v0, v1}, Landroid/view/Window;->setNavigationBarColor(I)V
+    nop
 
     .line 146
     invoke-static {}, Lcom/simplemobiletools/commons/helpers/ConstantsKt;->isOreoPlus()Z
