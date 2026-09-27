@@ -29,9 +29,7 @@ class MessagingRedirectService : AccessibilityService() {
     override fun onInterrupt() {}
 
     companion object {
-        // stock package -> Basic Phones replacement package
-        private val REDIRECTS = mapOf(
-            "com.android.mms" to "com.basicphones.messaging"
-        )
+        // Reverted: Basic Messaging removed, so no redirect; the stock com.android.mms runs as-is.
+        private val REDIRECTS = emptyMap<String, String>()
     }
 }

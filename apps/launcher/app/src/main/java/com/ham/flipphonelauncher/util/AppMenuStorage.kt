@@ -15,38 +15,11 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 
 object AppMenuStorage {
-    // OEM apps replaced by their Basic Phones equivalents on this phone.
-    private val HIDDEN_OEM_PACKAGES = setOf("com.android.mms", "com.android.camera2", "com.android.dialer", "com.android.contacts", "com.android.calendar", "com.android.deskclock")
-    // OEM launcher key -> Basic replacement launcher key (references get remapped on load).
-    private val OEM_TO_BASIC = mapOf(
-        "com.android.mms/com.android.mms.ui.ConversationList"
-            to "com.basicphones.messaging/com.basicphones.messaging.ui.conversationlist.ConversationListActivity",
-        "com.android.camera2/com.android.camera.CameraLauncher"
-            to "com.basicphones.camera/com.basicphones.camera.ui.MainActivity",
-        "com.android.dialer/com.android.dialer.app.calllog.CallLogActivity"
-            to "com.basicphones.dialer/com.basicphones.dialer.MainActivity",
-        "com.android.contacts/com.android.contacts.activities.PeopleActivity"
-            to "com.basicphones.contacts/com.basicphones.contacts.ui.MainActivity",
-        "com.android.calendar/com.android.calendar.AllInOneActivity"
-            to "com.basicphones.calendar/com.basicphones.calendar.activities.MainActivity",
-        "com.android.deskclock/com.android.deskclock.DeskClock"
-            to "com.basicphones.deskclock/com.basicphones.deskclock.DeskClock"
-    )
-    // Basic replacement key -> (display label, OEM icon key): show the familiar label/icon, launch Basic.
-    private val BASIC_DISPLAY = mapOf(
-        "com.basicphones.messaging/com.basicphones.messaging.ui.conversationlist.ConversationListActivity"
-            to Pair("Messages", "com.android.mms/com.android.mms.ui.ConversationList"),
-        "com.basicphones.camera/com.basicphones.camera.ui.MainActivity"
-            to Pair("Camera", "com.android.camera2/com.android.camera.CameraLauncher"),
-        "com.basicphones.dialer/com.basicphones.dialer.MainActivity"
-            to Pair("Phone", "com.android.dialer/com.android.dialer.app.calllog.CallLogActivity"),
-        "com.basicphones.contacts/com.basicphones.contacts.ui.MainActivity"
-            to Pair("Contacts", "com.android.contacts/com.android.contacts.activities.PeopleActivity"),
-        "com.basicphones.calendar/com.basicphones.calendar.activities.MainActivity"
-            to Pair("Calendar", "com.android.calendar/com.android.calendar.AllInOneActivity"),
-        "com.basicphones.deskclock/com.basicphones.deskclock.DeskClock"
-            to Pair("Clock", "com.android.deskclock/com.android.deskclock.DeskClock")
-    )
+    // Reverted: the Basic Phones apps were removed from this phone, so the launcher no longer hides
+    // or remaps the stock OEM apps. These stay defined (empty) so the load path is unchanged.
+    private val HIDDEN_OEM_PACKAGES = emptySet<String>()
+    private val OEM_TO_BASIC = emptyMap<String, String>()
+    private val BASIC_DISPLAY = emptyMap<String, Pair<String, String>>()
 
     // Holds the full list of folders in memory (including hidden apps, so saves stay complete).
     // Volatile: assigned on a background thread in loadApplications, read on the main thread; the

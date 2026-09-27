@@ -9,24 +9,24 @@
     "2": {
       "name": "Phone",
       "apps": [
-        "com.basicphones.dialer/com.basicphones.dialer.MainActivity"
+        "com.android.dialer/com.android.dialer.app.calllog.CallLogActivity"
       ]
     },
     "3": {
       "name": "Contacts",
       "apps": [
-        "com.basicphones.contacts/com.basicphones.contacts.ui.MainActivity"
+        "com.android.contacts/com.android.contacts.activities.PeopleActivity"
       ]
     },
     "4": {
       "name": "Messages",
-      "apps": ["com.basicphones.messaging/com.basicphones.messaging.ui.conversationlist.ConversationListActivity"]
+      "apps": ["com.android.mms/com.android.mms.ui.ConversationList"]
     },
     "5": {
       "name": "Schedule",
       "apps": [
-        "com.basicphones.calendar/com.basicphones.calendar.activities.MainActivity",
-        "com.basicphones.deskclock/com.basicphones.deskclock.DeskClock"
+        "com.android.calendar/com.android.calendar.AllInOneActivity",
+        "com.android.deskclock/com.android.deskclock.DeskClock"
       ]
     },
     "6": {
@@ -40,7 +40,7 @@
     "7": {
       "name": "Media",
       "apps": [
-        "com.basicphones.camera/com.basicphones.camera.ui.MainActivity",
+        "com.android.camera2/com.android.camera.CameraLauncher",
         "com.android.gallery3d/com.android.gallery3d.app.GalleryActivity",
         "com.android.music/com.android.music.MusicBrowserActivity",
         "com.android.soundrecorder/com.android.soundrecorder.SoundRecorder"
